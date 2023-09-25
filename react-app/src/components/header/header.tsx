@@ -9,7 +9,7 @@ interface IHeaderMenu {
 export class HeaderMenu extends React.Component<IHeaderMenu> {
   static defaultProps = {
     // if needed
-    kind: "full",
+    kind: "short",
   };
 
   render() {
@@ -43,11 +43,7 @@ export class HeaderMenu extends React.Component<IHeaderMenu> {
           </div>
         </div>
         <ul className={this.props.kind === "short" ? "nav__short" : "nav"}>
-          {this.props.kind === "short" ? (
-            <Link to="/">
-              <img className="Home-pic" alt="Home" />
-            </Link>
-          ) : (
+          {
             <>
               <Link className="nav__link nav__text" to="UpLoad">
                 About the shelter
@@ -55,14 +51,14 @@ export class HeaderMenu extends React.Component<IHeaderMenu> {
               <Link className="nav__link nav__text" to="Order">
                 Our pets
               </Link>
-              <Link className="nav__link nav__text" to="#help_id">
+              <Link className="nav__link nav__text" to="BuyCredits">
                 Help the shelter
               </Link>
               <Link className="nav__link nav__text" to="#contact_id">
                 Contacts
               </Link>
             </>
-          )}
+          }
         </ul>
         {this.props.kind === "short" ? <></> : <Navbar />}
       </header>
