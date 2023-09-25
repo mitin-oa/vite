@@ -1,0 +1,166 @@
+/* header styles starts */
+.header { 
+    &__short {
+        padding: 30px 40px;
+    };  
+    @media screen and (max-width: 767px){
+        .header {
+            margin: 0px 10px;
+        }
+    }
+}
+
+.nav {
+    list-style-type: none;
+    margin-block-start: 0.7em;
+
+    @media only screen and (max-width : 768px){
+        display: none;
+        position: fixed;
+        top: -30px;
+        left: -100%;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        flex-direction: column;
+        width: 70%;
+        height: 100vh;
+        padding: 20px 15px;
+        -webkit-box-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        justify-content: center;
+    };
+    &__link {
+        margin: 5px 0px;
+        &:last-child {
+            margin-right: 0px;
+        };
+        @media screen and (max-width: 767px){
+            font-size: 16px;
+            line-height: 24px;
+        };
+    
+    }
+
+    &__text {
+        margin-right: 15px;
+        font-family: 'Arial';
+        font-size: 15px;
+        line-height: 27px;
+        font-weight: 400;
+        letter-spacing: 0.05em;
+        color: #ffffff;
+        text-decoration: none;
+        
+        &:hover {
+            border-bottom: solid #F1CDB3;
+        };
+        &:last-child {
+            margin-right: 0px;
+        };
+        @media screen and (max-width: 767px){
+            font-size: 16px;
+            line-height: 24px;
+        };
+    
+    }
+
+    &__short {
+        display: block;
+    }
+
+    &__burger {
+        display: none;
+        @media screen and (max-width: 767px){
+            display: block;
+            position: absolute;
+            padding-top: 150px;
+            width: 320px;
+            right: 0px;
+            top: 0px;
+            list-style-type: none;
+            .Burger__active.nav__burger {
+                display: none;
+            }
+        };
+        &__link {
+            height: 57px;
+            margin-right: 15px;
+            margin-bottom: 30px;
+            text-align: start;
+
+        }
+        &__text {
+            font-family: 'Arial';
+            font-size: 32px;
+            line-height: 51px;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            color: #FAFAFA;
+            text-decoration: none;
+            :hover {
+                color: #F1CDB3;
+                border-bottom: solid #F1CDB3;
+            }
+        }
+    }
+}
+
+.Burger__active .nav__burger {
+    display: none;
+}
+
+.hamburger-menu {
+    display: none;
+    width: 30px;
+    height: 35px;
+    &__short {
+        display: none;
+    }
+    
+    @media screen and (max-width: 767px){
+        display: block;
+        &__span {
+            display: block;
+            height: 2px;
+            background-color: #F1CDB3;
+            margin: 8px 0;
+            -webkit-transition: 0.5s all;
+            transition: 0.5s all;
+        }
+        &__close {
+            width: 40px;
+            height: 40px;
+            position: absolute;
+            top: 30px;
+            right: 20px;
+            z-index: 11;
+        }
+        &__short {
+            display: none;
+        }
+    }
+}
+
+.Home-pic {
+    width: 50px;
+    margin-right: 0px;
+}
+
+.burger_visible {
+    display: none;
+    @media screen and (max-width: 767px){
+        display: block;
+        &__Link {
+            padding: 0.5rem 1rem;
+            font-size: 2rem;
+            color: #ffffff;
+            text-decoration: none;
+            :hover {
+              color: #F1CDB3;
+              cursor: pointer;
+              border-bottom: solid #F1CDB3;
+            } 
+        }
+    }
+}

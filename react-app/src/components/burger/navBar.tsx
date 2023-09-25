@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Burger } from "../burger/burger";
-import "../header-menu/header-menu.scss";
-import background from "../img/burger-background.png";
+import "../header/header.scss";
 import { Link } from "react-router-dom";
 
 const colors = {
@@ -20,8 +19,6 @@ const StyledMenu = styled.nav<{ open: boolean }>`
   position: fixed;
   text-align: center;
   /* background-color: ${colors.lightbrown}; */
-  background: url(${background}) no-repeat center;
-  background-size: cover;
   z-index: 2;
   padding: 15rem 0;
   flex-direction: column;

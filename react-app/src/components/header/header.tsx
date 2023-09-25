@@ -1,7 +1,6 @@
 import React from "react";
-import "./header-menu.scss";
-import Home from "../img/home.png";
-import { Link } from "react-router-dom";
+import "./header.scss";
+import { HashLink as Link } from "react-router-hash-link";
 import { Navbar } from "../burger/navBar";
 
 interface IHeaderMenu {
@@ -46,14 +45,14 @@ export class HeaderMenu extends React.Component<IHeaderMenu> {
         <ul className={this.props.kind === "short" ? "nav__short" : "nav"}>
           {this.props.kind === "short" ? (
             <Link to="/">
-              <img className="Home-pic" alt="Home" src={Home} />
+              <img className="Home-pic" alt="Home" />
             </Link>
           ) : (
             <>
-              <Link className="nav__link nav__text" to="#about_id">
+              <Link className="nav__link nav__text" to="UpLoad">
                 About the shelter
               </Link>
-              <Link className="nav__link nav__text" to="#our_id">
+              <Link className="nav__link nav__text" to="Order">
                 Our pets
               </Link>
               <Link className="nav__link nav__text" to="#help_id">
