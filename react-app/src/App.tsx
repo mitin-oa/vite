@@ -1,4 +1,4 @@
-/* import "./App.css"; */
+import "./App.scss";
 import { useState } from "react";
 import { HashLink as Link } from "react-router-hash-link";
 import { Route, Routes } from "react-router-dom";

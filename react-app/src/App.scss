@@ -1,0 +1,70 @@
+.app {
+    width: 100%;
+    margin: 0;
+    overflow: hidden;
+  }
+  
+  ::-webkit-scrollbar {
+    width: 0;
+  }
+  
+  .app__main-contaner {
+    display: flex;
+    width: 100%;
+  }
+  
+  button {
+    font-size: 1.5rem;
+  }
+  
+  .wrapper {
+    display: flex;
+    justify-content: space-between;
+    -webkit-box-pack: justify;
+    align-items: center;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  
+  .logo {
+    display: flex;
+    flex-direction: column;
+    min-width: 195px;
+    &__text {
+      margin: 10px 0 0;
+      font-size: 16px;
+      line-height: 15px;
+      font-weight: 400;
+      letter-spacing: 0.09em;
+      color: #ffffff;
+      &__short {
+        margin: 10px 0 0;
+        font-size: 16px;
+        line-height: 15px;
+        font-weight: 400;
+        letter-spacing: 0.09em;
+        color: black;
+      };
+    }
+    &__title {
+        font-family: Georgia;
+        font-weight: 400;
+        font-style:normal;
+        font-size: 32px;
+        text-align: Left;
+        letter-spacing: 0.12em;
+        Color: #F1CDB3;
+        margin: 0px;
+        &__short {
+          font-family: Georgia;
+          font-weight: 400;
+          font-style:normal;
+          font-size: 32px;
+          text-align: Left;
+          letter-spacing: 0.12em;
+          color: black;
+          margin-top: 0px;
+        };
+    }
+  }
+  

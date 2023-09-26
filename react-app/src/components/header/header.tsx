@@ -1,7 +1,9 @@
 import React from "react";
 import "./header.scss";
+import Logo from "../../../public/Logo.png";
 import { HashLink as Link } from "react-router-hash-link";
 import { Navbar } from "../burger/navBar";
+import SignIn from "../modal/modal";
 
 interface IHeaderMenu {
   kind?: "full" | "short";
@@ -30,33 +32,31 @@ export class HeaderMenu extends React.Component<IHeaderMenu> {
                   : "logo__title"
               }
             >
-              Cozy House
+              <img alt="LOGO" src={Logo}></img>
             </h1>
             <p
               className={
                 this.props.kind === "short" ? "logo__text__short" : "logo__text"
               }
-            >
-              {" "}
-              Shelter for pets in Boston
-            </p>
+            ></p>
           </div>
         </div>
         <ul className={this.props.kind === "short" ? "nav__short" : "nav"}>
           {
             <>
               <Link className="nav__link nav__text" to="UpLoad">
-                About the shelter
+                Upload Form
               </Link>
               <Link className="nav__link nav__text" to="Order">
-                Our pets
+                Order
               </Link>
               <Link className="nav__link nav__text" to="BuyCredits">
-                Help the shelter
+                Buy Credits
               </Link>
               <Link className="nav__link nav__text" to="#contact_id">
-                Contacts
+                Admin Panel
               </Link>
+              <SignIn />
             </>
           }
         </ul>
