@@ -62,13 +62,13 @@
   .button_only {
     width: 210px;
     text-decoration: none;
-    color: #292929;
-    font-family: 'Georgia';
-    font-size: 1.1rem;
+    color: #033c5a;
+    font-size: 18px;
+    font-weight: 600;
     letter-spacing: .06em;
     padding: 15px 45px;
     border: none;
-    border-radius: 2.2rem;
+    border-radius: 0.05rem;
     background-color: #ec720b;
     @media screen and (max-width: 1028px) {
         margin: 0 auto;
@@ -76,7 +76,6 @@
   }
   
   .button_text {
-    font-family: Georgia;
     font-style: normal;
     font-size: 17px;
     line-height: 22px;
@@ -92,7 +91,7 @@
     width: 700px;
     @media screen and (max-width: 1028px) {
         height: 500px;
-        width: 700px;
+        width: 500px;
         margin-top: 100px;
     };
     @media screen and (max-width: 760px) {

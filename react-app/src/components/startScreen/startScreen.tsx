@@ -1,9 +1,9 @@
 import React from "react";
-import "./startScreen.scss";
+import "../startScreen/startScreen.scss";
 import { HeaderMenu } from "../header/header";
-import StartScreenPic from "../../../public/Logo.jpeg";
+import StartScreenPic from "../../../public/start_screen_pic3.png";
 import { Link } from "react-router-dom";
-import SignIn from "../modal/modal";
+import { Footer } from "../footer/footer";
 
 export default class StartScreen extends React.Component {
   static defaultProps = {
@@ -17,9 +17,11 @@ export default class StartScreen extends React.Component {
         <div className="wrapper start_screen_content">
           <div className="Content">
             <h1 className="only_title">
-              App for the people <br></br>who suffer from PDFs
+              Get the legal service for your <br></br> was never been easier!
             </h1>
-            <p className="only_text">We offer to give a chance to a</p>
+            <p className="only_text">
+              We offer to give a chance to make all your legal stuff ease
+            </p>
             <button className="button_only">
               <Link className="button_text" to="#our_id">
                 Order Now

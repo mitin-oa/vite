@@ -36,7 +36,7 @@ export default function SignIn() {
 
   return (
     <div>
-      <Button children="Sign In" color="warning" onClick={openModal} />
+      <Button children="Log In" color="warning" onClick={openModal} />
       <Modal
         isOpen={modalIsOpen}
         onAfterOpen={afterOpenModal}

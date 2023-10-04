@@ -1,7 +1,12 @@
 /* header styles starts */
 .header { 
     &__short {
-        padding: 30px 0px;
+        padding: 30px 40px;
+        background-color: #033c5a;
+        width: 100%;
+        @media screen and (max-width: 767px){
+            padding: 30px 10px;
+        }
     };  
     @media screen and (max-width: 767px){
         .header {
@@ -11,8 +16,10 @@
 }
 
 .nav {
+    display: flex;
+    align-items: center;
     list-style-type: none;
-    margin-block-start: 0.7em;
+    height: 60px;
 
     @media only screen and (max-width : 768px){
         display: none;
@@ -31,7 +38,6 @@
         justify-content: center;
     };
     &__link {
-        margin: 5px 0px;
         &:last-child {
             margin-right: 0px;
         };
@@ -39,15 +45,20 @@
             font-size: 16px;
             line-height: 24px;
         };
+        &:hover {
+            border-bottom: solid #F1CDB3;
+        };
+        &:last-child {
+            margin-right: 0px;
+        };
     
     }
-
     &__text {
         margin-right: 15px;
         font-family: 'Arial';
-        font-size: 15px;
+        font-size: 17px;
         line-height: 27px;
-        font-weight: 400;
+        font-weight: 600;
         letter-spacing: 0.05em;
         color: #ffffff;
         text-decoration: none;
@@ -142,11 +153,6 @@
     }
 }
 
-.Home-pic {
-    width: 50px;
-    margin-right: 0px;
-}
-
 .burger_visible {
     display: none;
     @media screen and (max-width: 767px){
@@ -163,4 +169,8 @@
             } 
         }
     }
+}
+
+.gap {
+    width: 15px;
 }

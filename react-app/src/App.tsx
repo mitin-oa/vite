@@ -6,6 +6,7 @@ import Home from "./Home";
 import UpLoad from "./UpLoad";
 import Order from "./Order";
 import BuyCredits from "./BuyCredits";
+import AdminPanel from "./AdminPanel";
 
 function App() {
   let items = ["New York", "San Francisco", "Tokio", "London", "Paris"];
@@ -21,6 +22,7 @@ function App() {
         <Route path="UpLoad" element={<UpLoad />} />
         <Route path="Order" element={<Order />} />
         <Route path="BuyCredits" element={<BuyCredits />} />
+        <Route path="AdminPanel" element={<AdminPanel />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

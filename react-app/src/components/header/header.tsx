@@ -1,6 +1,6 @@
 import React from "react";
 import "./header.scss";
-import Logo from "../../../public/Logo.png";
+import Logo from "../../../public/logo-white-ec720b-background-033c5a.png";
 import { HashLink as Link } from "react-router-hash-link";
 import { Navbar } from "../burger/navBar";
 import SignIn from "../modal/modal";
@@ -11,7 +11,7 @@ interface IHeaderMenu {
 export class HeaderMenu extends React.Component<IHeaderMenu> {
   static defaultProps = {
     // if needed
-    kind: "short",
+    kind: "full",
   };
 
   render() {
@@ -24,22 +24,7 @@ export class HeaderMenu extends React.Component<IHeaderMenu> {
         }
       >
         <div className="logo">
-          <div className="logo__link">
-            <h1
-              className={
-                this.props.kind === "short"
-                  ? "logo__title__short"
-                  : "logo__title"
-              }
-            >
-              <img alt="LOGO" src={Logo}></img>
-            </h1>
-            <p
-              className={
-                this.props.kind === "short" ? "logo__text__short" : "logo__text"
-              }
-            ></p>
-          </div>
+          <img className="logo__img" alt="LOGO" src={Logo}></img>
         </div>
         <ul className={this.props.kind === "short" ? "nav__short" : "nav"}>
           {
@@ -53,7 +38,7 @@ export class HeaderMenu extends React.Component<IHeaderMenu> {
               <Link className="nav__link nav__text" to="BuyCredits">
                 Buy Credits
               </Link>
-              <Link className="nav__link nav__text" to="#contact_id">
+              <Link className="nav__link nav__text" to="AdminPanel">
                 Admin Panel
               </Link>
               <SignIn />
