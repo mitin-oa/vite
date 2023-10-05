@@ -2,6 +2,7 @@ import { useMediaQuery } from "react-responsive";
 import * as NumericInput from "react-numeric-input";
 import { ShortHeader } from "./components/shortHeader/shortHeader";
 import PayPal from "./components/PayPal";
+import { Footer } from "./components/footer/footer";
 
 export default function BuyCredits() {
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1160px" });
@@ -59,6 +60,7 @@ export default function BuyCredits() {
           </div>
         </div>
       </section>
+      <Footer kind={"short"} />
     </div>
   );
 }

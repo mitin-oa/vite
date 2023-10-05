@@ -1,5 +1,7 @@
 /* header styles starts */
 .header { 
+    width: 100%;
+    background-color: #033c5a;
     &__short {
         padding: 30px 40px;
         background-color: #033c5a;
@@ -78,6 +80,7 @@
 
     &__short {
         display: flex;
+        margin-bottom: 0px;
     }
 
     &__burger {

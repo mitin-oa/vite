@@ -37,31 +37,31 @@ export const Navbar = () => {
       <StyledMenu open={open}>
         <Link
           className="burger_visible__Link"
-          to="#about_id"
+          to="UpLoad"
           onClick={() => close()}
         >
-          About the shelter
+          Upload Form
         </Link>
         <Link
           className="burger_visible__Link"
-          to="#our_id"
+          to="Order"
           onClick={() => close()}
         >
-          Our pets
+          Order
         </Link>
         <Link
           className="burger_visible__Link"
-          to="#help_id"
+          to="BuyCredits"
           onClick={() => close()}
         >
-          Help the shelter
+          Buy Credits
         </Link>
         <Link
           className="burger_visible__Link"
-          to="#contact_id"
+          to="AdminPanel"
           onClick={() => close()}
         >
-          Contacts
+          Admin Panel
         </Link>
       </StyledMenu>
       <Burger open={open} setOpen={setOpen} />

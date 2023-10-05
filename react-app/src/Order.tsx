@@ -1,6 +1,8 @@
 import { useMediaQuery } from "react-responsive";
 import { HashLink as Link } from "react-router-hash-link";
 import { ShortHeader } from "./components/shortHeader/shortHeader";
+import FileUploader from "./components/FileUploader";
+import { Footer } from "./components/footer/footer";
 
 export default function Order() {
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1160px" });
@@ -32,6 +34,7 @@ export default function Order() {
                   <label htmlFor="numberOfPages">
                     1. Select the number of pages in your document
                   </label>
+
                   <input
                     type="number"
                     className="form-control"
@@ -48,13 +51,7 @@ export default function Order() {
                   <p>
                     File extensions allowed: .doc, .docx, .rtf, .pdf, .odt, .txt
                   </p>
-                  <input
-                    type="file"
-                    name="fileToUpload"
-                    id="fileToUpload"
-                    accept=".doc, .docx, .rtf, .pdf, .odt, .txt"
-                    required
-                  />
+                  <FileUploader />
                 </div>
 
                 <div className="form-group mb-3">
@@ -144,6 +141,7 @@ export default function Order() {
           </div>
         </div>
       </section>
+      <Footer kind={"short"} />
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const SingleFileUploader = () => {
+const FileUploader = () => {
   const [file, setFile] = useState<File | null>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -15,26 +15,34 @@ const SingleFileUploader = () => {
 
   return (
     <>
-      <div>
-        {/* <label htmlFor="file" className="sr-only">
-          Choose a file
-        </label> */}
-        <input id="file" type="file" onChange={handleFileChange} />
+      <div className="col-12">
+        <div className="file-upload">
+          <label>
+            <input
+              type="file"
+              name="fileToUpload"
+              id="fileToUpload"
+              accept=".doc, .docx, .rtf, .pdf, .odt, .txt"
+              onChange={handleFileChange}
+            />
+            <span>Choose file</span>
+          </label>
+        </div>
+        {file && (
+          <section>
+            File details:
+            <ul>
+              <li>Name: {file.name}</li>
+              <li>Type: {file.type}</li>
+              <li>Size: {file.size} bytes</li>
+            </ul>
+          </section>
+        )}
       </div>
-      {file && (
-        <section>
-          File details:
-          <ul>
-            <li>Name: {file.name}</li>
-            <li>Type: {file.type}</li>
-            <li>Size: {file.size} bytes</li>
-          </ul>
-        </section>
-      )}
 
-      {file && <button onClick={handleUpload}>Upload a file</button>}
+      {file && <button onClick={handleUpload}>Upload file</button>}
     </>
   );
 };
 
-export default SingleFileUploader;
+export default FileUploader;
