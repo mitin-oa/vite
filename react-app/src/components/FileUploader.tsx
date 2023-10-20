@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Button from "./Button";
 
 const FileUploader = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -29,18 +30,37 @@ const FileUploader = () => {
           </label>
         </div>
         {file && (
-          <section>
-            File details:
-            <ul>
-              <li>Name: {file.name}</li>
-              <li>Type: {file.type}</li>
-              <li>Size: {file.size} bytes</li>
-            </ul>
-          </section>
+          <table className="table">
+            <thead>
+              <tr>
+                <th colSpan={3}>File details</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Name</td>
+                <td>Type</td>
+                <td>Size</td>
+              </tr>
+              <tr>
+                <td>{file.name}</td>
+                <td>{file.type}</td>
+                <td>{(file.size / 1024).toFixed(1)} Kbytes</td>
+              </tr>
+            </tbody>
+          </table>
         )}
       </div>
 
-      {file && <button onClick={handleUpload}>Upload file</button>}
+      {file && (
+        <div>
+          <Button
+            children="Upload file"
+            color="warning"
+            onClick={handleUpload}
+          />
+        </div>
+      )}
     </>
   );
 };

@@ -3,7 +3,7 @@
     width: 100%;
     background-color: #033c5a;
     &__short {
-        padding: 30px 40px;
+        padding: 20px 40px;
         background-color: #033c5a;
         width: 100%;
         @media screen and (max-width: 767px){
@@ -48,7 +48,8 @@
             line-height: 24px;
         };
         &:hover {
-            border-bottom: solid #F1CDB3;
+            color: #ec720b;
+            border-bottom: solid #ec720b;
         };
         &:last-child {
             margin-right: 0px;
@@ -66,7 +67,8 @@
         text-decoration: none;
         
         &:hover {
-            border-bottom: solid #F1CDB3;
+            color: #ec720b;
+            border-bottom: solid #ec720b;
         };
         &:last-child {
             margin-right: 0px;
@@ -114,7 +116,7 @@
             text-decoration: none;
             :hover {
                 color: #F1CDB3;
-                border-bottom: solid #F1CDB3;
+                border-bottom: solid #ec720b;
             }
         }
     }
@@ -168,7 +170,7 @@
             :hover {
               color: #F1CDB3;
               cursor: pointer;
-              border-bottom: solid #F1CDB3;
+              border-bottom: solid #ec720b;
             } 
         }
     }

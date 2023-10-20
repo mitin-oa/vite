@@ -1,33 +1,36 @@
 import { useMediaQuery } from "react-responsive";
-import { HashLink as Link } from "react-router-hash-link";
 import { ShortHeader } from "./components/shortHeader/shortHeader";
 import FileUploader from "./components/FileUploader";
 import { Footer } from "./components/footer/footer";
+import NumInput from "./components/InputNumber";
+import { ChangeEvent, useState } from "react";
 
 export default function Order() {
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1160px" });
   const isPhoneScreen = useMediaQuery({ query: "(max-width: 760px" });
+  const [numPages, onChange]: any = useState();
+  const onPagesChange: any = (e: ChangeEvent<HTMLInputElement>) => {
+    const numPages = !Number.isNaN(e.target.valueAsNumber)
+      ? e.target.valueAsNumber
+      : null;
+    onChange(numPages);
+  };
   return (
     <div className="app">
       <ShortHeader />
       <section className="main-content">
+        <h2>
+          To order, select the length of your Document, upload it & checkout
+        </h2>
+        <p>
+          The length of agreement determines number of credits to be used (20€
+          per page). Delivery within 23-72 hours is +50% to total amount.
+        </p>
+
         <div className="container mt-5 form-container">
           <div className="row">
             {/* <!-- Левая колонка с текстом --> */}
             <div className="col-md-6" id="leftColumn">
-              <h2>
-                To order, select the length of your Document, upload it &
-                checkout
-              </h2>
-              <p>
-                The length of agreement determines number of credits to be used
-                (20€ per page)
-              </p>
-              <p>Delivery within 23-72 hours is +50% to total amount</p>
-            </div>
-
-            {/* <!-- Правая колонка с элементами формы --> */}
-            <div className="col-md-6">
               <form id="orderForm">
                 {/*  <!-- <form id="orderForm"> --> */}
                 <div className="form-group mb-3">
@@ -35,16 +38,8 @@ export default function Order() {
                     1. Select the number of pages in your document
                   </label>
 
-                  <input
-                    type="number"
-                    className="form-control"
-                    name="numberOfPages"
-                    id="numberOfPages"
-                    min="1"
-                    value="1"
-                  />
+                  <NumInput num={numPages} onChange={onPagesChange} />
                 </div>
-
                 {/* <!-- Форма загрузки --> */}
                 <div className="form-group mb-3">
                   <label>2. Upload your document</label>
@@ -53,7 +48,6 @@ export default function Order() {
                   </p>
                   <FileUploader />
                 </div>
-
                 <div className="form-group mb-3">
                   <label>3. Optional Extras</label>
                   <div className="form-check">
@@ -85,9 +79,14 @@ export default function Order() {
                     value="addInformation"
                   ></textarea>
                 </div>
+              </form>
+            </div>
 
+            {/* <!-- Правая колонка с элементами формы --> */}
+            <div className="col-md-6">
+              <form id="orderForm">
                 <div className="form-group mb-3">
-                  <legend>4. Contact Information</legend>
+                  <label>4. Contact Information</label>
                 </div>
 
                 <div className="form-group mb-3">

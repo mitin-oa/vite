@@ -1,12 +1,32 @@
 import { useMediaQuery } from "react-responsive";
-import * as NumericInput from "react-numeric-input";
 import { ShortHeader } from "./components/shortHeader/shortHeader";
 import PayPal from "./components/PayPal";
 import { Footer } from "./components/footer/footer";
+import { ChangeEvent, useState } from "react";
+import NumInput from "./components/InputNumber";
+import ModalWindow from "./components/modal/modal";
+
+/* interface Props {
+  showPay: boolean;
+  onPay: any;
+} */
 
 export default function BuyCredits() {
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1160px" });
   const isPhoneScreen = useMediaQuery({ query: "(max-width: 760px" });
+  const [numCredits, onChange]: any = useState();
+  const [show, setShow] = useState(false);
+  const onCreditsChange: any = (e: ChangeEvent<HTMLInputElement>) => {
+    const numCredits = !Number.isNaN(e.target.valueAsNumber)
+      ? e.target.valueAsNumber
+      : null;
+    onChange(numCredits);
+  };
+
+  function handlePayment() {
+    setShow(!show);
+  }
+  console.log(show);
   return (
     <div className="app">
       <ShortHeader />
@@ -33,28 +53,22 @@ export default function BuyCredits() {
                     <label htmlFor="quantity">
                       Select the number of credits you want to purchase
                     </label>
-                    <NumericInput
-                      mobile
-                      className="form-control"
-                      min={1}
-                      max={100}
-                      value={1}
-                      style={{}}
-                    />
+                    <NumInput num={numCredits} onChange={onCreditsChange} />
                   </div>
 
                   {/*  <!-- Элемент для отображения суммы к оплате --> */}
                   <div className="form-group mb-3">
                     <label>Amount to Pay:</label>
-                    <span id="amountToPay">20</span> $
+                    <span id="amountToPay">{20 * numCredits || 0}</span> $
                   </div>
 
                   {/* <!-- Button to show the PayPal button --> */}
                 </div>
                 {/* <!-- PayPal кнопка (placeholder) --> */}
-                <div id="paypal-button-placeholder">
-                  <PayPal />
-                </div>
+                <ModalWindow
+                  title={"Proceed"}
+                  childComp={<PayPal amountPay={20 * numCredits} />}
+                />
               </form>
             </div>
           </div>

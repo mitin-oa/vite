@@ -1,95 +1,94 @@
-import {
-  PayPalScriptProvider,
-  PayPalButtons,
-  usePayPalScriptReducer,
-} from "@paypal/react-paypal-js";
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import * as React from "react";
 
-// This value is from the props in the UI
-const style: object | undefined = { layout: "vertical" };
+const debug = true;
 
-function createOrder() {
-  // replace this url with your server
-  return fetch(
-    "https://react-paypal-js-storybook.fly.dev/api/paypal/create-order",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      // use the "body" param to optionally pass additional order information
-      // like product ids and quantities
-      body: JSON.stringify({
-        cart: [
-          {
-            sku: "1blwyeo8",
-            quantity: 2,
-          },
-        ],
-      }),
-    }
-  )
-    .then((response) => response.json())
-    .then((order) => {
-      // Your code here after create the order
-      return order.id;
-    });
-}
-function onApprove(data: any) {
-  // replace this url with your server
-  return fetch(
-    "https://react-paypal-js-storybook.fly.dev/api/paypal/capture-order",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        orderID: data.orderID,
-      }),
-    }
-  )
-    .then((response) => response.json())
-    .then((orderData) => {
-      // Your code here after capture the order
-    });
-}
-
-// Custom component to wrap the PayPalButtons and show loading spinner
-const ButtonWrapper = ({ showSpinner }: any) => {
-  const [{ isPending }] = usePayPalScriptReducer();
-
-  return (
-    <>
-      {showSpinner && isPending && <div className="spinner" />}
-      <PayPalButtons
-        style={style}
-        disabled={false}
-        forceReRender={[style]}
-        fundingSource={undefined}
-        createOrder={createOrder}
-        onApprove={onApprove}
-      />
-    </>
-  );
+type AmountProps = {
+  amountPay: number;
 };
 
-export default function App() {
-  return (
-    <div style={{ maxWidth: "750px", minHeight: "200px" }}>
-      <PayPalScriptProvider
-        options={{ clientId: "test", components: "buttons", currency: "USD" }}
-      >
-        <ButtonWrapper showSpinner={false} />
-      </PayPalScriptProvider>
-    </div>
-  );
-}
+type InitState = {
+  amount: number;
+  orderID: string;
+  onApproveMessage: string;
+  onErrorMessage: string;
+};
 
-/* 
-export default function PayPal() {
-  return (
-    <PayPalScriptProvider options={{ clientId: "test" }}>
-      <PayPalButtons style={{ layout: "horizontal" }} />
-    </PayPalScriptProvider>
-  );
-} */
+export default class PayPal extends React.Component<AmountProps, InitState> {
+  constructor(props: AmountProps) {
+    super(props);
+    this.state = {
+      amount: this.props.amountPay,
+      orderID: "",
+      onApproveMessage: "",
+      onErrorMessage: "string",
+    };
+
+    this.createOrder = this.createOrder.bind(this);
+    this.onApprove = this.onApprove.bind(this);
+    this.onError = this.onError.bind(this);
+    this.onClick = this.onClick.bind(this);
+  }
+
+  createOrder(data: Record<string, unknown>, actions: any) {
+    if (debug) console.log("Creating order for amount", this.state.amount);
+    return actions.order
+      .create({
+        purchase_units: [
+          {
+            amount: {
+              value: this.state.amount,
+            },
+          },
+        ],
+      })
+      .then((orderID: any) => {
+        this.setState({ orderID: orderID });
+        return orderID;
+      });
+  }
+
+  onApprove(data: any, actions: any) {
+    let app = this;
+    return actions.order.capture().then(function (details: any) {
+      app.setState({
+        onApproveMessage: `Transaction completed by ${details.payer.name.given_name}!`,
+      });
+    });
+  }
+
+  onError(err: Record<string, unknown>) {
+    this.setState({
+      onErrorMessage: err.toString(),
+    });
+  }
+
+  onClick() {
+    if (debug) console.log("When clicked, amount was", this.state.amount);
+  }
+
+  render() {
+    return (
+      <div style={{ minHeight: "300px" }}>
+        <table className="table" style={{ maxWidth: "400px" }}>
+          <tbody>
+            <tr>
+              <th>
+                <label htmlFor="amount">Order Amount: </label>
+              </th>
+              <td>${this.props.amountPay}</td>
+            </tr>
+          </tbody>
+        </table>
+        <PayPalScriptProvider options={{ clientId: "test" }}>
+          <PayPalButtons
+            createOrder={this.createOrder}
+            onApprove={this.onApprove}
+            onError={this.onError}
+            onClick={this.onClick}
+          />
+        </PayPalScriptProvider>
+      </div>
+    );
+  }
+}

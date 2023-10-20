@@ -218,7 +218,7 @@ export class Footer extends React.Component<IHeaderMenu> {
               </a>
               <a href="tel:+48000000000">
                 <img
-                  src="../public/telephone.png"
+                  src="../public/telephone-call.png"
                   className="contacts__icon"
                   alt="Picture phone"
                 />

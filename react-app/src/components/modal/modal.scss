@@ -9,6 +9,7 @@
 
   .Overlay {
     position: fixed;
+    z-index: 1000;
     top: 0;
     left: 0;
     right: 0;
@@ -16,7 +17,20 @@
     background-color: rebeccapurple;
   }
 
-  .form {
+  form {
     display: flex;
     flex-direction: column;
+    
+  }
+
+  button.btn-close {
+    position: absolute;
+    height: 40px;
+    min-width: 40px;
+    padding: 0px;
+    right: 12px;
+  }
+  
+  input {
+    margin-bottom: 10px !important;
   }
