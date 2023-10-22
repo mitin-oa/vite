@@ -1,0 +1,165 @@
+.footer {
+    position: absolute;
+    width: 100%;
+    height: 16vh;
+    background-color: white;
+    padding: 15px 40px 15px;
+    margin: 0 auto;
+    bottom: 0px;
+    &__short {
+        position: absolute;
+        width: 100%;
+        height: 16vh;
+        background-color: white;
+        padding: 15px 40px 15px;
+        margin: 0 auto;
+        bottom: 0px;
+        background-color: #033c5a;
+    }
+    &__logo {
+        font-style:normal;
+        font-weight: 500;
+        font-size: 32px;
+        line-height: 45px;
+        letter-spacing: 0.2em;
+        text-align: center;
+        color: #033c5a;
+        &__span {
+            color: #ec720b;
+        }
+        &__short {
+            font-style:normal;
+            font-weight: 500;
+            font-size: 32px;
+            line-height: 45px;
+            letter-spacing: 0.2em;
+            text-align: center;
+            color: white;
+        }
+    }
+    &__logo-img {
+        width: 120px;
+        height: 100px;
+        margin: 0 auto;
+        @media (max-width: 760px) {
+            width: 260px;
+            height: 269px;
+        };
+    }
+    &__content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items:flex-start;
+        @media (max-width: 1000px) {
+            flex-direction: column;
+            align-items: center;
+            row-gap: 8px;
+        };
+        &__contacts {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-grow: 1;
+            @media (max-width: 760px) {
+                flex-direction: column;
+                align-items: center;
+                row-gap: 8px;
+            };
+        };
+    };
+    &__nav {
+        display: flex;
+        flex-direction: column;
+        align-items:start;
+        row-gap: 10px;
+        margin-bottom: 0px;
+        padding-left: 0px;
+        &__short {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            row-gap: 10px;
+            margin-bottom: 0px;
+            padding-left: 0px;
+            color: white;
+        }
+    }
+}
+
+.contacts {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 0px;
+    &__links {
+        display: flex;
+        justify-content: space-around;
+    }
+    &__phone {
+        display: flex;
+        align-items: center;
+        margin-bottom: 32px;
+    }
+    &__img {
+        margin-right: 20px;
+    }
+    &__title {
+        font-family: 'Georgia';
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 30px;
+        letter-spacing: 0.1em;
+        margin-top: 0px;
+        margin-bottom: 5px;
+        @media (max-width: 760px) {
+            font-size: 20px;
+            line-height: 35.5px;
+            letter-spacing: 0.06em;
+            text-align: center;
+        };
+        &__short {
+            font-family: 'Georgia';
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 30px;
+            letter-spacing: 0.1em;
+            margin-top: 0px;
+            margin-bottom: 5px;
+            color: white;
+            @media (max-width: 760px) {
+                font-size: 25px;
+                line-height: 35.5px;
+                letter-spacing: 0.06em;
+                text-align: center;
+            }
+        }
+    }
+    &__info {
+        font-family: 'Georgia';
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 20px;
+        letter-spacing: 0.05em;
+        text-decoration: none;
+        color: #033c5aac;
+        &__short {
+            font-family: 'Georgia';
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 20px;
+            letter-spacing: 0.05em;
+            text-decoration: none;
+            color: white;
+        }
+    }
+
+    &__icon {
+        width: 40px;
+        height: 40px;
+    }
+}
+.gap {
+    height: 15px;
+}
+/* Footer ends*/
