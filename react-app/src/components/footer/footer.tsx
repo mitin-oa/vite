@@ -1,6 +1,9 @@
 import React from "react";
 import "../footer/footer.scss";
-import Logo from "../../../public/ChronoLegal_S.jpg";
+import FacebookPic from "../../../public/facebook.png";
+import MailPic from "../../../public/gmail.png";
+import PhonePic from "../../../public/telephone-call.png";
+import TelegramPic from "../../../public/telegram.png";
 import { HashLink as Link } from "react-router-hash-link";
 
 interface IHeaderMenu {
@@ -204,28 +207,28 @@ export class Footer extends React.Component<IHeaderMenu> {
             <div className="contacts__links">
               <a href="https://www.facebook.com/">
                 <img
-                  src="../public/facebook.png"
+                  src={FacebookPic}
                   className="contacts__icon"
                   alt="Picture social-list"
                 />
               </a>
               <a href="mailto:mitin.oa@gmail.com">
                 <img
-                  src="../public/gmail.png"
+                  src={MailPic}
                   className="contacts__icon"
                   alt="Picture mail"
                 />
               </a>
               <a href="tel:+48000000000">
                 <img
-                  src="../public/telephone-call.png"
+                  src={PhonePic}
                   className="contacts__icon"
                   alt="Picture phone"
                 />
               </a>
               <a href="https://t.me/">
                 <img
-                  src="../public/telegram.png"
+                  src={TelegramPic}
                   className="contacts__icon"
                   alt="Picture telegram"
                 />
