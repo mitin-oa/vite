@@ -1,5 +1,4 @@
 import { useMediaQuery } from "react-responsive";
-import { FileDrop } from "./DragUpload";
 import { ShortHeader } from "./components/shortHeader/shortHeader";
 import { useState } from "react";
 import FileUploader from "./components/FileUploader";
@@ -39,7 +38,7 @@ export default function UpLoad() {
                 className="text-wrap"
                 type="button"
                 value="Show all uploaded files"
-                onClick={() => FileDrop()}
+                /* onClick={() => FileDrop()} */
               />
             </div>
           </div>
