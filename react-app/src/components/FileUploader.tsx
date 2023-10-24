@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import Button from "./Button";
-import InputFile from "./InputFile";
-import MyUploadButton from "./InputFile";
 import InputFiles from "./InputFile";
 
 const FileUploader = () => {
@@ -9,11 +7,11 @@ const FileUploader = () => {
 
   const [files, setFiles] = useState<any[]>([]);
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  /* const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       setFile(e.target.files[0]);
     }
-  };
+  }; */
 
   const handleUpload = async () => {
     // We will fill this out later
@@ -63,13 +61,9 @@ const FileUploader = () => {
         </div>
       </div>
 
-      {file && (
+      {files && (
         <div>
-          <Button
-            children="Upload file"
-            color="warning"
-            onClick={handleUpload}
-          />
+          <Button children="Proceed" color="warning" onClick={handleUpload} />
         </div>
       )}
     </>
