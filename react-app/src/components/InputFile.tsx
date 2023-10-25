@@ -63,7 +63,9 @@ const InputFiles = ({ files, setFiles }: any) => {
   return (
     <>
       {files.length ? (
-        <MyUploadedFiles files={files} />
+        {
+          /* <MyUploadedFiles files={files} /> */
+        }
       ) : (
         <MyUploadButton setFiles={setFiles} />
       )}

@@ -7,6 +7,7 @@ import UpLoad from "./UpLoad";
 import Order from "./Order";
 import BuyCredits from "./BuyCredits";
 import AdminPanel from "./AdminPanel";
+import "vite/modulepreload-polyfill";
 
 function App() {
   return (

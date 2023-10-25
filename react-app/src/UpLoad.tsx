@@ -14,7 +14,7 @@ export default function UpLoad() {
       <section className="main-content">
         <div className="container">
           <div className="row">
-            <h2>Upload your files</h2>
+            <h2>Upload files</h2>
             <p>File extensions allowed: .doc, .docx, .rtf, .pdf, .odt, .txt</p>
             <FileUploader />
           </div>

@@ -23,7 +23,7 @@ export default class StartScreen extends React.Component {
         <div className="wrapper start_screen_content">
           <div className="Content">
             <h1 className="only_title">
-              Get the legal service for your <br></br> was never been easier!
+              Get the legal service for you <br></br> was never been easier!
             </h1>
             <p className="only_text">
               We offer to give a chance to make all your legal stuff ease. Lorem
