@@ -5,7 +5,7 @@ const LogInForm = ({ onSignIn }: any) => {
     <>
       <form
         className="form mx-4 mb-4"
-        action="/signin"
+        action="/api/signin"
         method="post"
         id="login-form"
       >
