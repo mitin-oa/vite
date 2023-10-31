@@ -57,7 +57,7 @@ const ModalWindow: React.FC<ParentCompProps> = (props) => {
           aria-label="Close"
           onClick={closeModal}
         ></button>
-        <h2 style={{ color: "#ec720b" }}>{title}</h2>
+        <h2 style={{ color: "#ec720b;" }}>{title}</h2>
         {childComp}
       </Modal>
     </div>

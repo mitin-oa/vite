@@ -1,6 +1,5 @@
 import { UrlBuilder } from "@bytescale/sdk";
 import { UploadButton } from "@bytescale/upload-widget-react";
-import { useState } from "react";
 
 const InputFiles = ({ files, setFiles }: any) => {
   // ---------------------------
@@ -16,7 +15,7 @@ const InputFiles = ({ files, setFiles }: any) => {
       },
     },
   };
-  console.log(files[0]);
+
   /* const [files, setFiles] = useState([]); */
 
   // --------------------------

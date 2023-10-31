@@ -37,6 +37,7 @@ export default class PayPal extends React.Component<AmountProps, InitState> {
         purchase_units: [
           {
             amount: {
+              currency_code: "USD",
               value: this.state.amount,
             },
           },
