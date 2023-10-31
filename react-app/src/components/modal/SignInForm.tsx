@@ -3,7 +3,7 @@ const SignInForm: React.FC = () => {
     <>
       <form
         className="form mx-4 mb-4"
-        action="/signup"
+        action="/api/signup"
         method="post"
         id="reg-form"
       >
