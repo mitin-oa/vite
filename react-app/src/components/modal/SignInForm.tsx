@@ -16,7 +16,7 @@ const SignInForm: React.FC = () => {
               id="username"
               name="username"
               placeholder="Enter user name"
-              value="user1"
+              defaultValue="user1"
               required
             />
             <br />
@@ -31,7 +31,7 @@ const SignInForm: React.FC = () => {
               id="email"
               name="email"
               placeholder="Enter email"
-              value="user1@example.com"
+              defaultValue="user1@example.com"
               required
             />
             <br />
@@ -46,7 +46,7 @@ const SignInForm: React.FC = () => {
               id="phone"
               name="phone"
               placeholder="Enter phone"
-              value="+3530000000"
+              defaultValue="+3530000000"
               required
             />
             <br />
@@ -61,7 +61,7 @@ const SignInForm: React.FC = () => {
               id="password"
               name="password"
               placeholder="Enter password"
-              value="pass"
+              defaultValue="pass"
               required
             />
           </div>
