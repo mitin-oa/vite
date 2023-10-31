@@ -16,7 +16,7 @@
     "src": "public/telephone-call.png"
   },
   "src/main.css": {
-    "file": "assets/main-aa2d1bef.css",
+    "file": "assets/main-56f83fcf.css",
     "src": "src/main.css"
   },
   "src/main.tsx": {
@@ -27,9 +27,9 @@
       "assets/start_screen_pic3-385ff5eb.png"
     ],
     "css": [
-      "assets/main-aa2d1bef.css"
+      "assets/main-56f83fcf.css"
     ],
-    "file": "assets/main-66a7e1a1.js",
+    "file": "assets/main-a0d0410a.js",
     "isEntry": true,
     "src": "src/main.tsx"
   }
