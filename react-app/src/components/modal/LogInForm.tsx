@@ -5,7 +5,7 @@ const LogInForm = ({ onSignIn }: any) => {
     <>
       <form
         className="form mx-4 mb-4"
-        action="/signin"
+        action="/api/signin"
         method="post"
         id="login-form"
       >
@@ -18,7 +18,7 @@ const LogInForm = ({ onSignIn }: any) => {
               id="login"
               name="login"
               placeholder="Enter user name"
-              value="client"
+              defaultValue="client"
               required
             />
             <br />
@@ -33,7 +33,7 @@ const LogInForm = ({ onSignIn }: any) => {
               id="password"
               name="password"
               placeholder="Enter password"
-              value="pass"
+              defaultValue="pass"
               required
             />
           </div>
