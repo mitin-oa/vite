@@ -41,9 +41,9 @@ const LogInForm = ({ onSignIn }: any) => {
         <div className="text-left col-xs-12">
           <input type="submit" className="btn btn-default" value="Submit" />
         </div>
-        <p>Not registred? Push Sign In.</p>
+        <p>Not registred? Push Sign Up.</p>
         <div className="text-left col-xs-12">
-          <Button children="Sign In" color="orange" onClick={onSignIn} />
+          <Button children="Sign Up" color="orange" onClick={onSignIn} />
         </div>
       </form>
     </>

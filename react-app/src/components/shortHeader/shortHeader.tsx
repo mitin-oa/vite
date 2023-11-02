@@ -4,7 +4,7 @@ import Logo from "../../../public/logo-white-ec720b-background-033c5a.png";
 import { HashLink as Link } from "react-router-hash-link";
 import SignIn from "../modal/modal";
 import ModalWindow from "../modal/modal";
-import SignInForm from "../modal/SignInForm";
+import SignInForm from "../modal/SignUpForm";
 
 interface IHeaderMenu {
   kind?: "full" | "short";
