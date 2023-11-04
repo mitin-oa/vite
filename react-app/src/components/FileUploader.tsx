@@ -1,7 +1,7 @@
-import React, { ChangeEvent, useState } from "react";
+import { useState } from "react";
 import Button from "./Button";
 import InputFiles from "./InputFile";
-import InputNumber from "./InputNumber";
+import InputPages from "./InputPages";
 
 const FileUploader = () => {
   const [files, setFiles] = useState<any[]>([]);
@@ -52,7 +52,7 @@ const FileUploader = () => {
                 {files.map((file) => (
                   <tr>
                     <td>{file.originalFile.originalFileName}</td>
-                    <td>{<InputNumber />}</td>
+                    <td>{<InputPages />}</td>
                     <td>
                       {
                         <div className="form-check">

@@ -1,22 +1,9 @@
-import React from "react";
-import { ChangeEvent, useState } from "react";
+interface Props {
+  num: number;
+  onChange: any;
+}
 
-interface Props {}
-
-export default function NumInput() {
-  const [numOfPages, setNumOfPages] = useState<number>(0);
-
-  const onPagesChange = (e: ChangeEvent<HTMLInputElement>) => {
-    // In general, use Number.isNaN over global isNaN as isNaN will coerce the value to a number first
-    // which likely isn't desired
-    const numOfPages = !Number.isNaN(e.target.valueAsNumber)
-      ? e.target.valueAsNumber
-      : 0;
-
-    setNumOfPages(numOfPages);
-  };
-
-  console.log(numOfPages);
+export default function NumInput({ num, onChange }: any) {
   return (
     <>
       <input
@@ -26,8 +13,8 @@ export default function NumInput() {
         id="numberOfCredits"
         min="1"
         max="50"
-        value={numOfPages ?? ""}
-        onChange={onPagesChange}
+        value={num ?? ""}
+        onChange={onChange}
       />
     </>
   );
