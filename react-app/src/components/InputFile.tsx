@@ -61,14 +61,13 @@ const InputFiles = ({ files, setFiles }: any) => {
 
   return (
     <>
-      {files.length ? (
-        {
-          /* <MyUploadedFiles files={files} /> */
-        }
+      <MyUploadButton setFiles={setFiles} />
+      {/* {files.length ? (
+        <MyUploadedFiles files={files} />
       ) : (
         <MyUploadButton setFiles={setFiles} />
       )}
-      {/* <a
+      <a
         className="developed_by"
         href="https://www.bytescale.com/docs/upload-widget/react"
         target="_blank"
