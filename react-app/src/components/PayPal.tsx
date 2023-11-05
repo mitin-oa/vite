@@ -81,7 +81,8 @@ export default class PayPal extends React.Component<AmountProps, InitState> {
             </tr>
           </tbody>
         </table>
-        <PayPalScriptProvider options={{ clientId: "test" }}>
+        {/* // * clientId here now - sandbox seller id */}
+        <PayPalScriptProvider options={{ clientId: "ATLcPG0Iju719cAPBCZfb_8CgpSv4Pg8xt73NQW4C8Qf6STnU84kWdVDGPHPBllV6kJbwWHiPZPvEtD4" }}>
           <PayPalButtons
             createOrder={this.createOrder}
             onApprove={this.onApprove}
