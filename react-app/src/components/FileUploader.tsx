@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Button from "./Button";
 import InputFiles from "./InputFile";
+import InputPages from "./InputPages";
 
 const FileUploader = () => {
-  const [file, setFile] = useState<File | null>(null);
-
   const [files, setFiles] = useState<any[]>([]);
 
   /* const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,20 +37,35 @@ const FileUploader = () => {
             <table className="table">
               <thead>
                 <tr>
-                  <th colSpan={2}>File details</th>
+                  <th colSpan={5}>File details</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td>Name</td>
-                  {/* <td>Type</td> */}
+                  <td>Number of pages</td>
+                  <td>Express service</td>
+                  <td>Estimated cost (in credits)</td>
                   <td>Size</td>
                 </tr>
 
                 {files.map((file) => (
                   <tr>
                     <td>{file.originalFile.originalFileName}</td>
-                    {/* <td>{file.type}</td> */}
+                    <td>{<InputPages />}</td>
+                    <td>
+                      {
+                        <div className="form-check">
+                          <input
+                            type="checkbox"
+                            className="form-check-input"
+                            name="expressDelivery"
+                            id="expressDelivery"
+                          />
+                        </div>
+                      }
+                    </td>
+                    <td>{"?"}</td>
                     <td>{(file.originalFile.size / 1024).toFixed(1)} Kbytes</td>
                   </tr>
                 ))}
