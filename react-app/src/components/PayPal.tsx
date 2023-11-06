@@ -26,7 +26,7 @@ export default class PayPal extends React.Component<AmountProps, InitState> {
   constructor(props: AmountProps) {
     super(props);
     this.state = {
-      amount: this.props.amountPay,
+      amount: this.props.amountPay || 1, // * VK: Value set to use default minimum possible payment
       orderID: "",
       onApproveMessage: "",
       onErrorMessage: "string",
@@ -91,7 +91,8 @@ export default class PayPal extends React.Component<AmountProps, InitState> {
               <th>
                 <label htmlFor="amount">Order Amount: </label>
               </th>
-              <td>${this.props.amountPay}</td>
+              {/* // * VK: this.props.amountPay changed to use default minimum possible payment */}
+              <td>${this.state.amount}</td> 
             </tr>
           </tbody>
         </table>
