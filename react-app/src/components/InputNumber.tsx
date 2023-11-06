@@ -13,7 +13,7 @@ export default function NumInput({ num, onChange }: Props) {
         id="numberOfCredits"
         min="1"
         max="50"
-        value={num ?? ""}
+        value={num ?? 1}
         onChange={onChange}
       />
     </>
