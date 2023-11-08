@@ -1,5 +1,5 @@
 import { useMediaQuery } from "react-responsive";
-import { ShortHeader } from "./components/shortHeader/shortHeader";
+import ShortHeader from "./components/shortHeader/shortHeader";
 
 export default function AdminPanel() {
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1160px" });

@@ -1,10 +1,10 @@
 import { useMediaQuery } from "react-responsive";
-import { ShortHeader } from "./components/shortHeader/shortHeader";
 import PayPal from "./components/PayPal";
 import { Footer } from "./components/footer/footer";
 import { ChangeEvent, useState } from "react";
 import NumInput from "./components/InputNumber";
 import ModalWindow from "./components/modal/modal";
+import ShortHeader from "./components/shortHeader/shortHeader";
 
 /* interface Props {
   showPay: boolean;
@@ -39,11 +39,10 @@ export default function BuyCredits() {
               <h2>If you want to purchase of credits</h2>
               <p>1 credit costs 1$</p>
               <p>
-                The length of agreement determines number of credits to be used (20 credits per page)
+                The length of agreement determines number of credits to be used
+                (20 credits per page)
               </p>
-              <p>
-                Delivery within 23-72 hours + 50% to the total cost
-              </p>
+              <p>Delivery within 23-72 hours + 50% to the total cost</p>
             </div>
 
             {/* <!-- Правая колонка с элементами формы --> */}
@@ -54,7 +53,7 @@ export default function BuyCredits() {
                     <label htmlFor="quantity">
                       Select the number of credits you want to purchase
                     </label>
-                    <NumInput num={numCredits} onChange={onCreditsChange}/>
+                    <NumInput num={numCredits} onChange={onCreditsChange} />
                   </div>
 
                   {/*  <!-- Элемент для отображения суммы к оплате --> */}

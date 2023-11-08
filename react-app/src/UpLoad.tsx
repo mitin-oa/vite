@@ -1,8 +1,8 @@
 import { useMediaQuery } from "react-responsive";
-import { ShortHeader } from "./components/shortHeader/shortHeader";
 import { Footer } from "./components/footer/footer";
 import FileUpload from "./components/fileUploader/FileUploader";
 import { useState } from "react";
+import ShortHeader from "./components/shortHeader/shortHeader";
 
 export default function UpLoad() {
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1160px" });
