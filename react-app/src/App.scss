@@ -410,7 +410,7 @@ color: #f2f2f2;
 	text-align: left;
   color: #ec720b;
 	border: none;
-	padding: 10px 15px;
+	padding: 5px 15px;
 	background: #033c5ae7;
 	font-size: 18px;
 	border-top: 2px solid #ddd;
@@ -425,7 +425,9 @@ color: #f2f2f2;
 }
 .table thead tr th:first-child {
 	border-radius: 10px;
-  
+}
+.table thead tr th {
+	border-radius: 10px;
 }
 .table thead tr th:last-child {
 	border-radius: 10px;
@@ -433,12 +435,13 @@ color: #f2f2f2;
 .table tbody td {
 	text-align: left;
 	border: none;
-	padding: 10px 15px;
-	font-size: 16px;
+	padding: 5px 15px;
+	font-size: 15px;
   font-weight: 700;
   color: #033c5ae7;
 	vertical-align: top;
-   background: #F8F8F8;
+  background: #F8F8F8;
+  border-radius: 10px;
 }
 .table tbody tr:nth-child(even) {
 	background: #F8F8F8;
@@ -459,3 +462,8 @@ color: #f2f2f2;
 	border-radius: 10px;
  
 } 
+
+.form-control {
+  height: 35px;
+  margin-bottom: 0px !important;
+}

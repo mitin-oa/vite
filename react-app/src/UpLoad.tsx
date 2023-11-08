@@ -3,6 +3,7 @@ import { Footer } from "./components/footer/footer";
 import FileUpload from "./components/fileUploader/FileUploader";
 import { useState } from "react";
 import ShortHeader from "./components/shortHeader/shortHeader";
+import FileUploader from "./components/fileUploader/fileUploaderValia";
 
 export default function UpLoad() {
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1160px" });
@@ -30,13 +31,13 @@ export default function UpLoad() {
             <h2>Upload files</h2>
             <p>File extensions allowed: .doc, .docx, .rtf, .pdf, .odt, .txt</p>
             <form onSubmit={handleSubmit}>
-              <FileUpload
-                accept=".jpg,.png,.jpeg,.doc,.docx,.rtf,.pdf,.odt,.txt"
+              <FileUploader
+              /* accept=".jpg,.png,.jpeg,.doc,.docx,.rtf,.pdf,.odt,.txt"
                 label=""
                 multiple
-                updateFilesCb={updateUploadedFiles}
+                updateFilesCb={updateUploadedFiles} */
               />
-              <button type="submit">PROCEED</button>
+              {/* <button type="submit">PROCEED</button> */}
             </form>
           </div>
         </div>
