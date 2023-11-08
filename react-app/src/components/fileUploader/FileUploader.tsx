@@ -60,6 +60,7 @@ const FileUpload = ({
       let updatedFiles = addNewFiles(newFiles);
       setFiles(updatedFiles);
       callUpdateFilesCb(updatedFiles);
+      onFilesUpload();
     }
   };
 
@@ -69,8 +70,15 @@ const FileUpload = ({
     callUpdateFilesCb({ ...files });
   };
 
-  const [pages, setPages] = useState([Array(Number(2)).fill(0)]);
-  console.log(files);
+  const [pages, setPages] = useState<any[]>([]);
+  const onFilesUpload = () => {
+    let pagesInit = Array(Object.keys(files).length).fill(null);
+    setPages(pagesInit);
+  };
+
+  console.log(pages);
+  console.log(Number(Object.keys(files).length));
+
   return (
     <>
       <FileUploadContainer>
@@ -122,7 +130,7 @@ const FileUpload = ({
                     </div>
                   }
                 </td>
-                <td>{pages[0]}</td>
+                <td>{pages}</td>
                 <td>{convertBytesToKB(files[file].size)} Kbytes</td>
               </tr>
             ))}

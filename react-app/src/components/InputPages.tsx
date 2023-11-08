@@ -15,7 +15,7 @@ export default function InputPages({ pages, setPages }: Props) {
       ? e.target.valueAsNumber
       : 0;
     setNumOfPages(numOfPages);
-    /* setPages(pages, numOfPages); */
+    setPages(numOfPages);
   };
 
   console.log(numOfPages);
