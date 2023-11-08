@@ -1,9 +1,7 @@
 import { useMediaQuery } from "react-responsive";
 import { ShortHeader } from "./components/shortHeader/shortHeader";
-
 import { Footer } from "./components/footer/footer";
-import FileUploaderNew from "./components/fileUploader/FileUploaderNew";
-import FileUpload from "./components/fileUploader/FileUploaderNew";
+import FileUpload from "./components/fileUploader/FileUploader";
 import { useState } from "react";
 
 export default function UpLoad() {
@@ -33,8 +31,8 @@ export default function UpLoad() {
             <p>File extensions allowed: .doc, .docx, .rtf, .pdf, .odt, .txt</p>
             <form onSubmit={handleSubmit}>
               <FileUpload
-                accept=".jpg,.png,.jpeg"
-                label="Profile Image(s)"
+                accept=".jpg,.png,.jpeg,.doc,.docx,.rtf,.pdf,.odt,.txt"
+                label=""
                 multiple
                 updateFilesCb={updateUploadedFiles}
               />

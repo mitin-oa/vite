@@ -3,7 +3,7 @@ import { ShortHeader } from "./components/shortHeader/shortHeader";
 import { Footer } from "./components/footer/footer";
 import NumInput from "./components/InputNumber";
 import { ChangeEvent, useState } from "react";
-import FileUpload from "./components/fileUploader/FileUploaderNew";
+import FileUpload from "./components/fileUploader/FileUploader";
 
 export default function Order() {
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1160px" });
