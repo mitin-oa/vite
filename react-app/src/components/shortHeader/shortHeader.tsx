@@ -23,19 +23,19 @@ export class ShortHeader extends React.Component<IHeaderMenu> {
         }
       >
         <div className="wrapper">
-          <div className="logo">
-            <img className="logo__img" alt="LOGO" src={Logo}></img>
-          </div>
+          <Link to="/">
+            <button
+              type="button"
+              className={"btn btn-warning"}
+              style={{ padding: "0px" }}
+            >
+              <img className="logo__img" alt="LOGO" src={Logo} />
+            </button>
+          </Link>
           <ul className={this.props.kind === "short" ? "nav__short" : "nav"}>
             {
               <>
-                <Link to="/">
-                  <button type="button" className={"btn btn-warning"}>
-                    Home
-                  </button>
-                </Link>
-                <div className="gap"></div>
-                <ModalWindow title={"Sign In"} childComp={<SignInForm />} />
+                <ModalWindow title={"Sign Up"} childComp={<SignInForm />} />
               </>
             }
           </ul>
