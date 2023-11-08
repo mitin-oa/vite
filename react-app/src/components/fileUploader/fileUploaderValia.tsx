@@ -82,7 +82,7 @@ const FileUploader = () => {
   // ! Временно. Для отладки
   const logContents = () => {
     console.log(fileData);
-    console.log(fileData[0].file);
+    //console.log(fileData[0].file);
 
     // console.log('File:', file);
     // console.log('Express Delivery:', expressDelivery);
@@ -90,7 +90,13 @@ const FileUploader = () => {
     // console.log('Number Of Pages:', numberOfPages);
   };
   // ! Временно. Для отладки
-
+  console.log(logContents());
+  let sum = 0;
+  let sum1 = 0;
+  fileData.map((file) => (sum += Number(file.pages)));
+  fileData.map(
+    (file) => (sum1 += file.expressDelivery ? file.pages * 1.5 : file.pages)
+  );
   return (
     <>
       <div className="col-12">
@@ -128,8 +134,8 @@ const FileUploader = () => {
             {fileData.map((file, index) => (
               <tr key={file.index}>
                 <td>
-                  {file.file.name.length > 20
-                    ? file.file.name.slice(0, 19) + "…"
+                  {file.file.name.length > 40
+                    ? file.file.name.slice(0, 39) + "…"
                     : file.file.name}
                 </td>
                 <td>
@@ -170,6 +176,13 @@ const FileUploader = () => {
                 <td>{(file.file.size / 1024).toFixed(1)} Kbytes</td>
               </tr>
             ))}
+            <tr>
+              <td>Total</td>
+              <td>{sum}</td>
+              <td>{""}</td>
+              <td>{sum1}</td>
+              <td>{""}</td>
+            </tr>
           </tbody>
         </table>
       </div>
