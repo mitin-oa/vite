@@ -1,9 +1,9 @@
 import { useMediaQuery } from "react-responsive";
 import { ShortHeader } from "./components/shortHeader/shortHeader";
-import FileUploader from "./components/fileUploader/FileUploader";
 import { Footer } from "./components/footer/footer";
 import NumInput from "./components/InputNumber";
 import { ChangeEvent, useState } from "react";
+import FileUpload from "./components/fileUploader/FileUploaderNew";
 
 export default function Order() {
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1160px" });
@@ -46,7 +46,7 @@ export default function Order() {
                   <p>
                     File extensions allowed: .doc, .docx, .rtf, .pdf, .odt, .txt
                   </p>
-                  <FileUploader />
+                  <FileUpload />
                 </div>
                 <div className="form-group mb-3">
                   <label>3. Optional Extras</label>

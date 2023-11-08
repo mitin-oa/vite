@@ -1,8 +1,7 @@
 import { useMediaQuery } from "react-responsive";
 import { ShortHeader } from "./components/shortHeader/shortHeader";
-import FileUploader from "./components/fileUploader/FileUploader";
+
 import { Footer } from "./components/footer/footer";
-import FileUploaderSimple from "./components/fileUploader/FileUploaderSimple";
 import FileUploaderNew from "./components/fileUploader/FileUploaderNew";
 import FileUpload from "./components/fileUploader/FileUploaderNew";
 import { useState } from "react";

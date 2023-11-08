@@ -12,7 +12,7 @@ import {
   RemoveFileIcon,
   InputLabel,
 } from "./FileUploadStyles";
-import "./fileUploaderStyles.scss";
+
 import InputPages from "../InputPages";
 
 const KILO_BYTES_PER_BYTE = 1000;
