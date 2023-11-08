@@ -6,7 +6,7 @@ export default function AdminPanel() {
   const isPhoneScreen = useMediaQuery({ query: "(max-width: 760px" });
   return (
     <div className="app">
-      <ShortHeader />
+      <ShortHeader kind="short" />
       <p>Admin Panel</p>
     </div>
   );

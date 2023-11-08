@@ -17,7 +17,7 @@ export default function Order() {
   };
   return (
     <div className="app">
-      <ShortHeader />
+      <ShortHeader kind="short" />
       <section className="main-content">
         <h2>
           To order, select the length of your Document, upload it & checkout

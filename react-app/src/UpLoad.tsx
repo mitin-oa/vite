@@ -22,7 +22,7 @@ export default function UpLoad() {
 
   return (
     <div className="app">
-      <ShortHeader />
+      <ShortHeader kind="short" />
       {/* <!-- Bootstrap "Containers" component. Taken from https://getbootstrap.com/docs/5.2/layout/containers/#how-they-work --> */}
       <section className="main-content">
         <div className="container">
