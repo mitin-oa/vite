@@ -23,9 +23,11 @@ const InputFiles = ({ files, setFiles }: any) => {
   // --------------------------
 
   const MyUploadButton = ({ setFiles }: any) => (
-    <UploadButton options={options} onComplete={setFiles}>
-      {({ onClick }) => <button onClick={onClick}>Upload a file...</button>}
-    </UploadButton>
+    <>
+      <UploadButton options={options} onComplete={setFiles}>
+        {({ onClick }) => <button onClick={onClick}>Upload a file...</button>}
+      </UploadButton>
+    </>
   );
 
   // -----------------------------

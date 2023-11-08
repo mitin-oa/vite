@@ -1,6 +1,6 @@
 import { useMediaQuery } from "react-responsive";
 import { ShortHeader } from "./components/shortHeader/shortHeader";
-import FileUploader from "./components/FileUploader";
+import FileUploader from "./components/fileUploader/FileUploader";
 import { Footer } from "./components/footer/footer";
 import NumInput from "./components/InputNumber";
 import { ChangeEvent, useState } from "react";

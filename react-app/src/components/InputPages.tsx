@@ -1,8 +1,11 @@
 import { ChangeEvent, useState } from "react";
 
-interface Props {}
+interface Props {
+  pages: any[];
+  setPages: any;
+}
 
-export default function NumInput() {
+export default function InputPages({ pages, setPages }: Props) {
   const [numOfPages, setNumOfPages] = useState<number>(0);
 
   const onPagesChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -12,6 +15,7 @@ export default function NumInput() {
       ? e.target.valueAsNumber
       : 0;
     setNumOfPages(numOfPages);
+    /* setPages(pages, numOfPages); */
   };
 
   console.log(numOfPages);
