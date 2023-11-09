@@ -11,7 +11,7 @@ interface IHeaderProps {
 }
 
 export default function ShortHeader({ kind }: IHeaderProps) {
-  const [signedIn, onSignIn] = useState(true);
+  const [signedIn, onSignIn] = useState(false);
   function handleSignIn() {
     return onSignIn(!signedIn);
   }
@@ -33,7 +33,7 @@ export default function ShortHeader({ kind }: IHeaderProps) {
               <ModalWindow
                 title={"Log In"}
                 childComp={
-                  signedIn ? (
+                  !signedIn ? (
                     <LogInForm onSignIn={handleSignIn} />
                   ) : (
                     <SignInForm />

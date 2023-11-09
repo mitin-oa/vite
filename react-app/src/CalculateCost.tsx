@@ -4,6 +4,7 @@ import NumInput from "./components/InputNumber";
 import { ChangeEvent, useState } from "react";
 import FileUpload from "./components/fileUploader/FileUploader";
 import ShortHeader from "./components/shortHeader/shortHeader";
+import { HeaderMenu } from "./components/header/header";
 
 export default function Order() {
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1160px" });
@@ -17,11 +18,9 @@ export default function Order() {
   };
   return (
     <div className="app">
-      <ShortHeader kind="short" />
+      <HeaderMenu kind="short" />
       <section className="main-content">
-        <h2>
-          To order, select the length of your Document, upload it & checkout
-        </h2>
+        <h2>To calculate cost</h2>
         <p>
           The length of agreement determines number of credits to be used (20€
           per page). Delivery within 23-72 hours is +50% to total amount.
@@ -42,14 +41,7 @@ export default function Order() {
                 </div>
                 {/* <!-- Форма загрузки --> */}
                 <div className="form-group mb-3">
-                  <label>2. Upload your document</label>
-                  <p>
-                    File extensions allowed: .doc, .docx, .rtf, .pdf, .odt, .txt
-                  </p>
-                  <FileUpload />
-                </div>
-                <div className="form-group mb-3">
-                  <label>3. Optional Extras</label>
+                  <label>2. Optional Extras</label>
                   <div className="form-check">
                     <input
                       type="checkbox"
@@ -86,7 +78,7 @@ export default function Order() {
             <div className="col-md-6">
               <form id="orderForm">
                 <div className="form-group mb-3">
-                  <label>4. Contact Information</label>
+                  <label>3. Contact Information</label>
                 </div>
 
                 <div className="form-group mb-3">
