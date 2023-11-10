@@ -1,6 +1,6 @@
 import Button from "../Button";
 
-const LogInForm = ({ onSignIn }: any) => {
+const LogInForm = ({ onSignIn, onSignUp }: any) => {
   return (
     <>
       <form
@@ -39,11 +39,12 @@ const LogInForm = ({ onSignIn }: any) => {
           </div>
         </div>
         <div className="text-left col-xs-12">
-          <input type="submit" className="btn btn-default" value="Submit" />
+          {/* <input type="submit" className="btn btn-default" value="Submit" /> */}
+          <Button children="Submit" color="orange" onClick={onSignIn} />
         </div>
         <p>Not registred? Push Sign Up.</p>
         <div className="text-left col-xs-12">
-          <Button children="Sign Up" color="orange" onClick={onSignIn} />
+          <Button children="Sign Up" color="orange" onClick={onSignUp} />
         </div>
       </form>
     </>

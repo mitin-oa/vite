@@ -1,25 +1,14 @@
 import { useMediaQuery } from "react-responsive";
 import { Footer } from "./components/footer/footer";
+import FileUpload from "./components/fileUploader/FileUploader";
 import { useState } from "react";
+import ShortHeader from "./components/shortHeader/shortHeader";
 import FileUploader from "./components/fileUploader/fileUploaderValia";
 import { HeaderMenu } from "./components/header/header";
-import Button from "./components/Button";
 
-export default function UpLoad() {
+export default function About() {
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1160px" });
   const isPhoneScreen = useMediaQuery({ query: "(max-width: 760px" });
-
-  const [newUserInfo, setNewUserInfo] = useState({
-    profileImages: [],
-  });
-
-  const updateUploadedFiles = (files: any) =>
-    setNewUserInfo({ ...newUserInfo, profileImages: files });
-
-  const handleSubmit = (event: { preventDefault: () => void }) => {
-    event.preventDefault();
-    //logic ...
-  };
 
   return (
     <div className="app">
@@ -28,14 +17,10 @@ export default function UpLoad() {
       <section className="main-content">
         <div className="container">
           <div className="row">
-            <h2>Upload files</h2>
-            <p>File extensions allowed: .doc, .docx, .rtf, .pdf, .odt, .txt</p>
-            <form onSubmit={handleSubmit}>
-              <FileUploader />
-            </form>
+            <h2>About service</h2>
+            <p>Fgfgfj cmvnlvjjc tokgeog flkgkge cv fvj gkergr</p>
           </div>
         </div>
-        <Button children="Proceed" color={""} onClick={() => handleSubmit} />
       </section>
       <Footer kind={"short"} />
       {/* <!-- END OF Bootstrap "Containers" component --> */}

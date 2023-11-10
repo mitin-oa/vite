@@ -188,7 +188,7 @@ const FileUploader = () => {
       </div>
 
       <div>
-        <Button children="Proceed" color="warning" onClick={handleUpload} />
+        {/* <Button children="Proceed" color="warning" onClick={handleUpload} /> */}
         {/* // ! Временно. Для отладки */}
         {/* <button onClick={logContents}>Log Contents</button> */}
       </div>

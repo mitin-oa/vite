@@ -1,4 +1,10 @@
-const SignInForm: React.FC = () => {
+import Button from "../Button";
+
+const SignInForm = ({ onSignUp, onCloseModal }: any) => {
+  const handleClick = () => {
+    onSignUp();
+    onCloseModal();
+  };
   return (
     <>
       <form
@@ -67,7 +73,8 @@ const SignInForm: React.FC = () => {
           </div>
         </div>
         <div className="text-left col-xs-12">
-          <input type="submit" className="btn btn-default" value="Submit" />
+          {/* <input type="submit" className="btn btn-default" value="Submit" /> */}
+          <Button children="Submit" color="orange" onClick={handleClick} />
         </div>
       </form>
     </>
