@@ -97,7 +97,7 @@ export function HeaderMenu({ kind }: IHeaderProps) {
             <>
               {kind === "full" ? (
                 <>
-                  <Link className="nav__link nav__text" to="AdminPanel">
+                  <Link className="nav__link nav__text" to="Dashboard">
                     Dashboard
                   </Link>
                   <Link className="nav__link nav__text" to="UpLoad">

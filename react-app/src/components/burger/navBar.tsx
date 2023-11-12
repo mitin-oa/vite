@@ -58,10 +58,10 @@ export const Navbar = () => {
         </Link>
         <Link
           className="burger_visible__Link"
-          to="AdminPanel"
+          to="Dashboard"
           onClick={() => close()}
         >
-          Admin Panel
+          Dashboard
         </Link>
       </StyledMenu>
       <Burger open={open} setOpen={setOpen} />

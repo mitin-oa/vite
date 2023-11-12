@@ -6,7 +6,7 @@ import Home from "./Home";
 import UpLoad from "./UpLoad";
 import Order from "./CalculateCost";
 import BuyCredits from "./BuyCredits";
-import AdminPanel from "./AdminPanel";
+import Dashboard from "./Dashboard";
 import "vite/modulepreload-polyfill";
 import About from "./About";
 import CalculateCost from "./CalculateCost";
@@ -20,7 +20,7 @@ function App() {
         <Route path="UpLoad" element={<UpLoad />} />
         <Route path="CalculateCost" element={<CalculateCost />} />
         <Route path="BuyCredits" element={<BuyCredits />} />
-        <Route path="AdminPanel" element={<AdminPanel />} />
+        <Route path="Dashboard" element={<Dashboard />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
