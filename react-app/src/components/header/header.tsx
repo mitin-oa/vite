@@ -7,16 +7,50 @@ import ModalWindow from "../modal/modal";
 import SignInForm from "../modal/SignUpForm";
 import LogInForm from "../modal/LogInForm";
 
+// * VK: Significant for the backend area. Please exercise caution when making alterations
+import { sendLogInRequest } from '../scripts/logIn';
+
 interface IHeaderProps {
   kind?: "full" | "short";
 }
 
 export function HeaderMenu({ kind }: IHeaderProps) {
   const [signedIn, onSignIn] = useState(false);
-  function handleSignIn() {
-    onSignIn(!signedIn);
-    setIsOpen(!modalIsOpen);
+
+  // * ↓ VK: Significant for the backend area. Please exercise caution when making alterations
+  async function handleSignIn(userData: { username: string; password: string }) {
+    // * VK: userData содержит имя пользователя и пароль из формы
+    const answer = await sendLogInRequest(userData);
+    console.log(answer, 'answer');
+
+    if (answer.status === 'success') {
+      // * VK: Логика в случае успешной авторизации
+      // console.log('Server response OK:', data);
+      alert(answer.message);
+
+      // * VK: Прежний код, который выполнялся после LogIn и вызова функции handleSignIn
+      onSignIn(!signedIn);
+      // * VK: Передача данных для закрытия модального окна
+      setIsOpen(!modalIsOpen);
+
+    } else {
+      // * VK: Логика в случае неуспешной авторизации
+      // console.log('Server response NOT OK:', data);
+      if (answer.HTTP_status === 400) {
+        // TODO VK: дополнить логику на случай неуспешной авторизации
+        alert(answer.message);
+      } else if (answer.HTTP_status === 400) {
+        // TODO VK: дополнить логику на случай сбоя в работе сервера
+        alert(answer.message);
+      } else {
+        // TODO VK: пересмотреть этот способ обработки ошибок, он не работает
+        alert('Unknown error!');
+      }
+    }
   }
+  // * ↑ VK: Significant for the backend area. Please exercise caution when making alterations
+
+
   const [signedUp, onSignUp] = useState(true);
   function handleSignUp() {
     onSignUp(!signedUp);
@@ -30,8 +64,9 @@ export function HeaderMenu({ kind }: IHeaderProps) {
     setIsOpen(false);
   }
 
-  console.log(signedIn);
+  console.log(signedIn, 'signedIn');
   console.log(signedUp);
+  
   return (
     <header className={kind === "short" ? "header__short" : "header"}>
       <div className="wrapper">
@@ -78,6 +113,7 @@ export function HeaderMenu({ kind }: IHeaderProps) {
               )}
 
               <ModalWindow
+              // * VK: This part of the code will be displayed if the variable signedIn == true
                 title={"Log In"}
                 childComp={
                   signedIn && signedUp ? (
