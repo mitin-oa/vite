@@ -13,14 +13,23 @@ function onOrder() {
     </Link>
   );
 }
-export default function StartScreen() {
+export default function StartScreen({
+  handleSignIn,
+  modalIsOpen,
+  setIsOpen,
+}: any) {
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1160px" });
   const isPhoneScreen = useMediaQuery({ query: "(max-width: 760px" });
   let kind: "full" | "short" = isMobileScreen ? "short" : "full";
 
   return (
     <section className="start_screen">
-      <HeaderMenu kind={kind} />
+      <HeaderMenu
+        kind={kind}
+        handleSignIn={handleSignIn}
+        modalIsOpen={modalIsOpen}
+        setIsOpen={setIsOpen}
+      />
       <div className="wrapper start_screen_content">
         <div className="Content">
           <h1 className="only_title">

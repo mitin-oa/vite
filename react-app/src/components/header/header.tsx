@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./header.scss";
 import Logo from "../../../public/logo-white-ec720b-background-033c5a.png";
 import { HashLink as Link } from "react-router-hash-link";
@@ -6,22 +6,32 @@ import { Navbar } from "../burger/navBar";
 import ModalWindow from "../modal/modal";
 import SignInForm from "../modal/SignUpForm";
 import LogInForm from "../modal/LogInForm";
+import { SignedInContext } from "../../App";
 
 interface IHeaderProps {
   kind?: "full" | "short";
+  handleSignIn: boolean;
+  modalIsOpen: boolean;
+  setIsOpen: any;
 }
 
-export function HeaderMenu({ kind }: IHeaderProps) {
-  const [signedIn, onSignIn] = useState(false);
-  function handleSignIn() {
+export function HeaderMenu({
+  kind,
+  handleSignIn,
+  modalIsOpen,
+  setIsOpen,
+}: IHeaderProps) {
+  const signedIn = useContext(SignedInContext);
+  /* const [signedIn, onSignIn] = useState(false); */
+  /* function handleSignIn() {
     onSignIn(!signedIn);
     setIsOpen(!modalIsOpen);
-  }
+  } */
   const [signedUp, onSignUp] = useState(true);
   function handleSignUp() {
     onSignUp(!signedUp);
   }
-  const [modalIsOpen, setIsOpen] = useState(false);
+  /* const [modalIsOpen, setIsOpen] = useState(false); */
 
   function openModal() {
     setIsOpen(true);

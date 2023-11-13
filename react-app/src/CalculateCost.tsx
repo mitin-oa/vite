@@ -2,11 +2,13 @@ import { useMediaQuery } from "react-responsive";
 import { Footer } from "./components/footer/footer";
 import NumInput from "./components/InputNumber";
 import { ChangeEvent, useState } from "react";
-import FileUpload from "./components/fileUploader/FileUploader";
-import ShortHeader from "./components/shortHeader/shortHeader";
 import { HeaderMenu } from "./components/header/header";
 
-export default function Order() {
+export default function CalculateCost({
+  handleSignIn,
+  modalIsOpen,
+  setIsOpen,
+}: any) {
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1160px" });
   const isPhoneScreen = useMediaQuery({ query: "(max-width: 760px" });
   const [numPages, onChange]: any = useState();
@@ -18,7 +20,12 @@ export default function Order() {
   };
   return (
     <div className="app">
-      <HeaderMenu kind="short" />
+      <HeaderMenu
+        kind="short"
+        handleSignIn={handleSignIn}
+        modalIsOpen={modalIsOpen}
+        setIsOpen={setIsOpen}
+      />
       <section className="main-content">
         <h2>To calculate cost</h2>
         <p>
