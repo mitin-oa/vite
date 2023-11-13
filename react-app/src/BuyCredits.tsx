@@ -1,10 +1,10 @@
 import { useMediaQuery } from "react-responsive";
-import { ShortHeader } from "./components/shortHeader/shortHeader";
 import PayPal from "./components/PayPal";
 import { Footer } from "./components/footer/footer";
 import { ChangeEvent, useState } from "react";
 import NumInput from "./components/InputNumber";
 import ModalWindow from "./components/modal/modal";
+import ShortHeader from "./components/shortHeader/shortHeader";
 
 /* interface Props {
   showPay: boolean;
@@ -29,7 +29,7 @@ export default function BuyCredits() {
   console.log(show);
   return (
     <div className="app">
-      <ShortHeader />
+      <ShortHeader kind="short" />
       {/* <!-- Bootstrap "Containers" component. Taken from https://getbootstrap.com/docs/5.2/layout/containers/#how-they-work --> */}
       <section className="main-content">
         <div className="container mt-5">
@@ -37,12 +37,12 @@ export default function BuyCredits() {
             {/* <!-- Левая колонка с текстом --> */}
             <div className="col-md-6">
               <h2>If you want to purchase of credits</h2>
-              <p>1 credits costs 20$</p>
+              <p>1 credit costs 1$</p>
               <p>
                 The length of agreement determines number of credits to be used
-                (1 credit per page)
+                (20 credits per page)
               </p>
-              <p>Delivery within 23-72 hours is 2 credits per page instead</p>
+              <p>Delivery within 23-72 hours + 50% to the total cost</p>
             </div>
 
             {/* <!-- Правая колонка с элементами формы --> */}
@@ -58,8 +58,8 @@ export default function BuyCredits() {
 
                   {/*  <!-- Элемент для отображения суммы к оплате --> */}
                   <div className="form-group mb-3">
-                    <label>Amount to Pay:</label>
-                    <span id="amountToPay">{20 * numCredits || 0}</span> $
+                    <label>Amount to Pay: </label>
+                    <span id="amountToPay">{1 * numCredits || 1}</span> $
                   </div>
 
                   {/* <!-- Button to show the PayPal button --> */}
@@ -67,7 +67,7 @@ export default function BuyCredits() {
                 {/* <!-- PayPal кнопка (placeholder) --> */}
                 <ModalWindow
                   title={"Proceed"}
-                  childComp={<PayPal amountPay={20 * numCredits} />}
+                  childComp={<PayPal amountPay={1 * numCredits} />}
                 />
               </form>
             </div>

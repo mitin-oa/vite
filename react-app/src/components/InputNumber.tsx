@@ -1,9 +1,9 @@
 interface Props {
   num: number;
-  onChange: () => void;
+  onChange: any;
 }
 
-export default function NumInput({ num, onChange }: Props) {
+export default function NumInput({ num, onChange }: any) {
   return (
     <>
       <input
@@ -13,7 +13,7 @@ export default function NumInput({ num, onChange }: Props) {
         id="numberOfCredits"
         min="1"
         max="50"
-        value={num ?? ""}
+        value={num ?? 1}
         onChange={onChange}
       />
     </>

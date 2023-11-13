@@ -18,29 +18,32 @@ const customStyles = {
 interface ParentCompProps {
   title?: any;
   childComp?: React.ReactNode;
+  modalIsOpen?: any;
+  openModal?: any;
+  closeModal?: any;
 }
-
+let subtitle: any;
 // Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
 Modal.setAppElement("#root");
 
 /* export default function ModalWindow({ content }: any) */
 const ModalWindow: React.FC<ParentCompProps> = (props) => {
-  const { title, childComp } = props;
-  const [modalIsOpen, setIsOpen] = React.useState(false);
+  const { title, childComp, modalIsOpen, openModal, closeModal } = props;
+  /* const [modalIsOpen, setIsOpen] = React.useState(false);
 
   function openModal() {
     setIsOpen(true);
-  }
+  } */
 
   function afterOpenModal() {
     // references are now sync'd and can be accessed.
-    title.style.color = "#ec720b";
+    subtitle.style.color = "#ec720b";
   }
 
-  function closeModal() {
+  /* function closeModal() {
     setIsOpen(false);
   }
-
+ */
   return (
     <div>
       <Button children={title} color="warning" onClick={openModal} />
@@ -57,7 +60,7 @@ const ModalWindow: React.FC<ParentCompProps> = (props) => {
           aria-label="Close"
           onClick={closeModal}
         ></button>
-        <h2 style={{ color: "#ec720b" }}>{title}</h2>
+        <h2 ref={(_subtitle) => (subtitle = _subtitle)}>{title}</h2>
         {childComp}
       </Modal>
     </div>
