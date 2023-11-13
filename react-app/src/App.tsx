@@ -5,10 +5,10 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./Home";
 import UpLoad from "./UpLoad";
 import BuyCredits from "./BuyCredits";
-import AdminPanel from "./AdminPanel";
 import "vite/modulepreload-polyfill";
 import About from "./About";
 import CalculateCost from "./CalculateCost";
+import DashBoard from "./DashBoard";
 export const SignedInContext = createContext(false);
 
 function App() {
@@ -40,7 +40,7 @@ function App() {
             element={<CalculateCost handleSignIn={handleSignIn} />}
           />
           <Route path="BuyCredits" element={<BuyCredits />} />
-          <Route path="AdminPanel" element={<AdminPanel />} />
+          <Route path="DashBoard" element={<DashBoard />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </SignedInContext.Provider>
