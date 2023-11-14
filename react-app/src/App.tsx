@@ -11,13 +11,49 @@ import CalculateCost from "./CalculateCost";
 import DashBoard from "./DashBoard";
 export const SignedInContext = createContext(false);
 
+// * VK: Significant for the backend area. Please exercise caution when making alterations
+import { sendLogInRequest } from './components/scripts/logIn';
+
 function App() {
   const [signedIn, onSignIn] = useState(false);
   const [modalIsOpen, setIsOpen] = useState(false);
-  function handleSignIn() {
-    onSignIn(!signedIn);
-    setIsOpen(!modalIsOpen);
+  // function handleSignIn() {
+  //   onSignIn(!signedIn);
+  //   setIsOpen(!modalIsOpen);
+  // }
+
+  // * ↓ VK: Significant for the backend area. Please exercise caution when making alterations
+  async function handleSignIn(userData: { username: string; password: string }) {
+    // * VK: userData содержит имя пользователя и пароль из формы
+    const answer = await sendLogInRequest(userData);
+    console.log(answer, 'answer');
+
+    if (answer.status === 'success') {
+      // * VK: Логика в случае успешной авторизации
+      // console.log('Server response OK:', data);
+      alert(answer.message);
+
+      // * VK: Прежний код, который выполнялся после LogIn и вызова функции handleSignIn
+      onSignIn(!signedIn);
+      // * VK: Передача данных для закрытия модального окна
+      setIsOpen(!modalIsOpen);
+
+    } else {
+      // * VK: Логика в случае неуспешной авторизации
+      // console.log('Server response NOT OK:', data);
+      if (answer.HTTP_status === 400) {
+        // TODO VK: дополнить логику на случай неуспешной авторизации
+        alert(answer.message);
+      } else if (answer.HTTP_status === 400) {
+        // TODO VK: дополнить логику на случай сбоя в работе сервера
+        alert(answer.message);
+      } else {
+        // TODO VK: пересмотреть этот способ обработки ошибок, он не работает
+        alert('Unknown error!');
+      }
+    }
   }
+  // * ↑ VK: Significant for the backend area. Please exercise caution when making alterations
 
   return (
     <>
