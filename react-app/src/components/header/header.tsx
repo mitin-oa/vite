@@ -28,9 +28,11 @@ export function HeaderMenu({
     setIsOpen(!modalIsOpen);
   } */
   const [signedUp, onSignUp] = useState(true);
+
   function handleSignUp() {
     onSignUp(!signedUp);
   }
+
   /* const [modalIsOpen, setIsOpen] = useState(false); */
 
   function openModal() {
@@ -40,8 +42,9 @@ export function HeaderMenu({
     setIsOpen(false);
   }
 
-  console.log(signedIn);
+  console.log(signedIn, 'signedIn');
   console.log(signedUp);
+  
   return (
     <header className={kind === "short" ? "header__short" : "header"}>
       <div className="wrapper">
@@ -88,6 +91,7 @@ export function HeaderMenu({
               )}
 
               <ModalWindow
+              // * VK: This part of the code will be displayed if the variable signedIn == true
                 title={"Log In"}
                 childComp={
                   signedIn && signedUp ? (

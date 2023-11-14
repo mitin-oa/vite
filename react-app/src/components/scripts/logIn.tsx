@@ -1,7 +1,7 @@
-/* **
+/**
  * Sends an authorization request to the server.
  * @param {UserData} userData - An object containing the values of the username
- * and password * fields from the authorization form.
+ * and password fields from the authorization form.
  * @returns {Promise<any>} - An object representing the data received from the
  *  server in response to an authorization request.
  */
