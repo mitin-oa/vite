@@ -12,23 +12,27 @@ import DashBoard from "./DashBoard";
 export const SignedInContext = createContext(false);
 
 // * VK: Significant for the backend area. Please exercise caution when making alterations
-import { sendLogInRequest } from './components/scripts/logIn';
+import { sendLogInRequest } from "./components/scripts/logIn";
 
 function App() {
   const [signedIn, onSignIn] = useState(false);
   const [modalIsOpen, setIsOpen] = useState(false);
+
   // function handleSignIn() {
   //   onSignIn(!signedIn);
   //   setIsOpen(!modalIsOpen);
   // }
 
   // * ↓ VK: Significant for the backend area. Please exercise caution when making alterations
-  async function handleSignIn(userData: { username: string; password: string }) {
+  async function handleSignIn(userData: {
+    username: string;
+    password: string;
+  }) {
     // * VK: userData содержит имя пользователя и пароль из формы
     const answer = await sendLogInRequest(userData);
-    console.log(answer, 'answer');
+    console.log(answer, "answer");
 
-    if (answer.status === 'success') {
+    if (answer.status === "success") {
       // * VK: Логика в случае успешной авторизации
       // console.log('Server response OK:', data);
       alert(answer.message);
@@ -37,7 +41,6 @@ function App() {
       onSignIn(!signedIn);
       // * VK: Передача данных для закрытия модального окна
       setIsOpen(!modalIsOpen);
-
     } else {
       // * VK: Логика в случае неуспешной авторизации
       // console.log('Server response NOT OK:', data);
@@ -49,7 +52,7 @@ function App() {
         alert(answer.message);
       } else {
         // TODO VK: пересмотреть этот способ обработки ошибок, он не работает
-        alert('Unknown error!');
+        alert("Unknown error!");
       }
     }
   }
@@ -63,14 +66,35 @@ function App() {
             path="/"
             element={
               <Home
+                onSignIn={onSignIn}
                 handleSignIn={handleSignIn}
                 modalIsOpen={modalIsOpen}
                 setIsOpen={setIsOpen}
               />
             }
           />
-          <Route path="About" element={<About />} />
-          <Route path="UpLoad" element={<UpLoad />} />
+          <Route
+            path="About"
+            element={
+              <About
+                onSignIn={onSignIn}
+                handleSignIn={handleSignIn}
+                modalIsOpen={modalIsOpen}
+                setIsOpen={setIsOpen}
+              />
+            }
+          />
+          <Route
+            path="UpLoad"
+            element={
+              <UpLoad
+                onSignIn={onSignIn}
+                handleSignIn={handleSignIn}
+                modalIsOpen={modalIsOpen}
+                setIsOpen={setIsOpen}
+              />
+            }
+          />
           <Route
             path="CalculateCost"
             element={<CalculateCost handleSignIn={handleSignIn} />}

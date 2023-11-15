@@ -55,7 +55,6 @@ const LogInForm = ({ onSignIn, onSignUp }: any) => {
           </div>
         </div>
         <div className="text-left col-xs-12">
-          {/* <Button children="Submit" color="orange" onClick={onSignIn} /> */}
           {/* // * VK: Significant for the backend area. Please exercise caution when making alterations */}
           <Button
             children="Submit"
