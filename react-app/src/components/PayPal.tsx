@@ -1,18 +1,18 @@
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import * as React from "react";
 
-// * VK Backend: connecting an external script to process requests to the backend
-import { sendPaymentDataToServer } from './scripts/fetch';
-
-
 const debug = true;
 
-// * VK Backend: Storing this in the app variable allows  to access 
-// * component's properties and methods inside the callback function.
-let app = this;
-
-type AmountProps = {
+// * VK: Significant for the backend area. Please exercise caution when making alterations
+/** * VK: Defining the type of properties (props) for the PayPal component.
+ * - amountPay: a required number representing the payment amount.
+ * - onSuccess: an optional callback function called when the PayPal transaction completes successfully.
+ * Takes two parameters: transactionId (transaction ID) and amount (payment amount).
+ * If passed, this function will be called by the component upon successful payment.
+ */
+type PaymentProps = {
   amountPay: number;
+  onSuccess?: (transactionId: string, amount: number) => void;
 };
 
 type InitState = {
@@ -22,8 +22,8 @@ type InitState = {
   onErrorMessage: string;
 };
 
-export default class PayPal extends React.Component<AmountProps, InitState> {
-  constructor(props: AmountProps) {
+export default class PayPal extends React.Component<PaymentProps, InitState> {
+  constructor(props: PaymentProps) {
     super(props);
     this.state = {
       amount: this.props.amountPay || 1, // * VK: Value set to use default minimum possible payment
@@ -40,6 +40,7 @@ export default class PayPal extends React.Component<AmountProps, InitState> {
 
   createOrder(data: Record<string, unknown>, actions: any) {
     if (debug) console.log("Creating order for amount", this.state.amount);
+    
     return actions.order
       .create({
         purchase_units: [
@@ -57,19 +58,35 @@ export default class PayPal extends React.Component<AmountProps, InitState> {
       });
   }
 
+
   onApprove(data: any, actions: any) {
     let app = this;
-    return actions.order.capture().then(function (details: any) {
-      console.log(details.id);
-      console.log(app.state.amount);
-      
-      // * VK Backend: sending payment data to server
-      sendPaymentDataToServer(details.id, app.state.amount);
 
-      app.setState({
-        onApproveMessage: `Transaction completed by ${details.payer.name.given_name}!`,
+    // ! VK: Временно - проверка авторизации перед проведением платежа.
+    // ! Заменить на логику, работающую с сервером
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; token=`);
+    const token = parts.length === 2 ? parts.pop()?.split(';').shift() !== null : false;
+    if (!token) {
+      alert("Authorization required. Payment will be canceled");
+    // !
+
+    } else {
+      return actions.order.capture().then(function (details: any) {
+        // console.log(details.id);
+        // console.log(app.state.amount);
+
+        app.setState({
+          onApproveMessage: `Transaction completed by ${details.payer.name.given_name}!`,
+        });
+
+        // * VK: Significant for the backend area. Please exercise caution when making alterations
+        // * VK: Call the onSuccess callback if it has been passed
+        if (app.props.onSuccess) {
+          app.props.onSuccess(details.id, app.state.amount);
+        }
       });
-    });
+    }
   }
 
   onError(err: Record<string, unknown>) {
@@ -80,6 +97,7 @@ export default class PayPal extends React.Component<AmountProps, InitState> {
 
   onClick() {
     if (debug) console.log("When clicked, amount was", this.state.amount);
+
   }
 
   render() {
@@ -92,7 +110,7 @@ export default class PayPal extends React.Component<AmountProps, InitState> {
                 <label htmlFor="amount">Order Amount: </label>
               </th>
               {/* // * VK: this.props.amountPay changed to use default minimum possible payment */}
-              <td>${this.state.amount}</td> 
+              <td>${this.state.amount}</td>
             </tr>
           </tbody>
         </table>
