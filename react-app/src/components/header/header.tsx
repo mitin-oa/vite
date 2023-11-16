@@ -87,37 +87,38 @@ export function HeaderMenu({
               ) : (
                 <></>
               )}
-
-              <ModalWindow
-                // * VK: This part of the code will be displayed if the variable signedIn == true
-                title={signedInStatus}
-                childComp={
-                  signedInStatus == "Sign in" ? (
-                    signedIn && signedUp ? (
-                      <LogInForm
-                        onSignIn={handleSignIn}
-                        onSignUp={handleSignUp}
-                      />
+              <Link to="/">
+                <ModalWindow
+                  // * VK: This part of the code will be displayed if the variable signedIn == true
+                  title={signedInStatus}
+                  childComp={
+                    signedInStatus == "Sign in" ? (
+                      signedIn && signedUp ? (
+                        <LogInForm
+                          onSignIn={handleSignIn}
+                          onSignUp={handleSignUp}
+                        />
+                      ) : (
+                        <SignInForm onSignUp={handleSignUp} />
+                      )
                     ) : (
-                      <SignInForm onSignUp={handleSignUp} />
+                      <Link to="/">
+                        <Button
+                          children={signedInStatus}
+                          color="orange"
+                          onClick={() => {
+                            onSignIn(false);
+                            setIsOpen(false);
+                          }}
+                        />
+                      </Link>
                     )
-                  ) : (
-                    <Link to="/">
-                      <Button
-                        children={signedInStatus}
-                        color="orange"
-                        onClick={() => {
-                          onSignIn(false);
-                          setIsOpen(false);
-                        }}
-                      />
-                    </Link>
-                  )
-                }
-                modalIsOpen={modalIsOpen}
-                openModal={openModal}
-                closeModal={closeModal}
-              />
+                  }
+                  modalIsOpen={modalIsOpen}
+                  openModal={openModal}
+                  closeModal={closeModal}
+                />
+              </Link>
             </>
           ) : (
             <>
@@ -136,38 +137,40 @@ export function HeaderMenu({
               ) : (
                 <></>
               )}
-              <ModalWindow
-                title={signedInStatus}
-                childComp={
-                  signedInStatus == "Sign in" ? (
-                    !signedIn && signedUp ? (
-                      <LogInForm
-                        onSignIn={handleSignIn}
-                        onSignUp={handleSignUp}
-                      />
+              <Link to="/">
+                <ModalWindow
+                  title={signedInStatus}
+                  childComp={
+                    signedInStatus == "Sign in" ? (
+                      !signedIn && signedUp ? (
+                        <LogInForm
+                          onSignIn={handleSignIn}
+                          onSignUp={handleSignUp}
+                        />
+                      ) : (
+                        <SignInForm
+                          onSignUp={handleSignUp}
+                          onCloseModal={closeModal}
+                        />
+                      )
                     ) : (
-                      <SignInForm
-                        onSignUp={handleSignUp}
-                        onCloseModal={closeModal}
-                      />
+                      <Link to="/">
+                        <Button
+                          children={signedInStatus}
+                          color="orange"
+                          onClick={() => {
+                            onSignIn(false);
+                            setIsOpen(false);
+                          }}
+                        />
+                      </Link>
                     )
-                  ) : (
-                    <Link to="/">
-                      <Button
-                        children={signedInStatus}
-                        color="orange"
-                        onClick={() => {
-                          onSignIn(false);
-                          setIsOpen(false);
-                        }}
-                      />
-                    </Link>
-                  )
-                }
-                modalIsOpen={modalIsOpen}
-                openModal={openModal}
-                closeModal={closeModal}
-              />
+                  }
+                  modalIsOpen={modalIsOpen}
+                  openModal={openModal}
+                  closeModal={closeModal}
+                />
+              </Link>
             </>
           )}
         </ul>

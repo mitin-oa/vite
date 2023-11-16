@@ -1,13 +1,15 @@
 import { useMediaQuery } from "react-responsive";
 import { Footer } from "./components/footer/footer";
 import NumInput from "./components/InputNumber";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, SetStateAction, useState } from "react";
 import { HeaderMenu } from "./components/header/header";
+import Button from "./components/Button";
 
 export default function CalculateCost({
   handleSignIn,
   modalIsOpen,
   setIsOpen,
+  onSignIn,
 }: any) {
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1160px" });
   const isPhoneScreen = useMediaQuery({ query: "(max-width: 760px" });
@@ -18,6 +20,12 @@ export default function CalculateCost({
       : null;
     onChange(numPages);
   };
+  const [calculateCost, setCalculateCost] = useState(false);
+  function handleCalculation() {
+    setCalculateCost(!calculateCost);
+  }
+  const [expressDelivery, setExpressDelivery] = useState(false);
+
   return (
     <div className="app">
       <HeaderMenu
@@ -25,6 +33,7 @@ export default function CalculateCost({
         handleSignIn={handleSignIn}
         modalIsOpen={modalIsOpen}
         setIsOpen={setIsOpen}
+        onSignIn={onSignIn}
       />
       <section className="main-content">
         <h2>To calculate cost</h2>
@@ -55,6 +64,7 @@ export default function CalculateCost({
                       className="form-check-input"
                       name="expressDelivery"
                       id="expressDelivery"
+                      onChange={(e) => setExpressDelivery(e.target.checked)}
                     />
                     <label
                       className="form-check-label"
@@ -123,10 +133,15 @@ export default function CalculateCost({
                     required
                   />
                 </div>
-                <input
+                {/* <input
                   type="submit"
                   className="btn btn-primary"
                   value="Proceed to checkout"
+                /> */}
+                <Button
+                  children="Proceed to checkout"
+                  color="orange"
+                  onClick={handleCalculation}
                 />
               </form>
 
@@ -138,6 +153,31 @@ export default function CalculateCost({
             </div>
           </div>
         </div>
+        {calculateCost && (
+          <table className="table">
+            <tbody>
+              <tr>
+                <td rowSpan={2}>Total</td>
+                <td>Number of pages</td>
+                <td>Estimated cost in credits</td>
+                <td>Estimated cost in Euro</td>
+              </tr>
+              <tr>
+                <td>{numPages ? numPages : 1}</td>
+                <td>
+                  {numPages ? (expressDelivery ? numPages * 1.5 : numPages) : 1}
+                </td>
+                <td>
+                  {numPages
+                    ? expressDelivery
+                      ? numPages * 1.5 * 20
+                      : numPages * 20
+                    : 20}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        )}
       </section>
       <Footer kind={"short"} />
     </div>
