@@ -14,6 +14,7 @@ function onOrder() {
   );
 }
 export default function StartScreen({
+  kind,
   handleSignIn,
   onSignIn,
   modalIsOpen,
@@ -21,7 +22,6 @@ export default function StartScreen({
 }: any) {
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1160px" });
   const isPhoneScreen = useMediaQuery({ query: "(max-width: 760px" });
-  let kind: "full" | "short" = isMobileScreen ? "short" : "full";
 
   return (
     <section className="start_screen">

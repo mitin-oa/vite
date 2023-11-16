@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { Dispatch, SetStateAction, useContext, useState } from "react";
 import "./header.scss";
 import Logo from "../../../public/logo-white-ec720b-background-033c5a.png";
 import { HashLink as Link } from "react-router-hash-link";
@@ -12,9 +12,9 @@ import Button from "../Button";
 interface IHeaderProps {
   kind?: "full" | "short";
   handleSignIn: boolean;
-  onSignIn: any;
+  onSignIn: Dispatch<SetStateAction<boolean>>;
   modalIsOpen: boolean;
-  setIsOpen: any;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 export function HeaderMenu({
@@ -26,17 +26,12 @@ export function HeaderMenu({
 }: IHeaderProps) {
   const signedIn = useContext(SignedInContext);
   const signedInStatus = signedIn ? "Sign out" : "Sign in";
-  /* function handleSignIn() {
-    onSignIn(!signedIn);
-    setIsOpen(!modalIsOpen);
-  } */
+
   const [signedUp, onSignUp] = useState(true);
 
   function handleSignUp() {
     onSignUp(!signedUp);
   }
-
-  /* const [modalIsOpen, setIsOpen] = useState(false); */
 
   function openModal() {
     setIsOpen(true);
@@ -107,14 +102,16 @@ export function HeaderMenu({
                       <SignInForm onSignUp={handleSignUp} />
                     )
                   ) : (
-                    <Button
-                      children={signedInStatus}
-                      color="orange"
-                      onClick={() => {
-                        onSignIn(false);
-                        setIsOpen(false);
-                      }}
-                    />
+                    <Link to="/">
+                      <Button
+                        children={signedInStatus}
+                        color="orange"
+                        onClick={() => {
+                          onSignIn(false);
+                          setIsOpen(false);
+                        }}
+                      />
+                    </Link>
                   )
                 }
                 modalIsOpen={modalIsOpen}
@@ -141,19 +138,6 @@ export function HeaderMenu({
               )}
               <ModalWindow
                 title={signedInStatus}
-                /* childComp={
-                  !signedIn && signedUp ? (
-                    <LogInForm
-                      onSignIn={handleSignIn}
-                      onSignUp={handleSignUp}
-                    />
-                  ) : (
-                    <SignInForm
-                      onSignUp={handleSignUp}
-                      onCloseModal={closeModal}
-                    />
-                  )
-                } */
                 childComp={
                   signedInStatus == "Sign in" ? (
                     !signedIn && signedUp ? (
@@ -168,14 +152,16 @@ export function HeaderMenu({
                       />
                     )
                   ) : (
-                    <Button
-                      children={signedInStatus}
-                      color="orange"
-                      onClick={() => {
-                        onSignIn(false);
-                        setIsOpen(false);
-                      }}
-                    />
+                    <Link to="/">
+                      <Button
+                        children={signedInStatus}
+                        color="orange"
+                        onClick={() => {
+                          onSignIn(false);
+                          setIsOpen(false);
+                        }}
+                      />
+                    </Link>
                   )
                 }
                 modalIsOpen={modalIsOpen}

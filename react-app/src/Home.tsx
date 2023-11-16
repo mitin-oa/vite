@@ -2,6 +2,7 @@ import { Footer } from "./components/footer/footer";
 import StartScreen from "./components/startScreen/startScreen";
 
 export default function Home({
+  kind,
   handleSignIn,
   onSignIn,
   modalIsOpen,
@@ -10,6 +11,7 @@ export default function Home({
   return (
     <div className="app">
       <StartScreen
+        kind={kind}
         handleSignIn={handleSignIn}
         onSignIn={onSignIn}
         modalIsOpen={modalIsOpen}

@@ -65,6 +65,7 @@ function App() {
             path="/"
             element={
               <Home
+                kind="full"
                 onSignIn={onSignIn}
                 handleSignIn={handleSignIn}
                 modalIsOpen={modalIsOpen}
@@ -76,6 +77,7 @@ function App() {
             path="About"
             element={
               <About
+                kind="short"
                 onSignIn={onSignIn}
                 handleSignIn={handleSignIn}
                 modalIsOpen={modalIsOpen}
@@ -87,6 +89,7 @@ function App() {
             path="UpLoad"
             element={
               <UpLoad
+                kind="short"
                 onSignIn={onSignIn}
                 handleSignIn={handleSignIn}
                 modalIsOpen={modalIsOpen}
@@ -96,10 +99,40 @@ function App() {
           />
           <Route
             path="CalculateCost"
-            element={<CalculateCost handleSignIn={handleSignIn} />}
+            element={
+              <CalculateCost
+                kind="short"
+                onSignIn={onSignIn}
+                handleSignIn={handleSignIn}
+                modalIsOpen={modalIsOpen}
+                setIsOpen={setIsOpen}
+              />
+            }
           />
-          <Route path="BuyCredits" element={<BuyCredits />} />
-          <Route path="DashBoard" element={<DashBoard />} />
+          <Route
+            path="BuyCredits"
+            element={
+              <BuyCredits
+                kind="short"
+                onSignIn={onSignIn}
+                handleSignIn={handleSignIn}
+                modalIsOpen={modalIsOpen}
+                setIsOpen={setIsOpen}
+              />
+            }
+          />
+          <Route
+            path="DashBoard"
+            element={
+              <DashBoard
+                kind="short"
+                onSignIn={onSignIn}
+                handleSignIn={handleSignIn}
+                modalIsOpen={modalIsOpen}
+                setIsOpen={setIsOpen}
+              />
+            }
+          />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </SignedInContext.Provider>
