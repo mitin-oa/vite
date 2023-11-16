@@ -17,7 +17,6 @@ import { sendLogInRequest } from "./components/scripts/logIn";
 function App() {
   const [signedIn, onSignIn] = useState(false);
   const [modalIsOpen, setIsOpen] = useState(false);
-  
   // function handleSignIn() {
   //   onSignIn(!signedIn);
   //   setIsOpen(!modalIsOpen);
