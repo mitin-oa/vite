@@ -27,29 +27,34 @@ export default function UpLoad({
   };
 
   return (
-    <div className="app">
-      <HeaderMenu
-        kind="short"
-        onSignIn={onSignIn}
-        handleSignIn={handleSignIn}
-        modalIsOpen={modalIsOpen}
-        setIsOpen={setIsOpen}
-      />
-      {/* <!-- Bootstrap "Containers" component. Taken from https://getbootstrap.com/docs/5.2/layout/containers/#how-they-work --> */}
-      <section className="main-content">
-        <div className="container">
-          <div className="row">
-            <h2>Upload files</h2>
-            <p>File extensions allowed: .doc, .docx, .rtf, .pdf, .odt, .txt</p>
-            <form onSubmit={handleSubmit}>
-              <FileUploader />
-            </form>
+    <>
+      <div className="app">
+        <HeaderMenu
+          kind="short"
+          onSignIn={onSignIn}
+          handleSignIn={handleSignIn}
+          modalIsOpen={modalIsOpen}
+          setIsOpen={setIsOpen}
+        />
+        {/* <!-- Bootstrap "Containers" component. Taken from https://getbootstrap.com/docs/5.2/layout/containers/#how-they-work --> */}
+        <section className="main-content">
+          <div className="container">
+            <div className="row">
+              <h2>Upload files</h2>
+              <p>
+                File extensions allowed: .doc, .docx, .rtf, .pdf, .odt, .txt
+              </p>
+              <form onSubmit={handleSubmit}>
+                <FileUploader />
+              </form>
+            </div>
           </div>
-        </div>
-        <Button children="Proceed" color={""} onClick={() => handleSubmit} />
-      </section>
+          <Button children="Proceed" color={""} onClick={() => handleSubmit} />
+        </section>
+
+        {/* <!-- END OF Bootstrap "Containers" component --> */}
+      </div>
       <Footer kind={"short"} />
-      {/* <!-- END OF Bootstrap "Containers" component --> */}
-    </div>
+    </>
   );
 }

@@ -1,19 +1,21 @@
 .footer {
-    position: absolute;
+    
     width: 100%;
     height: 16vh;
     background-color: white;
     padding: 15px 40px 15px;
     margin: 0 auto;
-    bottom: 0px;
+    
+    overflow: auto;
     &__short {
-        position: absolute;
+        position: relative;
         width: 100%;
         height: 16vh;
         background-color: white;
         padding: 15px 40px 15px;
         margin: 0 auto;
-        bottom: 0px;
+       
+        overflow: auto;
         background-color: #033c5a;
     }
     &__logo {

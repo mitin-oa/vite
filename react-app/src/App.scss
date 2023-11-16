@@ -1,8 +1,8 @@
 .app {
     width: 100%;
-    height: 84vh;
+    min-height: 84vh;
     margin: 0;
-    overflow: hidden;
+    overflow: auto;
     background-color:#032a5a10;
   }
   
@@ -13,7 +13,9 @@
   .container {
     display: flex;
   }
-  
+  .table-scroll {
+    scroll-behavior: auto;
+  }
   button {
     font-size: 1.5rem;
   }
@@ -385,6 +387,9 @@ color: #033c5a;
   margin-top: 20px;
 	margin-bottom: 20px;
   border-collapse:unset;
+}
+.scroll-table {
+  overflow-x: auto;
 }
 .table thead th {
 	font-weight: bold;

@@ -9,15 +9,17 @@ export default function Home({
   setIsOpen,
 }: any) {
   return (
-    <div className="app">
-      <StartScreen
-        kind={kind}
-        handleSignIn={handleSignIn}
-        onSignIn={onSignIn}
-        modalIsOpen={modalIsOpen}
-        setIsOpen={setIsOpen}
-      />
-      <Footer />
-    </div>
+    <>
+      <div className="app">
+        <StartScreen
+          kind={kind}
+          handleSignIn={handleSignIn}
+          onSignIn={onSignIn}
+          modalIsOpen={modalIsOpen}
+          setIsOpen={setIsOpen}
+        />
+      </div>
+      <Footer kind="full" />
+    </>
   );
 }

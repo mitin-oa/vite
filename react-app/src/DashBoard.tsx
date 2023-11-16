@@ -44,25 +44,27 @@ export default function Dashboard({
   // * ↑ VK: Significant for the backend area. Please exercise caution when making alterations
 
   return (
-    <div className="app">
-      <HeaderMenu
-        kind={kind}
-        onSignIn={onSignIn}
-        handleSignIn={handleSignIn}
-        modalIsOpen={modalIsOpen}
-        setIsOpen={setIsOpen}
-      />
-      <section className="main-content">
-        <div className="row">
-          <p>Dashboard Panel</p>
-          <p>Profile info</p>
-          <p>Credit points</p>
-          <p>Recent transactions (eg. 5 last transactions)</p>
-          <p>Recent files (eg. 10 last files) with all the info of each</p>
-          <p>Editor notes (recent/all editor notes)</p>
-        </div>
-      </section>
+    <>
+      <div className="app">
+        <HeaderMenu
+          kind={kind}
+          onSignIn={onSignIn}
+          handleSignIn={handleSignIn}
+          modalIsOpen={modalIsOpen}
+          setIsOpen={setIsOpen}
+        />
+        <section className="main-content">
+          <div className="row">
+            <p>Dashboard Panel</p>
+            <p>Profile info</p>
+            <p>Credit points</p>
+            <p>Recent transactions (eg. 5 last transactions)</p>
+            <p>Recent files (eg. 10 last files) with all the info of each</p>
+            <p>Editor notes (recent/all editor notes)</p>
+          </div>
+        </section>
+      </div>
       <Footer kind="short" />
-    </div>
+    </>
   );
 }

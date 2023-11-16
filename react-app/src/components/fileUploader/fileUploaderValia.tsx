@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Button from "../Button";
 
 /* import sendToServer from "./scripts/uploadFile";  */ // ! Backend. Connecting an external script
 
@@ -115,7 +114,7 @@ const FileUploader = () => {
         </div>
       </div>
 
-      <div>
+      <div className="table-scroll">
         <table className="table">
           <thead>
             <tr>
@@ -176,6 +175,7 @@ const FileUploader = () => {
                 <td>{(file.file.size / 1024).toFixed(1)} Kbytes</td>
               </tr>
             ))}
+
             <tr>
               <td>Total</td>
               <td>{sum}</td>
