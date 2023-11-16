@@ -6,6 +6,9 @@ import NumInput from "./components/InputNumber";
 import ModalWindow from "./components/modal/modal";
 import ShortHeader from "./components/shortHeader/shortHeader";
 
+// * VK Backend: connecting an external script to process requests to the backend
+import { sendPaymentDataToServer } from '../src/components/scripts/fetch';
+
 /* interface Props {
   showPay: boolean;
   onPay: any;
@@ -23,9 +26,21 @@ export default function BuyCredits() {
     onChange(numCredits);
   };
 
-  function handlePayment() {
-    setShow(!show);
+  // * ↓ VK: Significant for the backend area. Please exercise caution when making alterations
+  const [showModal, setShowModal] = useState(false); // * VK: State to control the visibility of a modal window
+
+  const handlePayment = (transactionId: string, amount: number) => {
+    console.log('Transaction ID:', transactionId);
+    console.log('Amount:', amount);
+
+    // * VK Backend: sending payment data to server 
+    sendPaymentDataToServer(transactionId, amount);
+
+    // * VK: Closing the modal window after successful payment
+    setShowModal(!showModal);
   }
+  // * ↑ VK: Significant for the backend area. Please exercise caution when making alterations
+
   console.log(show);
   return (
     <div className="app">
@@ -67,7 +82,12 @@ export default function BuyCredits() {
                 {/* <!-- PayPal кнопка (placeholder) --> */}
                 <ModalWindow
                   title={"Proceed"}
-                  childComp={<PayPal amountPay={1 * numCredits} />}
+                  // * VK: Significant for the backend area. Please exercise caution when making alterations
+                  // * VK: Passing the handlePaymentSuccess function to the PayPal component via the onSuccess property
+                  childComp={<PayPal amountPay={1 * numCredits} onSuccess={handlePayment} />}
+                  modalIsOpen={showModal}
+                  openModal={() => setShowModal(true)}
+                  closeModal={() => setShowModal(false)}
                 />
               </form>
             </div>
