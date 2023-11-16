@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react'
 
 
 // https://vitejs.dev/config/
-export default defineConfig({
+/* export default defineConfig({
   plugins: [react()],
   /* build: {
     // generate manifest.json in outDir
@@ -14,5 +14,21 @@ export default defineConfig({
       // overwrite default .html entry
       input: 'src/main.tsx'
     }
-  } */
+  } 
+}) */
+
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [react()],
+  server: {
+    proxy: {
+      '/api': { 
+        // target: 'http://localhost:3001',
+        target: 'https://sassagreement.com.ghanastudyfair.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/$/, ''),
+      },
+    },
+  },
 })

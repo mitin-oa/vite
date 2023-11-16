@@ -6,13 +6,24 @@ import ShortHeader from "./components/shortHeader/shortHeader";
 import FileUploader from "./components/fileUploader/fileUploaderValia";
 import { HeaderMenu } from "./components/header/header";
 
-export default function About() {
+export default function About({
+  onSignIn,
+  handleSignIn,
+  modalIsOpen,
+  setIsOpen,
+}: any) {
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1160px" });
   const isPhoneScreen = useMediaQuery({ query: "(max-width: 760px" });
 
   return (
     <div className="app">
-      <HeaderMenu kind="short" />
+      <HeaderMenu
+        kind="short"
+        onSignIn={onSignIn}
+        handleSignIn={handleSignIn}
+        modalIsOpen={modalIsOpen}
+        setIsOpen={setIsOpen}
+      />
       {/* <!-- Bootstrap "Containers" component. Taken from https://getbootstrap.com/docs/5.2/layout/containers/#how-they-work --> */}
       <section className="main-content">
         <div className="container">

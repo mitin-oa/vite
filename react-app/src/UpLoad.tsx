@@ -5,7 +5,12 @@ import FileUploader from "./components/fileUploader/fileUploaderValia";
 import { HeaderMenu } from "./components/header/header";
 import Button from "./components/Button";
 
-export default function UpLoad() {
+export default function UpLoad({
+  onSignIn,
+  handleSignIn,
+  modalIsOpen,
+  setIsOpen,
+}: any) {
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1160px" });
   const isPhoneScreen = useMediaQuery({ query: "(max-width: 760px" });
 
@@ -23,7 +28,13 @@ export default function UpLoad() {
 
   return (
     <div className="app">
-      <HeaderMenu kind="short" />
+      <HeaderMenu
+        kind="short"
+        onSignIn={onSignIn}
+        handleSignIn={handleSignIn}
+        modalIsOpen={modalIsOpen}
+        setIsOpen={setIsOpen}
+      />
       {/* <!-- Bootstrap "Containers" component. Taken from https://getbootstrap.com/docs/5.2/layout/containers/#how-they-work --> */}
       <section className="main-content">
         <div className="container">

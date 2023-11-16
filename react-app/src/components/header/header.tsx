@@ -7,10 +7,12 @@ import ModalWindow from "../modal/modal";
 import SignInForm from "../modal/SignUpForm";
 import LogInForm from "../modal/LogInForm";
 import { SignedInContext } from "../../App";
+import Button from "../Button";
 
 interface IHeaderProps {
   kind?: "full" | "short";
   handleSignIn: boolean;
+  onSignIn: any;
   modalIsOpen: boolean;
   setIsOpen: any;
 }
@@ -18,11 +20,12 @@ interface IHeaderProps {
 export function HeaderMenu({
   kind,
   handleSignIn,
+  onSignIn,
   modalIsOpen,
   setIsOpen,
 }: IHeaderProps) {
   const signedIn = useContext(SignedInContext);
-  /* const [signedIn, onSignIn] = useState(false); */
+  const signedInStatus = signedIn ? "Sign out" : "Sign in";
   /* function handleSignIn() {
     onSignIn(!signedIn);
     setIsOpen(!modalIsOpen);
@@ -42,9 +45,9 @@ export function HeaderMenu({
     setIsOpen(false);
   }
 
-  console.log(signedIn, 'signedIn');
+  console.log(signedIn, "signedIn");
   console.log(signedUp);
-  
+
   return (
     <header className={kind === "short" ? "header__short" : "header"}>
       <div className="wrapper">
@@ -91,16 +94,27 @@ export function HeaderMenu({
               )}
 
               <ModalWindow
-              // * VK: This part of the code will be displayed if the variable signedIn == true
-                title={"Log In"}
+                // * VK: This part of the code will be displayed if the variable signedIn == true
+                title={signedInStatus}
                 childComp={
-                  signedIn && signedUp ? (
-                    <LogInForm
-                      onSignIn={handleSignIn}
-                      onSignUp={handleSignUp}
-                    />
+                  signedInStatus == "Sign in" ? (
+                    signedIn && signedUp ? (
+                      <LogInForm
+                        onSignIn={handleSignIn}
+                        onSignUp={handleSignUp}
+                      />
+                    ) : (
+                      <SignInForm onSignUp={handleSignUp} />
+                    )
                   ) : (
-                    <SignInForm onSignUp={handleSignUp} />
+                    <Button
+                      children={signedInStatus}
+                      color="orange"
+                      onClick={() => {
+                        onSignIn(false);
+                        setIsOpen(false);
+                      }}
+                    />
                   )
                 }
                 modalIsOpen={modalIsOpen}
@@ -126,8 +140,8 @@ export function HeaderMenu({
                 <></>
               )}
               <ModalWindow
-                title={"Log In"}
-                childComp={
+                title={signedInStatus}
+                /* childComp={
                   !signedIn && signedUp ? (
                     <LogInForm
                       onSignIn={handleSignIn}
@@ -137,6 +151,30 @@ export function HeaderMenu({
                     <SignInForm
                       onSignUp={handleSignUp}
                       onCloseModal={closeModal}
+                    />
+                  )
+                } */
+                childComp={
+                  signedInStatus == "Sign in" ? (
+                    !signedIn && signedUp ? (
+                      <LogInForm
+                        onSignIn={handleSignIn}
+                        onSignUp={handleSignUp}
+                      />
+                    ) : (
+                      <SignInForm
+                        onSignUp={handleSignUp}
+                        onCloseModal={closeModal}
+                      />
+                    )
+                  ) : (
+                    <Button
+                      children={signedInStatus}
+                      color="orange"
+                      onClick={() => {
+                        onSignIn(false);
+                        setIsOpen(false);
+                      }}
                     />
                   )
                 }
