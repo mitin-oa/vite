@@ -40,6 +40,7 @@ export default class PayPal extends React.Component<PaymentProps, InitState> {
 
   createOrder(data: Record<string, unknown>, actions: any) {
     if (debug) console.log("Creating order for amount", this.state.amount);
+    
     return actions.order
       .create({
         purchase_units: [
@@ -57,22 +58,35 @@ export default class PayPal extends React.Component<PaymentProps, InitState> {
       });
   }
 
+
   onApprove(data: any, actions: any) {
     let app = this;
-    return actions.order.capture().then(function (details: any) {
-      // console.log(details.id);
-      // console.log(app.state.amount);
 
-      app.setState({
-        onApproveMessage: `Transaction completed by ${details.payer.name.given_name}!`,
+    // ! VK: Временно - проверка авторизации перед проведением платежа.
+    // ! Заменить на логику, работающую с сервером
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; token=`);
+    const token = parts.length === 2 ? parts.pop()?.split(';').shift() !== null : false;
+    if (!token) {
+      alert("Authorization required. Payment will be canceled");
+    // !
+
+    } else {
+      return actions.order.capture().then(function (details: any) {
+        // console.log(details.id);
+        // console.log(app.state.amount);
+
+        app.setState({
+          onApproveMessage: `Transaction completed by ${details.payer.name.given_name}!`,
+        });
+
+        // * VK: Significant for the backend area. Please exercise caution when making alterations
+        // * VK: Call the onSuccess callback if it has been passed
+        if (app.props.onSuccess) {
+          app.props.onSuccess(details.id, app.state.amount);
+        }
       });
-
-      // * VK: Significant for the backend area. Please exercise caution when making alterations
-      // * VK: Call the onSuccess callback if it has been passed
-      if (app.props.onSuccess) {
-        app.props.onSuccess(details.id, app.state.amount);
-      }
-    });
+    }
   }
 
   onError(err: Record<string, unknown>) {
