@@ -10,7 +10,7 @@ const debug = true;
  * Takes two parameters: transactionId (transaction ID) and amount (payment amount).
  * If passed, this function will be called by the component upon successful payment.
  */
-type AmountProps = {
+type PaymentProps = {
   amountPay: number;
   onSuccess?: (transactionId: string, amount: number) => void;
 };
@@ -22,8 +22,8 @@ type InitState = {
   onErrorMessage: string;
 };
 
-export default class PayPal extends React.Component<AmountProps, InitState> {
-  constructor(props: AmountProps) {
+export default class PayPal extends React.Component<PaymentProps, InitState> {
+  constructor(props: PaymentProps) {
     super(props);
     this.state = {
       amount: this.props.amountPay || 1, // * VK: Value set to use default minimum possible payment
