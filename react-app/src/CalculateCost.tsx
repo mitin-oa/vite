@@ -93,7 +93,7 @@ export default function CalculateCost({
               </div>
 
               {/* <!-- Правая колонка с элементами формы --> */}
-              <div className="col-md-6">
+              <div className="col-md-6" id="rightColumn">
                 <form id="orderForm">
                   <div className="form-group mb-3">
                     <label>3. Contact Information</label>
