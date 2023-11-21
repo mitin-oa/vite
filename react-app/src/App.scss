@@ -467,3 +467,8 @@ color: #033c5a;
   height: 35px;
   margin-bottom: 0px !important;
 }
+
+.dashboard-table tbody td:first-child {
+	width: 10%;
+  text-align: left;
+}

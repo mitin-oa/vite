@@ -53,6 +53,8 @@ export default function Dashboard({
           handleSignIn={handleSignIn}
           modalIsOpen={modalIsOpen}
           setIsOpen={setIsOpen}
+          signedUp={false}
+          handleSignUp={false}
         />
         <section className="main-content">
           <div className="row">
@@ -91,7 +93,12 @@ export default function Dashboard({
                       id="email"
                       name="email"
                       placeholder="Enter email"
-                      defaultValue="user1@example.com"
+                      defaultValue={"client@example.com"}
+                      value={
+                        userDataForDashboard
+                          ? userDataForDashboard.data.userData[0].email
+                          : "client@example.com"
+                      }
                       required
                     />
                     <br />
@@ -107,6 +114,11 @@ export default function Dashboard({
                       name="phone"
                       placeholder="Enter phone"
                       defaultValue="+3530000000"
+                      value={
+                        userDataForDashboard
+                          ? userDataForDashboard.data.userData[0].phone
+                          : "+3530000000"
+                      }
                       required
                     />
                     <br />
@@ -133,31 +145,46 @@ export default function Dashboard({
                   <tbody>
                     <tr>
                       <td>Credit points</td>
-                      <td>{20}</td>
+                      <td>
+                        {userDataForDashboard
+                          ? userDataForDashboard.data.userData[0].points
+                          : 0}
+                      </td>
                     </tr>
                   </tbody>
                 </table>
               </div>
-            </div>
-
-            <div className="col-md-6" id="rightColumn">
               <div className="row">
                 <p>Recent transactions (eg. 5 last transactions)</p>
                 <table className="table">
                   <tbody>
                     <tr>
                       <td>Transaction</td>
+                      <td>Date</td>
+                      <td>Status</td>
                       <td>Cost in credits</td>
                       <td>Cost in Euro</td>
                     </tr>
-                    <tr>
-                      <td>{1}</td>
-                      <td>{1}</td>
-                      <td>{20}</td>
-                    </tr>
+
+                    {userDataForDashboard
+                      ? userDataForDashboard.data.paymentsData.map((e: any) => (
+                          <tr>
+                            <td>
+                              {userDataForDashboard ? e.paypal_order_id : ""}
+                            </td>
+                            <td>{userDataForDashboard ? e.created_at : ""}</td>
+                            <td>{userDataForDashboard ? e.status : ""}</td>
+                            <td>{userDataForDashboard ? e.amount : ""}</td>
+                            <td>{userDataForDashboard ? e.amount * 20 : ""}</td>
+                          </tr>
+                        ))
+                      : ""}
                   </tbody>
                 </table>
               </div>
+            </div>
+
+            <div className="col-md-6" id="rightColumn">
               <div className="row">
                 <p>
                   Recent files (eg. 10 last files) with all the info of each
@@ -173,15 +200,39 @@ export default function Dashboard({
                       <td>{20}</td>
                     </tr>
                     <tr>
-                      <td>{1}</td>
+                      <td>{2}</td>
                       <td>{20}</td>
                     </tr>
                     <tr>
-                      <td>{1}</td>
+                      <td>{3}</td>
                       <td>{20}</td>
                     </tr>
                     <tr>
-                      <td>{1}</td>
+                      <td>{4}</td>
+                      <td>{20}</td>
+                    </tr>
+                    <tr>
+                      <td>{5}</td>
+                      <td>{20}</td>
+                    </tr>
+                    <tr>
+                      <td>{6}</td>
+                      <td>{20}</td>
+                    </tr>
+                    <tr>
+                      <td>{7}</td>
+                      <td>{20}</td>
+                    </tr>
+                    <tr>
+                      <td>{8}</td>
+                      <td>{20}</td>
+                    </tr>
+                    <tr>
+                      <td>{9}</td>
+                      <td>{20}</td>
+                    </tr>
+                    <tr>
+                      <td>{10}</td>
                       <td>{20}</td>
                     </tr>
                   </tbody>
@@ -189,7 +240,7 @@ export default function Dashboard({
               </div>
               <div className="row">
                 <p>Editor notes (recent/all editor notes)</p>
-                <table className="table">
+                <table className="table dashboard-table">
                   <tbody>
                     <tr>
                       <td>Name of document</td>
@@ -197,6 +248,42 @@ export default function Dashboard({
                     </tr>
                     <tr>
                       <td>{1}</td>
+                      <td>{"Dfbjbd dfvjd kv gjdk c.,vm xvjopef[f "}</td>
+                    </tr>
+                    <tr>
+                      <td>{2}</td>
+                      <td>{"Dfbjbd dfvjd kv gjdk c.,vm xvjopef[f "}</td>
+                    </tr>
+                    <tr>
+                      <td>{3}</td>
+                      <td>{"Dfbjbd dfvjd kv gjdk c.,vm xvjopef[f "}</td>
+                    </tr>
+                    <tr>
+                      <td>{4}</td>
+                      <td>{"Dfbjbd dfvjd kv gjdk c.,vm xvjopef[f "}</td>
+                    </tr>
+                    <tr>
+                      <td>{5}</td>
+                      <td>{"Dfbjbd dfvjd kv gjdk c.,vm xvjopef[f "}</td>
+                    </tr>
+                    <tr>
+                      <td>{6}</td>
+                      <td>{"Dfbjbd dfvjd kv gjdk c.,vm xvjopef[f "}</td>
+                    </tr>
+                    <tr>
+                      <td>{7}</td>
+                      <td>{"Dfbjbd dfvjd kv gjdk c.,vm xvjopef[f "}</td>
+                    </tr>
+                    <tr>
+                      <td>{8}</td>
+                      <td>{"Dfbjbd dfvjd kv gjdk c.,vm xvjopef[f "}</td>
+                    </tr>
+                    <tr>
+                      <td>{9}</td>
+                      <td>{"Dfbjbd dfvjd kv gjdk c.,vm xvjopef[f "}</td>
+                    </tr>
+                    <tr>
+                      <td>{10}</td>
                       <td>{"Dfbjbd dfvjd kv gjdk c.,vm xvjopef[f "}</td>
                     </tr>
                   </tbody>
