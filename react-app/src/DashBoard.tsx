@@ -172,7 +172,11 @@ export default function Dashboard({
                             <td>
                               {userDataForDashboard ? e.paypal_order_id : ""}
                             </td>
-                            <td>{userDataForDashboard ? e.created_at : ""}</td>
+                            <td>
+                              {userDataForDashboard
+                                ? e.created_at.toLocaleString()
+                                : ""}
+                            </td>
                             <td>{userDataForDashboard ? e.status : ""}</td>
                             <td>{userDataForDashboard ? e.amount : ""}</td>
                             <td>{userDataForDashboard ? e.amount * 20 : ""}</td>
@@ -189,103 +193,28 @@ export default function Dashboard({
                 <p>
                   Recent files (eg. 10 last files) with all the info of each
                 </p>
-                <table className="table">
-                  <tbody>
-                    <tr>
-                      <td>Name</td>
-                      <td>Cost in credits</td>
-                    </tr>
-                    <tr>
-                      <td>{1}</td>
-                      <td>{20}</td>
-                    </tr>
-                    <tr>
-                      <td>{2}</td>
-                      <td>{20}</td>
-                    </tr>
-                    <tr>
-                      <td>{3}</td>
-                      <td>{20}</td>
-                    </tr>
-                    <tr>
-                      <td>{4}</td>
-                      <td>{20}</td>
-                    </tr>
-                    <tr>
-                      <td>{5}</td>
-                      <td>{20}</td>
-                    </tr>
-                    <tr>
-                      <td>{6}</td>
-                      <td>{20}</td>
-                    </tr>
-                    <tr>
-                      <td>{7}</td>
-                      <td>{20}</td>
-                    </tr>
-                    <tr>
-                      <td>{8}</td>
-                      <td>{20}</td>
-                    </tr>
-                    <tr>
-                      <td>{9}</td>
-                      <td>{20}</td>
-                    </tr>
-                    <tr>
-                      <td>{10}</td>
-                      <td>{20}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div className="row">
-                <p>Editor notes (recent/all editor notes)</p>
                 <table className="table dashboard-table">
                   <tbody>
                     <tr>
-                      <td>Name of document</td>
+                      <td>Name</td>
+                      <td>Date</td>
                       <td>Notes</td>
                     </tr>
-                    <tr>
-                      <td>{1}</td>
-                      <td>{"Dfbjbd dfvjd kv gjdk c.,vm xvjopef[f "}</td>
-                    </tr>
-                    <tr>
-                      <td>{2}</td>
-                      <td>{"Dfbjbd dfvjd kv gjdk c.,vm xvjopef[f "}</td>
-                    </tr>
-                    <tr>
-                      <td>{3}</td>
-                      <td>{"Dfbjbd dfvjd kv gjdk c.,vm xvjopef[f "}</td>
-                    </tr>
-                    <tr>
-                      <td>{4}</td>
-                      <td>{"Dfbjbd dfvjd kv gjdk c.,vm xvjopef[f "}</td>
-                    </tr>
-                    <tr>
-                      <td>{5}</td>
-                      <td>{"Dfbjbd dfvjd kv gjdk c.,vm xvjopef[f "}</td>
-                    </tr>
-                    <tr>
-                      <td>{6}</td>
-                      <td>{"Dfbjbd dfvjd kv gjdk c.,vm xvjopef[f "}</td>
-                    </tr>
-                    <tr>
-                      <td>{7}</td>
-                      <td>{"Dfbjbd dfvjd kv gjdk c.,vm xvjopef[f "}</td>
-                    </tr>
-                    <tr>
-                      <td>{8}</td>
-                      <td>{"Dfbjbd dfvjd kv gjdk c.,vm xvjopef[f "}</td>
-                    </tr>
-                    <tr>
-                      <td>{9}</td>
-                      <td>{"Dfbjbd dfvjd kv gjdk c.,vm xvjopef[f "}</td>
-                    </tr>
-                    <tr>
-                      <td>{10}</td>
-                      <td>{"Dfbjbd dfvjd kv gjdk c.,vm xvjopef[f "}</td>
-                    </tr>
+                    {userDataForDashboard
+                      ? userDataForDashboard.data.fileData.map((e: any) => (
+                          <tr>
+                            <td>
+                              {userDataForDashboard ? e.original_name : ""}
+                            </td>
+                            <td>
+                              {userDataForDashboard
+                                ? e.created_at.toString()
+                                : ""}
+                            </td>
+                            <td>{"Dfbjbd dfvjd kv gjdk c.,vm xvjopef[f "}</td>
+                          </tr>
+                        ))
+                      : ""}
                   </tbody>
                 </table>
               </div>
