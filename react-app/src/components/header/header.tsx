@@ -6,12 +6,14 @@ import { Navbar } from "../burger/navBar";
 import ModalWindow from "../modal/modal";
 import SignInForm from "../modal/SignUpForm";
 import LogInForm from "../modal/LogInForm";
-import { SignedInContext } from "../../App";
+import { SignedInContext, SignedUpContext } from "../../App";
 import Button from "../Button";
 
 interface IHeaderProps {
   kind?: "full" | "short";
   handleSignIn: boolean;
+  signedUp: boolean;
+  handleSignUp: boolean;
   onSignIn: Dispatch<SetStateAction<boolean>>;
   modalIsOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
@@ -20,18 +22,20 @@ interface IHeaderProps {
 export function HeaderMenu({
   kind,
   handleSignIn,
+  handleSignUp,
   onSignIn,
   modalIsOpen,
   setIsOpen,
 }: IHeaderProps) {
   const signedIn = useContext(SignedInContext);
+  const signedUp = useContext(SignedUpContext);
   const signedInStatus = signedIn ? "Sign out" : "Sign in";
 
-  const [signedUp, onSignUp] = useState(true);
+  /* const [signedUp, onSignUp] = useState(true);
 
   function handleSignUp() {
     onSignUp(!signedUp);
-  }
+  } */
 
   function openModal() {
     setIsOpen(true);

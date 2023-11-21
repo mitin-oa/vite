@@ -6,6 +6,8 @@ import { HeaderMenu } from "./components/header/header";
 export default function About({
   onSignIn,
   handleSignIn,
+  signedUp,
+  handleSignUp,
   modalIsOpen,
   setIsOpen,
 }: any) {
@@ -18,6 +20,8 @@ export default function About({
         <HeaderMenu
           kind="short"
           onSignIn={onSignIn}
+          signedUp={signedUp}
+          handleSignUp={handleSignUp}
           handleSignIn={handleSignIn}
           modalIsOpen={modalIsOpen}
           setIsOpen={setIsOpen}

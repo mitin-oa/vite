@@ -5,6 +5,7 @@ export default function Home({
   kind,
   handleSignIn,
   onSignIn,
+  handleSignUp,
   modalIsOpen,
   setIsOpen,
 }: any) {
@@ -15,6 +16,7 @@ export default function Home({
           kind={kind}
           handleSignIn={handleSignIn}
           onSignIn={onSignIn}
+          handleSignUp={handleSignUp}
           modalIsOpen={modalIsOpen}
           setIsOpen={setIsOpen}
         />

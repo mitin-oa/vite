@@ -20,6 +20,8 @@ export default function BuyCredits({
   kind,
   onSignIn,
   handleSignIn,
+  signedUp,
+  handleSignUp,
   modalIsOpen,
   setIsOpen,
 }: any) {
@@ -57,6 +59,8 @@ export default function BuyCredits({
           kind={kind}
           onSignIn={onSignIn}
           handleSignIn={handleSignIn}
+          signedUp={signedUp}
+          handleSignUp={handleSignUp}
           modalIsOpen={modalIsOpen}
           setIsOpen={setIsOpen}
         />

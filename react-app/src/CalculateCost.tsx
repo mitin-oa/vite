@@ -7,6 +7,8 @@ import Button from "./components/Button";
 
 export default function CalculateCost({
   handleSignIn,
+  signedUp,
+  handleSignUp,
   modalIsOpen,
   setIsOpen,
   onSignIn,
@@ -32,6 +34,8 @@ export default function CalculateCost({
         <HeaderMenu
           kind="short"
           handleSignIn={handleSignIn}
+          signedUp={signedUp}
+          handleSignUp={handleSignUp}
           modalIsOpen={modalIsOpen}
           setIsOpen={setIsOpen}
           onSignIn={onSignIn}

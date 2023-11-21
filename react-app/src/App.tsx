@@ -10,17 +10,19 @@ import About from "./About";
 import CalculateCost from "./CalculateCost";
 import DashBoard from "./DashBoard";
 export const SignedInContext = createContext(false);
+export const SignedUpContext = createContext(true);
 
 // * VK: Significant for the backend area. Please exercise caution when making alterations
 import { sendLogInRequest } from "./components/scripts/logIn";
 
 function App() {
   const [signedIn, onSignIn] = useState(false);
+  const [signedUp, onSignUp] = useState(true);
   const [modalIsOpen, setIsOpen] = useState(false);
-  // function handleSignIn() {
-  //   onSignIn(!signedIn);
-  //   setIsOpen(!modalIsOpen);
-  // }
+
+  function handleSignUp() {
+    onSignUp(!signedUp);
+  }
 
   // * ↓ VK: Significant for the backend area. Please exercise caution when making alterations
   async function handleSignIn(userData: {
@@ -59,83 +61,96 @@ function App() {
 
   return (
     <>
-      <SignedInContext.Provider value={signedIn}>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Home
-                kind="full"
-                onSignIn={onSignIn}
-                handleSignIn={handleSignIn}
-                modalIsOpen={modalIsOpen}
-                setIsOpen={setIsOpen}
-              />
-            }
-          />
-          <Route
-            path="About"
-            element={
-              <About
-                kind="short"
-                onSignIn={onSignIn}
-                handleSignIn={handleSignIn}
-                modalIsOpen={modalIsOpen}
-                setIsOpen={setIsOpen}
-              />
-            }
-          />
-          <Route
-            path="UpLoad"
-            element={
-              <UpLoad
-                kind="short"
-                onSignIn={onSignIn}
-                handleSignIn={handleSignIn}
-                modalIsOpen={modalIsOpen}
-                setIsOpen={setIsOpen}
-              />
-            }
-          />
-          <Route
-            path="CalculateCost"
-            element={
-              <CalculateCost
-                kind="short"
-                onSignIn={onSignIn}
-                handleSignIn={handleSignIn}
-                modalIsOpen={modalIsOpen}
-                setIsOpen={setIsOpen}
-              />
-            }
-          />
-          <Route
-            path="BuyCredits"
-            element={
-              <BuyCredits
-                kind="short"
-                onSignIn={onSignIn}
-                handleSignIn={handleSignIn}
-                modalIsOpen={modalIsOpen}
-                setIsOpen={setIsOpen}
-              />
-            }
-          />
-          <Route
-            path="DashBoard"
-            element={
-              <DashBoard
-                kind="short"
-                onSignIn={onSignIn}
-                handleSignIn={handleSignIn}
-                modalIsOpen={modalIsOpen}
-                setIsOpen={setIsOpen}
-              />
-            }
-          />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </SignedInContext.Provider>
+      <SignedUpContext.Provider value={signedUp}>
+        <SignedInContext.Provider value={signedIn}>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Home
+                  kind="full"
+                  onSignIn={onSignIn}
+                  handleSignIn={handleSignIn}
+                  signedUp={signedUp}
+                  handleSignUp={handleSignUp}
+                  modalIsOpen={modalIsOpen}
+                  setIsOpen={setIsOpen}
+                />
+              }
+            />
+            <Route
+              path="About"
+              element={
+                <About
+                  kind="short"
+                  onSignIn={onSignIn}
+                  handleSignIn={handleSignIn}
+                  signedUp={signedUp}
+                  handleSignUp={handleSignUp}
+                  modalIsOpen={modalIsOpen}
+                  setIsOpen={setIsOpen}
+                />
+              }
+            />
+            <Route
+              path="UpLoad"
+              element={
+                <UpLoad
+                  onSignIn={onSignIn}
+                  handleSignIn={handleSignIn}
+                  signedUp={signedUp}
+                  handleSignUp={handleSignUp}
+                  modalIsOpen={modalIsOpen}
+                  setIsOpen={setIsOpen}
+                />
+              }
+            />
+            <Route
+              path="CalculateCost"
+              element={
+                <CalculateCost
+                  kind="short"
+                  onSignIn={onSignIn}
+                  handleSignIn={handleSignIn}
+                  signedUp={signedUp}
+                  handleSignUp={handleSignUp}
+                  modalIsOpen={modalIsOpen}
+                  setIsOpen={setIsOpen}
+                />
+              }
+            />
+            <Route
+              path="BuyCredits"
+              element={
+                <BuyCredits
+                  kind="short"
+                  onSignIn={onSignIn}
+                  handleSignIn={handleSignIn}
+                  signedUp={signedUp}
+                  handleSignUp={handleSignUp}
+                  modalIsOpen={modalIsOpen}
+                  setIsOpen={setIsOpen}
+                />
+              }
+            />
+            <Route
+              path="DashBoard"
+              element={
+                <DashBoard
+                  kind="short"
+                  onSignIn={onSignIn}
+                  handleSignIn={handleSignIn}
+                  signedUp={signedUp}
+                  handleSignUp={handleSignUp}
+                  modalIsOpen={modalIsOpen}
+                  setIsOpen={setIsOpen}
+                />
+              }
+            />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </SignedInContext.Provider>
+      </SignedUpContext.Provider>
     </>
   );
 }
