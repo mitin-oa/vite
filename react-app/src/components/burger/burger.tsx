@@ -14,7 +14,7 @@ const StyledHamburger = styled.button<{ open: boolean }>`
   width: 2rem;
   height: 2rem;
   padding: 0;
-  background: transparent;
+  // background: transparent;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -24,8 +24,8 @@ const StyledHamburger = styled.button<{ open: boolean }>`
   z-index: 2;
   div {
     position: relative;
-    width: 2rem;
-    height: 0.25rem;
+    width: 1.25rem;
+    height: 0.2rem;
     border-radius: 10px;
     background-color: ${({ open }) => (open ? colors.pearl : colors.pearl)};
     transition: all 0.3s linear;

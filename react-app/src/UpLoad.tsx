@@ -68,28 +68,33 @@ export default function UpLoad({
               </form>
             </div>
           </div>
-          {signedIn ? (
-            <Button
-              children="Proceed"
-              color={""}
-              onClick={() => handleSubmit}
-            />
-          ) : (
-            <ModalWindow
-              // * VK: This part of the code will be displayed if the variable signedIn == true
-              title={"Proceed"}
-              childComp={
-                signedUp ? (
-                  <LogInForm onSignIn={handleSignIn} onSignUp={handleSignUp} />
-                ) : (
-                  <SignInForm onSignUp={handleSignUp} />
-                )
-              }
-              modalIsOpen={modalIsOpen}
-              openModal={openModal}
-              closeModal={closeModal}
-            />
-          )}
+          <div className="container">
+            {signedIn ? (
+              <Button
+                children="Proceed"
+                color={""}
+                onClick={() => handleSubmit}
+              />
+            ) : (
+              <ModalWindow
+                // * VK: This part of the code will be displayed if the variable signedIn == true
+                title={"Proceed"}
+                childComp={
+                  signedUp ? (
+                    <LogInForm
+                      onSignIn={handleSignIn}
+                      onSignUp={handleSignUp}
+                    />
+                  ) : (
+                    <SignInForm onSignUp={handleSignUp} />
+                  )
+                }
+                modalIsOpen={modalIsOpen}
+                openModal={openModal}
+                closeModal={closeModal}
+              />
+            )}
+          </div>
         </section>
 
         {/* <!-- END OF Bootstrap "Containers" component --> */}
