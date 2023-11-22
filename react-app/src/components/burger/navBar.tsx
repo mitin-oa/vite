@@ -3,6 +3,12 @@ import styled from "styled-components";
 import { Burger } from "../burger/burger";
 import "../header/header.scss";
 import { Link } from "react-router-dom";
+import { Dispatch, SetStateAction, useContext } from "react";
+import SignInForm from "../modal/SignUpForm";
+import LogInForm from "../modal/LogInForm";
+import ModalWindow from "../modal/modal";
+import Button from "../Button";
+import { SignedInContext, SignedUpContext } from "../../App";
 
 const colors = {
   yellowmellow: "#fbe69b",
@@ -53,14 +59,53 @@ const ModalContent = styled.nav<{ open: boolean }>`
   padding: 2rem;
 `;
 
-export const Navbar = ({ signedInStatus }: { signedInStatus: string }) => {
+interface IHeaderProps {
+  signedInStatus: string;
+  handleSignIn: boolean;
+  signedUp: boolean;
+  handleSignUp: boolean;
+  onSignIn: Dispatch<SetStateAction<boolean>>;
+  modalIsOpen: boolean;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
+}
+
+export const Navbar = ({
+  signedInStatus,
+  handleSignIn,
+  signedUp,
+  handleSignUp,
+  onSignIn,
+  modalIsOpen,
+  setIsOpen,
+}: IHeaderProps) => {
   const [open, setOpen] = useState<boolean>(false);
   const close = () => setOpen(false);
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const signedIn = useContext(SignedInContext);
+  const toggleModal = () => {
+    setOpen((prevOpen) => {
+      if (!prevOpen) {
+        closeModal(); // Close the ModalWindow when opening the ModalContent
+      }
+      return !prevOpen;
+    });
+  };
+
+  function openModal() {
+    setIsOpen(true);
+    setModalOpen(true);
+    setOpen(false);
+  }
+  function closeModal() {
+    setIsOpen(false);
+    setModalOpen(false);
+  }
+
   return (
     <div className="burger_visible">
       <Burger open={open} setOpen={setOpen} />
       <ModalOverlay open={open} onClick={() => close()} />
-      <ModalContent open={open}>
+      <ModalContent open={open && !modalOpen}>
         {signedInStatus == "Sign out" ? (
           <>
             <Link
@@ -79,9 +124,6 @@ export const Navbar = ({ signedInStatus }: { signedInStatus: string }) => {
             </Link>
             <span className="burger_visible__Link" onClick={() => close()}>
               Upload Form
-            </span>
-            <span className="burger_visible__Link" onClick={() => close()}>
-              Sign out
             </span>
           </>
         ) : (
@@ -107,11 +149,39 @@ export const Navbar = ({ signedInStatus }: { signedInStatus: string }) => {
             >
               Upload Form
             </Link>
-            <span className="burger_visible__Link" onClick={() => close()}>
-              Sign in
-            </span>
           </>
         )}
+        <Link to="/">
+          <ModalWindow
+            title={signedInStatus}
+            childComp={
+              signedInStatus == "Sign in" ? (
+                !signedIn && signedUp ? (
+                  <LogInForm onSignIn={handleSignIn} onSignUp={handleSignUp} />
+                ) : (
+                  <SignInForm
+                    onSignUp={handleSignUp}
+                    onCloseModal={closeModal}
+                  />
+                )
+              ) : (
+                <Link to="/">
+                  <Button
+                    children={signedInStatus}
+                    color="orange"
+                    onClick={() => {
+                      onSignIn(false);
+                      setIsOpen(false);
+                    }}
+                  />
+                </Link>
+              )
+            }
+            modalIsOpen={modalIsOpen}
+            openModal={openModal}
+            closeModal={closeModal}
+          />
+        </Link>
       </ModalContent>
     </div>
   );

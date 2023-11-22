@@ -27,6 +27,7 @@
     align-items: center;
     max-width: 1280px;
     margin: 0 auto;
+    position: relative;
   }
   
   .logo {
@@ -471,4 +472,40 @@ color: #033c5a;
 .dashboard-table tbody td:first-child {
 	width: 10%;
   text-align: left;
+}
+
+.not_registered {
+  color: rgb(25,103,210);
+  margin-top: 1rem !important;
+  margin-bottom: 1rem !important;
+}
+
+.margin_left {
+  margin-left: 1.25rem;
+}
+
+.about_service {
+  width: 100%; /* default to 100% width */
+  height: 100%; /* default to 100% height */
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  overflow: auto;
+}
+
+@media (min-width: 768px) { /* apply styles for md screens and larger */
+  .about_service {
+    width: 50vw;
+    height: 50vh;
+  }
+}
+
+@media (max-width: 767px) { /* apply styles for sm screens and smaller */
+  .about_service {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.sc-bdfCDU.PXKBi, .sc-bdfCDU.hNbySd {
+  min-width: 72px !important;
 }

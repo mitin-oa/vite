@@ -58,7 +58,7 @@ export default function Dashboard({
           signedUp={signedUp}
           handleSignUp={handleSignUp}
         />
-        <section className="main-content">
+        <section className="main-content container flex-column">
           <div className="row">
             <h2>Dashboard Panel</h2>
           </div>

@@ -161,7 +161,7 @@
 .burger_visible {
     display: none;
     @media screen and (max-width: 767px){
-        display: block;
+        display: flex;
         &__Link {
             padding: 0.5rem 1rem;
             font-size: 1.2rem;

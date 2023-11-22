@@ -6,9 +6,22 @@ interface Props {
 
 const Button = ({ children, color, onClick }: Props) => {
   return (
-    <button type="button" className={"btn btn-" + color} onClick={onClick}>
-      {children}
-    </button>
+    <>
+      {children == "Sign out" ? (
+        <button
+          style={{ marginLeft: 25, marginTop: 10 }}
+          type="button"
+          className={"btn btn-" + color}
+          onClick={onClick}
+        >
+          {children}
+        </button>
+      ) : (
+        <button type="button" className={"btn btn-" + color} onClick={onClick}>
+          {children}
+        </button>
+      )}
+    </>
   );
 };
 
