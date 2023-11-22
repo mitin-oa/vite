@@ -179,8 +179,8 @@ button:not(.default) {
     box-shadow 0.2s ease;
   transition: color 0.2s ease, border 0.2s ease, background 0.2s ease,
     box-shadow 0.2s ease;
-  // position: relative;
-  margin: 0;
+  //position: relative;
+  margin: 0px;
   display: inline-block;
   min-width: 144px;
   max-width: 100%;
@@ -469,6 +469,11 @@ color: #033c5a;
   margin-bottom: 0px !important;
 }
 
+.dashboard-table tbody td:first-child {
+	width: 10%;
+  text-align: left;
+}
+
 .not_registered {
   color: rgb(25,103,210);
   margin-top: 1rem !important;
@@ -503,4 +508,8 @@ color: #033c5a;
 
 .sc-bdfCDU.PXKBi, .sc-bdfCDU.hNbySd {
   min-width: 72px !important;
+}
+
+.start_screen_content {
+  margin-top: 60px;
 }

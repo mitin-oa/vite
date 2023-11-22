@@ -24,6 +24,7 @@ const StyledMenu = styled.nav<{ open: boolean }>`
   width: 100vw;
   position: fixed;
   text-align: center;
+  /* background-color: ${colors.lightbrown}; */
   z-index: 2;
   padding: 15rem 0;
   flex-direction: column;
@@ -81,14 +82,14 @@ export const Navbar = ({
   const close = () => setOpen(false);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const signedIn = useContext(SignedInContext);
-  const toggleModal = () => {
-    setOpen(prevOpen => {
-      if (!prevOpen) {
-        closeModal(); // Close the ModalWindow when opening the ModalContent
-      }
-      return !prevOpen;
-    });
-  };
+  // const toggleModal = () => {
+  //   setOpen((prevOpen) => {
+  //     if (!prevOpen) {
+  //       closeModal(); // Close the ModalWindow when opening the ModalContent
+  //     }
+  //     return !prevOpen;
+  //   });
+  // };
 
   function openModal() {
     setIsOpen(true);
@@ -102,54 +103,32 @@ export const Navbar = ({
 
   return (
     <div className="burger_visible">
-      <Burger open={open} setOpen={toggleModal} />
+      <Burger open={open} setOpen={setOpen} />
       <ModalOverlay open={open} onClick={() => close()} />
-      <ModalContent open={open && !modalOpen}>
-        {signedInStatus == "Sign out" ? (
-          <>
-            <Link
-              className="burger_visible__Link"
-              to="Dashboard"
-              onClick={() => close()}
-            >
-              Dashboard
-            </Link>
-            <Link
-              className="burger_visible__Link"
-              to="BuyCredits"
-              onClick={() => close()}
-            >
-              Buy Credits
-            </Link>
-            <span className="burger_visible__Link" onClick={() => close()}>
-              Upload Form
-            </span>
-          </>
-        ) : (
-          <>
-            <Link
-              className="burger_visible__Link"
-              to="About"
-              onClick={() => close()}
-            >
-              About the service
-            </Link>
-            <Link
-              className="burger_visible__Link"
-              to="CalculateCost"
-              onClick={() => close()}
-            >
-              Calculate Cost
-            </Link>
-            <Link
-              className="burger_visible__Link"
-              to="UpLoad"
-              onClick={() => close()}
-            >
-              Upload Form
-            </Link>
-          </>
-        )}
+      {/* <ModalContent open={open && signedInStatus == "Sign in"}> */}
+      <ModalContent open={open}>
+        <Link
+          className="burger_visible__Link"
+          to="About"
+          onClick={() => close()}
+        >
+          About the service
+        </Link>
+        <Link
+          className="burger_visible__Link"
+          to="CalculateCost"
+          onClick={() => close()}
+        >
+          Calculate Cost
+        </Link>
+        <Link
+          className="burger_visible__Link"
+          to="UpLoad"
+          onClick={() => close()}
+        >
+          Upload Form
+        </Link>
+
         <Link to="/">
           <ModalWindow
             title={signedInStatus}
