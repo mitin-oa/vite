@@ -164,10 +164,10 @@
         display: block;
         &__Link {
             padding: 0.5rem 1rem;
-            font-size: 2rem;
-            color: #ffffff;
+            font-size: 1.2rem;
+            color: #ec720b;
             text-decoration: none;
-            :hover {
+            &:hover {
               color: #F1CDB3;
               cursor: pointer;
               border-bottom: solid #ec720b;

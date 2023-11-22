@@ -178,7 +178,7 @@ export function HeaderMenu({
             </>
           )}
         </ul>
-        {kind === "short" ? <></> : <Navbar />}
+        {kind === "short" ? <></> : <Navbar signedInStatus={signedInStatus} />}
       </div>
     </header>
   );

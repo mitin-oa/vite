@@ -14,6 +14,8 @@ export default function Dashboard({
   handleSignIn,
   modalIsOpen,
   setIsOpen,
+  signedUp,
+  handleSignUp,
 }: any) {
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1160px" });
   const isPhoneScreen = useMediaQuery({ query: "(max-width: 760px" });
@@ -53,8 +55,8 @@ export default function Dashboard({
           handleSignIn={handleSignIn}
           modalIsOpen={modalIsOpen}
           setIsOpen={setIsOpen}
-          signedUp={false}
-          handleSignUp={false}
+          signedUp={signedUp}
+          handleSignUp={handleSignUp}
         />
         <section className="main-content">
           <div className="row">
