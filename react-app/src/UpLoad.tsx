@@ -77,7 +77,6 @@ export default function UpLoad({
               />
             ) : (
               <ModalWindow
-                // * VK: This part of the code will be displayed if the variable signedIn == true
                 title={"Proceed"}
                 childComp={
                   signedUp ? (

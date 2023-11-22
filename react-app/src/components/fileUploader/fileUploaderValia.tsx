@@ -1,9 +1,21 @@
 import React, { useState } from "react";
 
-/* import sendToServer from "./scripts/uploadFile";  */ // ! Backend. Connecting an external script
+import Button from "../Button";
+
+import sentToServer from "../scripts/uploadHandler"; // * VK Backend: Connecting an external script
+
+// TODO LIST VK:
+// 1. implement cleaning/changing const files and fileData in case
+// if the user has made changes to the composition of the downloaded files,
+// otherwise irrelevant data will be sent to the server
+// (Pеализовать очистку/изменение const files и fileData в случае,
+// если пользователем были внесены изменения в состав загружаемых файлов,
+// иначе на сервер попадут неактуальные данные)
+// 2. Search "TODO 2" in file
 
 const FileUploader = () => {
-  // Объект будет хранить все данные о загружаемых файлах
+  // VK: The object will store all data about downloaded files
+  // * VK: Объект будет хранить все данные о загружаемых файлах
   type FileData = {
     index: number;
     file: File;
@@ -14,13 +26,15 @@ const FileUploader = () => {
   const [files, setFiles] = useState<FileList | null>(null);
   const [fileData, setFileData] = useState<FileData[]>([]);
 
-  // Добавляет значение в поля FileData
+  // VK: Adds a value to the FileData fields
+  // * VK: Добавляет значение в поля FileData
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const newFileList = e.target.files;
       setFiles(newFileList);
 
-      // Создаем объекты файлов с уникальными индексами
+      // VK: Create file objects with unique indexes
+      // * VK: Создаем объекты файлов с уникальными индексами
       const filesWithAdditionalData: FileData[] = Array.from(newFileList).map(
         (file, index) => ({
           index,
@@ -34,68 +48,79 @@ const FileUploader = () => {
     }
   };
 
-  // Обновление значения поля pages (количество страниц в загружаемом файле) в fileData
+  // VK: Update the value of the pages field (the number of pages in the downloaded file) in fileData
+  // * VK: Обновление значения поля pages (количество страниц в загружаемом файле) в fileData
   const setNumberOfPages = (index: number, pages: number) => {
     console.log(index);
     console.log(pages);
 
     const updatedFileData = [...fileData];
 
-    // Находим объект с соответствующим индексом и обновляем количество страниц
+    // VK: Find an object with the corresponding index and update the number of pages
+    // * VK: Находим объект с соответствующим индексом и обновляем количество страниц
     updatedFileData[index] = {
       ...updatedFileData[index],
       pages: pages,
     };
 
-    // Обновляем состояние fileData
+    // VK: Update fileData state
+    // * VK: Обновляем состояние fileData
     setFileData(updatedFileData);
   };
 
-  // Обновление количества значения поля expressDelivery в fileData
+  // VK: Update the quantity of the expressDelivery field value in fileData
+  // * VK: Обновление количества значения поля expressDelivery в fileData
   const setExpressDelivery = (index: number, expressDelivery: boolean) => {
     console.log(index);
     console.log(expressDelivery);
 
     const updatedFileData = [...fileData];
 
-    // Находим объект с соответствующим индексом и обновляем значение expressDelivery
+    // VK: Find an object with the corresponding index and update the expressDelivery value
+    // * VK: Находим объект с соответствующим индексом и обновляем значение expressDelivery
     updatedFileData[index] = {
       ...updatedFileData[index],
       expressDelivery: expressDelivery,
     };
 
-    // Обновляем состояние fileData
+    // VK: Update fileData state
+    // * VK: Обновляем состояние fileData
     setFileData(updatedFileData);
   };
 
+
   const handleUpload = async () => {
-    // // We will fill this out later
-    // // * Упаковка данных полей в один объект
-    // const extras = ({
-    //   expressDelivery: expressDelivery,
-    //   addInformation: addInformation,
-    // });
-    // const successConfirmed = sendToServer(file, numberOfPages, extras);
+    if (files == null) {
+      alert("No files selected!"); // TODO 2 VK: Improve the logic in case of an attempt to send a request without downloading files
+      return;
+    }
+    /* VK: This data can be used for frontend layout
+     * server returns JSON response { "message": "...", "pointsBalance": -97 }
+     * if pointsBalance is negative - display a message about the need to purchase credits
+     */
+    const data = await sentToServer(fileData, totalCredits);
+    console.log('Server processed the request successfully: ', data);
+    if (data.pointsBalance < 0) {
+      alert(`File has been sent for processing. Balance ${data.pointsBalance}. Need to top up your balance!`);
+    } else {
+      alert(`File has been sent for processing. Balance ${data.pointsBalance}.`);
+    }
   };
 
-  // ! Временно. Для отладки
-  const logContents = () => {
-    console.log(fileData);
-    //console.log(fileData[0].file);
+  // ! Temporarily. For debugging
+  const logContents = async () => {
+  }
+  // ! Temporarily. For debugging
 
-    // console.log('File:', file);
-    // console.log('Express Delivery:', expressDelivery);
-    // console.log('Additional Information:', addInformation);
-    // console.log('Number Of Pages:', numberOfPages);
-  };
-  // ! Временно. Для отладки
-  console.log(logContents());
-  let sum = 0;
-  let sum1 = 0;
-  fileData.map((file) => (sum += Number(file.pages)));
+
+  let totalPages = 0;
+  let totalCredits = 0;
+
+  fileData.map((file) => (totalPages += Number(file.pages)));
   fileData.map(
-    (file) => (sum1 += file.expressDelivery ? file.pages * 1.5 : file.pages)
+    (file) => (totalCredits += file.expressDelivery ? file.pages * 1.5 : file.pages)
   );
+
   return (
     <>
       <div className="col-12">
@@ -170,7 +195,6 @@ const FileUploader = () => {
                 </td>
                 <td>
                   {file.expressDelivery ? file.pages * 1.5 : file.pages}{" "}
-                  {/* Replace with estimated cost calculation */}
                 </td>
                 <td>{(file.file.size / 1024).toFixed(1)} Kbytes</td>
               </tr>
@@ -178,9 +202,9 @@ const FileUploader = () => {
 
             <tr>
               <td>Total</td>
-              <td>{sum}</td>
+              <td>{totalPages}</td>
               <td>{""}</td>
-              <td>{sum1}</td>
+              <td>{totalCredits}</td>
               <td>{""}</td>
             </tr>
           </tbody>
@@ -188,8 +212,8 @@ const FileUploader = () => {
       </div>
 
       <div>
-        {/* <Button children="Proceed" color="warning" onClick={handleUpload} /> */}
-        {/* // ! Временно. Для отладки */}
+        <Button children="Proceed working with backend" color="warning" onClick={handleUpload} />
+        {/* // ! Temporarily. For debugging */}
         {/* <button onClick={logContents}>Log Contents</button> */}
       </div>
     </>
