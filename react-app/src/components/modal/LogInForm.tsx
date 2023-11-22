@@ -62,7 +62,7 @@ const LogInForm = ({ onSignIn, onSignUp }: any) => {
             onClick={handleLogInSubmit}
           />
         </div>
-        <p>Not registred? Push Sign Up.</p>
+        <p className="not_registered">Not registred? Push Sign Up.</p>
         <div className="text-left col-xs-12">
           <Button children="Sign Up" color="orange" onClick={onSignUp} />
         </div>

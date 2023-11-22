@@ -28,8 +28,8 @@ export default function About({
         />
         {/* <!-- Bootstrap "Containers" component. Taken from https://getbootstrap.com/docs/5.2/layout/containers/#how-they-work --> */}
         <section className="main-content">
-          <div className="wrapper about_content">
-            <div className="row">
+          <div className="d-md-flex flex-md-row flex sm-column">
+            <div className="row about_service">
               <h2>About service</h2>
               <p>
                 Phasellus faucibus nunc pellentesque nisi sodales, ut posuere
@@ -57,9 +57,11 @@ export default function About({
                 vehicula imperdiet. Aliquam erat volutpat.
               </p>
             </div>
-            <div>
+            <div className="about_service">
               <img
-                className="start_screen_pet"
+                // className="start_screen_pet"
+                width={"100%"}
+                height={"100%"}
                 src={AboutPicture}
                 alt="Puppy"
               />

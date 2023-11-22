@@ -40,7 +40,7 @@ export default function CalculateCost({
           setIsOpen={setIsOpen}
           onSignIn={onSignIn}
         />
-        <section className="main-content">
+        <section className="main-content container" style={{flexDirection: "column"}}>
           <h2>To calculate cost</h2>
           <p>
             The length of agreement determines number of credits to be used (20€

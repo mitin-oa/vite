@@ -166,7 +166,7 @@ button:not(.default) {
   /* position: relative; */
   margin: 0 7px;
   display: inline-block;
-  min-width: 144px;
+  min-width: 72px;
   max-width: 100%;
   padding: 15px 25px;
   font-family: Arial, Helvetica Neue, Arial, Helvetica, sans-serif;

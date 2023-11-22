@@ -44,9 +44,6 @@ export function HeaderMenu({
     setIsOpen(false);
   }
 
-  console.log(signedIn, "signedIn");
-  console.log(signedUp);
-
   return (
     <header className={kind === "short" ? "header__short" : "header"}>
       <div className="wrapper">
@@ -178,7 +175,19 @@ export function HeaderMenu({
             </>
           )}
         </ul>
-        {kind === "short" ? <></> : <Navbar signedInStatus={signedInStatus}/>}
+        {kind === "short" ? (
+          <></>
+        ) : (
+          <Navbar
+            signedInStatus={signedInStatus}
+            handleSignIn={handleSignIn}
+            signedUp={signedUp}
+            handleSignUp={handleSignUp}
+            onSignIn={onSignIn}
+            modalIsOpen={modalIsOpen}
+            setIsOpen={setIsOpen}
+          />
+        )}
       </div>
     </header>
   );
