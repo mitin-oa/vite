@@ -12,7 +12,6 @@ import Button from "../Button";
 interface IHeaderProps {
   kind?: "full" | "short";
   handleSignIn: boolean;
-  signedUp: boolean;
   handleSignUp: boolean;
   onSignIn: Dispatch<SetStateAction<boolean>>;
   modalIsOpen: boolean;

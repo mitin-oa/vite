@@ -1,12 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
-import ShortHeader from "./components/shortHeader/shortHeader";
 import { Footer } from "./components/footer/footer";
-
+import { HeaderMenu } from "./components/header/header";
 // * VK: Significant for the backend area. Please exercise caution when making alterations
 import { getUserDataForDashboard } from "./components/scripts/getUserDataForDashboard";
-import { HeaderMenu } from "./components/header/header";
-import SignUpForm from "./components/modal/SignUpForm";
+import { SignedInContext, SignedUpContext } from "./App";
 
 export default function Dashboard({
   kind,
@@ -14,11 +12,12 @@ export default function Dashboard({
   handleSignIn,
   modalIsOpen,
   setIsOpen,
-  signedUp,
   handleSignUp,
 }: any) {
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1160px" });
   const isPhoneScreen = useMediaQuery({ query: "(max-width: 760px" });
+  const signedIn = useContext(SignedInContext);
+  const signedUp = useContext(SignedUpContext);
 
   // * ↓ VK: Significant for the backend area. Please exercise caution when making alterations
   const [userDataForDashboard, setUserDataForDashboard] = useState<any | null>(
@@ -46,6 +45,8 @@ export default function Dashboard({
   }
   // * ↑ VK: Significant for the backend area. Please exercise caution when making alterations
 
+  console.log(userDataForDashboard);
+
   return (
     <>
       <div className="app">
@@ -55,7 +56,6 @@ export default function Dashboard({
           handleSignIn={handleSignIn}
           modalIsOpen={modalIsOpen}
           setIsOpen={setIsOpen}
-          signedUp={signedUp}
           handleSignUp={handleSignUp}
         />
         <section className="main-content container flex-column">
@@ -203,7 +203,7 @@ export default function Dashboard({
                       <td>Notes</td>
                     </tr>
                     {userDataForDashboard
-                      ? userDataForDashboard.data.fileData.map((e: any) => (
+                      ? userDataForDashboard.data.editorNotes.map((e: any) => (
                           <tr>
                             <td>
                               {userDataForDashboard ? e.original_name : ""}
@@ -213,7 +213,11 @@ export default function Dashboard({
                                 ? e.created_at.toString()
                                 : ""}
                             </td>
-                            <td>{"Dfbjbd dfvjd kv gjdk c.,vm xvjopef[f "}</td>
+                            <td>
+                              {userDataForDashboard
+                                ? e.note_text.toString()
+                                : ""}
+                            </td>
                           </tr>
                         ))
                       : ""}
