@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import Button from "../Button";
 
-import sentToServer from "../scripts/uploadHandler"; // * VK Backend: Connecting an external script
+import sendToServer from "../scripts/uploadHandler"; // * VK Backend: Connecting an external script
 
 // TODO LIST VK:
 // 1. implement cleaning/changing const files and fileData in case
@@ -94,11 +94,12 @@ const FileUploader = () => {
       alert("No files selected!"); // TODO 2 VK: Improve the logic in case of an attempt to send a request without downloading files
       return;
     }
+
     /* VK: This data can be used for frontend layout
      * server returns JSON response { "message": "...", "pointsBalance": -97 }
      * if pointsBalance is negative - display a message about the need to purchase credits
      */
-    const data = await sentToServer(fileData, totalCredits);
+    const data = await sendToServer(fileData, totalCredits);
     console.log('Server processed the request successfully: ', data);
     if (data.pointsBalance < 0) {
       alert(`File has been sent for processing. Balance ${data.pointsBalance}. Need to top up your balance!`);

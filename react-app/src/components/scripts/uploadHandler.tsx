@@ -6,7 +6,7 @@
  *  server { "message": "...", "pointsBalance": ... }
  */
 
-  const sentToServer = async (fileData: any, totalCredits: number): Promise<any> => {
+  const sendToServer = async (fileData: any, totalCredits: number): Promise<any> => {
   const formData = new FormData();
 
   formData.append(`filesCount`, fileData.length.toString());
@@ -38,4 +38,4 @@
   }
 };
 
-export default sentToServer;
+export default sendToServer;
