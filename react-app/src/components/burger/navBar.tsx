@@ -52,10 +52,10 @@ const ModalContent = styled.nav<{ open: boolean }>`
   position: fixed;
   transform: translate(-50%, -50%);
   text-align: center;
-  display: flex;
+  display: ${({ open }) => (open ? "flex" : "none")};
   flex-direction: column;
   background-color: white;
-  z-index: ${({ open }) => (open ? "2" : "-1")};
+  z-index: 2;
   padding: 2rem;
 `;
 
@@ -78,7 +78,7 @@ export const Navbar = ({
 }: IHeaderProps) => {
   const [open, setOpen] = useState<boolean>(false);
   const close = () => setOpen(false);
-  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  /* const [modalOpen, setModalOpen] = useState<boolean>(false); */
   const signedIn = useContext(SignedInContext);
   const signedUp = useContext(SignedUpContext);
   /* const toggleModal = () => {
@@ -92,12 +92,12 @@ export const Navbar = ({
 
   function openModal() {
     setIsOpen(true);
-    setModalOpen(true);
+    /*  setModalOpen(true); */
     setOpen(false);
   }
   function closeModal() {
     setIsOpen(false);
-    setModalOpen(false);
+    /* setModalOpen(false); */
   }
 
   return (
@@ -110,21 +110,21 @@ export const Navbar = ({
           <>
             <Link
               className="burger_visible__Link"
-              to="Dashboard"
+              to="/Dashboard"
               onClick={() => close()}
             >
               Dashboard
             </Link>
             <Link
               className="burger_visible__Link"
-              to="BuyCredits"
+              to="/BuyCredits"
               onClick={() => close()}
             >
               Buy Credits
             </Link>
             <Link
               className="burger_visible__Link"
-              to="UpLoad"
+              to="/UpLoad"
               onClick={() => close()}
             >
               Upload Form
@@ -134,21 +134,21 @@ export const Navbar = ({
           <>
             <Link
               className="burger_visible__Link"
-              to="About"
+              to="/About"
               onClick={() => close()}
             >
               About the service
             </Link>
             <Link
               className="burger_visible__Link"
-              to="CalculateCost"
+              to="/CalculateCost"
               onClick={() => close()}
             >
               Calculate Cost
             </Link>
             <Link
               className="burger_visible__Link"
-              to="UpLoad"
+              to="/UpLoad"
               onClick={() => close()}
             >
               Upload Form

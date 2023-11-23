@@ -10,9 +10,6 @@ export default function About({
   modalIsOpen,
   setIsOpen,
 }: any) {
-  const isMobileScreen = useMediaQuery({ query: "(max-width: 1160px" });
-  const isPhoneScreen = useMediaQuery({ query: "(max-width: 760px" });
-
   return (
     <>
       <div className="app">

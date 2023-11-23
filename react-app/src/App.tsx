@@ -11,15 +11,19 @@ import CalculateCost from "./CalculateCost";
 import DashBoard from "./DashBoard";
 export const SignedInContext = createContext(false);
 export const SignedUpContext = createContext(true);
+export const MobileScreenContext = createContext(false);
 
 // * VK: Significant for the backend area. Please exercise caution when making alterations
 import { sendLogInRequest } from "./components/scripts/logIn";
+import { useMediaQuery } from "react-responsive";
 
 function App() {
   const [signedIn, onSignIn] = useState(false);
   const [signedUp, onSignUp] = useState(true);
   const [modalIsOpen, setIsOpen] = useState(false);
-
+  const isMobileScreen = useMediaQuery({ query: "(max-width: 1028px" });
+  /* const isPhoneScreen = useMediaQuery({ query: "(max-width: 760px" }); */
+  console.log(isMobileScreen);
   function handleSignUp() {
     onSignUp(!signedUp);
   }

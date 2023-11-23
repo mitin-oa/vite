@@ -14,11 +14,6 @@ export default function Dashboard({
   setIsOpen,
   handleSignUp,
 }: any) {
-  const isMobileScreen = useMediaQuery({ query: "(max-width: 1160px" });
-  const isPhoneScreen = useMediaQuery({ query: "(max-width: 760px" });
-  const signedIn = useContext(SignedInContext);
-  const signedUp = useContext(SignedUpContext);
-
   // * ↓ VK: Significant for the backend area. Please exercise caution when making alterations
   const [userDataForDashboard, setUserDataForDashboard] = useState<any | null>(
     null
@@ -165,7 +160,7 @@ export default function Dashboard({
                       <td>Date</td>
                       <td>Status</td>
                       <td>Cost in credits</td>
-                      <td>Cost in Euro</td>
+                      <td>Cost in Dollars</td>
                     </tr>
 
                     {userDataForDashboard
@@ -181,7 +176,7 @@ export default function Dashboard({
                             </td>
                             <td>{userDataForDashboard ? e.status : ""}</td>
                             <td>{userDataForDashboard ? e.amount : ""}</td>
-                            <td>{userDataForDashboard ? e.amount * 20 : ""}</td>
+                            <td>{userDataForDashboard ? e.amount : ""}</td>
                           </tr>
                         ))
                       : ""}

@@ -8,6 +8,7 @@ import SignInForm from "../modal/SignUpForm";
 import LogInForm from "../modal/LogInForm";
 import { SignedInContext, SignedUpContext } from "../../App";
 import Button from "../Button";
+import { useMediaQuery } from "react-responsive";
 
 interface IHeaderProps {
   kind?: "full" | "short";
@@ -28,13 +29,10 @@ export function HeaderMenu({
 }: IHeaderProps) {
   const signedIn = useContext(SignedInContext);
   const signedUp = useContext(SignedUpContext);
+  const isMobileScreen = useMediaQuery({ query: "(max-width: 1028px" });
+  console.log(isMobileScreen);
+
   const signedInStatus = signedIn ? "Sign out" : "Sign in";
-
-  /* const [signedUp, onSignUp] = useState(true);
-
-  function handleSignUp() {
-    onSignUp(!signedUp);
-  } */
 
   function openModal() {
     setIsOpen(true);
@@ -90,38 +88,42 @@ export function HeaderMenu({
               ) : (
                 <></>
               )}
-              <Link to="/">
-                <ModalWindow
-                  // * VK: This part of the code will be displayed if the variable signedIn == true
-                  title={signedInStatus}
-                  childComp={
-                    signedInStatus == "Sign in" ? (
-                      signedIn && signedUp ? (
-                        <LogInForm
-                          onSignIn={handleSignIn}
-                          onSignUp={handleSignUp}
-                        />
+              {!isMobileScreen ? (
+                <Link to="/">
+                  <ModalWindow
+                    // * VK: This part of the code will be displayed if the variable signedIn == true
+                    title={signedInStatus}
+                    childComp={
+                      signedInStatus == "Sign in" ? (
+                        signedIn && signedUp ? (
+                          <LogInForm
+                            onSignIn={handleSignIn}
+                            onSignUp={handleSignUp}
+                          />
+                        ) : (
+                          <SignInForm onSignUp={handleSignUp} />
+                        )
                       ) : (
-                        <SignInForm onSignUp={handleSignUp} />
+                        <Link to="/">
+                          <Button
+                            children={signedInStatus}
+                            color="orange"
+                            onClick={() => {
+                              onSignIn(false);
+                              setIsOpen(false);
+                            }}
+                          />
+                        </Link>
                       )
-                    ) : (
-                      <Link to="/">
-                        <Button
-                          children={signedInStatus}
-                          color="orange"
-                          onClick={() => {
-                            onSignIn(false);
-                            setIsOpen(false);
-                          }}
-                        />
-                      </Link>
-                    )
-                  }
-                  modalIsOpen={modalIsOpen}
-                  openModal={openModal}
-                  closeModal={closeModal}
-                />
-              </Link>
+                    }
+                    modalIsOpen={modalIsOpen}
+                    openModal={openModal}
+                    closeModal={closeModal}
+                  />
+                </Link>
+              ) : (
+                <></>
+              )}
             </>
           ) : (
             <>
@@ -140,46 +142,49 @@ export function HeaderMenu({
               ) : (
                 <></>
               )}
-              <Link to="/">
-                <ModalWindow
-                  title={signedInStatus}
-                  childComp={
-                    signedInStatus == "Sign in" ? (
-                      !signedIn && signedUp ? (
-                        <LogInForm
-                          onSignIn={handleSignIn}
-                          onSignUp={handleSignUp}
-                        />
+              {!isMobileScreen ? (
+                <Link to="/">
+                  <ModalWindow
+                    title={signedInStatus}
+                    childComp={
+                      signedInStatus == "Sign in" ? (
+                        !signedIn && signedUp ? (
+                          <LogInForm
+                            onSignIn={handleSignIn}
+                            onSignUp={handleSignUp}
+                          />
+                        ) : (
+                          <SignInForm
+                            onSignUp={handleSignUp}
+                            onCloseModal={closeModal}
+                          />
+                        )
                       ) : (
-                        <SignInForm
-                          onSignUp={handleSignUp}
-                          onCloseModal={closeModal}
-                        />
+                        <Link to="/">
+                          <Button
+                            children={signedInStatus}
+                            color="orange"
+                            onClick={() => {
+                              onSignIn(false);
+                              setIsOpen(false);
+                            }}
+                          />
+                        </Link>
                       )
-                    ) : (
-                      <Link to="/">
-                        <Button
-                          children={signedInStatus}
-                          color="orange"
-                          onClick={() => {
-                            onSignIn(false);
-                            setIsOpen(false);
-                          }}
-                        />
-                      </Link>
-                    )
-                  }
-                  modalIsOpen={modalIsOpen}
-                  openModal={openModal}
-                  closeModal={closeModal}
-                />
-              </Link>
+                    }
+                    modalIsOpen={modalIsOpen}
+                    openModal={openModal}
+                    closeModal={closeModal}
+                  />
+                </Link>
+              ) : (
+                <></>
+              )}
             </>
           )}
         </ul>
-        {kind === "short" ? (
-          <></>
-        ) : (
+
+        {isMobileScreen ? (
           <Navbar
             signedInStatus={signedInStatus}
             handleSignIn={handleSignIn}
@@ -188,6 +193,8 @@ export function HeaderMenu({
             modalIsOpen={modalIsOpen}
             setIsOpen={setIsOpen}
           />
+        ) : (
+          <></>
         )}
       </div>
     </header>
