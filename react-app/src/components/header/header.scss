@@ -6,11 +6,11 @@
         padding: 20px 40px;
         background-color: #033c5a;
         width: 100%;
-        @media screen and (max-width: 767px){
+        @media screen and (max-width: 1028px){
             padding: 30px 10px;
         }
     };  
-    @media screen and (max-width: 767px){
+    @media screen and (max-width: 1028px){
         .header {
             margin: 0px 10px;
         }
@@ -23,7 +23,7 @@
     list-style-type: none;
     height: 60px;
 
-    @media only screen and (max-width : 768px){
+    @media only screen and (max-width : 1028px){
         display: none;
         position: fixed;
         top: -30px;
@@ -43,7 +43,7 @@
         &:last-child {
             margin-right: 0px;
         };
-        @media screen and (max-width: 767px){
+        @media screen and (max-width: 1028px){
             font-size: 16px;
             line-height: 24px;
         };
@@ -73,7 +73,7 @@
         &:last-child {
             margin-right: 0px;
         };
-        @media screen and (max-width: 767px){
+        @media screen and (max-width: 1028px){
             font-size: 16px;
             line-height: 24px;
         };
@@ -87,7 +87,7 @@
 
     &__burger {
         display: none;
-        @media screen and (max-width: 767px){
+        @media screen and (max-width: 1028px){
             display: block;
             position: absolute;
             padding-top: 150px;
@@ -134,7 +134,7 @@
         display: none;
     }
     
-    @media screen and (max-width: 767px){
+    @media screen and (max-width: 1028px){
         display: block;
         &__span {
             display: block;
@@ -160,7 +160,7 @@
 
 .burger_visible {
     display: none;
-    @media screen and (max-width: 767px){
+    @media screen and (max-width: 1028px){
         display: flex;
         &__Link {
             padding: 0.5rem 1rem;
