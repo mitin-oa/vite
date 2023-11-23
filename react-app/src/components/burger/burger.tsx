@@ -16,7 +16,7 @@ const StyledHamburger = styled.button<{ open: boolean }>`
   padding: 3px !important;
   // background: transparent;
   position: absolute;
-  top: 12px;
+  top: 2px;
   right: 0;
   display: flex !important;
   flex-direction: column;

@@ -1,8 +1,19 @@
+html {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 .app {
     width: 100%;
     min-height: 84vh;
     margin: 0;
-    overflow: auto;
     background-color:#032a5a10;
   }
   
@@ -30,50 +41,7 @@
     position: relative;
   }
   
-  .logo {
-    display: flex;
-    flex-direction: column;
-    &__img{
-      height: 60px;
-      width: 270px;
-    }
-    &__text {
-      margin: 10px 0 0;
-      font-size: 16px;
-      line-height: 15px;
-      font-weight: 400;
-      letter-spacing: 0.09em;
-      color: #ffffff;
-      &__short {
-        margin: 10px 0 0;
-        font-size: 16px;
-        line-height: 15px;
-        font-weight: 400;
-        letter-spacing: 0.09em;
-        color: black;
-      };
-    }
-    &__title {
-        font-family: Georgia;
-        font-weight: 400;
-        font-style:normal;
-        font-size: 32px;
-        text-align: Left;
-        letter-spacing: 0.12em;
-        color: #F1CDB3;
-        margin: 0px;
-        &__short {
-          font-family: Georgia;
-          font-weight: 400;
-          font-style:normal;
-          font-size: 32px;
-          text-align: Left;
-          letter-spacing: 0.12em;
-          color: black;
-          margin-top: 0px;
-        };
-    }
-  }
+ 
 
 .btn {
   color: #033c5a !important;

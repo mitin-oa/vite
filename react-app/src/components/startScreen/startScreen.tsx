@@ -47,9 +47,17 @@ export default function StartScreen({
           </p>
           <Button children="Order Now" color="warning" onClick={onOrder} />
         </div>
-        <div className="Content">
-          <img className="start_screen_pet" src={StartScreenPic} alt="Puppy" />
-        </div>
+        {!isPhoneScreen ? (
+          <div className="Content">
+            <img
+              className="start_screen_pet"
+              src={StartScreenPic}
+              alt="Picture start screen"
+            />
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
     </section>
   );
