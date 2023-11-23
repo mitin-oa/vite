@@ -200,9 +200,7 @@ export default function Dashboard({
                     {userDataForDashboard
                       ? userDataForDashboard.data.editorNotes.map((e: any) => (
                           <tr>
-                            <td>
-                              {userDataForDashboard ? e.original_name : ""}
-                            </td>
+                            <td>{userDataForDashboard ? e.file_name : ""}</td>
                             <td>
                               {userDataForDashboard
                                 ? e.created_at.toString()
