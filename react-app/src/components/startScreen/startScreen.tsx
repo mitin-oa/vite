@@ -34,7 +34,7 @@ export default function StartScreen({
         modalIsOpen={modalIsOpen}
         setIsOpen={setIsOpen}
       />
-      <div className="wrapper start_screen_content">
+      <div className="wrapper start_screen_content d-flex flex-lm-row flex-md-block">
         <div className="Content">
           <h1 className="only_title">
             Get the legal service for you <br></br> was never been easier!

@@ -183,7 +183,6 @@ export function HeaderMenu({
           <Navbar
             signedInStatus={signedInStatus}
             handleSignIn={handleSignIn}
-            signedUp={signedUp}
             handleSignUp={handleSignUp}
             onSignIn={onSignIn}
             modalIsOpen={modalIsOpen}

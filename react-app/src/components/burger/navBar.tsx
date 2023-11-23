@@ -62,7 +62,6 @@ const ModalContent = styled.nav<{ open: boolean }>`
 interface IHeaderProps {
   signedInStatus: string;
   handleSignIn: boolean;
-  signedUp: boolean;
   handleSignUp: boolean;
   onSignIn: Dispatch<SetStateAction<boolean>>;
   modalIsOpen: boolean;
@@ -100,92 +99,6 @@ export const Navbar = ({
     setIsOpen(false);
     setModalOpen(false);
   }
-
-  /* return (
-    <div className="burger_visible">
-      <Burger open={open} setOpen={setOpen} />
-      <ModalOverlay open={open} onClick={() => close()} />
-      <ModalContent open={open}>
-        {signedInStatus == "Sign out" ? (
-          <>
-            <Link
-              className="burger_visible__Link"
-              to="Dashboard"
-              onClick={() => close()}
-            >
-              Dashboard
-            </Link>
-            <Link
-              className="burger_visible__Link"
-              to="BuyCredits"
-              onClick={() => close()}
-            >
-              Buy Credits
-            </Link>
-            <span className="burger_visible__Link" onClick={() => close()}>
-              Upload Form
-            </span>
-          </>
-        ) : (
-          <>
-            <Link
-              className="burger_visible__Link"
-              to="About"
-              onClick={() => close()}
-            >
-              About the service
-            </Link>
-            <Link
-              className="burger_visible__Link"
-              to="CalculateCost"
-              onClick={() => close()}
-            >
-              Calculate Cost
-            </Link>
-            <Link
-              className="burger_visible__Link"
-              to="UpLoad"
-              onClick={() => close()}
-            >
-              Upload Form
-            </Link>
-          </>
-        )}
-        <Link to="/">
-          <ModalWindow
-            title={signedInStatus}
-            childComp={
-              signedInStatus == "Sign in" ? (
-                !signedIn && signedUp ? (
-                  <LogInForm onSignIn={handleSignIn} onSignUp={handleSignUp} />
-                ) : (
-                  <SignInForm
-                    onSignUp={handleSignUp}
-                    onCloseModal={closeModal}
-                  />
-                )
-              ) : (
-                <Link to="/">
-                  <Button
-                    children={signedInStatus}
-                    color="orange"
-                    onClick={() => {
-                      onSignIn(false);
-                      setIsOpen(false);
-                    }}
-                  />
-                </Link>
-              )
-            }
-            modalIsOpen={modalIsOpen}
-            openModal={openModal}
-            closeModal={closeModal}
-          />
-        </Link>
-      </ModalContent>
-    </div>
-  );
-}; */
 
   return (
     <div className="burger_visible">
