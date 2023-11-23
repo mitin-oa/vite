@@ -10,7 +10,6 @@ import {
 } from "react";
 import NumInput from "./components/InputNumber";
 import ModalWindow from "./components/modal/modal";
-import ShortHeader from "./components/shortHeader/shortHeader";
 
 // * VK Backend: connecting an external script to process requests to the backend
 import { sendPaymentDataToServer } from "../src/components/scripts/fetch";
@@ -20,7 +19,6 @@ export default function BuyCredits({
   kind,
   onSignIn,
   handleSignIn,
-  signedUp,
   handleSignUp,
   modalIsOpen,
   setIsOpen,
@@ -59,7 +57,6 @@ export default function BuyCredits({
           kind={kind}
           onSignIn={onSignIn}
           handleSignIn={handleSignIn}
-          signedUp={signedUp}
           handleSignUp={handleSignUp}
           modalIsOpen={modalIsOpen}
           setIsOpen={setIsOpen}
