@@ -6,7 +6,6 @@ import { HeaderMenu } from "./components/header/header";
 export default function About({
   onSignIn,
   handleSignIn,
-  signedUp,
   handleSignUp,
   modalIsOpen,
   setIsOpen,
@@ -20,7 +19,6 @@ export default function About({
         <HeaderMenu
           kind="short"
           onSignIn={onSignIn}
-          signedUp={signedUp}
           handleSignUp={handleSignUp}
           handleSignIn={handleSignIn}
           modalIsOpen={modalIsOpen}
@@ -59,11 +57,10 @@ export default function About({
             </div>
             <div className="about_service">
               <img
-                //className="start_screen_pet"
                 width={"100%"}
                 height={"100%"}
                 src={AboutPicture}
-                alt="Puppy"
+                alt="Picture"
               />
             </div>
           </div>

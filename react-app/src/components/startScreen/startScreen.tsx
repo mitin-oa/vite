@@ -1,4 +1,3 @@
-import React from "react";
 import "../startScreen/startScreen.scss";
 import { HeaderMenu } from "../header/header";
 import StartScreenPic from "../../../public/start_screen_pic3.png";
@@ -30,7 +29,6 @@ export default function StartScreen({
       <HeaderMenu
         kind={kind}
         handleSignIn={handleSignIn}
-        signedUp={signedUp}
         handleSignUp={handleSignUp}
         onSignIn={onSignIn}
         modalIsOpen={modalIsOpen}

@@ -7,7 +7,6 @@ import Button from "./components/Button";
 
 export default function CalculateCost({
   handleSignIn,
-  signedUp,
   handleSignUp,
   modalIsOpen,
   setIsOpen,
@@ -34,7 +33,6 @@ export default function CalculateCost({
         <HeaderMenu
           kind="short"
           handleSignIn={handleSignIn}
-          signedUp={signedUp}
           handleSignUp={handleSignUp}
           modalIsOpen={modalIsOpen}
           setIsOpen={setIsOpen}
@@ -143,11 +141,6 @@ export default function CalculateCost({
                       required
                     />
                   </div>
-                  {/* <input
-                  type="submit"
-                  className="btn btn-primary"
-                  value="Proceed to checkout"
-                /> */}
                   <Button
                     children="Proceed to checkout"
                     color="orange"

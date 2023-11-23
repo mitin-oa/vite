@@ -49,7 +49,6 @@ export default function UpLoad({
           kind="short"
           onSignIn={onSignIn}
           handleSignIn={handleSignIn}
-          signedUp={signedUp}
           handleSignUp={handleSignUp}
           modalIsOpen={modalIsOpen}
           setIsOpen={setIsOpen}
