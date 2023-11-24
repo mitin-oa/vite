@@ -15,6 +15,9 @@ body {
     min-height: 84vh;
     margin: 0;
     background-color:#032a5a10;
+    @media (max-width: 760px) {
+      min-height: 55vh;
+    };
   }
   
   ::-webkit-scrollbar {

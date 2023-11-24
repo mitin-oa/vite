@@ -1,7 +1,7 @@
 /* start screen styles starts */
 
 .start_screen {
-    height: 84vh;
+    min-height: 84vh;
     padding: 30px 40px 0px;
     background-color: #033c5a;
     background-image:  url("../../public/Vector.png") ;
@@ -9,16 +9,17 @@
     background-repeat: no-repeat;
     background-position: bottom 100px right;
     @media (max-width: 1028px) {
-      padding: 30px 20px 0px;
+      padding: 30px 40px 0px;
     };
     @media (max-width: 760px) {
-      padding: 30px 10px 0px;
+      min-height: 55vh;
+      padding: 30px 10px 10px;
     };
     &_content {
-        //margin-top: 100px;
-      flex-direction: column;
+      //margin-top: 100px;
       align-items: flex-start; 
       @media (max-width: 1028px) {
+        flex-direction: column;
         margin-top: 80px;
       };
     };

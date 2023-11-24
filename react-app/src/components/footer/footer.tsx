@@ -192,7 +192,7 @@ export class Footer extends React.Component<IHeaderMenu> {
             </div>
           </div>
 
-          <div className="contacts">
+          <div className="contacts__social">
             <div
               className={
                 this.props.kind === "short"
