@@ -461,12 +461,25 @@ color: #033c5a;
   padding-left: 1.25rem;
   padding-right: 1.25rem;
   overflow: auto;
+  &__picture {
+    width: 100%;
+    height: 100%;
+    @media (max-width: 1028px) { /* apply styles for md screens and larger */
+      width: 50%;
+      height: 50%;
+      display: flex;
+      margin: 0 auto;
+    }
+    @media (max-width: 1028px) { /* apply styles for md screens and larger */
+      display: none;
+    }
+  }
 }
 
-@media (min-width: 768px) { /* apply styles for md screens and larger */
+@media (max-width: 1028px) { /* apply styles for md screens and larger */
   .about_service {
-    width: 50vw;
-    height: 50vh;
+    font-size: 16px;
+    flex-direction: column !important;
   }
 }
 
@@ -474,6 +487,7 @@ color: #033c5a;
   .about_service {
     width: 100%;
     height: 100%;
+    font-size: 14px;
   }
 }
 
