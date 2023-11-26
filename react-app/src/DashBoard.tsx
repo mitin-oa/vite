@@ -53,12 +53,12 @@ export default function Dashboard({
           setIsOpen={setIsOpen}
           handleSignUp={handleSignUp}
         />
-        <section className="main-content container flex-column">
+        <section className="main-content flex-column">
           <div className="row">
             <h2>Dashboard Panel</h2>
           </div>
           <div className="row">
-            <div className="col-md-6" id="leftColumn">
+            <div className="col-md-6 leftColumn" id="leftColumn">
               <p>Profile info</p>
               <form
                 className="form mx-4 mb-4"
@@ -151,73 +151,68 @@ export default function Dashboard({
                   </tbody>
                 </table>
               </div>
-              <div className="row">
-                <p>Recent transactions (eg. 5 last transactions)</p>
-                <table className="table">
-                  <tbody>
-                    <tr>
-                      <td>Transaction</td>
-                      <td>Date</td>
-                      <td>Status</td>
-                      <td>Cost in credits</td>
-                      <td>Cost in Dollars</td>
-                    </tr>
-
-                    {userDataForDashboard
-                      ? userDataForDashboard.data.paymentsData.map((e: any) => (
-                          <tr>
-                            <td>
-                              {userDataForDashboard ? e.paypal_order_id : ""}
-                            </td>
-                            <td>
-                              {userDataForDashboard
-                                ? e.created_at.toLocaleString()
-                                : ""}
-                            </td>
-                            <td>{userDataForDashboard ? e.status : ""}</td>
-                            <td>{userDataForDashboard ? e.amount : ""}</td>
-                            <td>{userDataForDashboard ? e.amount : ""}</td>
-                          </tr>
-                        ))
-                      : ""}
-                  </tbody>
-                </table>
-              </div>
             </div>
 
-            <div className="col-md-6" id="rightColumn">
-              <div className="row">
-                <p>
-                  Recent files (eg. 10 last files) with all the info of each
-                </p>
-                <table className="table dashboard-table">
-                  <tbody>
-                    <tr>
-                      <td>Name</td>
-                      <td>Date</td>
-                      <td>Notes</td>
-                    </tr>
-                    {userDataForDashboard
-                      ? userDataForDashboard.data.editorNotes.map((e: any) => (
-                          <tr>
-                            <td>{userDataForDashboard ? e.file_name : ""}</td>
-                            <td>
-                              {userDataForDashboard
-                                ? e.created_at.toString()
-                                : ""}
-                            </td>
-                            <td>
-                              {userDataForDashboard
-                                ? e.note_text.toString()
-                                : ""}
-                            </td>
-                          </tr>
-                        ))
-                      : ""}
-                  </tbody>
-                </table>
-              </div>
+            <div className="col-md-6 rightColumn">
+              <p>Recent transactions (eg. 5 last transactions)</p>
+              <table className="table">
+                <tbody>
+                  <tr>
+                    <td>Transaction</td>
+                    <td>Date</td>
+                    <td>Status</td>
+                    <td>Cost in credits</td>
+                    <td>Cost in Dollars</td>
+                  </tr>
+
+                  {userDataForDashboard
+                    ? userDataForDashboard.data.paymentsData.map((e: any) => (
+                        <tr>
+                          <td>
+                            {userDataForDashboard ? e.paypal_order_id : ""}
+                          </td>
+                          <td>
+                            {userDataForDashboard
+                              ? e.created_at.toLocaleString().split("T")[0]
+                              : ""}
+                          </td>
+                          <td>{userDataForDashboard ? e.status : ""}</td>
+                          <td>{userDataForDashboard ? e.amount : ""}</td>
+                          <td>{userDataForDashboard ? e.amount : ""}</td>
+                        </tr>
+                      ))
+                    : ""}
+                </tbody>
+              </table>
             </div>
+          </div>
+
+          <div className="row">
+            <p>Recent files (eg. 10 last files) with all the info of each</p>
+            <table className="table dashboard-table">
+              <tbody>
+                <tr>
+                  <td>Name</td>
+                  <td>Date</td>
+                  <td>Notes</td>
+                </tr>
+                {userDataForDashboard
+                  ? userDataForDashboard.data.editorNotes.map((e: any) => (
+                      <tr>
+                        <td>{userDataForDashboard ? e.file_name : ""}</td>
+                        <td>
+                          {userDataForDashboard
+                            ? e.created_at.toString().split("T")[0]
+                            : ""}
+                        </td>
+                        <td>
+                          {userDataForDashboard ? e.note_text.toString() : ""}
+                        </td>
+                      </tr>
+                    ))
+                  : ""}
+              </tbody>
+            </table>
           </div>
         </section>
       </div>

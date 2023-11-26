@@ -75,10 +75,10 @@ h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
   color: #033c5a;
 }
 
-.h2 {
+h2 {
   font-size: 25px !important;
   @media (max-width: 760px) { /* apply styles for md screens and larger */
-    font-size: 15px !important;
+    font-size: 20px !important;
   }
 }
 
@@ -93,14 +93,19 @@ p {
 
 section {
   padding: 50px 0px 0px;
+  @media (max-width: 1028px) { /* apply styles for md screens and larger */
+    padding: 30px 0px 0px;
+  }
 }
 .main-content {
   max-width: 1280px;
   margin: 0 auto;
-  @media (max-width: 760px) { /* apply styles for md screens and larger */
-    padding-top: 20px;
+  @media (max-width: 1028px) { /* apply styles for md screens and larger */
+    padding: 20px 20px 0px;
   }
-
+  @media (max-width: 760px) { /* apply styles for md screens and larger */
+    padding: 20px 10px 0px;
+  }
 }
 
 /* Default buttons style */
@@ -316,9 +321,6 @@ label, legend {
   display: none;
 }
 
-
-/* Далее задаем CSS стили для наших элементов: */
-
 .file-upload input[type="file"]{
 display: none;/* скрываем input file */
 }
@@ -418,7 +420,12 @@ color: #033c5a;
 	vertical-align: top;
   background: #F8F8F8;
   border-radius: 1px;
+  @media (max-width: 1200px) {
+    font-size: 14px;
+    padding: 5px 7px;
+  };
   @media (max-width: 760px) {
+    font-size: 12px;
     padding: 5px 5px;
   };
 }
@@ -433,6 +440,9 @@ color: #033c5a;
 	background: #F8F8F8;
   border-radius: 1px;
   font-size: 17px;
+  @media (max-width: 1028px) {
+    font-size: 15px;
+  };
   @media (max-width: 760px) {
     font-size: 12px;
   };
@@ -441,18 +451,24 @@ color: #033c5a;
   font-size: 17px;
   background: #b8e2f85b;
   color: #ec720b;
+  @media (max-width: 1028px) {
+    font-size: 16px;
+  };
   @media (max-width: 760px) {
     font-size: 14px;
   };
 }
-.table tbody tr:last-child td{
-  font-size: 17px;
+/* .table tbody tr:last-child td{
+  font-size: 15px;
   background: #b8e2f85b;
   color: #ec720b;
-  @media (max-width: 760px) {
-    font-size: 14px;
+  @media (max-width: 1028px) {
+    font-size: 15px;
   };
-}
+  @media (max-width: 760px) {
+    font-size: 12px;
+  };
+} */
 
 .table tbody tr:last-child td{
 	border-bottom: 3px solid #ddd;
@@ -526,4 +542,18 @@ color: #033c5a;
 
 .start_screen_content {
   margin-top: 60px;
+}
+
+.leftColumn {
+  width: 37% !important;
+  @media (max-width: 760px) { /* apply styles for md screens and larger */
+    width: 100% !important;
+  }
+}
+
+.rightColumn {
+  width: 63% !important;
+  @media (max-width: 760px) { /* apply styles for md screens and larger */
+    width: 100% !important;
+  }
 }
