@@ -44,7 +44,7 @@ export default function CalculateCost({
         >
           <h2>To calculate cost</h2>
           <p>
-            The length of agreement determines number of credits to be used (20€
+            The length of agreement determines number of credits to be used (20$
             per page). Delivery within 23-72 hours is +50% to total amount.
           </p>
 
@@ -141,18 +141,16 @@ export default function CalculateCost({
                       required
                     />
                   </div>
-                  <Button
-                    children="Proceed to checkout"
-                    color="orange"
-                    onClick={handleCalculation}
-                  />
+                  <div className="form-group mb-3" style={{ margin: "0 auto" }}>
+                    <Button
+                      children="Proceed to checkout"
+                      color="orange"
+                      onClick={handleCalculation}
+                    />
+                  </div>
                 </form>
 
                 {/* <!-- PayPal кнопка (placeholder) --> */}
-                <div
-                  id="paypal-button-container"
-                  style={{ display: "none" }}
-                ></div>
               </div>
             </div>
           </div>
