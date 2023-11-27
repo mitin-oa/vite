@@ -88,7 +88,6 @@ const FileUploader = () => {
     setFileData(updatedFileData);
   };
 
-
   const handleUpload = async () => {
     if (files == null) {
       alert("No files selected!"); // TODO 2 VK: Improve the logic in case of an attempt to send a request without downloading files
@@ -100,26 +99,29 @@ const FileUploader = () => {
      * if pointsBalance is negative - display a message about the need to purchase credits
      */
     const data = await sendToServer(fileData, totalCredits);
-    console.log('Server processed the request successfully: ', data);
+    console.log("Server processed the request successfully: ", data);
     if (data.pointsBalance < 0) {
-      alert(`File has been sent for processing. Balance ${data.pointsBalance}. Need to top up your balance!`);
+      alert(
+        `File has been sent for processing. Balance ${data.pointsBalance}. Need to top up your balance!`
+      );
     } else {
-      alert(`File has been sent for processing. Balance ${data.pointsBalance}.`);
+      alert(
+        `File has been sent for processing. Balance ${data.pointsBalance}.`
+      );
     }
   };
 
   // ! Temporarily. For debugging
-  const logContents = async () => {
-  }
+  const logContents = async () => {};
   // ! Temporarily. For debugging
-
 
   let totalPages = 0;
   let totalCredits = 0;
 
   fileData.map((file) => (totalPages += Number(file.pages)));
   fileData.map(
-    (file) => (totalCredits += file.expressDelivery ? file.pages * 1.5 : file.pages)
+    (file) =>
+      (totalCredits += file.expressDelivery ? file.pages * 1.5 : file.pages)
   );
 
   return (
@@ -194,9 +196,7 @@ const FileUploader = () => {
                     ></label>
                   </div>
                 </td>
-                <td>
-                  {file.expressDelivery ? file.pages * 1.5 : file.pages}{" "}
-                </td>
+                <td>{file.expressDelivery ? file.pages * 1.5 : file.pages} </td>
                 <td>{(file.file.size / 1024).toFixed(1)} Kbytes</td>
               </tr>
             ))}
@@ -213,7 +213,11 @@ const FileUploader = () => {
       </div>
 
       <div>
-        <Button children="Proceed working with backend" color="warning" onClick={handleUpload} />
+        {/*  <Button
+          children="Proceed working with backend"
+          color="warning"
+          onClick={handleUpload}
+        /> */}
         {/* // ! Temporarily. For debugging */}
         {/* <button onClick={logContents}>Log Contents</button> */}
       </div>

@@ -56,43 +56,34 @@ export default function UpLoad({
         {/* <!-- Bootstrap "Containers" component. Taken from https://getbootstrap.com/docs/5.2/layout/containers/#how-they-work --> */}
 
         <section className="main-content">
-          <div className="container">
-            <div className="row">
-              <h2>Upload files</h2>
-              <p>
-                File extensions allowed: .doc, .docx, .rtf, .pdf, .odt, .txt
-              </p>
-              <form onSubmit={handleSubmit}>
-                <FileUploader />
-              </form>
-            </div>
+          <div className="row">
+            <h2>Upload files</h2>
+            <p>File extensions allowed: .doc, .docx, .rtf, .pdf, .odt, .txt</p>
+            <form onSubmit={handleSubmit}>
+              <FileUploader />
+            </form>
           </div>
-          <div className="container">
-            {signedIn ? (
-              <Button
-                children="Proceed"
-                color={""}
-                onClick={() => handleSubmit}
-              />
-            ) : (
-              <ModalWindow
-                title={"Proceed"}
-                childComp={
-                  signedUp ? (
-                    <LogInForm
-                      onSignIn={handleSignIn}
-                      onSignUp={handleSignUp}
-                    />
-                  ) : (
-                    <SignInForm onSignUp={handleSignUp} />
-                  )
-                }
-                modalIsOpen={modalIsOpen}
-                openModal={openModal}
-                closeModal={closeModal}
-              />
-            )}
-          </div>
+          {signedIn ? (
+            <Button
+              children="Proceed"
+              color={""}
+              onClick={() => handleSubmit}
+            />
+          ) : (
+            <ModalWindow
+              title={"Proceed"}
+              childComp={
+                signedUp ? (
+                  <LogInForm onSignIn={handleSignIn} onSignUp={handleSignUp} />
+                ) : (
+                  <SignInForm onSignUp={handleSignUp} />
+                )
+              }
+              modalIsOpen={modalIsOpen}
+              openModal={openModal}
+              closeModal={closeModal}
+            />
+          )}{" "}
         </section>
 
         {/* <!-- END OF Bootstrap "Containers" component --> */}
