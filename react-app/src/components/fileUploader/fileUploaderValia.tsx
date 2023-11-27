@@ -40,7 +40,7 @@ const FileUploader = ({
     setIsOpen(false);
   }
 
-  const [files, setFiles] = useState<FileList | null>(null);
+  /* const [files, setFiles] = useState<FileList | null>(null); */
   const [fileData, setFileData] = useState<FileData[]>([]);
 
   // VK: Adds a value to the FileData fields
@@ -48,8 +48,8 @@ const FileUploader = ({
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const newFileList = e.target.files;
-      setFiles(newFileList);
-
+      /* setFiles(newFileList);
+       */
       // VK: Create file objects with unique indexes
       // * VK: Создаем объекты файлов с уникальными индексами
       const filesWithAdditionalData: FileData[] = Array.from(newFileList).map(
@@ -88,10 +88,11 @@ const FileUploader = ({
   // VK: Update the quantity of the expressDelivery field value in fileData
   // * VK: Обновление количества значения поля expressDelivery в fileData
   const setExpressDelivery = (index: number, expressDelivery: boolean) => {
-    console.log(index);
-    console.log(expressDelivery);
+    //console.log(index);
+    //console.log(expressDelivery);
 
     const updatedFileData = [...fileData];
+    //console.log(updatedFileData);
 
     // VK: Find an object with the corresponding index and update the expressDelivery value
     // * VK: Находим объект с соответствующим индексом и обновляем значение expressDelivery
@@ -106,7 +107,7 @@ const FileUploader = ({
   };
 
   const handleUpload = async () => {
-    if (files == null) {
+    if (fileData.length < 1) {
       alert("No files selected!"); // TODO 2 VK: Improve the logic in case of an attempt to send a request without downloading files
       return;
     }
@@ -189,6 +190,7 @@ const FileUploader = ({
                     name="numberOfPages"
                     min="1"
                     defaultValue={1}
+                    value={file.pages}
                     data-file-index={file.index}
                     onChange={(e) =>
                       setNumberOfPages(index, Number(e.target.value))
@@ -203,6 +205,7 @@ const FileUploader = ({
                       name="expressDelivery"
                       id={`expressDelivery-${file.index}`}
                       data-file-index={file.index}
+                      checked={file.expressDelivery}
                       onChange={(e) =>
                         setExpressDelivery(index, e.target.checked)
                       }
