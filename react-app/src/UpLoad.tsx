@@ -60,10 +60,15 @@ export default function UpLoad({
             <h2>Upload files</h2>
             <p>File extensions allowed: .doc, .docx, .rtf, .pdf, .odt, .txt</p>
             <form onSubmit={handleSubmit}>
-              <FileUploader />
+              <FileUploader
+                setIsOpen={setIsOpen}
+                handleSignIn={handleSignIn}
+                handleSignUp={handleSignUp}
+                modalIsOpen={modalIsOpen}
+              />
             </form>
           </div>
-          {signedIn ? (
+          {/* {signedIn ? (
             <Button
               children="Proceed"
               color={""}
@@ -83,7 +88,7 @@ export default function UpLoad({
               openModal={openModal}
               closeModal={closeModal}
             />
-          )}{" "}
+          )}{" "} */}
         </section>
 
         {/* <!-- END OF Bootstrap "Containers" component --> */}

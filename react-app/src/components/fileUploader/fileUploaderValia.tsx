@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 import Button from "../Button";
 
 import sendToServer from "../scripts/uploadHandler"; // * VK Backend: Connecting an external script
+import { SignedInContext, SignedUpContext } from "../../App";
+import ModalWindow from "../modal/modal";
+import LogInForm from "../modal/LogInForm";
+import SignInForm from "../modal/SignUpForm";
 
 // TODO LIST VK:
 // 1. implement cleaning/changing const files and fileData in case
@@ -13,7 +17,12 @@ import sendToServer from "../scripts/uploadHandler"; // * VK Backend: Connecting
 // иначе на сервер попадут неактуальные данные)
 // 2. Search "TODO 2" in file
 
-const FileUploader = () => {
+const FileUploader = ({
+  setIsOpen,
+  handleSignIn,
+  handleSignUp,
+  modalIsOpen,
+}: any) => {
   // VK: The object will store all data about downloaded files
   // * VK: Объект будет хранить все данные о загружаемых файлах
   type FileData = {
@@ -22,6 +31,14 @@ const FileUploader = () => {
     expressDelivery: boolean;
     pages: number;
   };
+  const signedIn = useContext(SignedInContext);
+  const signedUp = useContext(SignedUpContext);
+  function openModal() {
+    setIsOpen(true);
+  }
+  function closeModal() {
+    setIsOpen(false);
+  }
 
   const [files, setFiles] = useState<FileList | null>(null);
   const [fileData, setFileData] = useState<FileData[]>([]);
@@ -213,7 +230,28 @@ const FileUploader = () => {
       </div>
 
       <div>
-        {/*  <Button
+        {signedIn ? (
+          <Button
+            children="Proceed working with backend"
+            color={""}
+            onClick={handleUpload}
+          />
+        ) : (
+          <ModalWindow
+            title={"Proceed"}
+            childComp={
+              signedUp ? (
+                <LogInForm onSignIn={handleSignIn} onSignUp={handleSignUp} />
+              ) : (
+                <SignInForm onSignUp={handleSignUp} />
+              )
+            }
+            modalIsOpen={modalIsOpen}
+            openModal={openModal}
+            closeModal={closeModal}
+          />
+        )}{" "}
+        {/* <Button
           children="Proceed working with backend"
           color="warning"
           onClick={handleUpload}
