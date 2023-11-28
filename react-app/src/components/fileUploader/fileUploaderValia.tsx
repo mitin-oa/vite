@@ -135,11 +135,12 @@ const FileUploader = ({
 
   let totalPages = 0;
   let totalCredits = 0;
+  const creditsPerPage = 20;
 
   fileData.map((file) => (totalPages += Number(file.pages)));
   fileData.map(
     (file) =>
-      (totalCredits += file.expressDelivery ? file.pages * 1.5 : file.pages)
+      (totalCredits += file.expressDelivery ? (file.pages * creditsPerPage * 1.5) : (file.pages * creditsPerPage))
   );
 
   return (
@@ -216,7 +217,7 @@ const FileUploader = ({
                     ></label>
                   </div>
                 </td>
-                <td>{file.expressDelivery ? file.pages * 1.5 : file.pages} </td>
+                <td>{file.expressDelivery ? (file.pages * creditsPerPage * 1.5) : (file.pages * creditsPerPage)} </td>
                 <td>{(file.file.size / 1024).toFixed(1)} Kbytes</td>
               </tr>
             ))}
