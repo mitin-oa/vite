@@ -10,15 +10,6 @@ import { SignedInContext, SignedUpContext } from "../../App";
 import Button from "../Button";
 import { useMediaQuery } from "react-responsive";
 
-function deleteCookie(name: string) {
-  const date = new Date();
-
-  // Set it expire in -1 days
-  date.setTime(date.getTime() + -1 * 24 * 60 * 60 * 1000);
-
-  // Set it
-  document.cookie = name + "=; expires=" + date.toUTCString() + "; path=/";
-}
 interface IHeaderProps {
   kind?: "full" | "short";
   handleSignIn: boolean;
@@ -26,6 +17,17 @@ interface IHeaderProps {
   onSignIn: Dispatch<SetStateAction<boolean>>;
   modalIsOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
+}
+
+export function deleteCookie(name: string) {
+  const date = new Date();
+
+  // Set it expire in -1 days
+  date.setTime(date.getTime() + -1 * 24 * 60 * 60 * 1000);
+
+  // Set it
+  document.cookie = name + "=; expires=" + date.toUTCString() + "; path=/";
+  console.log(document.cookie);
 }
 
 export default function HeaderMenu({
@@ -48,6 +50,16 @@ export default function HeaderMenu({
   }
   function closeModal() {
     setIsOpen(false);
+  }
+  function deleteCookie(name: string) {
+    const date = new Date();
+
+    // Set it expire in -1 days
+    date.setTime(date.getTime() + -1 * 24 * 60 * 60 * 1000);
+
+    // Set it
+    document.cookie = name + "=; expires=" + date.toUTCString() + "; path=/";
+    console.log(document.cookie);
   }
 
   console.log(signedIn, "signedIn");
