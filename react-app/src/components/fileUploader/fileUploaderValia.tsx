@@ -236,7 +236,7 @@ const FileUploader = ({
       <div>
         {signedIn ? (
           <Button
-            children="Proceed working with backend"
+            children="Proceed"
             color={""}
             onClick={handleUpload}
           />
