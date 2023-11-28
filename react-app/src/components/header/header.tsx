@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useContext, useState } from "react";
+import { Dispatch, SetStateAction, useContext } from "react";
 import "./header.scss";
 import Logo from "../../../public/logo-white-ec720b-background-033c5a.png";
 import { HashLink as Link } from "react-router-hash-link";
@@ -6,7 +6,7 @@ import { Navbar } from "../burger/navBar";
 import ModalWindow from "../modal/modal";
 import SignInForm from "../modal/SignUpForm";
 import LogInForm from "../modal/LogInForm";
-import { SignedInContext, SignedUpContext } from "../../App";
+import { SignedInContext, SignedUpContext, deleteCookie } from "../../App";
 import Button from "../Button";
 import { useMediaQuery } from "react-responsive";
 
@@ -17,17 +17,6 @@ interface IHeaderProps {
   onSignIn: Dispatch<SetStateAction<boolean>>;
   modalIsOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
-}
-
-export function deleteCookie(name: string) {
-  const date = new Date();
-
-  // Set it expire in -1 days
-  date.setTime(date.getTime() + -1 * 24 * 60 * 60 * 1000);
-
-  // Set it
-  document.cookie = name + "=; expires=" + date.toUTCString() + "; path=/";
-  console.log(document.cookie);
 }
 
 export default function HeaderMenu({
@@ -50,16 +39,6 @@ export default function HeaderMenu({
   }
   function closeModal() {
     setIsOpen(false);
-  }
-  function deleteCookie(name: string) {
-    const date = new Date();
-
-    // Set it expire in -1 days
-    date.setTime(date.getTime() + -1 * 24 * 60 * 60 * 1000);
-
-    // Set it
-    document.cookie = name + "=; expires=" + date.toUTCString() + "; path=/";
-    console.log(document.cookie);
   }
 
   console.log(signedIn, "signedIn");
@@ -125,15 +104,17 @@ export default function HeaderMenu({
                         )
                       ) : (
                         <Link to="/">
-                          <Button
-                            children={signedInStatus}
-                            color="orange"
-                            onClick={() => {
-                              onSignIn(false);
-                              setIsOpen(false);
-                              deleteCookie("token");
-                            }}
-                          />
+                          <>
+                            <Button
+                              children={signedInStatus}
+                              color="orange"
+                              onClick={() => {
+                                onSignIn(false);
+                                setIsOpen(false);
+                                deleteCookie("token");
+                              }}
+                            />
+                          </>
                         </Link>
                       )
                     }

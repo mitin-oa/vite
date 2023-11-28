@@ -17,6 +17,18 @@ export const MobileScreenContext = createContext(false);
 import { sendLogInRequest } from "./components/scripts/logIn";
 import { useMediaQuery } from "react-responsive";
 
+export function deleteCookie(name: string) {
+  const date = new Date();
+
+  // Set it expire in -1 days
+  date.setTime(date.getTime() + -1 * 24 * 60 * 60 * 1000);
+
+  // Set it
+  document.cookie = name + "=; expires=" + date.toUTCString() + "; path=/";
+  console.log(document.cookie);
+}
+//deleteCookie("token");
+
 function App() {
   const value = `; ${document.cookie}`;
   console.log(document.cookie);
