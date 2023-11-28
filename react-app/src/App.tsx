@@ -18,7 +18,14 @@ import { sendLogInRequest } from "./components/scripts/logIn";
 import { useMediaQuery } from "react-responsive";
 
 function App() {
-  const [signedIn, onSignIn] = useState(false);
+  const value = `; ${document.cookie}`;
+  console.log(document.cookie);
+  const parts = value.split(`; token=`);
+  console.log(parts);
+  const token =
+    parts.length === 2 ? parts.pop()?.split(";").shift() !== null : false;
+  console.log(token);
+  const [signedIn, onSignIn] = useState(token);
   const [signedUp, onSignUp] = useState(true);
   const [modalIsOpen, setIsOpen] = useState(false);
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1028px" });

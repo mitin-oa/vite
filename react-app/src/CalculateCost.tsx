@@ -2,7 +2,7 @@ import { useMediaQuery } from "react-responsive";
 import { Footer } from "./components/footer/footer";
 import NumInput from "./components/InputNumber";
 import { ChangeEvent, SetStateAction, useState } from "react";
-import { HeaderMenu } from "./components/header/header";
+import HeaderMenu from "./components/header/header";
 import Button from "./components/Button";
 
 export default function CalculateCost({

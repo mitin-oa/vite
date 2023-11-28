@@ -2,12 +2,7 @@ import { useMediaQuery } from "react-responsive";
 import { Footer } from "./components/footer/footer";
 import { useContext, useState } from "react";
 import FileUploader from "./components/fileUploader/fileUploaderValia";
-import { HeaderMenu } from "./components/header/header";
-import Button from "./components/Button";
-
-import ModalWindow from "./components/modal/modal";
-import LogInForm from "./components/modal/LogInForm";
-import SignInForm from "./components/modal/SignUpForm";
+import HeaderMenu from "./components/header/header";
 import { SignedInContext, SignedUpContext } from "./App";
 
 export default function UpLoad({

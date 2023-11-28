@@ -1,5 +1,5 @@
 import "../startScreen/startScreen.scss";
-import { HeaderMenu } from "../header/header";
+import HeaderMenu from "../header/header";
 import StartScreenPic from "../../../public/start_screen_pic3.png";
 import { Link } from "react-router-dom";
 import Button from "../Button";
@@ -7,9 +7,11 @@ import { useMediaQuery } from "react-responsive";
 
 function onOrder() {
   return (
-    <Link className="button_text" to="#our_id">
-      Order Now
-    </Link>
+    <>
+      <Link className="nav__link nav__text" to="UpLoad">
+        File Upload
+      </Link>
+    </>
   );
 }
 export default function StartScreen({
@@ -45,7 +47,9 @@ export default function StartScreen({
             tempor incididunt ut labore et dolore magna aliqua. Laoreet id donec
             ultrices tincidunt.
           </p>
-          <Button children="Order Now" color="warning" onClick={onOrder} />
+          <Link to="UpLoad">
+            <Button children="Order Now" color="warning" onClick={() => null} />
+          </Link>
         </div>
         {!isPhoneScreen ? (
           <div className="Content">

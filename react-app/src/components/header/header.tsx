@@ -10,6 +10,15 @@ import { SignedInContext, SignedUpContext } from "../../App";
 import Button from "../Button";
 import { useMediaQuery } from "react-responsive";
 
+function deleteCookie(name: string) {
+  const date = new Date();
+
+  // Set it expire in -1 days
+  date.setTime(date.getTime() + -1 * 24 * 60 * 60 * 1000);
+
+  // Set it
+  document.cookie = name + "=; expires=" + date.toUTCString() + "; path=/";
+}
 interface IHeaderProps {
   kind?: "full" | "short";
   handleSignIn: boolean;
@@ -19,7 +28,7 @@ interface IHeaderProps {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-export function HeaderMenu({
+export default function HeaderMenu({
   kind,
   handleSignIn,
   handleSignUp,
@@ -80,7 +89,6 @@ export function HeaderMenu({
                   <Link className="nav__link nav__text" to="UpLoad">
                     File Upload
                   </Link>
-
                   <Link className="nav__link nav__text" to="BuyCredits">
                     Buy Credits
                   </Link>
@@ -111,6 +119,7 @@ export function HeaderMenu({
                             onClick={() => {
                               onSignIn(false);
                               setIsOpen(false);
+                              deleteCookie("token");
                             }}
                           />
                         </Link>
@@ -167,6 +176,7 @@ export function HeaderMenu({
                             onClick={() => {
                               onSignIn(false);
                               setIsOpen(false);
+                              deleteCookie("token");
                             }}
                           />
                         </Link>

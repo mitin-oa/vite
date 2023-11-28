@@ -13,7 +13,7 @@ import ModalWindow from "./components/modal/modal";
 
 // * VK Backend: connecting an external script to process requests to the backend
 import { sendPaymentDataToServer } from "../src/components/scripts/fetch";
-import { HeaderMenu } from "./components/header/header";
+import HeaderMenu from "./components/header/header";
 
 export default function BuyCredits({
   kind,

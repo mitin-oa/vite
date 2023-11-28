@@ -1,10 +1,9 @@
-import { useContext, useEffect, useState } from "react";
-import { useMediaQuery } from "react-responsive";
+import { useEffect, useState } from "react";
+
 import { Footer } from "./components/footer/footer";
-import { HeaderMenu } from "./components/header/header";
+import HeaderMenu from "./components/header/header";
 // * VK: Significant for the backend area. Please exercise caution when making alterations
 import { getUserDataForDashboard } from "./components/scripts/getUserDataForDashboard";
-import { SignedInContext, SignedUpContext } from "./App";
 
 export default function Dashboard({
   kind,
