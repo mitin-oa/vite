@@ -9,12 +9,7 @@ import LogInForm from "../modal/LogInForm";
 import SignInForm from "../modal/SignUpForm";
 
 // TODO LIST VK:
-// 1. implement cleaning/changing const files and fileData in case
-// if the user has made changes to the composition of the downloaded files,
-// otherwise irrelevant data will be sent to the server
-// (Pеализовать очистку/изменение const files и fileData в случае,
-// если пользователем были внесены изменения в состав загружаемых файлов,
-// иначе на сервер попадут неактуальные данные)
+// 1. Search "TODO 1" in file
 // 2. Search "TODO 2" in file
 
 const FileUploader = ({
@@ -122,6 +117,8 @@ const FileUploader = ({
      */
     const data = await sendToServer(fileData, totalCredits);
     console.log("Server processed the request successfully: ", data);
+    // TODO 1 VK: Improve the logic in case insufficient of balance and confirmation in case of sufficient balance
+    // * TODO 1 ВК: Внедрить логику при недостаточном балансе и подтверждение при достаточном балансе
     if (data.pointsBalance < 0) {
       alert(
         `File has been sent for processing. Balance ${data.pointsBalance}. Need to top up your balance!`
@@ -268,7 +265,7 @@ const FileUploader = ({
           onClick={handleUpload}
         /> */}
         {/* // ! Temporarily. For debugging */}
-        {/* <button onClick={logContents}>Log Contents</button> */}
+        <button onClick={logContents}>Log Contents</button>
       </div>
     </>
   );
