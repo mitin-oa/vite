@@ -8,7 +8,7 @@ import SignInForm from "../modal/SignUpForm";
 import LogInForm from "../modal/LogInForm";
 import ModalWindow from "../modal/modal";
 import Button from "../Button";
-import { SignedInContext, SignedUpContext } from "../../App";
+import { SignedInContext, SignedUpContext, deleteCookie } from "../../App";
 
 const colors = {
   yellowmellow: "#fbe69b",
@@ -177,6 +177,7 @@ export const Navbar = ({
                     onClick={() => {
                       onSignIn(false);
                       setIsOpen(false);
+                      deleteCookie("token");
                     }}
                   />
                 </Link>
