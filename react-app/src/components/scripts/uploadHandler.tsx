@@ -9,6 +9,8 @@
   const sendToServer = async (fileData: any, totalCredits: number): Promise<any> => {
   const formData = new FormData();
 
+//   console.log(fileData);
+
   formData.append(`filesCount`, fileData.length.toString());
   formData.append(`totalPointsCost`, totalCredits.toString());
 
@@ -16,7 +18,7 @@
       formData.append(`file_${file.index}`, file.file);
       formData.append(`expressDelivery_${file.index}`, file.expressDelivery.toString());
       formData.append(`pages_${file.index}`, file.pages.toString());
-      formData.append(`pointsCost_${file.index}`, (file.expressDelivery ? file.pages * 1.5 : file.pages).toString());
+      formData.append(`pointsCost_${file.index}`, file.costInPoints.toString());
   }
 
   try {

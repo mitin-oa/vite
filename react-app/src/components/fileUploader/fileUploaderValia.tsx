@@ -30,6 +30,7 @@ const FileUploader = ({
     file: File;
     expressDelivery: boolean;
     pages: number;
+    costInPoints: number
   };
   const signedIn = useContext(SignedInContext);
   const signedUp = useContext(SignedUpContext);
@@ -58,6 +59,7 @@ const FileUploader = ({
           file,
           expressDelivery: false,
           pages: 1,
+          costInPoints: 20,
         })
       );
 
@@ -67,9 +69,7 @@ const FileUploader = ({
 
   // VK: Update the value of the pages field (the number of pages in the downloaded file) in fileData
   // * VK: Обновление значения поля pages (количество страниц в загружаемом файле) в fileData
-  const setNumberOfPages = (index: number, pages: number) => {
-    console.log(index);
-    console.log(pages);
+  const setNumberOfPages = (index: number, pages: number,) => {
 
     const updatedFileData = [...fileData];
 
@@ -78,6 +78,9 @@ const FileUploader = ({
     updatedFileData[index] = {
       ...updatedFileData[index],
       pages: pages,
+      costInPoints: updatedFileData[index].expressDelivery
+        ? pages * creditsPerPage * 1.5
+        : pages * creditsPerPage,
     };
 
     // VK: Update fileData state
@@ -88,18 +91,19 @@ const FileUploader = ({
   // VK: Update the quantity of the expressDelivery field value in fileData
   // * VK: Обновление количества значения поля expressDelivery в fileData
   const setExpressDelivery = (index: number, expressDelivery: boolean) => {
-    //console.log(index);
-    //console.log(expressDelivery);
 
     const updatedFileData = [...fileData];
-    //console.log(updatedFileData);
 
     // VK: Find an object with the corresponding index and update the expressDelivery value
     // * VK: Находим объект с соответствующим индексом и обновляем значение expressDelivery
     updatedFileData[index] = {
       ...updatedFileData[index],
       expressDelivery: expressDelivery,
+      costInPoints: expressDelivery
+        ? updatedFileData[index].pages * creditsPerPage * 1.5
+        : updatedFileData[index].pages * creditsPerPage,
     };
+    setFileData(updatedFileData);
 
     // VK: Update fileData state
     // * VK: Обновляем состояние fileData
@@ -130,7 +134,10 @@ const FileUploader = ({
   };
 
   // ! Temporarily. For debugging
-  const logContents = async () => {};
+  const logContents = async () => { 
+    console.log('!!!!!');
+    console.log(fileData);
+  };
   // ! Temporarily. For debugging
 
   let totalPages = 0;
