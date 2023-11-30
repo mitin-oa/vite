@@ -10,7 +10,7 @@ const Button = ({ children, color, style, onClick }: Props) => {
     <>
       {children == "Sign out" ? (
         <button
-          style={{ marginLeft: 25, marginTop: 10 }}
+          style={{ marginLeft: 0, marginTop: 20 }}
           type="button"
           className={"btn btn-" + color + " " + style}
           onClick={onClick}

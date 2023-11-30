@@ -45,6 +45,11 @@ export default function Dashboard({
         )
     );
   }
+  function handleOrder(orderId: string) {
+    //How pass order_id to server handle with order?
+    return orderId;
+  }
+
   // * ↑ VK: Significant for the backend area. Please exercise caution when making alterations
 
   return (
@@ -259,9 +264,7 @@ export default function Dashboard({
                                 children={"Start processing"}
                                 color={"orange"}
                                 style={"table-btn"}
-                                onClick={function (): void {
-                                  throw new Error("Function not implemented.");
-                                }}
+                                onClick={() => handleOrder(e.order_id)}
                               />
                             ) : (
                               <></>
