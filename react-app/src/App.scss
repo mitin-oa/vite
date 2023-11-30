@@ -49,7 +49,6 @@ body {
 .btn {
   color: #033c5a !important;
   font-weight: 600;
-  //font-size: 17px !important;
   background-color: #ec720b;
   border-color: #ff8307;
   border-radius: 0.0rem !important;
@@ -186,8 +185,9 @@ button:not(.default) {
   color: #ffffff;
 }
 .table-btn {
-  max-width: 70px !important;
+  width: 70px !important;
   min-width: 20px !important;
+  min-height: 30px;
   padding: 2px 2px !important;
   font-size: 12px !important;
 }

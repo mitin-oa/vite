@@ -5,6 +5,8 @@ import HeaderMenu from "./components/header/header";
 // * VK: Significant for the backend area. Please exercise caution when making alterations
 import { getUserDataForDashboard } from "./components/scripts/getUserDataForDashboard";
 import Button from "./components/Button";
+import ModalWindow from "./components/modal/modal";
+import SignInForm from "./components/modal/SignUpForm";
 
 export default function Dashboard({
   kind,
@@ -50,6 +52,13 @@ export default function Dashboard({
     return orderId;
   }
 
+  function openModal() {
+    setIsOpen(true);
+  }
+  function closeModal() {
+    setIsOpen(false);
+  }
+
   // * ↑ VK: Significant for the backend area. Please exercise caution when making alterations
 
   return (
@@ -80,94 +89,23 @@ export default function Dashboard({
                         : 0}
                     </td>
                     <td>
-                      <Button
-                        children={"Change"}
-                        color={"orange"}
-                        style="table-btn"
-                        onClick={function (): void {
-                          throw new Error("Function not implemented.");
-                        }}
+                      <ModalWindow
+                        title={"Change"}
+                        childComp={
+                          <SignInForm
+                            onSignUp={handleSignUp}
+                            onCloseModal={closeModal}
+                          />
+                        }
+                        modalIsOpen={modalIsOpen}
+                        openModal={openModal}
+                        closeModal={closeModal}
+                        btnModalStyle="table-btn"
                       />
                     </td>
                   </tr>
                 </tbody>
               </table>
-              {/* <form
-                className="form mx-4 mb-4"
-                action="/api/signup"
-                method="post"
-                id="reg-form"
-              >
-                <div className="col-xs-12">
-                  <div className="form-group ">
-                    <label htmlFor="username">User name:</label>
-                    <input
-                      type="text"
-                      className="input-field"
-                      id="username"
-                      name="username"
-                      placeholder="Enter user name"
-                      defaultValue="user1"
-                      required
-                    />
-                    <br />
-                  </div>
-                </div>
-                <div className="col-xs-12">
-                  <div className="form-group">
-                    <label htmlFor="email">Email:</label>
-                    <input
-                      type="email"
-                      className="input-field"
-                      id="email"
-                      name="email"
-                      placeholder="Enter email"
-                      defaultValue={"client@example.com"}
-                      value={
-                        userDataForDashboard
-                          ? userDataForDashboard.data.userData[0].email
-                          : "client@example.com"
-                      }
-                      required
-                    />
-                    <br />
-                  </div>
-                </div>
-                <div className="col-xs-12">
-                  <div className="form-group">
-                    <label htmlFor="phone">Phone number:</label>
-                    <input
-                      type="text"
-                      className="input-field"
-                      id="phone"
-                      name="phone"
-                      placeholder="Enter phone"
-                      defaultValue="+3530000000"
-                      value={
-                        userDataForDashboard
-                          ? userDataForDashboard.data.userData[0].phone
-                          : "+3530000000"
-                      }
-                      required
-                    />
-                    <br />
-                  </div>
-                </div>
-                <div className="col-xs-12">
-                  <div className="form-group">
-                    <label htmlFor="password">Password:</label>
-                    <input
-                      type="password"
-                      className="input-field"
-                      id="password"
-                      name="password"
-                      placeholder="Enter password"
-                      defaultValue="pass"
-                      required
-                    />
-                  </div>
-                </div> 
-              </form>*/}
               <div className="row">
                 <p>Credit points</p>
                 <table className="table">
@@ -297,4 +235,83 @@ export default function Dashboard({
       <Footer kind="short" />
     </>
   );
+}
+
+{
+  /* <form
+                className="form mx-4 mb-4"
+                action="/api/signup"
+                method="post"
+                id="reg-form"
+              >
+                <div className="col-xs-12">
+                  <div className="form-group ">
+                    <label htmlFor="username">User name:</label>
+                    <input
+                      type="text"
+                      className="input-field"
+                      id="username"
+                      name="username"
+                      placeholder="Enter user name"
+                      defaultValue="user1"
+                      required
+                    />
+                    <br />
+                  </div>
+                </div>
+                <div className="col-xs-12">
+                  <div className="form-group">
+                    <label htmlFor="email">Email:</label>
+                    <input
+                      type="email"
+                      className="input-field"
+                      id="email"
+                      name="email"
+                      placeholder="Enter email"
+                      defaultValue={"client@example.com"}
+                      value={
+                        userDataForDashboard
+                          ? userDataForDashboard.data.userData[0].email
+                          : "client@example.com"
+                      }
+                      required
+                    />
+                    <br />
+                  </div>
+                </div>
+                <div className="col-xs-12">
+                  <div className="form-group">
+                    <label htmlFor="phone">Phone number:</label>
+                    <input
+                      type="text"
+                      className="input-field"
+                      id="phone"
+                      name="phone"
+                      placeholder="Enter phone"
+                      defaultValue="+3530000000"
+                      value={
+                        userDataForDashboard
+                          ? userDataForDashboard.data.userData[0].phone
+                          : "+3530000000"
+                      }
+                      required
+                    />
+                    <br />
+                  </div>
+                </div>
+                <div className="col-xs-12">
+                  <div className="form-group">
+                    <label htmlFor="password">Password:</label>
+                    <input
+                      type="password"
+                      className="input-field"
+                      id="password"
+                      name="password"
+                      placeholder="Enter password"
+                      defaultValue="pass"
+                      required
+                    />
+                  </div>
+                </div> 
+              </form>*/
 }
