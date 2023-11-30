@@ -4,6 +4,7 @@ import { Footer } from "./components/footer/footer";
 import HeaderMenu from "./components/header/header";
 // * VK: Significant for the backend area. Please exercise caution when making alterations
 import { getUserDataForDashboard } from "./components/scripts/getUserDataForDashboard";
+import Button from "./components/Button";
 
 export default function Dashboard({
   kind,
@@ -36,10 +37,15 @@ export default function Dashboard({
   if (userDataForDashboard !== null && userDataForDashboard !== undefined) {
     console.log("userDataForDashboard", userDataForDashboard);
     console.log("email", userDataForDashboard.data.userData[0].email);
+    console.log(
+      userDataForDashboard.data.fileData
+        .slice(-10, userDataForDashboard.data.fileData.length)
+        .sort((a: any, b: any) =>
+          a.created_at.date > b.created_at.date ? 1 : -1
+        )
+    );
   }
   // * ↑ VK: Significant for the backend area. Please exercise caution when making alterations
-
-  console.log(userDataForDashboard);
 
   return (
     <>
@@ -192,23 +198,63 @@ export default function Dashboard({
               <tbody>
                 <tr>
                   <td>Name</td>
+                  <td>Status</td>
                   <td>Date</td>
-                  <td>Notes</td>
+                  <td>Manage</td>
+                  <td>Download</td>
                 </tr>
                 {userDataForDashboard
-                  ? userDataForDashboard.data.editorNotes.map((e: any) => (
-                      <tr>
-                        <td>{userDataForDashboard ? e.file_name : ""}</td>
-                        <td>
-                          {userDataForDashboard
-                            ? e.created_at.toString().split("T")[0]
-                            : ""}
-                        </td>
-                        <td>
-                          {userDataForDashboard ? e.note_text.toString() : ""}
-                        </td>
-                      </tr>
-                    ))
+                  ? userDataForDashboard.data.fileData
+                      .slice(-10, userDataForDashboard.data.fileData.length)
+                      .sort((a: any, b: any) =>
+                        a.created_at.date > b.created_at.date ? 1 : -1
+                      )
+                      .map((e: any) => (
+                        <tr>
+                          <td>{userDataForDashboard ? e.original_name : ""}</td>
+                          <td>{userDataForDashboard ? e.order_status : ""}</td>
+                          <td>
+                            {userDataForDashboard
+                              ? e.created_at.toString().split("T")[0] +
+                                " " +
+                                e.created_at
+                                  .toString()
+                                  .split("T")[1]
+                                  .split(".")[0]
+                              : ""}
+                          </td>
+                          <td>
+                            {e.order_status === "pending" ? (
+                              <Button
+                                children={"Start processing"}
+                                color={"orange"}
+                                style={"table-btn"}
+                                onClick={function (): void {
+                                  throw new Error("Function not implemented.");
+                                }}
+                              />
+                            ) : (
+                              <></>
+                            )}
+                          </td>
+                          <td>
+                            {e.order_status !== "pending" ? (
+                              <Button
+                                children={
+                                  e.completed ? "Download" : "Not completed"
+                                }
+                                color={"orange"}
+                                style={"table-btn"}
+                                onClick={function (): void {
+                                  throw new Error("Function not implemented.");
+                                }}
+                              />
+                            ) : (
+                              <></>
+                            )}
+                          </td>
+                        </tr>
+                      ))
                   : ""}
               </tbody>
             </table>

@@ -31,7 +31,7 @@ body {
     scroll-behavior: auto;
   }
   button {
-    font-size: 1.5rem;
+    font-size: 2rem;
   }
   
   .wrapper {
@@ -49,7 +49,7 @@ body {
 .btn {
   color: #033c5a !important;
   font-weight: 600;
-  font-size: 17px  !important;
+  //font-size: 17px !important;
   background-color: #ec720b;
   border-color: #ff8307;
   border-radius: 0.0rem !important;
@@ -176,7 +176,7 @@ button:not(.default) {
   max-width: 100%;
   padding: 15px 25px;
   font-family: "Arial", "Helvetica Neue", Arial, Helvetica, sans-serif;
-  font-size: 14px;
+  font-size: 17px;
   font-weight: 600;
   /* text-transform: uppercase; */
   line-height: 1;
@@ -184,6 +184,12 @@ button:not(.default) {
   border-style:inherit;
   background-color: #ec720b;
   color: #ffffff;
+}
+.table-btn {
+  max-width: 70px !important;
+  min-width: 20px !important;
+  padding: 2px 2px !important;
+  font-size: 12px !important;
 }
 
 .form {
