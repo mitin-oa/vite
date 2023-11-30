@@ -65,7 +65,29 @@ export default function Dashboard({
           <div className="row">
             <div className="col-md-6 leftColumn" id="leftColumn">
               <p>Profile info</p>
-              <form
+              <table className="table">
+                <tbody>
+                  <tr>
+                    <td>User name</td>
+                    <td>
+                      {userDataForDashboard
+                        ? userDataForDashboard.data.userData[0].username
+                        : 0}
+                    </td>
+                    <td>
+                      <Button
+                        children={"Change"}
+                        color={"orange"}
+                        style="table-btn"
+                        onClick={function (): void {
+                          throw new Error("Function not implemented.");
+                        }}
+                      />
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              {/* <form
                 className="form mx-4 mb-4"
                 action="/api/signup"
                 method="post"
@@ -139,8 +161,8 @@ export default function Dashboard({
                       required
                     />
                   </div>
-                </div>
-              </form>
+                </div> 
+              </form>*/}
               <div className="row">
                 <p>Credit points</p>
                 <table className="table">
@@ -151,6 +173,16 @@ export default function Dashboard({
                         {userDataForDashboard
                           ? userDataForDashboard.data.userData[0].points
                           : 0}
+                      </td>
+                      <td>
+                        <Button
+                          children={"Buy credits"}
+                          color={"orange"}
+                          style="table-btn"
+                          onClick={function (): void {
+                            throw new Error("Function not implemented.");
+                          }}
+                        />
                       </td>
                     </tr>
                   </tbody>
