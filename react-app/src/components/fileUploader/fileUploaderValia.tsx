@@ -9,12 +9,7 @@ import LogInForm from "../modal/LogInForm";
 import SignInForm from "../modal/SignUpForm";
 
 // TODO LIST VK:
-// 1. implement cleaning/changing const files and fileData in case
-// if the user has made changes to the composition of the downloaded files,
-// otherwise irrelevant data will be sent to the server
-// (Pеализовать очистку/изменение const files и fileData в случае,
-// если пользователем были внесены изменения в состав загружаемых файлов,
-// иначе на сервер попадут неактуальные данные)
+// 1. Search "TODO 1" in file
 // 2. Search "TODO 2" in file
 
 const FileUploader = ({
@@ -30,6 +25,7 @@ const FileUploader = ({
     file: File;
     expressDelivery: boolean;
     pages: number;
+    costInPoints: number
   };
   const signedIn = useContext(SignedInContext);
   const signedUp = useContext(SignedUpContext);
@@ -58,6 +54,7 @@ const FileUploader = ({
           file,
           expressDelivery: false,
           pages: 1,
+          costInPoints: 20,
         })
       );
 
@@ -67,9 +64,7 @@ const FileUploader = ({
 
   // VK: Update the value of the pages field (the number of pages in the downloaded file) in fileData
   // * VK: Обновление значения поля pages (количество страниц в загружаемом файле) в fileData
-  const setNumberOfPages = (index: number, pages: number) => {
-    console.log(index);
-    console.log(pages);
+  const setNumberOfPages = (index: number, pages: number,) => {
 
     const updatedFileData = [...fileData];
 
@@ -78,6 +73,9 @@ const FileUploader = ({
     updatedFileData[index] = {
       ...updatedFileData[index],
       pages: pages,
+      costInPoints: updatedFileData[index].expressDelivery
+        ? pages * creditsPerPage * 1.5
+        : pages * creditsPerPage,
     };
 
     // VK: Update fileData state
@@ -88,18 +86,19 @@ const FileUploader = ({
   // VK: Update the quantity of the expressDelivery field value in fileData
   // * VK: Обновление количества значения поля expressDelivery в fileData
   const setExpressDelivery = (index: number, expressDelivery: boolean) => {
-    //console.log(index);
-    //console.log(expressDelivery);
 
     const updatedFileData = [...fileData];
-    //console.log(updatedFileData);
 
     // VK: Find an object with the corresponding index and update the expressDelivery value
     // * VK: Находим объект с соответствующим индексом и обновляем значение expressDelivery
     updatedFileData[index] = {
       ...updatedFileData[index],
       expressDelivery: expressDelivery,
+      costInPoints: expressDelivery
+        ? updatedFileData[index].pages * creditsPerPage * 1.5
+        : updatedFileData[index].pages * creditsPerPage,
     };
+    setFileData(updatedFileData);
 
     // VK: Update fileData state
     // * VK: Обновляем состояние fileData
@@ -118,6 +117,8 @@ const FileUploader = ({
      */
     const data = await sendToServer(fileData, totalCredits);
     console.log("Server processed the request successfully: ", data);
+    // TODO 1 VK: Improve the logic in case insufficient of balance and confirmation in case of sufficient balance
+    // * TODO 1 ВК: Внедрить логику при недостаточном балансе и подтверждение при достаточном балансе
     if (data.pointsBalance < 0) {
       alert(
         `File has been sent for processing. Balance ${data.pointsBalance}. Need to top up your balance!`
@@ -130,7 +131,10 @@ const FileUploader = ({
   };
 
   // ! Temporarily. For debugging
-  const logContents = async () => {};
+  const logContents = async () => { 
+    console.log('!!!!!');
+    console.log(fileData);
+  };
   // ! Temporarily. For debugging
 
   let totalPages = 0;
@@ -236,7 +240,7 @@ const FileUploader = ({
       <div>
         {signedIn ? (
           <Button
-            children="Proceed working with backend"
+            children="Proceed"
             color={""}
             onClick={handleUpload}
           />
@@ -261,7 +265,7 @@ const FileUploader = ({
           onClick={handleUpload}
         /> */}
         {/* // ! Temporarily. For debugging */}
-        {/* <button onClick={logContents}>Log Contents</button> */}
+        <button onClick={logContents}>Log Contents</button>
       </div>
     </>
   );
