@@ -167,7 +167,6 @@ export default function Dashboard({
                     <td>Date</td>
                     <td>Status</td>
                     <td>Cost in credits</td>
-                    <td>Cost in Dollars</td>
                   </tr>
 
                   {userDataForDashboard
@@ -182,7 +181,6 @@ export default function Dashboard({
                               : ""}
                           </td>
                           <td>{userDataForDashboard ? e.status : ""}</td>
-                          <td>{userDataForDashboard ? e.amount : ""}</td>
                           <td>{userDataForDashboard ? e.amount : ""}</td>
                         </tr>
                       ))
