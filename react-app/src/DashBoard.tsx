@@ -56,7 +56,6 @@ export default function Dashboard({
     const serverAnswer = await sendHandleOrderRequest(orderId, points_cost);
 
     alert(serverAnswer.message);
-
   }
 
   function openModal() {
@@ -205,12 +204,21 @@ export default function Dashboard({
                           </td>
                           <td>
                             {e.order_status === "pending" ? (
-                              <Button
-                                children={"Start processing"}
-                                color={"orange"}
-                                style={"table-btn"}
-                                onClick={() => handleOrder(e.order_id, e.points_cost)}
-                              />
+                              e.points_cost <
+                              userDataForDashboard.data.userData[0].points ? (
+                                <Button
+                                  children={"Start processing"}
+                                  color={"orange"}
+                                  style={"table-btn"}
+                                  onClick={() =>
+                                    handleOrder(e.order_id, e.points_cost)
+                                  }
+                                />
+                              ) : (
+                                <>
+                                  <a>Not enough credits</a>
+                                </>
+                              )
                             ) : (
                               <></>
                             )}
