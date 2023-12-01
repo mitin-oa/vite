@@ -4,6 +4,8 @@ import { Footer } from "./components/footer/footer";
 import HeaderMenu from "./components/header/header";
 // * VK: Significant for the backend area. Please exercise caution when making alterations
 import { getUserDataForDashboard } from "./components/scripts/getUserDataForDashboard";
+import { sendHandleOrderRequest } from "./components/scripts/handleOrderRequest";
+
 import Button from "./components/Button";
 import ModalWindow from "./components/modal/modal";
 import SignInForm from "./components/modal/SignUpForm";
@@ -26,6 +28,7 @@ export default function Dashboard({
       try {
         // Запрос комбинированных данных о пользователе при загрузке компонента
         const serverAnswer = await getUserDataForDashboard();
+        console.log(serverAnswer);
         setUserDataForDashboard(serverAnswer); // Сохраняем данные в состоянии
       } catch (error) {
         console.error("An error occurred while loading data:", error);
@@ -47,9 +50,13 @@ export default function Dashboard({
         )
     );
   }
-  function handleOrder(orderId: string) {
+
+  async function handleOrder(orderId: string, points_cost: string) {
     //How pass order_id to server handle with order?
-    return orderId;
+    const serverAnswer = await sendHandleOrderRequest(orderId, points_cost);
+
+    alert(serverAnswer.message);
+
   }
 
   function openModal() {
@@ -202,7 +209,7 @@ export default function Dashboard({
                                 children={"Start processing"}
                                 color={"orange"}
                                 style={"table-btn"}
-                                onClick={() => handleOrder(e.order_id)}
+                                onClick={() => handleOrder(e.order_id, e.points_cost)}
                               />
                             ) : (
                               <></>
