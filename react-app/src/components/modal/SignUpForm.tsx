@@ -1,10 +1,24 @@
+import { useState } from "react";
 import Button from "../Button";
 
 const SignInForm = ({ onSignUp, onCloseModal }: any) => {
+  const [inputName, setInputName] = useState("username");
+  const [inputEmail, setInputEmail] = useState("email");
+  const [inputPhone, setInputPhone] = useState("+3530000000");
+  const [inputPassword, setInputPassword] = useState("pass");
+
   const handleClick = () => {
     onSignUp();
     onCloseModal();
+    let userProfileData: Object = {
+      userName: inputName,
+      userEmail: inputEmail,
+      userPhone: inputPhone,
+      userPassword: inputPassword,
+    };
+    console.log(userProfileData);
   };
+
   return (
     <>
       <form
@@ -24,6 +38,7 @@ const SignInForm = ({ onSignUp, onCloseModal }: any) => {
               placeholder="Enter user name"
               defaultValue="user1"
               required
+              onChange={(event) => setInputName(event.target.value)}
             />
             <br />
           </div>
@@ -39,6 +54,7 @@ const SignInForm = ({ onSignUp, onCloseModal }: any) => {
               placeholder="Enter email"
               defaultValue="user1@example.com"
               required
+              onChange={(event) => setInputEmail(event.target.value)}
             />
             <br />
           </div>
@@ -54,6 +70,7 @@ const SignInForm = ({ onSignUp, onCloseModal }: any) => {
               placeholder="Enter phone"
               defaultValue="+3530000000"
               required
+              onChange={(event) => setInputPhone(event.target.value)}
             />
             <br />
           </div>
@@ -69,6 +86,7 @@ const SignInForm = ({ onSignUp, onCloseModal }: any) => {
               placeholder="Enter password"
               defaultValue="pass"
               required
+              onChange={(event) => setInputPassword(event.target.value)}
             />
           </div>
         </div>
