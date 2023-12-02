@@ -70,7 +70,6 @@ interface IHeaderProps {
 }
 
 export const Navbar = ({
-  signedInStatus,
   handleSignIn,
   handleSignUp,
   setUserProfileData,
@@ -80,17 +79,11 @@ export const Navbar = ({
 }: IHeaderProps) => {
   const [open, setOpen] = useState<boolean>(false);
   const close = () => setOpen(false);
-  /* const [modalOpen, setModalOpen] = useState<boolean>(false); */
+
   const signedIn = useContext(SignedInContext);
   const signedUp = useContext(SignedUpContext);
-  /* const toggleModal = () => {
-    setOpen((prevOpen) => {
-      if (!prevOpen) {
-        closeModal(); // Close the ModalWindow when opening the ModalContent
-      }
-      return !prevOpen;
-    });
-  }; */
+
+  const signedInStatus = signedIn ? "Sign Out" : "Sign In";
 
   function openModal() {
     setIsOpen(true);
@@ -108,7 +101,7 @@ export const Navbar = ({
       <ModalOverlay open={open} onClick={() => close()} />
       {/* <ModalContent open={open && signedInStatus == "Sign in"}> */}
       <ModalContent open={open}>
-        {signedInStatus == "Sign out" ? (
+        {signedInStatus == "Sign Out" ? (
           <>
             <Link
               className="burger_visible__Link"
@@ -160,9 +153,9 @@ export const Navbar = ({
 
         <Link to="/">
           <ModalWindow
-            title={signedInStatus}
+            title={signedUp ? signedInStatus : "Sign Up"}
             childComp={
-              signedInStatus == "Sign in" ? (
+              signedInStatus == "Sign In" ? (
                 !signedIn && signedUp ? (
                   <LogInForm onSignIn={handleSignIn} onSignUp={handleSignUp} />
                 ) : (

@@ -31,9 +31,8 @@ export default function HeaderMenu({
 }: IHeaderProps) {
   const signedIn = useContext(SignedInContext);
   const signedUp = useContext(SignedUpContext);
-  console.log(signedUp);
+
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1028px" });
-  console.log(isMobileScreen);
 
   const signedInStatus = signedIn ? "Sign Out" : "Sign In";
 
