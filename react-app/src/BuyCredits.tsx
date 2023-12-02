@@ -1,13 +1,7 @@
 import { useMediaQuery } from "react-responsive";
 import PayPal from "./components/PayPal";
 import { Footer } from "./components/footer/footer";
-import {
-  ChangeEvent,
-  Dispatch,
-  ReactNode,
-  SetStateAction,
-  useState,
-} from "react";
+import { ChangeEvent, useState } from "react";
 import NumInput from "./components/InputNumber";
 import ModalWindow from "./components/modal/modal";
 
@@ -20,6 +14,7 @@ export default function BuyCredits({
   onSignIn,
   handleSignIn,
   handleSignUp,
+  setUserProfileData,
   modalIsOpen,
   setIsOpen,
 }: any) {
@@ -60,6 +55,7 @@ export default function BuyCredits({
           handleSignUp={handleSignUp}
           modalIsOpen={modalIsOpen}
           setIsOpen={setIsOpen}
+          setUserProfileData={setUserProfileData}
         />
         {/* <!-- Bootstrap "Containers" component. Taken from https://getbootstrap.com/docs/5.2/layout/containers/#how-they-work --> */}
         <section className="main-content">

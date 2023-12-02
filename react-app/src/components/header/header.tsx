@@ -43,9 +43,6 @@ export default function HeaderMenu({
     setIsOpen(false);
   }
 
-  console.log(signedIn, "signedIn");
-  console.log(signedUp);
-
   return (
     <header className={kind === "short" ? "header__short" : "header"}>
       <div className="wrapper">

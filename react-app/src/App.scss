@@ -192,6 +192,10 @@ button:not(.default) {
   font-size: 12px !important;
 }
 
+.btn-no-display {
+  display: none !important;
+}
+
 .form {
   zoom: 1;
   display: block;

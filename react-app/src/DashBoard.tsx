@@ -9,6 +9,7 @@ import { sendHandleOrderRequest } from "./components/scripts/handleOrderRequest"
 import Button from "./components/Button";
 import ModalWindow from "./components/modal/modal";
 import SignInForm from "./components/modal/SignUpForm";
+import { Link } from "react-router-dom";
 
 export default function Dashboard({
   kind,
@@ -112,6 +113,7 @@ export default function Dashboard({
                           <SignInForm
                             onSignUp={handleSignUp}
                             onCloseModal={closeModal}
+                            setUserProfileData={setUserProfileData}
                           />
                         }
                         modalIsOpen={modalIsOpen}
@@ -135,14 +137,14 @@ export default function Dashboard({
                           : 0}
                       </td>
                       <td>
-                        <Button
-                          children={"Buy credits"}
-                          color={"orange"}
-                          style="table-btn"
-                          onClick={function (): void {
-                            throw new Error("Function not implemented.");
-                          }}
-                        />
+                        <Link className="nav__link nav__text" to="/BuyCredits">
+                          <Button
+                            children={"Buy credits"}
+                            color={"orange"}
+                            style="table-btn"
+                            onClick={() => ""}
+                          />
+                        </Link>
                       </td>
                     </tr>
                   </tbody>
@@ -215,24 +217,21 @@ export default function Dashboard({
                           </td>
                           <td>
                             {e.order_status === "pending" ? (
-                              !serverAnswerMessage ? (
-                                e.points_cost >
-                                userDataForDashboard.data.userData[0].points ? (
-                                  <Button
-                                    children={"Start processing"}
-                                    color={"orange"}
-                                    style={"table-btn"}
-                                    onClick={() => {
-                                      handleOrder(e.order_id, e.points_cost);
-                                    }}
-                                  />
-                                ) : (
-                                  <>
-                                    <a>Not enough credits</a>
-                                  </>
-                                )
+                              e.points_cost <
+                              userDataForDashboard.data.userData[0].points ? (
+                                <Button
+                                  children={"Start processing"}
+                                  color={"orange"}
+                                  style={"table-btn"}
+                                  disable={true}
+                                  onClick={() => {
+                                    handleOrder(e.order_id, e.points_cost);
+                                  }}
+                                />
                               ) : (
-                                <></>
+                                <>
+                                  <a>Not enough credits</a>
+                                </>
                               )
                             ) : (
                               <></>
