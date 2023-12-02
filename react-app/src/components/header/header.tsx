@@ -13,6 +13,7 @@ import { useMediaQuery } from "react-responsive";
 interface IHeaderProps {
   kind?: "full" | "short";
   handleSignIn: boolean;
+  setUserProfileData: any;
   handleSignUp: boolean;
   onSignIn: Dispatch<SetStateAction<boolean>>;
   modalIsOpen: boolean;
@@ -23,6 +24,7 @@ export default function HeaderMenu({
   kind,
   handleSignIn,
   handleSignUp,
+  setUserProfileData,
   onSignIn,
   modalIsOpen,
   setIsOpen,
@@ -159,6 +161,7 @@ export default function HeaderMenu({
                           <SignInForm
                             onSignUp={handleSignUp}
                             onCloseModal={closeModal}
+                            setUserProfileData={setUserProfileData}
                           />
                         )
                       ) : (
@@ -191,6 +194,7 @@ export default function HeaderMenu({
           <Navbar
             signedInStatus={signedInStatus}
             handleSignIn={handleSignIn}
+            setUserProfileData={setUserProfileData}
             handleSignUp={handleSignUp}
             onSignIn={onSignIn}
             modalIsOpen={modalIsOpen}

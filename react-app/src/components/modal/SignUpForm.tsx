@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Button from "../Button";
 
-const SignInForm = ({ onSignUp, onCloseModal }: any) => {
+const SignInForm = ({ onSignUp, onCloseModal, setUserProfileData }: any) => {
   const [inputName, setInputName] = useState("username");
   const [inputEmail, setInputEmail] = useState("email");
   const [inputPhone, setInputPhone] = useState("+3530000000");
@@ -10,13 +10,12 @@ const SignInForm = ({ onSignUp, onCloseModal }: any) => {
   const handleClick = () => {
     onSignUp();
     onCloseModal();
-    let userProfileData: Object = {
+    setUserProfileData({
       userName: inputName,
       userEmail: inputEmail,
       userPhone: inputPhone,
       userPassword: inputPassword,
-    };
-    console.log(userProfileData);
+    });
   };
 
   return (

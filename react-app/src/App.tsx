@@ -43,6 +43,13 @@ function App() {
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1028px" });
   /* const isPhoneScreen = useMediaQuery({ query: "(max-width: 760px" }); */
   console.log(isMobileScreen);
+  const [userProfileData, setUserProfileData] = useState({
+    userName: "user",
+    userEmail: "user@example.com",
+    userPhone: "+3530000000",
+    userPassword: "password",
+  });
+  console.log(userProfileData);
   function handleSignUp() {
     onSignUp(!signedUp);
   }
@@ -94,6 +101,7 @@ function App() {
                   kind="full"
                   onSignIn={onSignIn}
                   handleSignIn={handleSignIn}
+                  setUserProfileData={setUserProfileData}
                   signedUp={signedUp}
                   handleSignUp={handleSignUp}
                   modalIsOpen={modalIsOpen}

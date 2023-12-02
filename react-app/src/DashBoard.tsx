@@ -17,11 +17,13 @@ export default function Dashboard({
   modalIsOpen,
   setIsOpen,
   handleSignUp,
+  setUserProfileData,
 }: any) {
   // * ↓ VK: Significant for the backend area. Please exercise caution when making alterations
   const [userDataForDashboard, setUserDataForDashboard] = useState<any | null>(
     null
   );
+  const [serverAnswerMessage, setServerAnswerMessage] = useState(false);
 
   useEffect(() => {
     const requestData = async () => {
@@ -41,14 +43,6 @@ export default function Dashboard({
   // Проверка наличия данных перед обработкой
   if (userDataForDashboard !== null && userDataForDashboard !== undefined) {
     console.log("userDataForDashboard", userDataForDashboard);
-    console.log("email", userDataForDashboard.data.userData[0].email);
-    console.log(
-      userDataForDashboard.data.fileData
-        .slice(-10, userDataForDashboard.data.fileData.length)
-        .sort((a: any, b: any) =>
-          a.created_at.date > b.created_at.date ? 1 : -1
-        )
-    );
   }
 
   async function handleOrder(orderId: string, points_cost: string) {
@@ -56,6 +50,22 @@ export default function Dashboard({
     const serverAnswer = await sendHandleOrderRequest(orderId, points_cost);
 
     alert(serverAnswer.message);
+
+    let answer = serverAnswer.message === "Low balance" ? true : false;
+
+    setServerAnswerMessage(answer);
+
+    const index = userDataForDashboard.data.fileData.findIndex(
+      (e: any) => e.order_id === orderId
+    );
+
+    userDataForDashboard.data.fileData[index] = {
+      ...userDataForDashboard.data.fileData[index],
+      order_status: "paid",
+    };
+
+    //console.log(userDataForDashboard);
+    setUserDataForDashboard(userDataForDashboard);
   }
 
   function openModal() {
@@ -76,6 +86,7 @@ export default function Dashboard({
           handleSignIn={handleSignIn}
           modalIsOpen={modalIsOpen}
           setIsOpen={setIsOpen}
+          setUserProfileData={setUserProfileData}
           handleSignUp={handleSignUp}
         />
         <section className="main-content flex-column">
@@ -204,20 +215,24 @@ export default function Dashboard({
                           </td>
                           <td>
                             {e.order_status === "pending" ? (
-                              e.points_cost <
-                              userDataForDashboard.data.userData[0].points ? (
-                                <Button
-                                  children={"Start processing"}
-                                  color={"orange"}
-                                  style={"table-btn"}
-                                  onClick={() =>
-                                    handleOrder(e.order_id, e.points_cost)
-                                  }
-                                />
+                              !serverAnswerMessage ? (
+                                e.points_cost >
+                                userDataForDashboard.data.userData[0].points ? (
+                                  <Button
+                                    children={"Start processing"}
+                                    color={"orange"}
+                                    style={"table-btn"}
+                                    onClick={() => {
+                                      handleOrder(e.order_id, e.points_cost);
+                                    }}
+                                  />
+                                ) : (
+                                  <>
+                                    <a>Not enough credits</a>
+                                  </>
+                                )
                               ) : (
-                                <>
-                                  <a>Not enough credits</a>
-                                </>
+                                <></>
                               )
                             ) : (
                               <></>

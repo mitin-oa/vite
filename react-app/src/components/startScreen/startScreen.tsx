@@ -17,7 +17,7 @@ function onOrder() {
 export default function StartScreen({
   kind,
   handleSignIn,
-  signedUp,
+  setUserProfileData,
   handleSignUp,
   onSignIn,
   modalIsOpen,
@@ -31,6 +31,7 @@ export default function StartScreen({
       <HeaderMenu
         kind={kind}
         handleSignIn={handleSignIn}
+        setUserProfileData={setUserProfileData}
         handleSignUp={handleSignUp}
         onSignIn={onSignIn}
         modalIsOpen={modalIsOpen}

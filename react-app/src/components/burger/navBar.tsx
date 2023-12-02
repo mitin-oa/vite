@@ -62,6 +62,7 @@ const ModalContent = styled.nav<{ open: boolean }>`
 interface IHeaderProps {
   signedInStatus: string;
   handleSignIn: boolean;
+  setUserProfileData: any;
   handleSignUp: boolean;
   onSignIn: Dispatch<SetStateAction<boolean>>;
   modalIsOpen: boolean;
@@ -72,6 +73,7 @@ export const Navbar = ({
   signedInStatus,
   handleSignIn,
   handleSignUp,
+  setUserProfileData,
   onSignIn,
   modalIsOpen,
   setIsOpen,
@@ -167,6 +169,7 @@ export const Navbar = ({
                   <SignInForm
                     onSignUp={handleSignUp}
                     onCloseModal={closeModal}
+                    setUserProfileData={setUserProfileData}
                   />
                 )
               ) : (
