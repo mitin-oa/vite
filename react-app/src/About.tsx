@@ -7,6 +7,7 @@ export default function About({
   onSignIn,
   handleSignIn,
   handleSignUp,
+  setUserProfileData,
   modalIsOpen,
   setIsOpen,
 }: any) {
@@ -18,6 +19,7 @@ export default function About({
           onSignIn={onSignIn}
           handleSignUp={handleSignUp}
           handleSignIn={handleSignIn}
+          setUserProfileData={setUserProfileData}
           modalIsOpen={modalIsOpen}
           setIsOpen={setIsOpen}
         />

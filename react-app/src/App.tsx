@@ -39,6 +39,7 @@ function App() {
   console.log(token);
   const [signedIn, onSignIn] = useState(token);
   const [signedUp, onSignUp] = useState(true);
+  console.log(signedUp);
   const [modalIsOpen, setIsOpen] = useState(false);
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1028px" });
   /* const isPhoneScreen = useMediaQuery({ query: "(max-width: 760px" }); */
@@ -117,6 +118,7 @@ function App() {
                   onSignIn={onSignIn}
                   handleSignIn={handleSignIn}
                   signedUp={signedUp}
+                  setUserProfileData={setUserProfileData}
                   handleSignUp={handleSignUp}
                   modalIsOpen={modalIsOpen}
                   setIsOpen={setIsOpen}
@@ -130,6 +132,7 @@ function App() {
                   onSignIn={onSignIn}
                   handleSignIn={handleSignIn}
                   signedUp={signedUp}
+                  setUserProfileData={setUserProfileData}
                   handleSignUp={handleSignUp}
                   modalIsOpen={modalIsOpen}
                   setIsOpen={setIsOpen}
@@ -144,6 +147,7 @@ function App() {
                   onSignIn={onSignIn}
                   handleSignIn={handleSignIn}
                   signedUp={signedUp}
+                  setUserProfileData={setUserProfileData}
                   handleSignUp={handleSignUp}
                   modalIsOpen={modalIsOpen}
                   setIsOpen={setIsOpen}
@@ -158,6 +162,7 @@ function App() {
                   onSignIn={onSignIn}
                   handleSignIn={handleSignIn}
                   signedUp={signedUp}
+                  setUserProfileData={setUserProfileData}
                   handleSignUp={handleSignUp}
                   modalIsOpen={modalIsOpen}
                   setIsOpen={setIsOpen}
@@ -172,6 +177,7 @@ function App() {
                   onSignIn={onSignIn}
                   handleSignIn={handleSignIn}
                   signedUp={signedUp}
+                  setUserProfileData={setUserProfileData}
                   handleSignUp={handleSignUp}
                   modalIsOpen={modalIsOpen}
                   setIsOpen={setIsOpen}

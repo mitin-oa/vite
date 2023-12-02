@@ -31,10 +31,11 @@ export default function HeaderMenu({
 }: IHeaderProps) {
   const signedIn = useContext(SignedInContext);
   const signedUp = useContext(SignedUpContext);
+  console.log(signedUp);
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1028px" });
   console.log(isMobileScreen);
 
-  const signedInStatus = signedIn ? "Sign out" : "Sign in";
+  const signedInStatus = signedIn ? "Sign Out" : "Sign In";
 
   function openModal() {
     setIsOpen(true);
@@ -93,16 +94,19 @@ export default function HeaderMenu({
                 <Link to="/">
                   <ModalWindow
                     // * VK: This part of the code will be displayed if the variable signedIn == true
-                    title={signedInStatus}
+                    title={signedUp ? signedInStatus : "Sign Up"}
                     childComp={
-                      signedInStatus == "Sign in" ? (
-                        signedIn && signedUp ? (
+                      signedInStatus == "Sign In" ? (
+                        !signedIn && signedUp ? (
                           <LogInForm
                             onSignIn={handleSignIn}
                             onSignUp={handleSignUp}
                           />
                         ) : (
-                          <SignInForm onSignUp={handleSignUp} />
+                          <SignInForm
+                            onSignUp={handleSignUp}
+                            setUserProfileData={setUserProfileData}
+                          />
                         )
                       ) : (
                         <Link to="/">
@@ -149,9 +153,9 @@ export default function HeaderMenu({
               {!isMobileScreen ? (
                 <Link to="/">
                   <ModalWindow
-                    title={signedInStatus}
+                    title={signedUp ? signedInStatus : "Sign Up"}
                     childComp={
-                      signedInStatus == "Sign in" ? (
+                      signedInStatus == "Sign In" ? (
                         !signedIn && signedUp ? (
                           <LogInForm
                             onSignIn={handleSignIn}
