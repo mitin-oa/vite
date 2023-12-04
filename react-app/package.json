@@ -17,7 +17,6 @@
     "link-router": "^1.0.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-input-number": "^5.0.19",
     "react-modal": "^3.16.1",
     "react-numeric-input": "^2.2.3",
     "react-responsive": "^9.0.2",

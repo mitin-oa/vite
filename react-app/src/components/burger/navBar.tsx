@@ -4,11 +4,11 @@ import { Burger } from "../burger/burger";
 import "../header/header.scss";
 import { Link } from "react-router-dom";
 import { Dispatch, SetStateAction, useContext } from "react";
-import SignInForm from "../modal/SignUpForm";
 import LogInForm from "../modal/LogInForm";
 import ModalWindow from "../modal/modal";
 import Button from "../Button";
 import { SignedInContext, SignedUpContext, deleteCookie } from "../../App";
+import SignUpForm from "../modal/SignUpForm";
 
 const colors = {
   yellowmellow: "#fbe69b",
@@ -162,7 +162,7 @@ export const Navbar = ({
                     onSignUp={handleSignUp}
                   />
                 ) : (
-                  <SignInForm
+                  <SignUpForm
                     handleSignUp={handleSignUp}
                     onCloseModal={closeModal}
                     setUserProfileData={setUserProfileData}

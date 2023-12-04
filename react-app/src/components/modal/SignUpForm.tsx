@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Button from "../Button";
 
-const SignInForm = ({ onSignUp, onCloseModal, setUserProfileData }: any) => {
+const SignUpForm = ({ onSignUp, onCloseModal, setUserProfileData }: any) => {
   const [inputName, setInputName] = useState("username");
   const [inputEmail, setInputEmail] = useState("email");
   const [inputPhone, setInputPhone] = useState("+3530000000");
@@ -98,4 +98,4 @@ const SignInForm = ({ onSignUp, onCloseModal, setUserProfileData }: any) => {
   );
 };
 
-export default SignInForm;
+export default SignUpForm;

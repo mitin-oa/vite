@@ -4,11 +4,11 @@ import Logo from "../../../public/logo-white-ec720b-background-033c5a.png";
 import { HashLink as Link } from "react-router-hash-link";
 import { Navbar } from "../burger/navBar";
 import ModalWindow from "../modal/modal";
-import SignInForm from "../modal/SignUpForm";
 import LogInForm from "../modal/LogInForm";
 import { SignedInContext, SignedUpContext, deleteCookie } from "../../App";
 import Button from "../Button";
 import { useMediaQuery } from "react-responsive";
+import SignUpForm from "../modal/SignUpForm";
 
 interface IHeaderProps {
   kind?: "full" | "short";
@@ -99,7 +99,7 @@ export default function HeaderMenu({
                             onSignUp={handleSignUp}
                           />
                         ) : (
-                          <SignInForm
+                          <SignUpForm
                             onSignUp={handleSignUp}
                             setUserProfileData={setUserProfileData}
                           />
@@ -158,7 +158,7 @@ export default function HeaderMenu({
                             onSignUp={handleSignUp}
                           />
                         ) : (
-                          <SignInForm
+                          <SignUpForm
                             onSignUp={handleSignUp}
                             onCloseModal={closeModal}
                             setUserProfileData={setUserProfileData}
