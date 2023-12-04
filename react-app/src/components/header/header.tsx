@@ -100,7 +100,7 @@ export default function HeaderMenu({
                           />
                         ) : (
                           <SignUpForm
-                            onSignUp={handleSignUp}
+                            handleSignUpForm={handleSignUp}
                             setUserProfileData={setUserProfileData}
                           />
                         )
@@ -159,7 +159,7 @@ export default function HeaderMenu({
                           />
                         ) : (
                           <SignUpForm
-                            onSignUp={handleSignUp}
+                            handleSignUp={handleSignUp}
                             onCloseModal={closeModal}
                             setUserProfileData={setUserProfileData}
                           />

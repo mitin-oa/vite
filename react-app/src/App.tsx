@@ -46,6 +46,7 @@ function App() {
     userPassword: "password",
   });
   console.log(userProfileData);
+
   function handleSignUp() {
     onSignUp(!signedUp);
   }
