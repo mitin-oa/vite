@@ -1,6 +1,6 @@
 import Button from "../Button";
 
-const LogInForm = ({ onSignIn, onSignUp }: any) => {
+const LogInForm = ({ handleSignIn, onSignUp }: any) => {
   // * ↓ VK: Significant for the backend area. Please exercise caution when making alterations
   const handleLogInSubmit = () => {
     // * VK: Form fields data entered by the user
@@ -11,7 +11,7 @@ const LogInForm = ({ onSignIn, onSignUp }: any) => {
     const password = formData.get("password") as string;
 
     // * VK: Pass the data to the onSignIn function
-    onSignIn({
+    handleSignIn({
       login,
       password,
     });

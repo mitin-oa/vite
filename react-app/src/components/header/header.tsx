@@ -95,7 +95,7 @@ export default function HeaderMenu({
                       signedInStatus == "Sign In" ? (
                         !signedIn && signedUp ? (
                           <LogInForm
-                            onSignIn={handleSignIn}
+                            handleSignIn={handleSignIn}
                             onSignUp={handleSignUp}
                           />
                         ) : (
@@ -154,7 +154,7 @@ export default function HeaderMenu({
                       signedInStatus == "Sign In" ? (
                         !signedIn && signedUp ? (
                           <LogInForm
-                            onSignIn={handleSignIn}
+                            handleSignIn={handleSignIn}
                             onSignUp={handleSignUp}
                           />
                         ) : (

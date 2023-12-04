@@ -157,10 +157,13 @@ export const Navbar = ({
             childComp={
               signedInStatus == "Sign In" ? (
                 !signedIn && signedUp ? (
-                  <LogInForm onSignIn={handleSignIn} onSignUp={handleSignUp} />
+                  <LogInForm
+                    handleSignIn={handleSignIn}
+                    onSignUp={handleSignUp}
+                  />
                 ) : (
                   <SignInForm
-                    onSignUp={handleSignUp}
+                    handleSignUp={handleSignUp}
                     onCloseModal={closeModal}
                     setUserProfileData={setUserProfileData}
                   />
