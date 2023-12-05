@@ -25,7 +25,7 @@ const FileUploader = ({
     file: File;
     expressDelivery: boolean;
     pages: number;
-    costInPoints: number
+    costInPoints: number;
   };
   const signedIn = useContext(SignedInContext);
   const signedUp = useContext(SignedUpContext);
@@ -53,7 +53,7 @@ const FileUploader = ({
           index,
           file,
           expressDelivery: false,
-          pages: 1,
+          pages: 0,
           costInPoints: 20,
         })
       );
@@ -64,8 +64,7 @@ const FileUploader = ({
 
   // VK: Update the value of the pages field (the number of pages in the downloaded file) in fileData
   // * VK: Обновление значения поля pages (количество страниц в загружаемом файле) в fileData
-  const setNumberOfPages = (index: number, pages: number,) => {
-
+  const setNumberOfPages = (index: number, pages: number) => {
     const updatedFileData = [...fileData];
 
     // VK: Find an object with the corresponding index and update the number of pages
@@ -86,7 +85,6 @@ const FileUploader = ({
   // VK: Update the quantity of the expressDelivery field value in fileData
   // * VK: Обновление количества значения поля expressDelivery в fileData
   const setExpressDelivery = (index: number, expressDelivery: boolean) => {
-
     const updatedFileData = [...fileData];
 
     // VK: Find an object with the corresponding index and update the expressDelivery value
@@ -131,8 +129,8 @@ const FileUploader = ({
   };
 
   // ! Temporarily. For debugging
-  const logContents = async () => { 
-    console.log('!!!!!');
+  const logContents = async () => {
+    console.log("!!!!!");
     console.log(fileData);
   };
   // ! Temporarily. For debugging
@@ -144,7 +142,9 @@ const FileUploader = ({
   fileData.map((file) => (totalPages += Number(file.pages)));
   fileData.map(
     (file) =>
-      (totalCredits += file.expressDelivery ? (file.pages * creditsPerPage * 1.5) : (file.pages * creditsPerPage))
+      (totalCredits += file.expressDelivery
+        ? file.pages * creditsPerPage * 1.5
+        : file.pages * creditsPerPage)
   );
 
   return (
@@ -193,8 +193,8 @@ const FileUploader = ({
                     type="number"
                     className="form-control"
                     name="numberOfPages"
-                    min="1"
-                    defaultValue={1}
+                    min="0"
+                    defaultValue={0}
                     value={file.pages}
                     data-file-index={file.index}
                     onChange={(e) =>
@@ -221,7 +221,11 @@ const FileUploader = ({
                     ></label>
                   </div>
                 </td>
-                <td>{file.expressDelivery ? (file.pages * creditsPerPage * 1.5) : (file.pages * creditsPerPage)} </td>
+                <td>
+                  {file.expressDelivery
+                    ? file.pages * creditsPerPage * 1.5
+                    : file.pages * creditsPerPage}{" "}
+                </td>
                 <td>{(file.file.size / 1024).toFixed(1)} Kbytes</td>
               </tr>
             ))}
@@ -239,11 +243,7 @@ const FileUploader = ({
 
       <div>
         {signedIn ? (
-          <Button
-            children="Proceed"
-            color={""}
-            onClick={handleUpload}
-          />
+          <Button children="Proceed" color={""} onClick={handleUpload} />
         ) : (
           <ModalWindow
             title={"Proceed"}

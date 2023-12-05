@@ -47,6 +47,7 @@ export default function UpLoad({
           handleSignUp={handleSignUp}
           modalIsOpen={modalIsOpen}
           setIsOpen={setIsOpen}
+          setUserProfileData={undefined}
         />
         {/* <!-- Bootstrap "Containers" component. Taken from https://getbootstrap.com/docs/5.2/layout/containers/#how-they-work --> */}
 

@@ -11,9 +11,9 @@ export default function NumInput({ num, onChange }: any) {
         className="form-control"
         name="numberOfCredits"
         id="numberOfCredits"
-        min="1"
+        min="0"
         max="50"
-        value={num ?? 1}
+        value={num ?? ""}
         onChange={onChange}
       />
     </>
