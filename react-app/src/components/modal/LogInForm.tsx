@@ -56,15 +56,19 @@ const LogInForm = ({ handleSignIn, onSignUp }: any) => {
         </div>
         <div className="text-left col-xs-12">
           {/* // * VK: Significant for the backend area. Please exercise caution when making alterations */}
-          <Button
-            children="Submit"
-            color="orange"
-            onClick={handleLogInSubmit}
-          />
+          <div className="btn-container">
+            <Button
+              children="Submit"
+              color="orange"
+              onClick={handleLogInSubmit}
+            />
+          </div>
         </div>
         <p>Not registred? Push Sign Up.</p>
         <div className="text-left col-xs-12">
-          <Button children="Sign Up" color="orange" onClick={onSignUp} />
+          <div className="btn-container">
+            <Button children="Sign Up" color="orange" onClick={onSignUp} />
+          </div>
         </div>
       </form>
     </>

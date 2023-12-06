@@ -2,6 +2,7 @@ import React from "react";
 import Modal from "react-modal";
 import "./modal.scss";
 import Button from "../Button";
+import { useMediaQuery } from "react-responsive";
 
 const customStyles = {
   content: {
@@ -10,6 +11,18 @@ const customStyles = {
     right: "auto",
     bottom: "auto",
     width: "350px",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+  },
+};
+
+const customStylesMobile = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    width: "280px",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
   },
@@ -37,21 +50,13 @@ const ModalWindow: React.FC<ParentCompProps> = (props) => {
     closeModal,
     btnModalStyle,
   } = props;
-  /* const [modalIsOpen, setIsOpen] = React.useState(false);
-
-  function openModal() {
-    setIsOpen(true);
-  } */
+  const isMobileScreen = useMediaQuery({ query: "(max-width: 760px" });
 
   function afterOpenModal() {
     // references are now sync'd and can be accessed.
     subtitle.style.color = "#ec720b";
   }
 
-  /* function closeModal() {
-    setIsOpen(false);
-  }
- */
   return (
     <div>
       <Button
@@ -64,7 +69,7 @@ const ModalWindow: React.FC<ParentCompProps> = (props) => {
         isOpen={modalIsOpen}
         onAfterOpen={afterOpenModal}
         onRequestClose={closeModal}
-        style={customStyles}
+        style={!isMobileScreen ? customStyles : customStylesMobile}
         contentLabel="Example Modal"
       >
         <button

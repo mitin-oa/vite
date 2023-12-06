@@ -169,17 +169,19 @@ export const Navbar = ({
                   />
                 )
               ) : (
-                <Link to="/">
-                  <Button
-                    children={signedInStatus}
-                    color="orange"
-                    onClick={() => {
-                      onSignIn(false);
-                      setIsOpen(false);
-                      deleteCookie("token");
-                    }}
-                  />
-                </Link>
+                <div className="btn-container">
+                  <Link to="/">
+                    <Button
+                      children={`Want to ${signedInStatus}?`}
+                      color="orange"
+                      onClick={() => {
+                        onSignIn(false);
+                        setIsOpen(false);
+                        deleteCookie("token");
+                      }}
+                    />
+                  </Link>
+                </div>
               )
             }
             modalIsOpen={modalIsOpen}
