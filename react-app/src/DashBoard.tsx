@@ -24,7 +24,6 @@ export default function Dashboard({
   const [userDataForDashboard, setUserDataForDashboard] = useState<any | null>(
     null
   );
-  const [serverAnswerMessage, setServerAnswerMessage] = useState(false);
 
   useEffect(() => {
     const requestData = async () => {
@@ -53,8 +52,6 @@ export default function Dashboard({
     alert(serverAnswer.message);
 
     let answer = serverAnswer.message === "Low balance" ? true : false;
-
-    setServerAnswerMessage(answer);
 
     const index = userDataForDashboard.data.fileData.findIndex(
       (e: any) => e.order_id === orderId
