@@ -1,9 +1,42 @@
+import { useState } from "react";
 import Button from "../Button";
 
-const SignInForm = ({ onSignUp, onCloseModal }: any) => {
-  const handleClick = () => {
-    onSignUp();
+const SignUpForm = ({
+  handleSignUp,
+  onCloseModal,
+  setUserProfileData,
+}: any) => {
+  const [inputName, setInputName] = useState("username");
+  const [inputEmail, setInputEmail] = useState("email");
+  const [inputPhone, setInputPhone] = useState("+3530000000");
+  const [inputPassword, setInputPassword] = useState("pass");
+
+  const handleClick = async () => {
+    handleSignUp();
     onCloseModal();
+    const data = {
+      userName: inputName,
+      userEmail: inputEmail,
+      userPhone: inputPhone,
+      userPassword: inputPassword,
+    };
+    setUserProfileData(data);
+    try {
+      const response = await fetch("/api/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      console.log("-------", response);
+      if (response.status === 200) alert("Successfully registered!");
+      else if (response.status === 400) alert("User Already Exist");
+    } catch (error) {
+      console.error("There was a problem with the fetch operation:", error);
+      alert("Error Occured");
+      throw error;
+    }
   };
   return (
     <>
@@ -24,6 +57,7 @@ const SignInForm = ({ onSignUp, onCloseModal }: any) => {
               placeholder="Enter user name"
               defaultValue="user1"
               required
+              onChange={(event) => setInputName(event.target.value)}
             />
             <br />
           </div>
@@ -39,6 +73,7 @@ const SignInForm = ({ onSignUp, onCloseModal }: any) => {
               placeholder="Enter email"
               defaultValue="user1@example.com"
               required
+              onChange={(event) => setInputEmail(event.target.value)}
             />
             <br />
           </div>
@@ -54,6 +89,7 @@ const SignInForm = ({ onSignUp, onCloseModal }: any) => {
               placeholder="Enter phone"
               defaultValue="+3530000000"
               required
+              onChange={(event) => setInputPhone(event.target.value)}
             />
             <br />
           </div>
@@ -69,6 +105,7 @@ const SignInForm = ({ onSignUp, onCloseModal }: any) => {
               placeholder="Enter password"
               defaultValue="pass"
               required
+              onChange={(event) => setInputPassword(event.target.value)}
             />
           </div>
         </div>
@@ -81,4 +118,4 @@ const SignInForm = ({ onSignUp, onCloseModal }: any) => {
   );
 };
 
-export default SignInForm;
+export default SignUpForm;

@@ -1,6 +1,22 @@
 import Button from "../Button";
 
-const LogInForm = ({ onSignIn, onSignUp }: any) => {
+const LogInForm = ({ handleSignIn, onSignUp }: any) => {
+  // * ↓ VK: Significant for the backend area. Please exercise caution when making alterations
+  const handleLogInSubmit = () => {
+    // * VK: Form fields data entered by the user
+    const formData = new FormData(
+      document.getElementById("login-form") as HTMLFormElement
+    );
+    const login = formData.get("login") as string;
+    const password = formData.get("password") as string;
+
+    // * VK: Pass the data to the onSignIn function
+    handleSignIn({
+      login,
+      password,
+    });
+  };
+  // * ↑ VK: Significant for the backend area. Please exercise caution when making alterations
   return (
     <>
       <form
@@ -39,8 +55,12 @@ const LogInForm = ({ onSignIn, onSignUp }: any) => {
           </div>
         </div>
         <div className="text-left col-xs-12">
-          {/* <input type="submit" className="btn btn-default" value="Submit" /> */}
-          <Button children="Submit" color="orange" onClick={onSignIn} />
+          {/* // * VK: Significant for the backend area. Please exercise caution when making alterations */}
+          <Button
+            children="Submit"
+            color="orange"
+            onClick={handleLogInSubmit}
+          />
         </div>
         <p>Not registred? Push Sign Up.</p>
         <div className="text-left col-xs-12">

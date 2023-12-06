@@ -21,6 +21,7 @@ interface ParentCompProps {
   modalIsOpen?: any;
   openModal?: any;
   closeModal?: any;
+  btnModalStyle?: string;
 }
 let subtitle: any;
 // Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
@@ -28,7 +29,14 @@ Modal.setAppElement("#root");
 
 /* export default function ModalWindow({ content }: any) */
 const ModalWindow: React.FC<ParentCompProps> = (props) => {
-  const { title, childComp, modalIsOpen, openModal, closeModal } = props;
+  const {
+    title,
+    childComp,
+    modalIsOpen,
+    openModal,
+    closeModal,
+    btnModalStyle,
+  } = props;
   /* const [modalIsOpen, setIsOpen] = React.useState(false);
 
   function openModal() {
@@ -46,7 +54,12 @@ const ModalWindow: React.FC<ParentCompProps> = (props) => {
  */
   return (
     <div>
-      <Button children={title} color="warning" onClick={openModal} />
+      <Button
+        children={title}
+        color="warning"
+        style={btnModalStyle}
+        onClick={openModal}
+      />
       <Modal
         isOpen={modalIsOpen}
         onAfterOpen={afterOpenModal}
@@ -60,7 +73,12 @@ const ModalWindow: React.FC<ParentCompProps> = (props) => {
           aria-label="Close"
           onClick={closeModal}
         ></button>
-        <h2 ref={(_subtitle) => (subtitle = _subtitle)}>{title}</h2>
+        <h2
+          style={{ marginLeft: 25 }}
+          ref={(_subtitle) => (subtitle = _subtitle)}
+        >
+          {title}
+        </h2>
         {childComp}
       </Modal>
     </div>

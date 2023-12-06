@@ -1,9 +1,23 @@
+html {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 .app {
     width: 100%;
-    height: 84vh;
+    min-height: 84vh;
     margin: 0;
-    overflow: hidden;
     background-color:#032a5a10;
+    @media (max-width: 760px) {
+      min-height: 55vh;
+    };
   }
   
   ::-webkit-scrollbar {
@@ -13,9 +27,11 @@
   .container {
     display: flex;
   }
-  
+  .table-scroll {
+    scroll-behavior: auto;
+  }
   button {
-    font-size: 1.5rem;
+    font-size: 2rem;
   }
   
   .wrapper {
@@ -25,57 +41,14 @@
     align-items: center;
     max-width: 1280px;
     margin: 0 auto;
+    position: relative;
   }
   
-  .logo {
-    display: flex;
-    flex-direction: column;
-    &__img{
-      height: 60px;
-      width: 270px;
-    }
-    &__text {
-      margin: 10px 0 0;
-      font-size: 16px;
-      line-height: 15px;
-      font-weight: 400;
-      letter-spacing: 0.09em;
-      color: #ffffff;
-      &__short {
-        margin: 10px 0 0;
-        font-size: 16px;
-        line-height: 15px;
-        font-weight: 400;
-        letter-spacing: 0.09em;
-        color: black;
-      };
-    }
-    &__title {
-        font-family: Georgia;
-        font-weight: 400;
-        font-style:normal;
-        font-size: 32px;
-        text-align: Left;
-        letter-spacing: 0.12em;
-        color: #F1CDB3;
-        margin: 0px;
-        &__short {
-          font-family: Georgia;
-          font-weight: 400;
-          font-style:normal;
-          font-size: 32px;
-          text-align: Left;
-          letter-spacing: 0.12em;
-          color: black;
-          margin-top: 0px;
-        };
-    }
-  }
+ 
 
 .btn {
   color: #033c5a !important;
   font-weight: 600;
-  font-size: 17px  !important;
   background-color: #ec720b;
   border-color: #ff8307;
   border-radius: 0.0rem !important;
@@ -101,18 +74,37 @@ h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
   color: #033c5a;
 }
 
+h2 {
+  font-size: 25px !important;
+  @media (max-width: 760px) { /* apply styles for md screens and larger */
+    font-size: 20px !important;
+  }
+}
+
 p {
   font-size: 18px;
   font-weight: 500;
   color: #033c5a;
+  @media (max-width: 760px) { /* apply styles for md screens and larger */
+    font-size: 16px;
+  }
 }
 
 section {
   padding: 50px 0px 0px;
+  @media (max-width: 1028px) { /* apply styles for md screens and larger */
+    padding: 30px 0px 0px;
+  }
 }
 .main-content {
   max-width: 1280px;
   margin: 0 auto;
+  @media (max-width: 1028px) { /* apply styles for md screens and larger */
+    padding: 20px 20px 0px;
+  }
+  @media (max-width: 760px) { /* apply styles for md screens and larger */
+    padding: 20px 10px 0px;
+  }
 }
 
 /* Default buttons style */
@@ -137,8 +129,8 @@ section {
 /* Redefining the size and alignment for input fields in Bootstrap modal dialog box */
 .input-field {
   margin-bottom: 10px;
-  margin-left: 20px;
-  margin-right: 20px;
+  margin-left: 0px;
+  margin-right: 0px;
   width: 90%;
 }
 
@@ -176,14 +168,14 @@ button:not(.default) {
     box-shadow 0.2s ease;
   transition: color 0.2s ease, border 0.2s ease, background 0.2s ease,
     box-shadow 0.2s ease;
-  position: relative;
-  margin: 0 7px;
+  //position: relative;
+  margin: 0px;
   display: inline-block;
   min-width: 144px;
   max-width: 100%;
   padding: 15px 25px;
   font-family: "Arial", "Helvetica Neue", Arial, Helvetica, sans-serif;
-  font-size: 14px;
+  font-size: 17px;
   font-weight: 600;
   /* text-transform: uppercase; */
   line-height: 1;
@@ -193,11 +185,31 @@ button:not(.default) {
   color: #ffffff;
 }
 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+opacity: 1;
+}
+
+.table-btn {
+  width: 70px !important;
+  min-width: 20px !important;
+  min-height: 30px;
+  padding: 2px 2px !important;
+  font-size: 12px !important;
+}
+
+.btn-no-display {
+  display: none !important;
+}
+
 .form {
   zoom: 1;
   display: block;
   width: auto;
   padding: 25px 0 0;
+  @media (max-width: 760px) {
+    padding: 0;
+};
 }
 
 .form:before,
@@ -294,6 +306,9 @@ label, legend {
   color:#ec720b;
   margin-bottom: 5px;
   font-size: 20px !important;
+  @media (max-width: 760px) { /* apply styles for md screens and larger */
+    font-size: 16px !important;
+  }
 }
 
 .mb-3 {
@@ -324,9 +339,6 @@ label, legend {
 .hidden {
   display: none;
 }
-
-
-/* Далее задаем CSS стили для наших элементов: */
 
 .file-upload input[type="file"]{
 display: none;/* скрываем input file */
@@ -386,6 +398,9 @@ color: #033c5a;
 	margin-bottom: 20px;
   border-collapse:unset;
 }
+.scroll-table {
+  overflow-x: auto;
+}
 .table thead th {
 	font-weight: bold;
 	text-align: left;
@@ -394,24 +409,24 @@ color: #033c5a;
 	padding: 5px 15px;
 	background: #033c5ae7;
 	font-size: 18px;
-	border-top: 2px solid #ddd;
+	border-top: 3px solid #ddd;
 }
 .table tr th:first-child, .table tr td:first-child {
-	border-left: 2px solid #ddd;
-  border-radius: 10px;
+	border-left: 3px solid #ddd;
+  border-radius: 1px;
 }
 .table tr th:last-child, .table tr td:last-child {
 	border-right: 2px solid #ddd;
-  border-radius: 10px;
+  border-radius: 1px;
 }
 .table thead tr th:first-child {
-	border-radius: 10px;
+	border-radius: 1px;
 }
 .table thead tr th {
-	border-radius: 10px;
+	border-radius: 1px;
 }
 .table thead tr th:last-child {
-	border-radius: 10px;
+	border-radius: 1px;
   
 }
 .table tbody td {
@@ -423,42 +438,145 @@ color: #033c5a;
   color: #033c5ae7;
 	vertical-align: top;
   background: #F8F8F8;
-  border-radius: 10px;
+  border-radius: 1px;
+  @media (max-width: 1200px) {
+    font-size: 14px;
+    padding: 5px 7px;
+  };
+  @media (max-width: 760px) {
+    font-size: 12px;
+    padding: 5px 5px;
+  };
 }
 .table tbody td:first-child {
 	width: 40%;
   text-align: left;
+  word-break: break-all;
+  @media (max-width: 760px) {
+    width: 40%;
+  };
 }
 .table tbody td {
 	width: 15%;
 }
 .table tbody tr:nth-child(even) {
 	background: #F8F8F8;
-  border-radius: 10px;
+  border-radius: 1px;
+  font-size: 17px;
+  @media (max-width: 1028px) {
+    font-size: 15px;
+  };
+  @media (max-width: 760px) {
+    font-size: 12px;
+  };
 }
 .table tbody tr:first-child td{
   font-size: 17px;
   background: #b8e2f85b;
   color: #ec720b;
+  @media (max-width: 1028px) {
+    font-size: 16px;
+  };
+  @media (max-width: 760px) {
+    font-size: 14px;
+  };
 }
-.table tbody tr:last-child td{
-  font-size: 17px;
+/* .table tbody tr:last-child td{
+  font-size: 15px;
   background: #b8e2f85b;
   color: #ec720b;
-}
+  @media (max-width: 1028px) {
+    font-size: 15px;
+  };
+  @media (max-width: 760px) {
+    font-size: 12px;
+  };
+} */
 
 .table tbody tr:last-child td{
-	border-bottom: 2px solid #ddd;
+	border-bottom: 3px solid #ddd;
 }
 .table tbody tr:last-child td:first-child {
-	border-radius: 10px;
+	border-radius: 1px;
 }
 .table tbody tr:last-child td:last-child {
-	border-radius: 10px;
+	border-radius: 1px;
  
 } 
 
 .form-control {
-  height: 35px;
+  //height: 35px;
   margin-bottom: 0px !important;
+}
+
+.dashboard-table tbody td:first-child {
+	width: 15%;
+  text-align: left;
+}
+
+.not_registered {
+  color: rgb(25,103,210);
+  margin-top: 1rem !important;
+  margin-bottom: 1rem !important;
+}
+
+.margin_left {
+  margin-left: 1.25rem;
+}
+
+.about_service {
+  width: 100%; /* default to 100% width */
+  height: 100%; /* default to 100% height */
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  overflow: auto;
+  @media (max-width: 1028px) { /* apply styles for md screens and larger */
+    padding-left: 1rem;
+    padding-right: 1rem;
+    font-size: 16px;
+    flex-direction: column !important;
+  }
+  @media (max-width: 760px) { /* apply styles for md screens and larger */
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+    width: 100%;
+    height: 100%;
+    font-size: 14px;
+  }
+  &__picture {
+    width: 100%;
+    height: 100%;
+    @media (max-width: 1028px) { /* apply styles for md screens and larger */
+      width: 60%;
+      height: 60%;
+      display: flex;
+      margin: 0 auto;
+    }
+    @media (max-width: 760px) { /* apply styles for md screens and larger */
+      display: none;
+    }
+  }
+}
+
+
+.sc-bdfCDU.PXKBi, .sc-bdfCDU.hNbySd {
+  min-width: 72px !important;
+}
+
+.start_screen_content {
+  margin-top: 60px;
+}
+
+.leftColumn {
+  width: 37% !important;
+  @media (max-width: 760px) { /* apply styles for md screens and larger */
+    width: 100% !important;
+  }
+}
+
+.rightColumn {
+  width: 63% !important;
+  @media (max-width: 760px) { /* apply styles for md screens and larger */
+    width: 100% !important;
+  }
 }

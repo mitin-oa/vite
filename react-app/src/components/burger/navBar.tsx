@@ -3,6 +3,12 @@ import styled from "styled-components";
 import { Burger } from "../burger/burger";
 import "../header/header.scss";
 import { Link } from "react-router-dom";
+import { Dispatch, SetStateAction, useContext } from "react";
+import LogInForm from "../modal/LogInForm";
+import ModalWindow from "../modal/modal";
+import Button from "../Button";
+import { SignedInContext, SignedUpContext, deleteCookie } from "../../App";
+import SignUpForm from "../modal/SignUpForm";
 
 const colors = {
   yellowmellow: "#fbe69b",
@@ -29,42 +35,159 @@ const StyledMenu = styled.nav<{ open: boolean }>`
   overflow-y: hidden;
 `;
 
-export const Navbar = () => {
+const ModalOverlay = styled.div<{ open: boolean }>`
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  background-color: rgba(255, 255, 255, 0.75);
+  z-index: ${({ open }) => (open ? "1" : "-1")};
+`;
+
+const ModalContent = styled.nav<{ open: boolean }>`
+  top: 50%;
+  left: 50%;
+  min-width: 300px;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  display: ${({ open }) => (open ? "flex" : "none")};
+  flex-direction: column;
+  background-color: white;
+  z-index: 2;
+  padding: 2rem;
+`;
+
+interface IHeaderProps {
+  signedInStatus: string;
+  handleSignIn: boolean;
+  setUserProfileData: any;
+  handleSignUp: boolean;
+  onSignIn: Dispatch<SetStateAction<boolean>>;
+  modalIsOpen: boolean;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
+}
+
+export const Navbar = ({
+  handleSignIn,
+  handleSignUp,
+  setUserProfileData,
+  onSignIn,
+  modalIsOpen,
+  setIsOpen,
+}: IHeaderProps) => {
   const [open, setOpen] = useState<boolean>(false);
   const close = () => setOpen(false);
+
+  const signedIn = useContext(SignedInContext);
+  const signedUp = useContext(SignedUpContext);
+
+  const signedInStatus = signedIn ? "Sign Out" : "Sign In";
+
+  function openModal() {
+    setIsOpen(true);
+    /*  setModalOpen(true); */
+    setOpen(false);
+  }
+  function closeModal() {
+    setIsOpen(false);
+    /* setModalOpen(false); */
+  }
+
   return (
     <div className="burger_visible">
-      <StyledMenu open={open}>
-        <Link
-          className="burger_visible__Link"
-          to="UpLoad"
-          onClick={() => close()}
-        >
-          Upload Form
-        </Link>
-        <Link
-          className="burger_visible__Link"
-          to="Order"
-          onClick={() => close()}
-        >
-          Order
-        </Link>
-        <Link
-          className="burger_visible__Link"
-          to="BuyCredits"
-          onClick={() => close()}
-        >
-          Buy Credits
-        </Link>
-        <Link
-          className="burger_visible__Link"
-          to="AdminPanel"
-          onClick={() => close()}
-        >
-          Admin Panel
-        </Link>
-      </StyledMenu>
       <Burger open={open} setOpen={setOpen} />
+      <ModalOverlay open={open} onClick={() => close()} />
+      {/* <ModalContent open={open && signedInStatus == "Sign in"}> */}
+      <ModalContent open={open}>
+        {signedInStatus == "Sign Out" ? (
+          <>
+            <Link
+              className="burger_visible__Link"
+              to="/Dashboard"
+              onClick={() => close()}
+            >
+              Dashboard
+            </Link>
+            <Link
+              className="burger_visible__Link"
+              to="/BuyCredits"
+              onClick={() => close()}
+            >
+              Buy Credits
+            </Link>
+            <Link
+              className="burger_visible__Link"
+              to="/UpLoad"
+              onClick={() => close()}
+            >
+              Upload Form
+            </Link>
+          </>
+        ) : (
+          <>
+            <Link
+              className="burger_visible__Link"
+              to="/About"
+              onClick={() => close()}
+            >
+              About the service
+            </Link>
+            <Link
+              className="burger_visible__Link"
+              to="/CalculateCost"
+              onClick={() => close()}
+            >
+              Calculate Cost
+            </Link>
+            <Link
+              className="burger_visible__Link"
+              to="/UpLoad"
+              onClick={() => close()}
+            >
+              Upload Form
+            </Link>
+          </>
+        )}
+
+        <Link to="/">
+          <ModalWindow
+            title={signedUp ? signedInStatus : "Sign Up"}
+            childComp={
+              signedInStatus == "Sign In" ? (
+                !signedIn && signedUp ? (
+                  <LogInForm
+                    handleSignIn={handleSignIn}
+                    onSignUp={handleSignUp}
+                  />
+                ) : (
+                  <SignUpForm
+                    handleSignUp={handleSignUp}
+                    onCloseModal={closeModal}
+                    setUserProfileData={setUserProfileData}
+                  />
+                )
+              ) : (
+                <Link to="/">
+                  <Button
+                    children={signedInStatus}
+                    color="orange"
+                    onClick={() => {
+                      onSignIn(false);
+                      setIsOpen(false);
+                      deleteCookie("token");
+                    }}
+                  />
+                </Link>
+              )
+            }
+            modalIsOpen={modalIsOpen}
+            openModal={openModal}
+            closeModal={closeModal}
+          />
+        </Link>
+      </ModalContent>
     </div>
   );
 };

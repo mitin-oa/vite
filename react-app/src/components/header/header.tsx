@@ -1,37 +1,40 @@
-import { useContext, useState } from "react";
+import { Dispatch, SetStateAction, useContext } from "react";
 import "./header.scss";
 import Logo from "../../../public/logo-white-ec720b-background-033c5a.png";
 import { HashLink as Link } from "react-router-hash-link";
 import { Navbar } from "../burger/navBar";
 import ModalWindow from "../modal/modal";
-import SignInForm from "../modal/SignUpForm";
 import LogInForm from "../modal/LogInForm";
-import { SignedInContext } from "../../App";
+import { SignedInContext, SignedUpContext, deleteCookie } from "../../App";
+import Button from "../Button";
+import { useMediaQuery } from "react-responsive";
+import SignUpForm from "../modal/SignUpForm";
 
 interface IHeaderProps {
   kind?: "full" | "short";
   handleSignIn: boolean;
+  setUserProfileData: any;
+  handleSignUp: boolean;
+  onSignIn: Dispatch<SetStateAction<boolean>>;
   modalIsOpen: boolean;
-  setIsOpen: any;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-export function HeaderMenu({
+export default function HeaderMenu({
   kind,
   handleSignIn,
+  handleSignUp,
+  setUserProfileData,
+  onSignIn,
   modalIsOpen,
   setIsOpen,
 }: IHeaderProps) {
   const signedIn = useContext(SignedInContext);
-  /* const [signedIn, onSignIn] = useState(false); */
-  /* function handleSignIn() {
-    onSignIn(!signedIn);
-    setIsOpen(!modalIsOpen);
-  } */
-  const [signedUp, onSignUp] = useState(true);
-  function handleSignUp() {
-    onSignUp(!signedUp);
-  }
-  /* const [modalIsOpen, setIsOpen] = useState(false); */
+  const signedUp = useContext(SignedUpContext);
+
+  const isMobileScreen = useMediaQuery({ query: "(max-width: 1028px" });
+
+  const signedInStatus = signedIn ? "Sign Out" : "Sign In";
 
   function openModal() {
     setIsOpen(true);
@@ -40,8 +43,6 @@ export function HeaderMenu({
     setIsOpen(false);
   }
 
-  console.log(signedIn);
-  console.log(signedUp);
   return (
     <header className={kind === "short" ? "header__short" : "header"}>
       <div className="wrapper">
@@ -72,13 +73,12 @@ export function HeaderMenu({
             <>
               {kind === "full" ? (
                 <>
-                  <Link className="nav__link nav__text" to="AdminPanel">
+                  <Link className="nav__link nav__text" to="Dashboard">
                     Dashboard
                   </Link>
                   <Link className="nav__link nav__text" to="UpLoad">
                     File Upload
                   </Link>
-
                   <Link className="nav__link nav__text" to="BuyCredits">
                     Buy Credits
                   </Link>
@@ -86,23 +86,48 @@ export function HeaderMenu({
               ) : (
                 <></>
               )}
-
-              <ModalWindow
-                title={"Log In"}
-                childComp={
-                  signedIn && signedUp ? (
-                    <LogInForm
-                      onSignIn={handleSignIn}
-                      onSignUp={handleSignUp}
-                    />
-                  ) : (
-                    <SignInForm onSignUp={handleSignUp} />
-                  )
-                }
-                modalIsOpen={modalIsOpen}
-                openModal={openModal}
-                closeModal={closeModal}
-              />
+              {!isMobileScreen ? (
+                <Link to="/">
+                  <ModalWindow
+                    // * VK: This part of the code will be displayed if the variable signedIn == true
+                    title={signedUp ? signedInStatus : "Sign Up"}
+                    childComp={
+                      signedInStatus == "Sign In" ? (
+                        !signedIn && signedUp ? (
+                          <LogInForm
+                            handleSignIn={handleSignIn}
+                            onSignUp={handleSignUp}
+                          />
+                        ) : (
+                          <SignUpForm
+                            handleSignUpForm={handleSignUp}
+                            setUserProfileData={setUserProfileData}
+                          />
+                        )
+                      ) : (
+                        <Link to="/">
+                          <>
+                            <Button
+                              children={signedInStatus}
+                              color="orange"
+                              onClick={() => {
+                                onSignIn(false);
+                                setIsOpen(false);
+                                deleteCookie("token");
+                              }}
+                            />
+                          </>
+                        </Link>
+                      )
+                    }
+                    modalIsOpen={modalIsOpen}
+                    openModal={openModal}
+                    closeModal={closeModal}
+                  />
+                </Link>
+              ) : (
+                <></>
+              )}
             </>
           ) : (
             <>
@@ -121,29 +146,63 @@ export function HeaderMenu({
               ) : (
                 <></>
               )}
-              <ModalWindow
-                title={"Log In"}
-                childComp={
-                  !signedIn && signedUp ? (
-                    <LogInForm
-                      onSignIn={handleSignIn}
-                      onSignUp={handleSignUp}
-                    />
-                  ) : (
-                    <SignInForm
-                      onSignUp={handleSignUp}
-                      onCloseModal={closeModal}
-                    />
-                  )
-                }
-                modalIsOpen={modalIsOpen}
-                openModal={openModal}
-                closeModal={closeModal}
-              />
+              {!isMobileScreen ? (
+                <Link to="/">
+                  <ModalWindow
+                    title={signedUp ? signedInStatus : "Sign Up"}
+                    childComp={
+                      signedInStatus == "Sign In" ? (
+                        !signedIn && signedUp ? (
+                          <LogInForm
+                            handleSignIn={handleSignIn}
+                            onSignUp={handleSignUp}
+                          />
+                        ) : (
+                          <SignUpForm
+                            handleSignUp={handleSignUp}
+                            onCloseModal={closeModal}
+                            setUserProfileData={setUserProfileData}
+                          />
+                        )
+                      ) : (
+                        <Link to="/">
+                          <Button
+                            children={signedInStatus}
+                            color="orange"
+                            onClick={() => {
+                              onSignIn(false);
+                              setIsOpen(false);
+                              deleteCookie("token");
+                            }}
+                          />
+                        </Link>
+                      )
+                    }
+                    modalIsOpen={modalIsOpen}
+                    openModal={openModal}
+                    closeModal={closeModal}
+                  />
+                </Link>
+              ) : (
+                <></>
+              )}
             </>
           )}
         </ul>
-        {kind === "short" ? <></> : <Navbar />}
+
+        {isMobileScreen ? (
+          <Navbar
+            signedInStatus={signedInStatus}
+            handleSignIn={handleSignIn}
+            setUserProfileData={setUserProfileData}
+            handleSignUp={handleSignUp}
+            onSignIn={onSignIn}
+            modalIsOpen={modalIsOpen}
+            setIsOpen={setIsOpen}
+          />
+        ) : (
+          <></>
+        )}
       </div>
     </header>
   );
