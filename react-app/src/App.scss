@@ -206,7 +206,12 @@ opacity: 1;
 .resetPass-btn {
   width: 100% !important;
   background-color: white !important;
-  padding: 0 !important;
+  padding: 3px !important;
+}
+
+.resetPass-btn:hover {
+  color: #5087a6 !important;
+  background-color: white!important;
 }
 
 .btn-no-display {

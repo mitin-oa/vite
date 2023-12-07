@@ -1,13 +1,7 @@
+import { useState } from "react";
 import Button from "../Button";
-import ModalWindow from "./modal";
 
-const LogInForm = ({
-  handleSignIn,
-  onSignUp,
-  modalIsOpen,
-  openModal,
-  closeModal,
-}: any) => {
+const LogInForm = ({ handleSignIn, onSignUp }: any) => {
   // * ↓ VK: Significant for the backend area. Please exercise caution when making alterations
   const handleLogInSubmit = () => {
     // * VK: Form fields data entered by the user
@@ -24,9 +18,9 @@ const LogInForm = ({
     });
   };
   // * ↑ VK: Significant for the backend area. Please exercise caution when making alterations
-
+  const [resetPass, onResetPass] = useState("Reset password?");
   function handleResetPass() {
-    return "something to do";
+    onResetPass("New password sent to email");
   }
 
   return (
@@ -68,7 +62,7 @@ const LogInForm = ({
         </div>
 
         <Button
-          children={"Reset password?"}
+          children={resetPass}
           color={"white"}
           onClick={handleResetPass}
           style="resetPass-btn"
