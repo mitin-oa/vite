@@ -40,12 +40,7 @@ const SignUpForm = ({
   };
   return (
     <>
-      <form
-        className="form mx-4 mb-4"
-        action="/api/signup"
-        method="post"
-        id="reg-form"
-      >
+      <form className="form " action="/api/signup" method="post" id="reg-form">
         <div className="col-xs-12">
           <div className="form-group ">
             <label htmlFor="username">User name:</label>
@@ -64,7 +59,7 @@ const SignUpForm = ({
         </div>
         <div className="col-xs-12">
           <div className="form-group">
-            <label htmlFor="email">Email:</label>
+            <label htmlFor="email">Email adress:</label>
             <input
               type="email"
               className="input-field"
@@ -96,7 +91,7 @@ const SignUpForm = ({
         </div>
         <div className="col-xs-12">
           <div className="form-group">
-            <label htmlFor="password">Password:</label>
+            <label htmlFor="password">Choose a password:</label>
             <input
               type="password"
               className="input-field"
@@ -108,10 +103,19 @@ const SignUpForm = ({
               onChange={(event) => setInputPassword(event.target.value)}
             />
           </div>
+          <a style={{ fontSize: "14px" }}>
+            At least 16 characters OR at least 8 characters including a number
+            and a letter.
+          </a>
         </div>
         <div className="text-left col-xs-12">
           {/* <input type="submit" className="btn btn-default" value="Submit" /> */}
-          <Button children="Submit" color="orange" onClick={handleClick} />
+          <Button
+            children="Submit"
+            color="orange"
+            onClick={handleClick}
+            style="modal-btn"
+          />
         </div>
       </form>
     </>

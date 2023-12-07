@@ -116,6 +116,7 @@ export default function HeaderMenu({
                                   setIsOpen(false);
                                   deleteCookie("token");
                                 }}
+                                style="modal-btn"
                               />
                             </>
                           </Link>
@@ -176,6 +177,7 @@ export default function HeaderMenu({
                               setIsOpen(false);
                               deleteCookie("token");
                             }}
+                            style="modal-btn"
                           />
                         </Link>
                       )

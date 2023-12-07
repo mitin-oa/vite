@@ -79,7 +79,7 @@ const ModalWindow: React.FC<ParentCompProps> = (props) => {
           onClick={closeModal}
         ></button>
         <h2
-          style={{ marginLeft: 25 }}
+          style={{ textAlign: "center" }}
           ref={(_subtitle) => (subtitle = _subtitle)}
         >
           {title}

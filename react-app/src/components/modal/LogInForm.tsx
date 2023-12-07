@@ -20,7 +20,7 @@ const LogInForm = ({ handleSignIn, onSignUp }: any) => {
   return (
     <>
       <form
-        className="form mx-4 mb-4"
+        className="form "
         action="/api/signin"
         method="post"
         id="login-form"
@@ -61,13 +61,22 @@ const LogInForm = ({ handleSignIn, onSignUp }: any) => {
               children="Submit"
               color="orange"
               onClick={handleLogInSubmit}
+              style="modal-btn"
             />
           </div>
         </div>
-        <p>Not registred? Push Sign Up.</p>
+        <div className="text-left col-xs-12">
+          <p>Not registred? Push Sign Up.</p>
+        </div>
+
         <div className="text-left col-xs-12">
           <div className="btn-container">
-            <Button children="Sign Up" color="orange" onClick={onSignUp} />
+            <Button
+              children="Sign Up"
+              color="orange"
+              onClick={onSignUp}
+              style="modal-btn"
+            />
           </div>
         </div>
       </form>
