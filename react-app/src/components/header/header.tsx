@@ -97,6 +97,8 @@ export default function HeaderMenu({
                           <LogInForm
                             handleSignIn={handleSignIn}
                             onSignUp={handleSignUp}
+                            setIsOpen={setIsOpen}
+                            modalIsOpen={modalIsOpen}
                           />
                         ) : (
                           <SignUpForm
@@ -159,6 +161,8 @@ export default function HeaderMenu({
                           <LogInForm
                             handleSignIn={handleSignIn}
                             onSignUp={handleSignUp}
+                            setIsOpen={setIsOpen}
+                            modalIsOpen={modalIsOpen}
                           />
                         ) : (
                           <SignUpForm

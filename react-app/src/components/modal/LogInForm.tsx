@@ -1,6 +1,13 @@
 import Button from "../Button";
+import ModalWindow from "./modal";
 
-const LogInForm = ({ handleSignIn, onSignUp }: any) => {
+const LogInForm = ({
+  handleSignIn,
+  onSignUp,
+  modalIsOpen,
+  openModal,
+  closeModal,
+}: any) => {
   // * ↓ VK: Significant for the backend area. Please exercise caution when making alterations
   const handleLogInSubmit = () => {
     // * VK: Form fields data entered by the user
@@ -17,6 +24,11 @@ const LogInForm = ({ handleSignIn, onSignUp }: any) => {
     });
   };
   // * ↑ VK: Significant for the backend area. Please exercise caution when making alterations
+
+  function handleResetPass() {
+    return "something to do";
+  }
+
   return (
     <>
       <form
@@ -54,6 +66,14 @@ const LogInForm = ({ handleSignIn, onSignUp }: any) => {
             />
           </div>
         </div>
+
+        <Button
+          children={"Reset password?"}
+          color={"white"}
+          onClick={handleResetPass}
+          style="resetPass-btn"
+        />
+
         <div className="text-left col-xs-12">
           {/* // * VK: Significant for the backend area. Please exercise caution when making alterations */}
           <div className="btn-container">
