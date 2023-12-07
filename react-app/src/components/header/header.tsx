@@ -107,22 +107,20 @@ export default function HeaderMenu({
                           />
                         )
                       ) : (
-                        <div className="btn-container">
-                          <Link to="/">
-                            <>
-                              <Button
-                                children={`Want to ${signedInStatus}?`}
-                                color="orange"
-                                onClick={() => {
-                                  onSignIn(false);
-                                  setIsOpen(false);
-                                  deleteCookie("token");
-                                }}
-                                style="modal-btn"
-                              />
-                            </>
-                          </Link>
-                        </div>
+                        <Link to="/">
+                          <>
+                            <Button
+                              children={`Want to ${signedInStatus}?`}
+                              color="orange"
+                              onClick={() => {
+                                onSignIn(false);
+                                setIsOpen(false);
+                                deleteCookie("token");
+                              }}
+                              style="modal-btn"
+                            />
+                          </>
+                        </Link>
                       )
                     }
                     modalIsOpen={modalIsOpen}
