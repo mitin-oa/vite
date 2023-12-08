@@ -11,6 +11,8 @@ export default function UpLoad({
   handleSignUp,
   modalIsOpen,
   setIsOpen,
+  resetPass,
+  setResetPass,
 }: any) {
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1160px" });
   const isPhoneScreen = useMediaQuery({ query: "(max-width: 760px" });
@@ -18,19 +20,6 @@ export default function UpLoad({
   const signedUp = useContext(SignedUpContext);
   console.log(signedIn);
   console.log(signedUp);
-  function openModal() {
-    setIsOpen(true);
-  }
-  function closeModal() {
-    setIsOpen(false);
-  }
-
-  /* const [newUserInfo, setNewUserInfo] = useState({
-    profileImages: [],
-  }); */
-
-  /* const updateUploadedFiles = (files: any) =>
-    setNewUserInfo({ ...newUserInfo, profileImages: files }); */
 
   const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
@@ -48,6 +37,8 @@ export default function UpLoad({
           modalIsOpen={modalIsOpen}
           setIsOpen={setIsOpen}
           setUserProfileData={undefined}
+          resetPass={resetPass}
+          setResetPass={setResetPass}
         />
         {/* <!-- Bootstrap "Containers" component. Taken from https://getbootstrap.com/docs/5.2/layout/containers/#how-they-work --> */}
 

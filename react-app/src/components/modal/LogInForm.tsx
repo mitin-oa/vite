@@ -1,7 +1,12 @@
 import { useState } from "react";
 import Button from "../Button";
 
-const LogInForm = ({ handleSignIn, onSignUp }: any) => {
+const LogInForm = ({
+  handleSignIn,
+  onSignUp,
+  resetPass,
+  setResetPass,
+}: any) => {
   // * ↓ VK: Significant for the backend area. Please exercise caution when making alterations
   const handleLogInSubmit = () => {
     // * VK: Form fields data entered by the user
@@ -18,9 +23,9 @@ const LogInForm = ({ handleSignIn, onSignUp }: any) => {
     });
   };
   // * ↑ VK: Significant for the backend area. Please exercise caution when making alterations
-  const [resetPass, onResetPass] = useState("Reset password?");
+
   function handleResetPass() {
-    onResetPass("New password sent to email");
+    setResetPass(!resetPass);
   }
 
   return (
@@ -62,7 +67,7 @@ const LogInForm = ({ handleSignIn, onSignUp }: any) => {
         </div>
 
         <Button
-          children={resetPass}
+          children="Reset password?"
           color={"white"}
           onClick={handleResetPass}
           style="resetPass-btn"

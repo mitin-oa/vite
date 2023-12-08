@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useContext } from "react";
+import { Dispatch, SetStateAction, useContext, useState } from "react";
 import "./header.scss";
 import Logo from "../../../public/logo-white-ec720b-background-033c5a.png";
 import { HashLink as Link } from "react-router-hash-link";
@@ -9,6 +9,7 @@ import { SignedInContext, SignedUpContext, deleteCookie } from "../../App";
 import Button from "../Button";
 import { useMediaQuery } from "react-responsive";
 import SignUpForm from "../modal/SignUpForm";
+import ResetPassForm from "../modal/ResetPass";
 
 interface IHeaderProps {
   kind?: "full" | "short";
@@ -18,6 +19,8 @@ interface IHeaderProps {
   onSignIn: Dispatch<SetStateAction<boolean>>;
   modalIsOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
+  resetPass?: boolean;
+  setResetPass?: Dispatch<SetStateAction<boolean>>;
 }
 
 export default function HeaderMenu({
@@ -31,7 +34,7 @@ export default function HeaderMenu({
 }: IHeaderProps) {
   const signedIn = useContext(SignedInContext);
   const signedUp = useContext(SignedUpContext);
-
+  const [resetPass, setResetPass] = useState(false);
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1028px" });
 
   const signedInStatus = signedIn ? "Sign Out" : "Sign In";
@@ -41,6 +44,7 @@ export default function HeaderMenu({
   }
   function closeModal() {
     setIsOpen(false);
+    resetPass && setResetPass(!resetPass);
   }
 
   return (
@@ -94,12 +98,22 @@ export default function HeaderMenu({
                     childComp={
                       signedInStatus == "Sign In" ? (
                         !signedIn && signedUp ? (
-                          <LogInForm
-                            handleSignIn={handleSignIn}
-                            onSignUp={handleSignUp}
-                            setIsOpen={setIsOpen}
-                            modalIsOpen={modalIsOpen}
-                          />
+                          !resetPass ? (
+                            <LogInForm
+                              handleSignIn={handleSignIn}
+                              onSignUp={handleSignUp}
+                              setIsOpen={setIsOpen}
+                              modalIsOpen={modalIsOpen}
+                              resetPass={resetPass}
+                              setResetPass={setResetPass}
+                            />
+                          ) : (
+                            <ResetPassForm
+                              setIsOpen={setIsOpen}
+                              resetPass={resetPass}
+                              setResetPass={setResetPass}
+                            />
+                          )
                         ) : (
                           <SignUpForm
                             handleSignUpForm={handleSignUp}
@@ -152,16 +166,32 @@ export default function HeaderMenu({
               {!isMobileScreen ? (
                 <Link to="/">
                   <ModalWindow
-                    title={signedUp ? signedInStatus : "Sign Up"}
+                    title={
+                      signedUp
+                        ? resetPass
+                          ? "Reset password"
+                          : signedInStatus
+                        : "Sign Up"
+                    }
                     childComp={
                       signedInStatus == "Sign In" ? (
                         !signedIn && signedUp ? (
-                          <LogInForm
-                            handleSignIn={handleSignIn}
-                            onSignUp={handleSignUp}
-                            setIsOpen={setIsOpen}
-                            modalIsOpen={modalIsOpen}
-                          />
+                          !resetPass ? (
+                            <LogInForm
+                              handleSignIn={handleSignIn}
+                              onSignUp={handleSignUp}
+                              setIsOpen={setIsOpen}
+                              modalIsOpen={modalIsOpen}
+                              resetPass={resetPass}
+                              setResetPass={setResetPass}
+                            />
+                          ) : (
+                            <ResetPassForm
+                              setIsOpen={setIsOpen}
+                              resetPass={resetPass}
+                              setResetPass={setResetPass}
+                            />
+                          )
                         ) : (
                           <SignUpForm
                             handleSignUp={handleSignUp}
@@ -205,6 +235,8 @@ export default function HeaderMenu({
             onSignIn={onSignIn}
             modalIsOpen={modalIsOpen}
             setIsOpen={setIsOpen}
+            resetPass={resetPass}
+            setResetPass={setResetPass}
           />
         ) : (
           <></>

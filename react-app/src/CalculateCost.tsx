@@ -12,6 +12,8 @@ export default function CalculateCost({
   setIsOpen,
   onSignIn,
   setUserProfileData,
+  resetPass,
+  setResetPass,
 }: any) {
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1160px" });
   const isPhoneScreen = useMediaQuery({ query: "(max-width: 760px" });
@@ -39,6 +41,8 @@ export default function CalculateCost({
           modalIsOpen={modalIsOpen}
           setIsOpen={setIsOpen}
           onSignIn={onSignIn}
+          resetPass={resetPass}
+          setResetPass={setResetPass}
         />
         <section
           className="main-content container"

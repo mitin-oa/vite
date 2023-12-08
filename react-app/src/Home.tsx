@@ -9,6 +9,8 @@ export default function Home({
   handleSignUp,
   modalIsOpen,
   setIsOpen,
+  resetPass,
+  setResetPass,
 }: any) {
   return (
     <>
@@ -21,6 +23,8 @@ export default function Home({
           handleSignUp={handleSignUp}
           modalIsOpen={modalIsOpen}
           setIsOpen={setIsOpen}
+          resetPass={resetPass}
+          setResetPass={setResetPass}
         />
       </div>
       <Footer kind="full" />
