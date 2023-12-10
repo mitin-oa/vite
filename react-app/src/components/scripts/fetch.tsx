@@ -10,24 +10,27 @@
  * @param totalAmount - the amount entered by the user for payment
  */
 function sendPaymentDataToServer(payPalOrderID: any, totalAmount: any) {
-  console.log('sendPaymentDataToServer');
 
-  const data = { payPalOrderID: payPalOrderID, totalAmount: totalAmount };
+  const dataToSend = { payPalOrderID: payPalOrderID, totalAmount: totalAmount };
+  let serverResponse;
 
   fetch('/api/process-payment', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify(dataToSend)
   })
     .then(response => response.json())
     .then(data => {
-      console.log('Server response:', data);
+      console.log(data);
+      serverResponse =  data;
     })
     .catch(error => {
       console.error('Error sending payment data:', error);
     });
+
+    return serverResponse;
 }
 
 export { sendPaymentDataToServer };

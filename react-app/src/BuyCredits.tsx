@@ -32,12 +32,15 @@ export default function BuyCredits({
   // * ↓ VK: Significant for the backend area. Please exercise caution when making alterations
   const [showModal, setShowModal] = useState(false); // * VK: State to control the visibility of a modal window
 
-  const handlePayment = (transactionId: string, amount: number) => {
+  const handlePayment = async (transactionId: string, amount: number) => {
     console.log("Transaction ID:", transactionId);
     console.log("Amount:", amount);
 
     // * VK Backend: sending payment data to server
-    sendPaymentDataToServer(transactionId, amount);
+    const serverResponse = await sendPaymentDataToServer(transactionId, amount);
+    console.log("serverResponse");
+    console.log(serverResponse);
+
 
     // * VK: Closing the modal window after successful payment
     setShowModal(!showModal);
