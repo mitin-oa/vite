@@ -7,6 +7,7 @@ import { SignedInContext, SignedUpContext } from "../../App";
 import ModalWindow from "../modal/modal";
 import LogInForm from "../modal/LogInForm";
 import SignInForm from "../modal/SignUpForm";
+import NumInput from "../InputNumber";
 
 // TODO LIST VK:
 // 1. Search "TODO 1" in file
@@ -53,7 +54,7 @@ const FileUploader = ({
           index,
           file,
           expressDelivery: false,
-          pages: 0,
+          pages: 1,
           costInPoints: 20,
         })
       );
@@ -194,8 +195,7 @@ const FileUploader = ({
                     className="form-control"
                     name="numberOfPages"
                     min="0"
-                    defaultValue={0}
-                    value={file.pages}
+                    defaultValue={1}
                     data-file-index={file.index}
                     onChange={(e) =>
                       setNumberOfPages(index, Number(e.target.value))

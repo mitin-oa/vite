@@ -17,18 +17,24 @@ export default function CalculateCost({
 }: any) {
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1160px" });
   const isPhoneScreen = useMediaQuery({ query: "(max-width: 760px" });
-  const [numPages, onChange]: any = useState();
+  const [numPages, setNumPages]: any = useState();
   const onPagesChange: any = (e: ChangeEvent<HTMLInputElement>) => {
     const numPages = !Number.isNaN(e.target.valueAsNumber)
       ? e.target.valueAsNumber
       : null;
-    onChange(numPages);
+    setNumPages(numPages);
   };
   const [calculateCost, setCalculateCost] = useState(false);
   function handleCalculation() {
     setCalculateCost(!calculateCost);
   }
   const [expressDelivery, setExpressDelivery] = useState(false);
+  const [addInformation, setAddInformation] = useState("Add information");
+  const [inputName, setInputName] = useState("John Boil");
+  const [inputEmail, setInputEmail] = useState(
+    "sb-yhbsi27086563@personal.example.com"
+  );
+  const [inputPhone, setInputPhone] = useState("+343 12345678");
 
   return (
     <>
@@ -97,7 +103,8 @@ export default function CalculateCost({
                       id="addInformation"
                       rows={4}
                       placeholder="Enter text"
-                      value="addInformation"
+                      value={addInformation}
+                      onChange={(e) => setAddInformation(e.target.value)}
                     ></textarea>
                   </div>
                 </form>
@@ -119,6 +126,7 @@ export default function CalculateCost({
                       id="email"
                       value="sb-yhbsi27086563@personal.example.com"
                       required
+                      onChange={(e) => setInputEmail(e.target.value)}
                     />
                   </div>
 
@@ -129,8 +137,9 @@ export default function CalculateCost({
                       className="form-control"
                       name="phoneNumber"
                       id="phoneNumber"
-                      value="+343 12345678"
+                      value={inputPhone}
                       required
+                      onChange={(e) => setInputPhone(e.target.value)}
                     />
                   </div>
 
@@ -145,6 +154,7 @@ export default function CalculateCost({
                       id="contactPersonName"
                       value="John Boil"
                       required
+                      onChange={(e) => setInputName(e.target.value)}
                     />
                   </div>
                   <div className="form-group mb-3" style={{ margin: "0 auto" }}>
@@ -167,7 +177,7 @@ export default function CalculateCost({
                   <td rowSpan={2}>Total</td>
                   <td>Number of pages</td>
                   <td>Estimated cost in credits</td>
-                  <td>Estimated cost in Euro</td>
+                  <td>Estimated cost in $</td>
                 </tr>
                 <tr>
                   <td>{numPages ? numPages : 1}</td>

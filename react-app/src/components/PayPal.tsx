@@ -101,7 +101,7 @@ export default class PayPal extends React.Component<PaymentProps, InitState> {
   render() {
     return (
       <div style={{ minHeight: "300px" }}>
-        <table className="table" style={{ maxWidth: "400px" }}>
+        <table className="table" style={{ margin: "30px 0 30px" }}>
           <tbody>
             <tr>
               <th>
