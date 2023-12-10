@@ -124,7 +124,7 @@ export default function CalculateCost({
                       className="form-control"
                       name="email"
                       id="email"
-                      value="sb-yhbsi27086563@personal.example.com"
+                      value={inputEmail}
                       required
                       onChange={(e) => setInputEmail(e.target.value)}
                     />
@@ -152,7 +152,7 @@ export default function CalculateCost({
                       className="form-control"
                       name="contactPersonName"
                       id="contactPersonName"
-                      value="John Boil"
+                      value={inputName}
                       required
                       onChange={(e) => setInputName(e.target.value)}
                     />
