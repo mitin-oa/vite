@@ -11,7 +11,7 @@ import ModalWindow from "./components/modal/modal";
 import SignInForm from "./components/modal/SignUpForm";
 import { Link } from "react-router-dom";
 
-export default function Dashboard({
+export default function DashBoardManager({
   kind,
   onSignIn,
   handleSignIn,
@@ -74,7 +74,7 @@ export default function Dashboard({
   }
 
   // * ↑ VK: Significant for the backend area. Please exercise caution when making alterations
-
+  const [addInformation, setAddInformation] = useState("Add information");
   return (
     <>
       <div className="app">
@@ -89,7 +89,7 @@ export default function Dashboard({
         />
         <section className="main-content flex-column">
           <div className="row">
-            <h2>Dashboard Panel</h2>
+            <h2>Editor Dashboard Panel</h2>
           </div>
           <div className="row">
             <div className="col-md-6 leftColumn" id="leftColumn">
@@ -122,67 +122,96 @@ export default function Dashboard({
                   </tr>
                 </tbody>
               </table>
-              <div className="row">
-                <p>Credit points</p>
-                <table className="table">
-                  <tbody>
-                    <tr>
-                      <td>Credit points</td>
-                      <td>
-                        {userDataForDashboard
-                          ? userDataForDashboard.data.userData[0].points
-                          : 0}
-                      </td>
-                      <td>
-                        <Link className="nav__link nav__text" to="/BuyCredits">
-                          <Button
-                            children={"Buy credits"}
-                            color={"orange"}
-                            style="table-btn"
-                            onClick={() => ""}
-                          />
-                        </Link>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            <div className="col-md-6 rightColumn">
-              <p>Recent transactions (eg. 5 last transactions)</p>
-              <table className="table">
-                <tbody>
-                  <tr>
-                    <td>Transaction</td>
-                    <td>Date</td>
-                    <td>Status</td>
-                    <td>Cost in credits</td>
-                  </tr>
-
-                  {userDataForDashboard
-                    ? userDataForDashboard.data.paymentsData.map((e: any) => (
-                        <tr>
-                          <td>
-                            {userDataForDashboard ? e.paypal_order_id : ""}
-                          </td>
-                          <td>
-                            {userDataForDashboard
-                              ? e.created_at.toLocaleString().split("T")[0]
-                              : ""}
-                          </td>
-                          <td>{userDataForDashboard ? e.status : ""}</td>
-                          <td>{userDataForDashboard ? e.amount : ""}</td>
-                        </tr>
-                      ))
-                    : ""}
-                </tbody>
-              </table>
             </div>
           </div>
-
           <div className="row">
-            <p>Recent files (eg. 10 last files) with all the info of each</p>
+            <p>Recent uploaded files</p>
+            <table className="table dashboard-table">
+              <tbody>
+                <tr>
+                  <td>Name</td>
+                  <td>Status</td>
+                  <td>Date</td>
+                  <td>Download</td>
+                  <td>Upload Edited File</td>
+                  <td>Notes</td>
+                </tr>
+                {userDataForDashboard
+                  ? userDataForDashboard.data.fileData
+                      .slice(-10, userDataForDashboard.data.fileData.length)
+                      .sort((a: any, b: any) =>
+                        a.created_at.date > b.created_at.date ? 1 : -1
+                      )
+                      .map((e: any) => (
+                        <tr>
+                          <td>{userDataForDashboard ? e.original_name : ""}</td>
+                          <td>{userDataForDashboard ? e.order_status : ""}</td>
+                          <td>
+                            {userDataForDashboard
+                              ? e.created_at.toString().split("T")[0] +
+                                " " +
+                                e.created_at
+                                  .toString()
+                                  .split("T")[1]
+                                  .split(".")[0]
+                              : ""}
+                          </td>
+
+                          <td>
+                            {e.order_status !== "pending" ? (
+                              <Button
+                                children={
+                                  e.completed ? "Download" : "Not completed"
+                                }
+                                color={"orange"}
+                                style={"table-btn"}
+                                onClick={function (): void {
+                                  throw new Error("Function not implemented.");
+                                }}
+                              />
+                            ) : (
+                              <></>
+                            )}
+                          </td>
+                          <td>
+                            {e.order_status !== "pending" ? (
+                              <Button
+                                children={
+                                  e.completed ? "Download" : "Not completed"
+                                }
+                                color={"orange"}
+                                style={"table-btn"}
+                                onClick={function (): void {
+                                  throw new Error("Function not implemented.");
+                                }}
+                              />
+                            ) : (
+                              <></>
+                            )}
+                          </td>
+                          <td style={{ minWidth: "40vw" }}>
+                            <div className="form-group mb-3">
+                              <textarea
+                                className="form-control"
+                                name="addInformation"
+                                id="addInformation"
+                                rows={4}
+                                placeholder="Enter text"
+                                value={addInformation}
+                                onChange={(e) =>
+                                  setAddInformation(e.target.value)
+                                }
+                              ></textarea>
+                            </div>
+                          </td>
+                        </tr>
+                      ))
+                  : ""}
+              </tbody>
+            </table>
+          </div>
+          <div className="row">
+            <p>Recent edited files</p>
             <table className="table dashboard-table">
               <tbody>
                 <tr>
@@ -261,4 +290,83 @@ export default function Dashboard({
       <Footer kind="short" />
     </>
   );
+}
+
+{
+  /* <form
+                  className="form mx-4 mb-4"
+                  action="/api/signup"
+                  method="post"
+                  id="reg-form"
+                >
+                  <div className="col-xs-12">
+                    <div className="form-group ">
+                      <label htmlFor="username">User name:</label>
+                      <input
+                        type="text"
+                        className="input-field"
+                        id="username"
+                        name="username"
+                        placeholder="Enter user name"
+                        defaultValue="user1"
+                        required
+                      />
+                      <br />
+                    </div>
+                  </div>
+                  <div className="col-xs-12">
+                    <div className="form-group">
+                      <label htmlFor="email">Email:</label>
+                      <input
+                        type="email"
+                        className="input-field"
+                        id="email"
+                        name="email"
+                        placeholder="Enter email"
+                        defaultValue={"client@example.com"}
+                        value={
+                          userDataForDashboard
+                            ? userDataForDashboard.data.userData[0].email
+                            : "client@example.com"
+                        }
+                        required
+                      />
+                      <br />
+                    </div>
+                  </div>
+                  <div className="col-xs-12">
+                    <div className="form-group">
+                      <label htmlFor="phone">Phone number:</label>
+                      <input
+                        type="text"
+                        className="input-field"
+                        id="phone"
+                        name="phone"
+                        placeholder="Enter phone"
+                        defaultValue="+3530000000"
+                        value={
+                          userDataForDashboard
+                            ? userDataForDashboard.data.userData[0].phone
+                            : "+3530000000"
+                        }
+                        required
+                      />
+                      <br />
+                    </div>
+                  </div>
+                  <div className="col-xs-12">
+                    <div className="form-group">
+                      <label htmlFor="password">Password:</label>
+                      <input
+                        type="password"
+                        className="input-field"
+                        id="password"
+                        name="password"
+                        placeholder="Enter password"
+                        defaultValue="pass"
+                        required
+                      />
+                    </div>
+                  </div> 
+                </form>*/
 }

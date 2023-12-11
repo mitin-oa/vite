@@ -25,9 +25,6 @@ export default function CalculateCost({
     setNumPages(numPages);
   };
   const [calculateCost, setCalculateCost] = useState(false);
-  function handleCalculation() {
-    setCalculateCost(!calculateCost);
-  }
   const [expressDelivery, setExpressDelivery] = useState(false);
   const [addInformation, setAddInformation] = useState("Add information");
   const [inputName, setInputName] = useState("John Boil");
@@ -36,6 +33,27 @@ export default function CalculateCost({
   );
   const [inputPhone, setInputPhone] = useState("+343 12345678");
 
+  const [calculateCostInf, setCalcCostInf] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    numberOfPages: "",
+    express: false,
+    notes: "",
+  });
+
+  function handleCalculation() {
+    setCalculateCost(!calculateCost);
+    setCalcCostInf({
+      name: inputName,
+      email: inputEmail,
+      phone: inputPhone,
+      numberOfPages: numPages,
+      express: expressDelivery,
+      notes: addInformation,
+    });
+  }
+  console.log(calculateCostInf);
   return (
     <>
       <div className="app">
@@ -74,24 +92,59 @@ export default function CalculateCost({
                     <NumInput num={numPages} onChange={onPagesChange} />
                   </div>
                   {/* <!-- Форма загрузки --> */}
-                  <div className="form-group mb-3">
-                    <label>2. Optional Extras</label>
-                    <div className="form-check">
-                      <input
-                        type="checkbox"
-                        className="form-check-input"
-                        name="expressDelivery"
-                        id="expressDelivery"
-                        onChange={(e) => setExpressDelivery(e.target.checked)}
+                  <div style={{ display: "flex" }}>
+                    <div className="form-group mb-3">
+                      <label>2. Optional Extras</label>
+                      <div className="form-check">
+                        <input
+                          type="checkbox"
+                          className="form-check-input"
+                          name="expressDelivery"
+                          id="expressDelivery"
+                          onChange={(e) => setExpressDelivery(e.target.checked)}
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="expressDelivery"
+                        >
+                          Express Delivery (+50%)
+                        </label>
+                      </div>
+                    </div>
+                    <div className="form-group" style={{ margin: "15px auto" }}>
+                      <Button
+                        children="Calculate Cost"
+                        color="orange"
+                        onClick={handleCalculation}
                       />
-                      <label
-                        className="form-check-label"
-                        htmlFor="expressDelivery"
-                      >
-                        Express Delivery (+50%)
-                      </label>
                     </div>
                   </div>
+                  {calculateCost && (
+                    <table className="table">
+                      <tbody>
+                        <tr>
+                          <td>Estimated cost in credits</td>
+                          <td>Estimated cost in $</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            {numPages
+                              ? expressDelivery
+                                ? numPages * 1.5 * 20
+                                : numPages * 20
+                              : 1}
+                          </td>
+                          <td>
+                            {numPages
+                              ? expressDelivery
+                                ? numPages * 1.5 * 20
+                                : numPages * 20
+                              : 20}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  )}
                   <div className="form-group mb-3">
                     <label htmlFor="addInformation">
                       Is there any information that you would like to bring to
@@ -184,8 +237,8 @@ export default function CalculateCost({
                   <td>
                     {numPages
                       ? expressDelivery
-                        ? numPages * 1.5
-                        : numPages
+                        ? numPages * 1.5 * 20
+                        : numPages * 20
                       : 1}
                   </td>
                   <td>

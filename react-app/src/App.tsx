@@ -16,6 +16,8 @@ export const MobileScreenContext = createContext(false);
 // * VK: Significant for the backend area. Please exercise caution when making alterations
 import { sendLogInRequest } from "./components/scripts/logIn";
 import { useMediaQuery } from "react-responsive";
+import DashBoardR from "./DashBoardEditor";
+import DashBoardEditor from "./DashBoardEditor";
 
 export function deleteCookie(name: string) {
   const date = new Date();
@@ -167,7 +169,7 @@ function App() {
             <Route
               path="DashBoard"
               element={
-                <DashBoard
+                <DashBoardEditor
                   kind="short"
                   onSignIn={onSignIn}
                   handleSignIn={handleSignIn}

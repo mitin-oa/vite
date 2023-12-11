@@ -41,7 +41,6 @@ export default function BuyCredits({
     console.log("serverResponse");
     console.log(serverResponse);
 
-
     // * VK: Closing the modal window after successful payment
     setShowModal(!showModal);
   };
