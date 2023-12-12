@@ -122,12 +122,16 @@ export default function CalculateCost({
                       <label htmlFor="numberOfPages">
                         1. Select the number of pages in your document
                       </label>
-
                       <NumInput num={numPages} onChange={onPagesChange} />
                     </div>
                     {/* <!-- Форма загрузки --> */}
-                    <div style={{ display: "flex" }}>
-                      <div className="form-group">
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <div className="form-group" style={{ width: "50%" }}>
                         <label>2. Optional Extras</label>
                         <div className="form-check">
                           <input
@@ -147,7 +151,12 @@ export default function CalculateCost({
                           </label>
                         </div>
                       </div>
-                      <div style={{ margin: "0 auto", padding: "15px 0" }}>
+                      <div
+                        style={{
+                          margin: "0 auto",
+                          padding: "15px 0",
+                        }}
+                      >
                         <Button
                           children="Calculate Cost"
                           color="orange"
@@ -159,18 +168,20 @@ export default function CalculateCost({
                       <table className="table">
                         <tbody>
                           <tr>
-                            <td>Estimated cost in credits</td>
+                            <td style={{ textAlign: "center" }}>
+                              Estimated cost in credits
+                            </td>
                             <td>Estimated cost in $</td>
                           </tr>
                           <tr>
-                            <td>
+                            <td style={{ width: "50%", textAlign: "center" }}>
                               {numPages
                                 ? expressDelivery
                                   ? numPages * 1.5 * 20
                                   : numPages * 20
                                 : 0}
                             </td>
-                            <td style={{ minWidth: "20vw" }}>
+                            <td style={{ width: "50%" }}>
                               {numPages
                                 ? expressDelivery
                                   ? numPages * 1.5 * 20
@@ -187,9 +198,9 @@ export default function CalculateCost({
                       <div style={{ display: "flex" }}>
                         <label
                           htmlFor="addInformation"
-                          style={{ margin: "5px 20px 0 0" }}
+                          style={{ margin: "5px 0px 0 0", width: "50%" }}
                         >
-                          3. Please, download your files
+                          3. Please, upload files
                         </label>
                         <div style={{ margin: "0 auto", padding: "10px 0" }}>
                           <div className="file-upload">
@@ -202,7 +213,7 @@ export default function CalculateCost({
                                 multiple // Add the 'multiple' attribute to enable multiple file selection
                                 onChange={handleFileChange}
                               />
-                              <span>Choose files</span>
+                              <span>Upload files</span>
                             </label>
                           </div>
                         </div>
@@ -220,7 +231,7 @@ export default function CalculateCost({
                           <tbody>
                             <tr></tr>
                             {fileData.map((file, index) => (
-                              <tr key={file.index}>
+                              <tr key={index}>
                                 <td>
                                   {file.file.name.length > 40
                                     ? file.file.name.slice(0, 39) + "…"
@@ -263,14 +274,14 @@ export default function CalculateCost({
                     </div>
 
                     <div className="form-group mb-3">
-                      <label htmlFor="email">Email</label>
+                      <label htmlFor="email">Email*</label>
                       <input
                         type="email"
                         className="form-control"
                         name="email"
                         id="email"
                         value={inputEmail}
-                        required
+                        required={true}
                         onChange={(e) => setInputEmail(e.target.value)}
                       />
                     </div>
@@ -290,7 +301,7 @@ export default function CalculateCost({
 
                     <div className="form-group mb-3">
                       <label htmlFor="contactPersonName">
-                        Contact person name
+                        Contact person name*
                       </label>
                       <input
                         type="text"
@@ -298,7 +309,7 @@ export default function CalculateCost({
                         name="contactPersonName"
                         id="contactPersonName"
                         value={inputName}
-                        required
+                        required={true}
                         onChange={(e) => setInputName(e.target.value)}
                       />
                     </div>
