@@ -45,6 +45,8 @@ export default function CalculateCost({
 
   function handleCalculation() {
     setCalculateCost(!calculateCost);
+  }
+  function handleOrder() {
     setCalcCostInf({
       name: inputName,
       email: inputEmail,
@@ -53,7 +55,9 @@ export default function CalculateCost({
       express: expressDelivery,
       notes: addInformation,
     });
+    // add logic...
   }
+
   console.log(calculateCostInf);
 
   type FileData = {
@@ -320,7 +324,7 @@ export default function CalculateCost({
                       <Button
                         children="Proceed to order"
                         color="orange"
-                        onClick={handleCalculation}
+                        onClick={handleOrder}
                         style="modal-btn"
                       />
                     </div>

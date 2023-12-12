@@ -414,6 +414,14 @@ color: #033c5a;
 .row {
   flex-grow: 1 !important;
 }
+
+.col-md-6 {
+  @media (max-width: 1030px) {
+    flex: 0 0 auto !important;
+    width: 100% !important;
+  }
+}
+
 .mt-5 {
   padding-left: 0px !important;
   padding-right: 0px !important;
