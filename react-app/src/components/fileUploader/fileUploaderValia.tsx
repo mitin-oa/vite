@@ -265,7 +265,7 @@ const FileUploader = ({
           onClick={handleUpload}
         /> */}
         {/* // ! Temporarily. For debugging */}
-        <button onClick={logContents}>Log Contents</button>
+        {/* <button onClick={logContents}>Log Contents</button> */}
       </div>
     </>
   );

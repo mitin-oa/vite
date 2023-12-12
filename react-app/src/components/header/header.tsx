@@ -156,9 +156,9 @@ export default function HeaderMenu({
                   <Link className="nav__link nav__text" to="CalculateCost">
                     Calculate Cost
                   </Link>
-                  <Link className="nav__link nav__text" to="UpLoad">
+                  {/* <Link className="nav__link nav__text" to="UpLoad">
                     Upload Form
-                  </Link>
+                  </Link> */}
                 </>
               ) : (
                 <></>

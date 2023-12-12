@@ -146,13 +146,13 @@ export const Navbar = ({
             >
               Calculate Cost
             </Link>
-            <Link
+            {/* <Link
               className="burger_visible__Link"
               to="/UpLoad"
               onClick={() => close()}
             >
               Upload Form
-            </Link>
+            </Link> */}
           </>
         )}
 

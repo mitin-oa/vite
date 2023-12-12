@@ -4,6 +4,7 @@ import NumInput from "./components/InputNumber";
 import { ChangeEvent, SetStateAction, useState } from "react";
 import HeaderMenu from "./components/header/header";
 import Button from "./components/Button";
+import FileUploader from "./components/fileUploader/fileUploaderValia";
 
 export default function CalculateCost({
   handleSignIn,
@@ -54,6 +55,38 @@ export default function CalculateCost({
     });
   }
   console.log(calculateCostInf);
+
+  type FileData = {
+    index: number;
+    file: File;
+    expressDelivery: boolean;
+    pages: number;
+    costInPoints: number;
+  };
+  const [fileData, setFileData] = useState<FileData[]>([]);
+
+  // VK: Adds a value to the FileData fields
+  // * VK: Добавляет значение в поля FileData
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const newFileList = e.target.files;
+      /* setFiles(newFileList);
+       */
+      // VK: Create file objects with unique indexes
+      // * VK: Создаем объекты файлов с уникальными индексами
+      const filesWithAdditionalData: FileData[] = Array.from(newFileList).map(
+        (file, index) => ({
+          index,
+          file,
+          expressDelivery: false,
+          pages: 1,
+          costInPoints: 20,
+        })
+      );
+
+      setFileData(filesWithAdditionalData);
+    }
+  };
   return (
     <>
       <div className="app">
@@ -84,81 +117,139 @@ export default function CalculateCost({
               <div className="col-md-6" id="leftColumn">
                 <form id="orderForm">
                   {/*  <!-- <form id="orderForm"> --> */}
-                  <div className="form-group mb-3">
-                    <label htmlFor="numberOfPages">
-                      1. Select the number of pages in your document
-                    </label>
-
-                    <NumInput num={numPages} onChange={onPagesChange} />
-                  </div>
-                  {/* <!-- Форма загрузки --> */}
-                  <div style={{ display: "flex" }}>
+                  <div className="frame-container">
                     <div className="form-group mb-3">
-                      <label>2. Optional Extras</label>
-                      <div className="form-check">
-                        <input
-                          type="checkbox"
-                          className="form-check-input"
-                          name="expressDelivery"
-                          id="expressDelivery"
-                          onChange={(e) => setExpressDelivery(e.target.checked)}
+                      <label htmlFor="numberOfPages">
+                        1. Select the number of pages in your document
+                      </label>
+
+                      <NumInput num={numPages} onChange={onPagesChange} />
+                    </div>
+                    {/* <!-- Форма загрузки --> */}
+                    <div style={{ display: "flex" }}>
+                      <div className="form-group">
+                        <label>2. Optional Extras</label>
+                        <div className="form-check">
+                          <input
+                            type="checkbox"
+                            className="form-check-input"
+                            name="expressDelivery"
+                            id="expressDelivery"
+                            onChange={(e) =>
+                              setExpressDelivery(e.target.checked)
+                            }
+                          />
+                          <label
+                            className="form-check-label"
+                            htmlFor="expressDelivery"
+                          >
+                            Express Delivery (+50%)
+                          </label>
+                        </div>
+                      </div>
+                      <div style={{ margin: "0 auto", padding: "15px 0" }}>
+                        <Button
+                          children="Calculate Cost"
+                          color="orange"
+                          onClick={handleCalculation}
                         />
-                        <label
-                          className="form-check-label"
-                          htmlFor="expressDelivery"
-                        >
-                          Express Delivery (+50%)
-                        </label>
                       </div>
                     </div>
-                    <div className="form-group" style={{ margin: "15px auto" }}>
-                      <Button
-                        children="Calculate Cost"
-                        color="orange"
-                        onClick={handleCalculation}
-                      />
-                    </div>
+                    {calculateCost && (
+                      <table className="table">
+                        <tbody>
+                          <tr>
+                            <td>Estimated cost in credits</td>
+                            <td>Estimated cost in $</td>
+                          </tr>
+                          <tr>
+                            <td>
+                              {numPages
+                                ? expressDelivery
+                                  ? numPages * 1.5 * 20
+                                  : numPages * 20
+                                : 0}
+                            </td>
+                            <td style={{ minWidth: "20vw" }}>
+                              {numPages
+                                ? expressDelivery
+                                  ? numPages * 1.5 * 20
+                                  : numPages * 20
+                                : 0}
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    )}
                   </div>
-                  {calculateCost && (
-                    <table className="table">
-                      <tbody>
-                        <tr>
-                          <td>Estimated cost in credits</td>
-                          <td>Estimated cost in $</td>
-                        </tr>
-                        <tr>
-                          <td>
-                            {numPages
-                              ? expressDelivery
-                                ? numPages * 1.5 * 20
-                                : numPages * 20
-                              : 1}
-                          </td>
-                          <td>
-                            {numPages
-                              ? expressDelivery
-                                ? numPages * 1.5 * 20
-                                : numPages * 20
-                              : 20}
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  )}
-                  <div className="form-group mb-3">
-                    <label htmlFor="addInformation">
-                      Is there any information that you would like to bring to
-                      our attention about your contract? (Optional)
-                    </label>
-                    <textarea
-                      className="form-control"
-                      name="addInformation"
-                      id="addInformation"
-                      rows={4}
-                      placeholder="Enter text"
-                      value={addInformation}
-                      onChange={(e) => setAddInformation(e.target.value)}
-                    ></textarea>
+                  <div className="frame-container">
+                    <div className="form-group mb-3">
+                      <div style={{ display: "flex" }}>
+                        <label
+                          htmlFor="addInformation"
+                          style={{ margin: "5px 20px 0 0" }}
+                        >
+                          3. Please, download your files
+                        </label>
+                        <div style={{ margin: "0 auto", padding: "10px 0" }}>
+                          <div className="file-upload">
+                            <label>
+                              <input
+                                type="file"
+                                name="fileToUpload"
+                                id="fileToUpload"
+                                accept=".doc, .docx, .rtf, .pdf, .odt, .txt"
+                                multiple // Add the 'multiple' attribute to enable multiple file selection
+                                onChange={handleFileChange}
+                              />
+                              <span>Choose files</span>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {fileData.length > 0 ? (
+                      <div className="table-scroll">
+                        <table className="table">
+                          <thead>
+                            <tr>
+                              <th colSpan={5}>File name</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr></tr>
+                            {fileData.map((file, index) => (
+                              <tr key={file.index}>
+                                <td>
+                                  {file.file.name.length > 40
+                                    ? file.file.name.slice(0, 39) + "…"
+                                    : file.file.name}
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+
+                    <div className="form-group mb-3">
+                      <label htmlFor="addInformation">
+                        4. Is there any information that you would like to bring
+                        to our attention about your contract? (Optional)
+                      </label>
+                      <textarea
+                        className="form-control"
+                        name="addInformation"
+                        id="addInformation"
+                        rows={4}
+                        placeholder="Enter text"
+                        value={addInformation}
+                        onChange={(e) => setAddInformation(e.target.value)}
+                      ></textarea>
+                    </div>
                   </div>
                 </form>
               </div>
@@ -166,56 +257,62 @@ export default function CalculateCost({
               {/* <!-- Правая колонка с элементами формы --> */}
               <div className="col-md-6" id="rightColumn">
                 <form id="orderForm">
-                  <div className="form-group mb-3">
-                    <label>3. Contact Information</label>
-                  </div>
+                  <div className="frame-container">
+                    <div className="form-group mb-3">
+                      <label>3. Contact Information</label>
+                    </div>
 
-                  <div className="form-group mb-3">
-                    <label htmlFor="email">Email</label>
-                    <input
-                      type="email"
-                      className="form-control"
-                      name="email"
-                      id="email"
-                      value={inputEmail}
-                      required
-                      onChange={(e) => setInputEmail(e.target.value)}
-                    />
-                  </div>
+                    <div className="form-group mb-3">
+                      <label htmlFor="email">Email</label>
+                      <input
+                        type="email"
+                        className="form-control"
+                        name="email"
+                        id="email"
+                        value={inputEmail}
+                        required
+                        onChange={(e) => setInputEmail(e.target.value)}
+                      />
+                    </div>
 
-                  <div className="form-group mb-3">
-                    <label htmlFor="phoneNumber">Phone number</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      name="phoneNumber"
-                      id="phoneNumber"
-                      value={inputPhone}
-                      required
-                      onChange={(e) => setInputPhone(e.target.value)}
-                    />
-                  </div>
+                    <div className="form-group mb-3">
+                      <label htmlFor="phoneNumber">Phone number</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="phoneNumber"
+                        id="phoneNumber"
+                        value={inputPhone}
+                        required
+                        onChange={(e) => setInputPhone(e.target.value)}
+                      />
+                    </div>
 
-                  <div className="form-group mb-3">
-                    <label htmlFor="contactPersonName">
-                      Contact person name
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      name="contactPersonName"
-                      id="contactPersonName"
-                      value={inputName}
-                      required
-                      onChange={(e) => setInputName(e.target.value)}
-                    />
-                  </div>
-                  <div className="form-group mb-3" style={{ margin: "0 auto" }}>
-                    <Button
-                      children="Proceed to checkout"
-                      color="orange"
-                      onClick={handleCalculation}
-                    />
+                    <div className="form-group mb-3">
+                      <label htmlFor="contactPersonName">
+                        Contact person name
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="contactPersonName"
+                        id="contactPersonName"
+                        value={inputName}
+                        required
+                        onChange={(e) => setInputName(e.target.value)}
+                      />
+                    </div>
+                    <div
+                      className="form-group mb-3"
+                      style={{ margin: "0 auto" }}
+                    >
+                      <Button
+                        children="Proceed to order"
+                        color="orange"
+                        onClick={handleCalculation}
+                        style="modal-btn"
+                      />
+                    </div>
                   </div>
                 </form>
 
@@ -223,35 +320,6 @@ export default function CalculateCost({
               </div>
             </div>
           </div>
-          {calculateCost && (
-            <table className="table">
-              <tbody>
-                <tr>
-                  <td rowSpan={2}>Total</td>
-                  <td>Number of pages</td>
-                  <td>Estimated cost in credits</td>
-                  <td>Estimated cost in $</td>
-                </tr>
-                <tr>
-                  <td>{numPages ? numPages : 1}</td>
-                  <td>
-                    {numPages
-                      ? expressDelivery
-                        ? numPages * 1.5 * 20
-                        : numPages * 20
-                      : 1}
-                  </td>
-                  <td>
-                    {numPages
-                      ? expressDelivery
-                        ? numPages * 1.5 * 20
-                        : numPages * 20
-                      : 20}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          )}
         </section>
       </div>
       <Footer kind={"short"} />
