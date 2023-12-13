@@ -38,8 +38,7 @@ export default function BuyCredits({
 
     // * VK Backend: sending payment data to server
     const serverResponse = await sendPaymentDataToServer(transactionId, amount);
-    console.log("serverResponse");
-    console.log(serverResponse);
+    console.log("serverResponse", serverResponse);
 
     // * VK: Closing the modal window after successful payment
     setShowModal(!showModal);
