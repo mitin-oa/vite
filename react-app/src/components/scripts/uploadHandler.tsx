@@ -28,7 +28,6 @@ const sendToServer = async (fileData: any, totalCredits: number): Promise<any> =
         })
             .then(response => response.json())
             .then(data => {
-                console.log(data);
                 resolve(data);
             })
             .catch(error => {
