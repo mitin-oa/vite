@@ -12,25 +12,25 @@
 function sendPaymentDataToServer(payPalOrderID: any, totalAmount: any) {
 
   const dataToSend = { payPalOrderID: payPalOrderID, totalAmount: totalAmount };
-  let serverResponse;
 
-  fetch('/api/process-payment', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(dataToSend)
-  })
-    .then(response => response.json())
-    .then(data => {
-      console.log(data);
-      serverResponse =  data;
+  return new Promise((resolve, reject) => {
+    fetch('/api/process-payment', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(dataToSend)
     })
-    .catch(error => {
-      console.error('Error sending payment data:', error);
-    });
-
-    return serverResponse;
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        resolve(data);
+      })
+      .catch(error => {
+        console.error('Error sending payment data:', error);
+        reject(error);
+      });
+  });
 }
 
 export { sendPaymentDataToServer };
