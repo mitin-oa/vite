@@ -1,7 +1,7 @@
 import { useMediaQuery } from "react-responsive";
 import { Footer } from "./components/footer/footer";
 import { useContext, useState } from "react";
-import FileUploader from "./components/fileUploader/fileUploaderValia";
+import FileUploader from "./components/fileUploader/fileUploader";
 import HeaderMenu from "./components/header/header";
 import { SignedInContext, SignedUpContext } from "./App";
 
