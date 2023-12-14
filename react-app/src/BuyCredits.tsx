@@ -4,10 +4,10 @@ import { Footer } from "./components/footer/footer";
 import { ChangeEvent, useState } from "react";
 import NumInput from "./components/InputNumber";
 import ModalWindow from "./components/modal/modal";
-
 // * VK Backend: connecting an external script to process requests to the backend
 import { sendPaymentDataToServer } from "../src/components/scripts/fetch";
 import HeaderMenu from "./components/header/header";
+import Alert from "./components/Alert";
 
 export default function BuyCredits({
   kind,
@@ -31,21 +31,26 @@ export default function BuyCredits({
 
   // * ↓ VK: Significant for the backend area. Please exercise caution when making alterations
   const [showModal, setShowModal] = useState(false); // * VK: State to control the visibility of a modal window
+  const [paymentStatus, setPaymentStatus] = useState();
 
   const handlePayment = async (transactionId: string, amount: number) => {
     console.log("Transaction ID:", transactionId);
     console.log("Amount:", amount);
 
     // * VK Backend: sending payment data to server
-    const serverResponse = await sendPaymentDataToServer(transactionId, amount);
+    const serverResponse: any = await sendPaymentDataToServer(
+      transactionId,
+      amount
+    );
     console.log("serverResponse", serverResponse);
-
+    setPaymentStatus(serverResponse.success);
     // * VK: Closing the modal window after successful payment
     setShowModal(!showModal);
   };
   // * ↑ VK: Significant for the backend area. Please exercise caution when making alterations
 
   console.log(show);
+
   return (
     <>
       <div className="app">
@@ -67,10 +72,12 @@ export default function BuyCredits({
                 <h2>If you want to purchase of credits</h2>
                 <p>1 credit costs 1$</p>
                 <p>
-                  The length of agreement determines number of credits to be
-                  used (20 credits per page)
+                  The size of document determines cost in credits (20 credits
+                  per page)
                 </p>
-                <p>Delivery within 23-72 hours + 50% to the total cost</p>
+                <p>
+                  Express delivery (23-72 hours) require 50% increase of cost
+                </p>
               </div>
 
               {/* <!-- Правая колонка с элементами формы --> */}
@@ -93,20 +100,32 @@ export default function BuyCredits({
                     {/* <!-- Button to show the PayPal button --> */}
                   </div>
                   {/* <!-- PayPal кнопка (placeholder) --> */}
-                  <ModalWindow
-                    title={"Proceed"}
-                    // * VK: Significant for the backend area. Please exercise caution when making alterations
-                    // * VK: Passing the handlePaymentSuccess function to the PayPal component via the onSuccess property
-                    childComp={
-                      <PayPal
-                        amountPay={1 * numCredits}
-                        onSuccess={handlePayment}
-                      />
-                    }
-                    modalIsOpen={showModal}
-                    openModal={() => setShowModal(true)}
-                    closeModal={() => setShowModal(false)}
-                  />
+                  {!paymentStatus ? (
+                    <ModalWindow
+                      title={"Proceed to pay"}
+                      // * VK: Significant for the backend area. Please exercise caution when making alterations
+                      // * VK: Passing the handlePaymentSuccess function to the PayPal component via the onSuccess property
+                      childComp={
+                        <PayPal
+                          amountPay={1 * numCredits}
+                          onSuccess={handlePayment}
+                        />
+                      }
+                      modalIsOpen={showModal}
+                      openModal={() => setShowModal(true)}
+                      closeModal={() => setShowModal(false)}
+                      btnModalStyle={"modal-btn"}
+                    />
+                  ) : (
+                    <Alert
+                      children={
+                        paymentStatus ? "Payment successlull" : "Payment failed"
+                      }
+                      onClose={function (): void {
+                        throw new Error("Function not implemented.");
+                      }}
+                    />
+                  )}
                 </form>
               </div>
             </div>

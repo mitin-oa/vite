@@ -8,6 +8,7 @@ import ModalWindow from "../modal/modal";
 import LogInForm from "../modal/LogInForm";
 import SignInForm from "../modal/SignUpForm";
 import NumInput from "../InputNumber";
+import Alert from "../Alert";
 
 // TODO LIST VK:
 // 1. Search "TODO 1" in file
@@ -30,6 +31,8 @@ const FileUploader = ({
   };
   const signedIn = useContext(SignedInContext);
   const signedUp = useContext(SignedUpContext);
+  const [filesUploaded, setFilesUploaded] = useState(false);
+  const [fileUploadMessage, setFileUploadMessage] = useState("");
   function openModal() {
     setIsOpen(true);
   }
@@ -97,8 +100,6 @@ const FileUploader = ({
         ? updatedFileData[index].pages * creditsPerPage * 1.5
         : updatedFileData[index].pages * creditsPerPage,
     };
-    setFileData(updatedFileData);
-
     // VK: Update fileData state
     // * VK: Обновляем состояние fileData
     setFileData(updatedFileData);
@@ -117,7 +118,7 @@ const FileUploader = ({
     const token =
       parts.length === 2 ? parts.pop()?.split(";").shift() !== null : false;
     if (!token) {
-      alert("Plaese, LogIn again");
+      alert("Please, LogIn again");
     } else {
       /* VK: This data can be used for frontend layout
        * server returns JSON response { "message": "...", "pointsBalance": -97 }
@@ -132,12 +133,22 @@ const FileUploader = ({
           `File has been sent for processing. Need to top up your balance!`
         );
       } else {
-        alert(
-          `File has been sent for processing.`
-        );
+        alert(`File has been sent for processing.`);
       }
+      setFileUploadMessage(
+        data.needTopUpBalance
+          ? "File has been sent for processing. Need to top up your balance!"
+          : "File has been sent for processing."
+      );
     }
+
+    setFilesUploaded(!filesUploaded);
   };
+
+  /* VK: This data can be used for frontend layout
+   * server returns JSON response { "message": "...", "pointsBalance": -97 }
+   * if pointsBalance is negative - display a message about the need to purchase credits
+   */
 
   // ! Temporarily. For debugging
   const logContents = async () => {
@@ -153,130 +164,146 @@ const FileUploader = ({
   fileData.map((file) => (totalPages += Number(file.pages)));
   fileData.map(
     (file) =>
-    (totalCredits += file.expressDelivery
-      ? file.pages * creditsPerPage * 1.5
-      : file.pages * creditsPerPage)
+      (totalCredits += file.expressDelivery
+        ? file.pages * creditsPerPage * 1.5
+        : file.pages * creditsPerPage)
   );
 
   return (
     <>
-      <div className="col-12">
-        <div className="file-upload">
-          <label>
-            <input
-              type="file"
-              name="fileToUpload"
-              id="fileToUpload"
-              accept=".doc, .docx, .rtf, .pdf, .odt, .txt"
-              multiple // Add the 'multiple' attribute to enable multiple file selection
-              onChange={handleFileChange}
-            />
-            <span>Choose files</span>
-          </label>
-        </div>
-      </div>
+      {!filesUploaded ? (
+        <>
+          <div className="col-12">
+            <div className="file-upload">
+              <label>
+                <input
+                  type="file"
+                  name="fileToUpload"
+                  id="fileToUpload"
+                  accept=".doc, .docx, .rtf, .pdf, .odt, .txt"
+                  multiple // Add the 'multiple' attribute to enable multiple file selection
+                  onChange={handleFileChange}
+                />
+                <span>Choose files</span>
+              </label>
+            </div>
+          </div>
 
-      <div className="table-scroll">
-        <table className="table">
-          <thead>
-            <tr>
-              <th colSpan={5}>File details</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Name</td>
-              <td>Number of pages</td>
-              <td>Express Delivery (+50%)</td>
-              <td>Estimated cost (in credits)</td>
-              <td>Size</td>
-            </tr>
+          <div className="table-scroll">
+            <table className="table">
+              <thead>
+                <tr>
+                  <th colSpan={5}>File details</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Name</td>
+                  <td>Number of pages</td>
+                  <td>Express Delivery (+50%)</td>
+                  <td>Estimated cost (in credits)</td>
+                  <td>Size</td>
+                </tr>
 
-            {fileData.map((file, index) => (
-              <tr key={file.index}>
-                <td>
-                  {file.file.name.length > 40
-                    ? file.file.name.slice(0, 39) + "…"
-                    : file.file.name}
-                </td>
-                <td>
-                  <input
-                    type="number"
-                    className="form-control"
-                    name="numberOfPages"
-                    min="0"
-                    defaultValue={1}
-                    data-file-index={file.index}
-                    onChange={(e) =>
-                      setNumberOfPages(index, Number(e.target.value))
-                    }
-                  />
-                </td>
-                <td>
-                  <div className="form-check">
-                    <input
-                      type="checkbox"
-                      className="form-check-input"
-                      name="expressDelivery"
-                      id={`expressDelivery-${file.index}`}
-                      data-file-index={file.index}
-                      checked={file.expressDelivery}
-                      onChange={(e) =>
-                        setExpressDelivery(index, e.target.checked)
-                      }
-                    />
-                    <label
-                      className="form-check-label"
-                      htmlFor={`expressDelivery-${file.index}`}
-                    ></label>
-                  </div>
-                </td>
-                <td>
-                  {file.expressDelivery
-                    ? file.pages * creditsPerPage * 1.5
-                    : file.pages * creditsPerPage}{" "}
-                </td>
-                <td>{(file.file.size / 1024).toFixed(1)} Kbytes</td>
-              </tr>
-            ))}
+                {fileData.map((file, index) => (
+                  <tr key={file.index}>
+                    <td>
+                      {file.file.name.length > 40
+                        ? file.file.name.slice(0, 39) + "…"
+                        : file.file.name}
+                    </td>
+                    <td>
+                      <input
+                        type="number"
+                        className="form-control"
+                        name="numberOfPages"
+                        min="0"
+                        defaultValue={1}
+                        data-file-index={file.index}
+                        onChange={(e) =>
+                          setNumberOfPages(index, Number(e.target.value))
+                        }
+                      />
+                    </td>
+                    <td>
+                      <div className="form-check">
+                        <input
+                          type="checkbox"
+                          className="form-check-input"
+                          name="expressDelivery"
+                          id={`expressDelivery-${file.index}`}
+                          data-file-index={file.index}
+                          checked={file.expressDelivery}
+                          onChange={(e) =>
+                            setExpressDelivery(index, e.target.checked)
+                          }
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor={`expressDelivery-${file.index}`}
+                        ></label>
+                      </div>
+                    </td>
+                    <td>
+                      {file.expressDelivery
+                        ? file.pages * creditsPerPage * 1.5
+                        : file.pages * creditsPerPage}{" "}
+                    </td>
+                    <td>{(file.file.size / 1024).toFixed(1)} Kbytes</td>
+                  </tr>
+                ))}
 
-            <tr>
-              <td>Total</td>
-              <td>{totalPages}</td>
-              <td>{""}</td>
-              <td>{totalCredits}</td>
-              <td>{""}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div>
-        {signedIn ? (
-          <Button children="Proceed" color={""} onClick={handleUpload} />
-        ) : (
-          <ModalWindow
-            title={"Proceed"}
-            childComp={
-              signedUp ? (
-                <LogInForm onSignIn={handleSignIn} onSignUp={handleSignUp} />
+                <tr>
+                  <td>Total</td>
+                  <td>{totalPages}</td>
+                  <td>{""}</td>
+                  <td>{totalCredits}</td>
+                  <td>{""}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div>
+            {signedIn ? (
+              fileData.length > 0 ? (
+                <Button
+                  children="Proceed to upload"
+                  color={""}
+                  onClick={handleUpload}
+                />
               ) : (
-                <SignInForm onSignUp={handleSignUp} />
+                <></>
               )
-            }
-            modalIsOpen={modalIsOpen}
-            openModal={openModal}
-            closeModal={closeModal}
-          />
-        )}{" "}
-        {/* <Button
-          children="Proceed working with backend"
-          color="warning"
-          onClick={handleUpload}
-        /> */}
-        {/* // ! Temporarily. For debugging */}
-        {/* <button onClick={logContents}>Log Contents</button> */}
-      </div>
+            ) : (
+              <ModalWindow
+                title={"Proceed"}
+                childComp={
+                  signedUp ? (
+                    <LogInForm
+                      onSignIn={handleSignIn}
+                      onSignUp={handleSignUp}
+                    />
+                  ) : (
+                    <SignInForm onSignUp={handleSignUp} />
+                  )
+                }
+                modalIsOpen={modalIsOpen}
+                openModal={openModal}
+                closeModal={closeModal}
+              />
+            )}{" "}
+            {/* <button onClick={logContents}>Log Contents</button> */}
+          </div>
+        </>
+      ) : (
+        <Alert
+          children={fileUploadMessage}
+          onClose={() => {
+            setFilesUploaded(!filesUploaded);
+            setFileData([]);
+          }}
+        />
+      )}
     </>
   );
 };
