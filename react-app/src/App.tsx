@@ -169,7 +169,7 @@ function App() {
             <Route
               path="DashBoard"
               element={
-                <DashBoardEditor
+                <DashBoard
                   kind="short"
                   onSignIn={onSignIn}
                   handleSignIn={handleSignIn}

@@ -99,6 +99,7 @@ section {
 .main-content {
   max-width: 1280px;
   margin: 0 auto;
+  padding: 50px 40px 0;
   @media (max-width: 1028px) { /* apply styles for md screens and larger */
     padding: 20px 20px 0px;
   }
@@ -119,6 +120,8 @@ section {
 .nav-item {
   font-size: 20px;
   font-weight: 500;
+  color: #033c5a;
+
 }
 
 /* Redefining the size of the Bootstrap modal dialog box */

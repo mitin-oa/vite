@@ -20,7 +20,7 @@ export default function BuyCredits({
 }: any) {
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1160px" });
   const isPhoneScreen = useMediaQuery({ query: "(max-width: 760px" });
-  const [numCredits, onChange]: any = useState();
+  const [numCredits, onChange]: any = useState(1);
   const [show, setShow] = useState(false);
   const onCreditsChange: any = (e: ChangeEvent<HTMLInputElement>) => {
     const numCredits = !Number.isNaN(e.target.valueAsNumber)
@@ -31,7 +31,7 @@ export default function BuyCredits({
 
   // * ↓ VK: Significant for the backend area. Please exercise caution when making alterations
   const [showModal, setShowModal] = useState(false); // * VK: State to control the visibility of a modal window
-  const [paymentStatus, setPaymentStatus] = useState();
+  const [paymentStatus, setPaymentStatus] = useState(false);
 
   const handlePayment = async (transactionId: string, amount: number) => {
     console.log("Transaction ID:", transactionId);
@@ -67,17 +67,37 @@ export default function BuyCredits({
         <section className="main-content">
           <div className="container mt-5">
             <div className="row">
+              {paymentStatus ? (
+                <Alert
+                  children={
+                    paymentStatus
+                      ? "The payment has been done"
+                      : "Payment has been failed"
+                  }
+                  onClose={() => {
+                    setPaymentStatus(!paymentStatus);
+                  }}
+                />
+              ) : (
+                <></>
+              )}
+            </div>
+          </div>
+          <div className="container mt-5">
+            <div className="row">
               {/* <!-- Левая колонка с текстом --> */}
               <div className="col-md-6">
-                <h2>If you want to purchase of credits</h2>
-                <p>1 credit costs 1$</p>
-                <p>
-                  The size of document determines cost in credits (20 credits
-                  per page)
-                </p>
-                <p>
-                  Express delivery (23-72 hours) require 50% increase of cost
-                </p>
+                <h2>Credits Purchase</h2>
+                <ul className="nav-item">
+                  <li style={{ marginBottom: "10px" }}>1 credit costs 1$</li>
+                  <li style={{ marginBottom: "10px" }}>
+                    The size of document determines cost in credits (20 credits
+                    per page)
+                  </li>
+                  <li style={{ marginBottom: "10px" }}>
+                    Express delivery (23-72 hours) require 50% increase of cost
+                  </li>
+                </ul>
               </div>
 
               {/* <!-- Правая колонка с элементами формы --> */}
@@ -93,39 +113,34 @@ export default function BuyCredits({
 
                     {/*  <!-- Элемент для отображения суммы к оплате --> */}
                     <div className="form-group mb-3">
-                      <label>Amount to Pay: </label>
-                      <span id="amountToPay">{1 * numCredits || 1}</span> $
+                      <label>Amount to Pay:</label>
+                      <span
+                        id="amountToPay"
+                        style={{ fontWeight: "650", color: "#ec720b" }}
+                      >
+                        {" " + (numCredits || 1) + " $"}
+                      </span>{" "}
                     </div>
 
                     {/* <!-- Button to show the PayPal button --> */}
                   </div>
                   {/* <!-- PayPal кнопка (placeholder) --> */}
-                  {!paymentStatus ? (
-                    <ModalWindow
-                      title={"Proceed to pay"}
-                      // * VK: Significant for the backend area. Please exercise caution when making alterations
-                      // * VK: Passing the handlePaymentSuccess function to the PayPal component via the onSuccess property
-                      childComp={
-                        <PayPal
-                          amountPay={1 * numCredits}
-                          onSuccess={handlePayment}
-                        />
-                      }
-                      modalIsOpen={showModal}
-                      openModal={() => setShowModal(true)}
-                      closeModal={() => setShowModal(false)}
-                      btnModalStyle={"modal-btn"}
-                    />
-                  ) : (
-                    <Alert
-                      children={
-                        paymentStatus ? "Payment successlull" : "Payment failed"
-                      }
-                      onClose={function (): void {
-                        throw new Error("Function not implemented.");
-                      }}
-                    />
-                  )}
+
+                  <ModalWindow
+                    title={"Proceed to pay"}
+                    // * VK: Significant for the backend area. Please exercise caution when making alterations
+                    // * VK: Passing the handlePaymentSuccess function to the PayPal component via the onSuccess property
+                    childComp={
+                      <PayPal
+                        amountPay={1 * numCredits}
+                        onSuccess={handlePayment}
+                      />
+                    }
+                    modalIsOpen={showModal}
+                    openModal={() => setShowModal(true)}
+                    closeModal={() => setShowModal(false)}
+                    btnModalStyle={"modal-btn"}
+                  />
                 </form>
               </div>
             </div>

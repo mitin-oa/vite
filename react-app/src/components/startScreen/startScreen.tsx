@@ -52,7 +52,7 @@ export default function StartScreen({
             tempor incididunt ut labore et dolore magna aliqua. Laoreet id donec
             ultrices tincidunt.
           </p>
-          <Link to="UpLoad">
+          <Link to="CalculateCost">
             <Button children="Order Now" color="warning" onClick={() => null} />
           </Link>
         </div>
