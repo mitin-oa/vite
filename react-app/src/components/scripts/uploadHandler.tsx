@@ -6,38 +6,41 @@
  *  server { "message": "...", "pointsBalance": ... }
  */
 
-  const sendToServer = async (fileData: any, totalCredits: number): Promise<any> => {
+const sendToServer = async (
+  fileData: any,
+  totalCredits: number
+): Promise<any> => {
   const formData = new FormData();
 
-//   console.log(fileData);
+  //   console.log(fileData);
 
   formData.append(`filesCount`, fileData.length.toString());
   formData.append(`totalPointsCost`, totalCredits.toString());
 
   for (const file of fileData) {
-      formData.append(`file_${file.index}`, file.file);
-      formData.append(`expressDelivery_${file.index}`, file.expressDelivery.toString());
-      formData.append(`pages_${file.index}`, file.pages.toString());
-      formData.append(`pointsCost_${file.index}`, file.costInPoints.toString());
+    formData.append(`file_${file.index}`, file.file);
+    formData.append(
+      `expressDelivery_${file.index}`,
+      file.expressDelivery.toString()
+    );
+    formData.append(`pages_${file.index}`, file.pages.toString());
+    formData.append(`pointsCost_${file.index}`, file.costInPoints.toString());
   }
 
-  try {
-      const response = await fetch('/api/initiateFileProcessing', {
-          method: 'POST',
-          body: formData,
+  return new Promise((resolve, reject) => {
+    fetch("/api/initiateFileProcessing", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        resolve(data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        reject(error);
       });
-
-      if (response.ok) {
-          const data = await response.json();
-          return data;
-      } else {
-          console.error('There was an error sending a request to the server.');
-          return null; // ! VK: Or throw an error, depending on the error handling logic
-      }
-  } catch (error) {
-      console.error('An error occurred while executing the request:', error);
-      return null; // ! VK: Or throw an error, depending on the error handling logic
-  }
+  });
 };
 
 export default sendToServer;

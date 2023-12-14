@@ -4,7 +4,7 @@ import NumInput from "./components/InputNumber";
 import { ChangeEvent, SetStateAction, useState } from "react";
 import HeaderMenu from "./components/header/header";
 import Button from "./components/Button";
-import FileUploader from "./components/fileUploader/fileUploaderValia";
+import FileUploader from "./components/fileUploader/fileUploader";
 
 export default function CalculateCost({
   handleSignIn,

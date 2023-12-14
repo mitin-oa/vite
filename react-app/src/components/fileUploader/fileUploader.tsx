@@ -14,7 +14,7 @@ import Alert from "../Alert";
 // 1. Search "TODO 1" in file
 // 2. Search "TODO 2" in file
 
-const FileUploader = ({
+const FileUploader = async ({
   setIsOpen,
   handleSignIn,
   handleSignUp,
@@ -112,25 +112,38 @@ const FileUploader = ({
       return;
     }
 
-    /* VK: This data can be used for frontend layout
-     * server returns JSON response { "message": "...", "pointsBalance": -97 }
-     * if pointsBalance is negative - display a message about the need to purchase credits
-     */
-    const data = await sendToServer(fileData, totalCredits);
-    console.log("Server processed the request successfully: ", data);
-    // TODO 1 VK: Improve the logic in case insufficient of balance and confirmation in case of sufficient balance
-    // * TODO 1 ВК: Внедрить логику при недостаточном балансе и подтверждение при достаточном балансе
-    if (data.pointsBalance < 0) {
-      alert(
-        `File has been sent for processing. Balance ${data.pointsBalance}. Need to top up your balance!`
-      );
+    // ! VK: Временно - проверка авторизации перед проведением платежа.
+    // ! Заменить на логику, работающую с сервером
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; token=`);
+    const token =
+      parts.length === 2 ? parts.pop()?.split(";").shift() !== null : false;
+    if (!token) {
+      alert("Please, LogIn again");
     } else {
-      alert(
-        `File has been sent for processing. Balance ${data.pointsBalance}.`
-      );
+      /* VK: This data can be used for frontend layout
+       * server returns JSON response { "message": "...", "pointsBalance": -97 }
+       * if pointsBalance is negative - display a message about the need to purchase credits
+       */
+      const data = await sendToServer(fileData, totalCredits);
+      console.log("Server processed the request successfully: ", data);
+      // TODO 1 VK: Improve the logic in case insufficient of balance and confirmation in case of sufficient balance
+      // * TODO 1 ВК: Внедрить логику при недостаточном балансе и подтверждение при достаточном балансе
+      if (data.needTopUpBalance) {
+        alert(
+          `File has been sent for processing. Need to top up your balance!`
+        );
+      } else {
+        alert(`File has been sent for processing.`);
+      }
     }
     setFilesUploaded(!filesUploaded);
   };
+
+  /* VK: This data can be used for frontend layout
+   * server returns JSON response { "message": "...", "pointsBalance": -97 }
+   * if pointsBalance is negative - display a message about the need to purchase credits
+   */
 
   // ! Temporarily. For debugging
   const logContents = async () => {
