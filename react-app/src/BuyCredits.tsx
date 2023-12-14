@@ -87,15 +87,17 @@ export default function BuyCredits({
             <div className="row">
               {/* <!-- Левая колонка с текстом --> */}
               <div className="col-md-6">
-                <h2>If you want to purchase of credits</h2>
-                <p>1 credit costs 1$</p>
-                <p>
-                  The size of document determines cost in credits (20 credits
-                  per page)
-                </p>
-                <p>
-                  Express delivery (23-72 hours) require 50% increase of cost
-                </p>
+                <h2>Credits Purchase</h2>
+                <ul className="nav-item">
+                  <li style={{ marginBottom: "10px" }}>1 credit costs 1$</li>
+                  <li style={{ marginBottom: "10px" }}>
+                    The size of document determines cost in credits (20 credits
+                    per page)
+                  </li>
+                  <li style={{ marginBottom: "10px" }}>
+                    Express delivery (23-72 hours) require 50% increase of cost
+                  </li>
+                </ul>
               </div>
 
               {/* <!-- Правая колонка с элементами формы --> */}
@@ -111,8 +113,13 @@ export default function BuyCredits({
 
                     {/*  <!-- Элемент для отображения суммы к оплате --> */}
                     <div className="form-group mb-3">
-                      <label>Amount to Pay: </label>
-                      <span id="amountToPay">{1 * numCredits || 1}</span> $
+                      <label>Amount to Pay:</label>
+                      <span
+                        id="amountToPay"
+                        style={{ fontWeight: "650", color: "#ec720b" }}
+                      >
+                        {" " + (numCredits || 1) + " $"}
+                      </span>{" "}
                     </div>
 
                     {/* <!-- Button to show the PayPal button --> */}
