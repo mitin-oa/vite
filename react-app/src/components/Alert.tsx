@@ -11,6 +11,7 @@ const Alert = ({ children, onClose }: Props) => {
       <div
         className="alert alert-warning alert-dismissible fade show"
         role="alert"
+        style={{ textAlign: "center" }}
       >
         <strong>{children}</strong>
         <button
@@ -19,6 +20,7 @@ const Alert = ({ children, onClose }: Props) => {
           data-bs-dismiss="alert"
           aria-label="Close"
           onClick={onClose}
+          style={{ width: "30px", padding: 0, margin: "12px" }}
         ></button>
       </div>
     </>
