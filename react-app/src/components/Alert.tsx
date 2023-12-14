@@ -13,13 +13,13 @@ const Alert = ({ children, onClose }: Props) => {
         role="alert"
       >
         <strong>{children}</strong>
-        {/* <button
+        <button
           type="button"
           className="btn-close"
           data-bs-dismiss="alert"
           aria-label="Close"
           onClick={onClose}
-        ></button> */}
+        ></button>
       </div>
     </>
   );

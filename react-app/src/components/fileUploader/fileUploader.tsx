@@ -14,7 +14,7 @@ import Alert from "../Alert";
 // 1. Search "TODO 1" in file
 // 2. Search "TODO 2" in file
 
-const FileUploader = async ({
+const FileUploader = ({
   setIsOpen,
   handleSignIn,
   handleSignUp,
@@ -32,6 +32,7 @@ const FileUploader = async ({
   const signedIn = useContext(SignedInContext);
   const signedUp = useContext(SignedUpContext);
   const [filesUploaded, setFilesUploaded] = useState(false);
+  const [fileUploadMessage, setFileUploadMessage] = useState("");
   function openModal() {
     setIsOpen(true);
   }
@@ -99,8 +100,6 @@ const FileUploader = async ({
         ? updatedFileData[index].pages * creditsPerPage * 1.5
         : updatedFileData[index].pages * creditsPerPage,
     };
-    setFileData(updatedFileData);
-
     // VK: Update fileData state
     // * VK: Обновляем состояние fileData
     setFileData(updatedFileData);
@@ -136,7 +135,13 @@ const FileUploader = async ({
       } else {
         alert(`File has been sent for processing.`);
       }
+      setFileUploadMessage(
+        data.needTopUpBalance
+          ? "File has been sent for processing. Need to top up your balance!"
+          : "File has been sent for processing."
+      );
     }
+
     setFilesUploaded(!filesUploaded);
   };
 
@@ -166,23 +171,24 @@ const FileUploader = async ({
 
   return (
     <>
-      <div className="col-12">
-        <div className="file-upload">
-          <label>
-            <input
-              type="file"
-              name="fileToUpload"
-              id="fileToUpload"
-              accept=".doc, .docx, .rtf, .pdf, .odt, .txt"
-              multiple // Add the 'multiple' attribute to enable multiple file selection
-              onChange={handleFileChange}
-            />
-            <span>Choose files</span>
-          </label>
-        </div>
-      </div>
       {!filesUploaded ? (
         <>
+          <div className="col-12">
+            <div className="file-upload">
+              <label>
+                <input
+                  type="file"
+                  name="fileToUpload"
+                  id="fileToUpload"
+                  accept=".doc, .docx, .rtf, .pdf, .odt, .txt"
+                  multiple // Add the 'multiple' attribute to enable multiple file selection
+                  onChange={handleFileChange}
+                />
+                <span>Choose files</span>
+              </label>
+            </div>
+          </div>
+
           <div className="table-scroll">
             <table className="table">
               <thead>
@@ -259,11 +265,15 @@ const FileUploader = async ({
           </div>
           <div>
             {signedIn ? (
-              <Button
-                children="Proceed to upload"
-                color={""}
-                onClick={handleUpload}
-              />
+              fileData.length > 0 ? (
+                <Button
+                  children="Proceed to upload"
+                  color={""}
+                  onClick={handleUpload}
+                />
+              ) : (
+                <></>
+              )
             ) : (
               <ModalWindow
                 title={"Proceed"}
@@ -287,9 +297,10 @@ const FileUploader = async ({
         </>
       ) : (
         <Alert
-          children={filesUploaded}
-          onClose={function (): void {
-            throw new Error("Function not implemented.");
+          children={fileUploadMessage}
+          onClose={() => {
+            setFilesUploaded(!filesUploaded);
+            setFileData([]);
           }}
         />
       )}
