@@ -62,7 +62,7 @@ export default function DashBoardEditor({
       order_status: "paid",
     };
 
-    //console.log(userDataForDashboard);
+    console.log(userDataForDashboard);
     setUserDataForDashboard(userDataForDashboard);
   }
 
@@ -129,7 +129,7 @@ export default function DashBoardEditor({
             <table className="table dashboard-table">
               <tbody>
                 <tr>
-                  <td>File name</td>
+                  <td style={{ minWidth: "7vw" }}>File name</td>
                   <td>Pages</td>
                   <td>Client name</td>
 
@@ -141,18 +141,18 @@ export default function DashBoardEditor({
                   <td>Notes or Flag to manager</td>
                 </tr>
                 {userDataForDashboard
-                  ? userDataForDashboard.data.fileData
-                      .slice(-10, userDataForDashboard.data.fileData.length)
+                  ? userDataForDashboard.data.orderData
+                      .slice(-10, userDataForDashboard.data.orderData.length)
                       .sort((a: any, b: any) =>
                         a.created_at.date > b.created_at.date ? 1 : -1
                       )
                       .map((e: any) => (
-                        <tr>
+                        <tr key={e.order_id}>
                           <td>{userDataForDashboard ? e.original_name : ""}</td>
-                          <td>{userDataForDashboard ? e.order_status : ""}</td>
                           <td>
-                            {userDataForDashboard.data.userData[0].username}
+                            {userDataForDashboard ? e.number_of_pages : ""}
                           </td>
+                          <td>{userDataForDashboard ? e.client_id : ""}</td>
 
                           <td>
                             {userDataForDashboard
@@ -165,7 +165,7 @@ export default function DashBoardEditor({
                               : ""}
                           </td>
                           <td>
-                            {e.order_status !== "pending" ? (
+                            {e.order_status === "paid" ? (
                               <Button
                                 children={
                                   e.completed ? "Download" : "Not completed"
@@ -183,36 +183,44 @@ export default function DashBoardEditor({
 
                           <td>{userDataForDashboard ? e.order_status : ""}</td>
                           <td>
-                            {e.order_status !== "pending" ? (
-                              <Button
-                                children={
-                                  e.completed ? "Download" : "Not completed"
-                                }
-                                color={"orange"}
-                                style={"table-btn"}
-                                onClick={function (): void {
-                                  throw new Error("Function not implemented.");
-                                }}
-                              />
-                            ) : (
-                              <></>
-                            )}
+                            {
+                              (e.order_status = "paid" ? (
+                                <Button
+                                  children={
+                                    e.completed ? "Download" : "Not completed"
+                                  }
+                                  color={"orange"}
+                                  style={"table-btn"}
+                                  onClick={function (): void {
+                                    throw new Error(
+                                      "Function not implemented."
+                                    );
+                                  }}
+                                />
+                              ) : (
+                                <></>
+                              ))
+                            }
                           </td>
                           <td>
-                            {e.order_status !== "pending" ? (
-                              <Button
-                                children={
-                                  e.completed ? "Download" : "Not completed"
-                                }
-                                color={"orange"}
-                                style={"table-btn"}
-                                onClick={function (): void {
-                                  throw new Error("Function not implemented.");
-                                }}
-                              />
-                            ) : (
-                              <></>
-                            )}
+                            {
+                              (e.order_status = "paid" ? (
+                                <Button
+                                  children={
+                                    e.completed ? "Download" : "Not completed"
+                                  }
+                                  color={"orange"}
+                                  style={"table-btn"}
+                                  onClick={function (): void {
+                                    throw new Error(
+                                      "Function not implemented."
+                                    );
+                                  }}
+                                />
+                              ) : (
+                                <></>
+                              ))
+                            }
                           </td>
                           <td style={{ minWidth: "30vw" }}>
                             <div className="form-group mb-3">

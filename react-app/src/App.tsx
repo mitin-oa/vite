@@ -16,8 +16,8 @@ export const MobileScreenContext = createContext(false);
 // * VK: Significant for the backend area. Please exercise caution when making alterations
 import { sendLogInRequest } from "./components/scripts/logIn";
 import { useMediaQuery } from "react-responsive";
-import DashBoardR from "./DashBoardEditor";
 import DashBoardEditor from "./DashBoardEditor";
+import DashBoardManager from "./DashBoardManager";
 
 export function deleteCookie(name: string) {
   const date = new Date();
@@ -27,17 +27,20 @@ export function deleteCookie(name: string) {
 
   // Set it
   document.cookie = name + "=; expires=" + date.toUTCString() + "; path=/";
-  console.log(document.cookie);
 }
 //deleteCookie("token");
 
 function App() {
   const value = `; ${document.cookie}`;
   const parts = value.split(`; token=`);
+  console.log(document.cookie);
+  console.log(parts);
   const token =
     parts.length === 2 ? parts.pop()?.split(";").shift() !== null : false;
   const [signedIn, onSignIn] = useState(token);
   const [signedUp, onSignUp] = useState(true);
+  const [userRole, setUserRole] = useState(localStorage.getItem("userRole"));
+
   const [modalIsOpen, setIsOpen] = useState(false);
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1028px" });
   /* const isPhoneScreen = useMediaQuery({ query: "(max-width: 760px" }); */
@@ -60,7 +63,8 @@ function App() {
     // * VK: userData содержит имя пользователя и пароль из формы
     const answer: any = await sendLogInRequest(userData);
     console.log(answer, "answer");
-
+    setUserRole(answer.userRole);
+    localStorage.setItem("userRole", answer.userRole);
     if (answer.HTTP_status === 200) {
       // * VK: Логика в случае успешной авторизации
       // console.log('Server response OK:', data);
@@ -86,7 +90,7 @@ function App() {
     }
   }
   // * ↑ VK: Significant for the backend area. Please exercise caution when making alterations
-
+  console.log(userRole);
   return (
     <>
       <SignedUpContext.Provider value={signedUp}>
@@ -169,16 +173,40 @@ function App() {
             <Route
               path="DashBoard"
               element={
-                <DashBoard
-                  kind="short"
-                  onSignIn={onSignIn}
-                  handleSignIn={handleSignIn}
-                  signedUp={signedUp}
-                  setUserProfileData={setUserProfileData}
-                  handleSignUp={handleSignUp}
-                  modalIsOpen={modalIsOpen}
-                  setIsOpen={setIsOpen}
-                />
+                userRole === "client" ? (
+                  <DashBoard
+                    kind="short"
+                    onSignIn={onSignIn}
+                    handleSignIn={handleSignIn}
+                    signedUp={signedUp}
+                    setUserProfileData={setUserProfileData}
+                    handleSignUp={handleSignUp}
+                    modalIsOpen={modalIsOpen}
+                    setIsOpen={setIsOpen}
+                  />
+                ) : userRole === "editor" ? (
+                  <DashBoardEditor
+                    kind="short"
+                    onSignIn={onSignIn}
+                    handleSignIn={handleSignIn}
+                    signedUp={signedUp}
+                    setUserProfileData={setUserProfileData}
+                    handleSignUp={handleSignUp}
+                    modalIsOpen={modalIsOpen}
+                    setIsOpen={setIsOpen}
+                  />
+                ) : (
+                  <DashBoardManager
+                    kind="short"
+                    onSignIn={onSignIn}
+                    handleSignIn={handleSignIn}
+                    signedUp={signedUp}
+                    setUserProfileData={setUserProfileData}
+                    handleSignUp={handleSignUp}
+                    modalIsOpen={modalIsOpen}
+                    setIsOpen={setIsOpen}
+                  />
+                )
               }
             />
             <Route path="*" element={<NotFound />} />
