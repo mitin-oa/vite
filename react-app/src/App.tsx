@@ -58,10 +58,10 @@ function App() {
     password: string;
   }) {
     // * VK: userData содержит имя пользователя и пароль из формы
-    const answer = await sendLogInRequest(userData);
+    const answer: any = await sendLogInRequest(userData);
     console.log(answer, "answer");
 
-    if (answer.status === "success") {
+    if (answer.HTTP_status === 200) {
       // * VK: Логика в случае успешной авторизации
       // console.log('Server response OK:', data);
       alert(answer.message);
@@ -76,7 +76,7 @@ function App() {
       if (answer.HTTP_status === 400) {
         // TODO VK: дополнить логику на случай неуспешной авторизации
         alert(answer.message);
-      } else if (answer.HTTP_status === 400) {
+      } else if (answer.HTTP_status === 500) {
         // TODO VK: дополнить логику на случай сбоя в работе сервера
         alert(answer.message);
       } else {

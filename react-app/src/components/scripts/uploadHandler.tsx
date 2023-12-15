@@ -14,8 +14,8 @@ const sendToServer = async (
 
   //   console.log(fileData);
 
-  formData.append(`filesCount`, fileData.length.toString());
-  formData.append(`totalPointsCost`, totalCredits.toString());
+    formData.append(`filesCount`, fileData.length.toString());
+    formData.append(`totalPointsCost`, totalCredits.toString());
 
   for (const file of fileData) {
     formData.append(`file_${file.index}`, file.file);
