@@ -1,11 +1,13 @@
-import { useState } from "react";
 import Button from "../Button";
+import withReactContent from "sweetalert2-react-content";
+import Swal from "sweetalert2";
 
 const LogInForm = ({
   handleSignIn,
   onSignUp,
   resetPass,
   setResetPass,
+  serverAnswerMessage,
 }: any) => {
   // * ↓ VK: Significant for the backend area. Please exercise caution when making alterations
   const handleLogInSubmit = () => {
@@ -27,6 +29,12 @@ const LogInForm = ({
   function handleResetPass() {
     setResetPass(!resetPass);
   }
+
+  const showSwal = () => {
+    withReactContent(Swal).fire({
+      title: <h2>{serverAnswerMessage}</h2>,
+    });
+  };
 
   return (
     <>
@@ -79,7 +87,9 @@ const LogInForm = ({
             <Button
               children="Submit"
               color="orange"
-              onClick={handleLogInSubmit}
+              onClick={() => {
+                handleLogInSubmit(), showSwal();
+              }}
               style="modal-btn"
             />
           </div>

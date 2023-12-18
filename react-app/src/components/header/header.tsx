@@ -19,8 +19,7 @@ interface IHeaderProps {
   onSignIn: Dispatch<SetStateAction<boolean>>;
   modalIsOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
-  resetPass?: boolean;
-  setResetPass?: Dispatch<SetStateAction<boolean>>;
+  serverAnswerMessage?: string;
 }
 
 export default function HeaderMenu({
@@ -31,6 +30,7 @@ export default function HeaderMenu({
   onSignIn,
   modalIsOpen,
   setIsOpen,
+  serverAnswerMessage,
 }: IHeaderProps) {
   const signedIn = useContext(SignedInContext);
   const signedUp = useContext(SignedUpContext);
@@ -106,6 +106,7 @@ export default function HeaderMenu({
                               modalIsOpen={modalIsOpen}
                               resetPass={resetPass}
                               setResetPass={setResetPass}
+                              serverAnswerMessage={serverAnswerMessage}
                             />
                           ) : (
                             <ResetPassForm
@@ -118,6 +119,7 @@ export default function HeaderMenu({
                           <SignUpForm
                             handleSignUpForm={handleSignUp}
                             setUserProfileData={setUserProfileData}
+                            serverAnswerMessage={serverAnswerMessage}
                           />
                         )
                       ) : (
@@ -156,9 +158,6 @@ export default function HeaderMenu({
                   <Link className="nav__link nav__text" to="CalculateCost">
                     Calculate Cost
                   </Link>
-                  {/* <Link className="nav__link nav__text" to="UpLoad">
-                    Upload Form
-                  </Link> */}
                 </>
               ) : (
                 <></>
@@ -184,6 +183,7 @@ export default function HeaderMenu({
                               modalIsOpen={modalIsOpen}
                               resetPass={resetPass}
                               setResetPass={setResetPass}
+                              serverAnswerMessage={serverAnswerMessage}
                             />
                           ) : (
                             <ResetPassForm
@@ -197,6 +197,7 @@ export default function HeaderMenu({
                             handleSignUp={handleSignUp}
                             onCloseModal={closeModal}
                             setUserProfileData={setUserProfileData}
+                            serverAnswerMessage={serverAnswerMessage}
                           />
                         )
                       ) : (

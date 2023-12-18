@@ -22,8 +22,7 @@ export default function StartScreen({
   onSignIn,
   modalIsOpen,
   setIsOpen,
-  resetPass,
-  setResetPass,
+  serverAnswerMessage,
 }: any) {
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1160px" });
   const isPhoneScreen = useMediaQuery({ query: "(max-width: 760px" });
@@ -38,8 +37,7 @@ export default function StartScreen({
         onSignIn={onSignIn}
         modalIsOpen={modalIsOpen}
         setIsOpen={setIsOpen}
-        resetPass={resetPass}
-        setResetPass={setResetPass}
+        serverAnswerMessage={serverAnswerMessage}
       />
       <div className="wrapper start_screen_content d-flex flex-lm-row flex-md-block">
         <div className="Content">

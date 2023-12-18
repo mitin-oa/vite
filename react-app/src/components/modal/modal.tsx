@@ -35,6 +35,7 @@ interface ParentCompProps {
   openModal?: any;
   closeModal?: any;
   btnModalStyle?: string;
+  btnCloseVisible?: string;
 }
 let subtitle: any;
 // Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
@@ -49,6 +50,7 @@ const ModalWindow: React.FC<ParentCompProps> = (props) => {
     openModal,
     closeModal,
     btnModalStyle,
+    btnCloseVisible,
   } = props;
   const isMobileScreen = useMediaQuery({ query: "(max-width: 760px" });
 
@@ -74,7 +76,7 @@ const ModalWindow: React.FC<ParentCompProps> = (props) => {
       >
         <button
           type="button"
-          className="btn-close"
+          className={"btn-close" + " " + { btnCloseVisible }}
           aria-label="Close"
           onClick={closeModal}
         ></button>

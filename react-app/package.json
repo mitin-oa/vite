@@ -12,6 +12,7 @@
     "@bytescale/sdk": "^3.8.0",
     "@bytescale/upload-widget-react": "^4.11.0",
     "@paypal/react-paypal-js": "^8.1.3",
+    "@sweetalert/with-react": "^0.1.1",
     "@types/react-router-hash-link": "^2.4.6",
     "@userfront/toolkit": "^1.0.5",
     "bootstrap": "^5.2.3",
@@ -25,7 +26,10 @@
     "react-router-hash-link": "^2.4.3",
     "react-uploader": "^3.43.0",
     "redux-state-manage": "^1.0.2",
-    "styled-components": "^6.0.8"
+    "styled-components": "^6.0.8",
+    "sweetalert": "^2.1.2",
+    "sweetalert2": "^11.10.1",
+    "sweetalert2-react-content": "^5.0.7"
   },
   "devDependencies": {
     "@types/node": "^20.9.0",

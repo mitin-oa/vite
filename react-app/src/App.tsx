@@ -40,6 +40,7 @@ function App() {
   const [signedIn, onSignIn] = useState(token);
   const [signedUp, onSignUp] = useState(true);
   const [userRole, setUserRole] = useState(localStorage.getItem("userRole"));
+  const [serverAnswerMessage, setServerAnswerMessage] = useState("");
 
   const [modalIsOpen, setIsOpen] = useState(false);
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1028px" });
@@ -68,8 +69,8 @@ function App() {
     if (answer.HTTP_status === 200) {
       // * VK: Логика в случае успешной авторизации
       // console.log('Server response OK:', data);
-      alert(answer.message);
-
+      //alert(answer.message);
+      setServerAnswerMessage(answer.message);
       // * VK: Прежний код, который выполнялся после LogIn и вызова функции handleSignIn
       onSignIn(!signedIn);
       // * VK: Передача данных для закрытия модального окна
@@ -80,9 +81,11 @@ function App() {
       if (answer.HTTP_status === 400) {
         // TODO VK: дополнить логику на случай неуспешной авторизации
         alert(answer.message);
+        setServerAnswerMessage(answer.message);
       } else if (answer.HTTP_status === 500) {
         // TODO VK: дополнить логику на случай сбоя в работе сервера
         alert(answer.message);
+        setServerAnswerMessage(answer.message);
       } else {
         // TODO VK: пересмотреть этот способ обработки ошибок, он не работает
         alert("Unknown error!");
@@ -108,6 +111,7 @@ function App() {
                   handleSignUp={handleSignUp}
                   modalIsOpen={modalIsOpen}
                   setIsOpen={setIsOpen}
+                  serverAnswerMessage={serverAnswerMessage}
                 />
               }
             />
