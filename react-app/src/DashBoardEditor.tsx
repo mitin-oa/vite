@@ -10,6 +10,7 @@ import Button from "./components/Button";
 import ModalWindow from "./components/modal/modal";
 import SignInForm from "./components/modal/SignUpForm";
 import { Link } from "react-router-dom";
+import InputText from "./components/InputText";
 
 export default function DashBoardEditor({
   kind,
@@ -45,25 +46,24 @@ export default function DashBoardEditor({
     console.log("userDataForDashboard", userDataForDashboard);
   }
 
-  async function handleOrder(orderId: string, points_cost: string) {
+  async function handleOrder(orderId: string) {
     //How pass order_id to server handle with order?
-    const serverAnswer = await sendHandleOrderRequest(orderId, points_cost);
-
-    alert(serverAnswer.message);
-
-    let answer = serverAnswer.message === "Low balance" ? true : false;
-
-    const index = userDataForDashboard.data.fileData.findIndex(
+    //const serverAnswer = await sendHandleOrderRequest(orderId, points_cost);
+    //alert(serverAnswer.message);
+    //let answer = serverAnswer.message === "Low balance" ? true : false;
+    /* const index = userDataForDashboard.data.orderData.findIndex(
       (e: any) => e.order_id === orderId
     );
 
-    userDataForDashboard.data.fileData[index] = {
-      ...userDataForDashboard.data.fileData[index],
-      order_status: "paid",
+    userDataForDashboard.data.orderData[index] = {
+      ...userDataForDashboard.data.orderData[index],
+      add_information: "",
     };
 
-    console.log(userDataForDashboard);
     setUserDataForDashboard(userDataForDashboard);
+    console.log(userDataForDashboard);
+    console.log(index);
+    console.log("add_information"); */
   }
 
   function openModal() {
@@ -74,7 +74,7 @@ export default function DashBoardEditor({
   }
 
   // * ↑ VK: Significant for the backend area. Please exercise caution when making alterations
-  const [addInformation, setAddInformation] = useState("Add information");
+  //const [addInformation, setAddInformation] = useState("Add information");
   return (
     <>
       <div className="app">
@@ -152,7 +152,7 @@ export default function DashBoardEditor({
                           <td>
                             {userDataForDashboard ? e.number_of_pages : ""}
                           </td>
-                          <td>{userDataForDashboard ? e.client_id : ""}</td>
+                          <td>{userDataForDashboard ? e.client_name : ""}</td>
 
                           <td>
                             {userDataForDashboard
@@ -223,19 +223,16 @@ export default function DashBoardEditor({
                             }
                           </td>
                           <td style={{ minWidth: "30vw" }}>
-                            <div className="form-group mb-3">
-                              <textarea
-                                className="form-control"
-                                name="addInformation"
-                                id="addInformation"
-                                rows={4}
-                                placeholder="Enter text"
-                                value={addInformation}
-                                onChange={(e) =>
-                                  setAddInformation(e.target.value)
+                            {
+                              <InputText
+                                order_id={e.order_id}
+                                onChange={() => handleOrder(e.order_id)}
+                                userDataForDashboard={userDataForDashboard}
+                                setUserDataForDashboard={
+                                  setUserDataForDashboard
                                 }
-                              ></textarea>
-                            </div>
+                              />
+                            }
                           </td>
                         </tr>
                       ))
