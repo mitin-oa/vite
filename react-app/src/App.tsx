@@ -1,5 +1,5 @@
 import "./App.scss";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { HashLink as Link } from "react-router-hash-link";
 import { Route, Routes } from "react-router-dom";
 import Home from "./Home";
@@ -18,6 +18,7 @@ import { sendLogInRequest } from "./components/scripts/logIn";
 import { useMediaQuery } from "react-responsive";
 import DashBoardEditor from "./DashBoardEditor";
 import DashBoardManager from "./DashBoardManager";
+import Swal from "sweetalert2";
 
 export function deleteCookie(name: string) {
   const date = new Date();
@@ -57,6 +58,7 @@ function App() {
   }
 
   // * ↓ VK: Significant for the backend area. Please exercise caution when making alterations
+
   async function handleSignIn(userData: {
     username: string;
     password: string;
@@ -70,7 +72,11 @@ function App() {
       // * VK: Логика в случае успешной авторизации
       // console.log('Server response OK:', data);
       //alert(answer.message);
-      setServerAnswerMessage(answer.message);
+      Swal.fire({
+        title: "Good job!",
+        text: "Authentication successful!",
+        icon: "success",
+      });
       // * VK: Прежний код, который выполнялся после LogIn и вызова функции handleSignIn
       onSignIn(!signedIn);
       // * VK: Передача данных для закрытия модального окна
@@ -81,17 +87,33 @@ function App() {
       if (answer.HTTP_status === 400) {
         // TODO VK: дополнить логику на случай неуспешной авторизации
         alert(answer.message);
-        setServerAnswerMessage(answer.message);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+        });
       } else if (answer.HTTP_status === 500) {
         // TODO VK: дополнить логику на случай сбоя в работе сервера
         alert(answer.message);
-        setServerAnswerMessage(answer.message);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+        });
       } else {
         // TODO VK: пересмотреть этот способ обработки ошибок, он не работает
         alert("Unknown error!");
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+        });
       }
     }
+    setServerAnswerMessage(answer.message);
   }
+
+  console.log(serverAnswerMessage);
   // * ↑ VK: Significant for the backend area. Please exercise caution when making alterations
   console.log(userRole);
   return (
@@ -112,6 +134,7 @@ function App() {
                   modalIsOpen={modalIsOpen}
                   setIsOpen={setIsOpen}
                   serverAnswerMessage={serverAnswerMessage}
+                  setServerAnswerMessage={setServerAnswerMessage}
                 />
               }
             />
@@ -127,6 +150,8 @@ function App() {
                   handleSignUp={handleSignUp}
                   modalIsOpen={modalIsOpen}
                   setIsOpen={setIsOpen}
+                  serverAnswerMessage={serverAnswerMessage}
+                  setServerAnswerMessage={setServerAnswerMessage}
                 />
               }
             />

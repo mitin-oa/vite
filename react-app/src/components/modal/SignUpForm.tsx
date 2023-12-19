@@ -1,5 +1,8 @@
 import { useState } from "react";
 import Button from "../Button";
+import withReactContent from "sweetalert2-react-content";
+import Swal from "sweetalert2";
+import { stripVTControlCharacters } from "util";
 
 const SignUpForm = ({
   handleSignUp,
@@ -30,14 +33,28 @@ const SignUpForm = ({
         body: JSON.stringify(data),
       });
       console.log("-------", response);
-      if (response.status === 200) alert("Successfully registered!");
-      else if (response.status === 400) alert("User Already Exist");
+      if (response.status === 200) {
+        //alert("Successfully registered!");
+        Swal.fire({
+          title: "Good job!",
+          text: "Successfully registered!",
+          icon: "success",
+        });
+      } else if (response.status === 400) {
+        //alert("User Already Exist");
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "User Already Exist!",
+        });
+      }
     } catch (error) {
       console.error("There was a problem with the fetch operation:", error);
       alert("Error Occured");
       throw error;
     }
   };
+
   return (
     <>
       <form className="form " action="/api/signup" method="post" id="reg-form">
@@ -113,7 +130,9 @@ const SignUpForm = ({
           <Button
             children="Submit"
             color="orange"
-            onClick={handleClick}
+            onClick={() => {
+              handleClick();
+            }}
             style="modal-btn"
           />
         </div>

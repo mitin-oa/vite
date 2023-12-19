@@ -1,6 +1,7 @@
 import Button from "../Button";
 import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
+import { useEffect } from "react";
 
 const LogInForm = ({
   handleSignIn,
@@ -8,8 +9,12 @@ const LogInForm = ({
   resetPass,
   setResetPass,
   serverAnswerMessage,
+  setServerAnswerMessage,
 }: any) => {
   // * ↓ VK: Significant for the backend area. Please exercise caution when making alterations
+  useEffect(() => {
+    setServerAnswerMessage(serverAnswerMessage);
+  }, []);
   const handleLogInSubmit = () => {
     // * VK: Form fields data entered by the user
     const formData = new FormData(
@@ -19,23 +24,20 @@ const LogInForm = ({
     const password = formData.get("password") as string;
 
     // * VK: Pass the data to the onSignIn function
+
     handleSignIn({
       login,
       password,
     });
   };
+
   // * ↑ VK: Significant for the backend area. Please exercise caution when making alterations
 
   function handleResetPass() {
     setResetPass(!resetPass);
   }
 
-  const showSwal = () => {
-    withReactContent(Swal).fire({
-      title: <h2>{serverAnswerMessage}</h2>,
-    });
-  };
-
+  console.log(serverAnswerMessage);
   return (
     <>
       <form
@@ -88,7 +90,7 @@ const LogInForm = ({
               children="Submit"
               color="orange"
               onClick={() => {
-                handleLogInSubmit(), showSwal();
+                handleLogInSubmit();
               }}
               style="modal-btn"
             />

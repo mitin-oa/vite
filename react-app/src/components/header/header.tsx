@@ -20,6 +20,7 @@ interface IHeaderProps {
   modalIsOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   serverAnswerMessage?: string;
+  setServerAnswerMessage?: any;
 }
 
 export default function HeaderMenu({
@@ -31,6 +32,7 @@ export default function HeaderMenu({
   modalIsOpen,
   setIsOpen,
   serverAnswerMessage,
+  setServerAnswerMessage,
 }: IHeaderProps) {
   const signedIn = useContext(SignedInContext);
   const signedUp = useContext(SignedUpContext);
@@ -107,6 +109,7 @@ export default function HeaderMenu({
                               resetPass={resetPass}
                               setResetPass={setResetPass}
                               serverAnswerMessage={serverAnswerMessage}
+                              setServerAnswerMessage={setServerAnswerMessage}
                             />
                           ) : (
                             <ResetPassForm
@@ -184,6 +187,7 @@ export default function HeaderMenu({
                               resetPass={resetPass}
                               setResetPass={setResetPass}
                               serverAnswerMessage={serverAnswerMessage}
+                              setServerAnswerMessage={setServerAnswerMessage}
                             />
                           ) : (
                             <ResetPassForm
