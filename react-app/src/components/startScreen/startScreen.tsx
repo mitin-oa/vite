@@ -4,16 +4,9 @@ import StartScreenPic from "../../../public/start_screen_pic3.png";
 import { Link } from "react-router-dom";
 import Button from "../Button";
 import { useMediaQuery } from "react-responsive";
+import { useContext } from "react";
+import { SignedInContext } from "../../App";
 
-function onOrder() {
-  return (
-    <>
-      <Link className="nav__link nav__text" to="UpLoad">
-        File Upload
-      </Link>
-    </>
-  );
-}
 export default function StartScreen({
   kind,
   handleSignIn,
@@ -27,7 +20,7 @@ export default function StartScreen({
 }: any) {
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1160px" });
   const isPhoneScreen = useMediaQuery({ query: "(max-width: 760px" });
-
+  const signedIn = useContext(SignedInContext);
   return (
     <section className="start_screen">
       <HeaderMenu
@@ -52,9 +45,25 @@ export default function StartScreen({
             tempor incididunt ut labore et dolore magna aliqua. Laoreet id donec
             ultrices tincidunt.
           </p>
-          <Link to="CalculateCost">
-            <Button children="Order Now" color="warning" onClick={() => null} />
-          </Link>
+          {signedIn ? (
+            <>
+              <Link to="Upload">
+                <Button
+                  children="Order Now"
+                  color="warning"
+                  onClick={() => null}
+                />
+              </Link>
+            </>
+          ) : (
+            <Link to="CalculateCost">
+              <Button
+                children="Order Now"
+                color="warning"
+                onClick={() => null}
+              />
+            </Link>
+          )}
         </div>
         {!isPhoneScreen ? (
           <div className="Content">

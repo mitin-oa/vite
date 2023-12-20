@@ -86,7 +86,7 @@ function App() {
       // console.log('Server response NOT OK:', data);
       if (answer.HTTP_status === 400) {
         // TODO VK: дополнить логику на случай неуспешной авторизации
-        alert(answer.message);
+        //alert(answer.message);
         Swal.fire({
           icon: "error",
           title: "Oops...",
@@ -94,7 +94,7 @@ function App() {
         });
       } else if (answer.HTTP_status === 500) {
         // TODO VK: дополнить логику на случай сбоя в работе сервера
-        alert(answer.message);
+        //alert(answer.message);
         Swal.fire({
           icon: "error",
           title: "Oops...",
@@ -102,7 +102,7 @@ function App() {
         });
       } else {
         // TODO VK: пересмотреть этот способ обработки ошибок, он не работает
-        alert("Unknown error!");
+        //alert("Unknown error!");
         Swal.fire({
           icon: "error",
           title: "Oops...",
