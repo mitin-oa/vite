@@ -74,7 +74,7 @@ function App() {
       //alert(answer.message);
       Swal.fire({
         title: "Good job!",
-        text: "Authentication successful!",
+        text: `${answer.message}!`,
         icon: "success",
       });
       // * VK: Прежний код, который выполнялся после LogIn и вызова функции handleSignIn
@@ -90,7 +90,7 @@ function App() {
         Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: "Something went wrong!",
+          text: `${answer.message}`,
         });
       } else if (answer.HTTP_status === 500) {
         // TODO VK: дополнить логику на случай сбоя в работе сервера
@@ -98,7 +98,7 @@ function App() {
         Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: "Something went wrong!",
+          text: `${answer.message}`,
         });
       } else {
         // TODO VK: пересмотреть этот способ обработки ошибок, он не работает
@@ -106,7 +106,7 @@ function App() {
         Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: "Something went wrong!",
+          text: `${answer.message}`,
         });
       }
     }
