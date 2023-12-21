@@ -1,14 +1,20 @@
 import Button from "./Button";
 
 function DownLoadFile({ fileName }: any) {
-  const downloadFile = (filePath: string, fileName: string) => {
-    fetch(filePath, {
+  const downloadFile = (fileName: string) => {
+    let pathToFile = "/api/downloadOriginalFile/" + fileName;
+    fetch(pathToFile, {
       method: "GET",
       headers: {
         "Content-Type": "application/pdf",
       },
     })
-      .then((response) => response.blob())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Server returned an error response');
+        }
+        return response.blob();
+      })
       .then((blob) => {
         const url = window.URL.createObjectURL(new Blob([blob]));
 
@@ -31,7 +37,7 @@ function DownLoadFile({ fileName }: any) {
       <Button
         children={"Download file"}
         color={"orange"}
-        onClick={() => downloadFile("/api/downloadOriginalFile", fileName)}
+        onClick={() => downloadFile(fileName)}
         style={"table-btn"}
       />
     </div>
