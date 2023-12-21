@@ -5,12 +5,11 @@ import HeaderMenu from "./components/header/header";
 // * VK: Significant for the backend area. Please exercise caution when making alterations
 import { getUserDataForDashboard } from "./components/scripts/getUserDataForDashboard";
 import { sendHandleOrderRequest } from "./components/scripts/handleOrderRequest";
-
 import Button from "./components/Button";
 import ModalWindow from "./components/modal/modal";
-import SignInForm from "./components/modal/SignUpForm";
 import InputText from "./components/InputText";
 import DownLoadFile from "./components/DownloadFile";
+import SignUpForm from "./components/modal/SignUpForm";
 
 export default function DashBoardEditor({
   kind,
@@ -107,7 +106,7 @@ export default function DashBoardEditor({
                       <ModalWindow
                         title={"Change"}
                         childComp={
-                          <SignInForm
+                          <SignUpForm
                             onSignUp={handleSignUp}
                             onCloseModal={closeModal}
                             setUserProfileData={setUserProfileData}
@@ -234,83 +233,4 @@ export default function DashBoardEditor({
       <Footer kind="short" />
     </>
   );
-}
-
-{
-  /* <form
-                  className="form mx-4 mb-4"
-                  action="/api/signup"
-                  method="post"
-                  id="reg-form"
-                >
-                  <div className="col-xs-12">
-                    <div className="form-group ">
-                      <label htmlFor="username">User name:</label>
-                      <input
-                        type="text"
-                        className="input-field"
-                        id="username"
-                        name="username"
-                        placeholder="Enter user name"
-                        defaultValue="user1"
-                        required
-                      />
-                      <br />
-                    </div>
-                  </div>
-                  <div className="col-xs-12">
-                    <div className="form-group">
-                      <label htmlFor="email">Email:</label>
-                      <input
-                        type="email"
-                        className="input-field"
-                        id="email"
-                        name="email"
-                        placeholder="Enter email"
-                        defaultValue={"client@example.com"}
-                        value={
-                          userDataForDashboard
-                            ? userDataForDashboard.data.userData[0].email
-                            : "client@example.com"
-                        }
-                        required
-                      />
-                      <br />
-                    </div>
-                  </div>
-                  <div className="col-xs-12">
-                    <div className="form-group">
-                      <label htmlFor="phone">Phone number:</label>
-                      <input
-                        type="text"
-                        className="input-field"
-                        id="phone"
-                        name="phone"
-                        placeholder="Enter phone"
-                        defaultValue="+3530000000"
-                        value={
-                          userDataForDashboard
-                            ? userDataForDashboard.data.userData[0].phone
-                            : "+3530000000"
-                        }
-                        required
-                      />
-                      <br />
-                    </div>
-                  </div>
-                  <div className="col-xs-12">
-                    <div className="form-group">
-                      <label htmlFor="password">Password:</label>
-                      <input
-                        type="password"
-                        className="input-field"
-                        id="password"
-                        name="password"
-                        placeholder="Enter password"
-                        defaultValue="pass"
-                        required
-                      />
-                    </div>
-                  </div> 
-                </form>*/
 }

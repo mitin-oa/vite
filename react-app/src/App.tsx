@@ -52,7 +52,7 @@ function App() {
     userPhone: "+3530000000",
     userPassword: "password",
   });
-
+  console.log(userProfileData);
   function handleSignUp() {
     onSignUp(!signedUp);
   }
