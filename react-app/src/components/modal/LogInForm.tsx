@@ -1,6 +1,4 @@
 import Button from "../Button";
-import withReactContent from "sweetalert2-react-content";
-import Swal from "sweetalert2";
 import { useEffect } from "react";
 
 const LogInForm = ({
@@ -8,13 +6,9 @@ const LogInForm = ({
   onSignUp,
   resetPass,
   setResetPass,
-  serverAnswerMessage,
-  setServerAnswerMessage,
 }: any) => {
   // * ↓ VK: Significant for the backend area. Please exercise caution when making alterations
-  useEffect(() => {
-    setServerAnswerMessage(serverAnswerMessage);
-  }, []);
+
   const handleLogInSubmit = () => {
     // * VK: Form fields data entered by the user
     const formData = new FormData(
@@ -37,7 +31,6 @@ const LogInForm = ({
     setResetPass(!resetPass);
   }
 
-  console.log(serverAnswerMessage);
   return (
     <>
       <form

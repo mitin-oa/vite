@@ -1,10 +1,9 @@
 import { useMediaQuery } from "react-responsive";
 import { Footer } from "./components/footer/footer";
 import NumInput from "./components/InputNumber";
-import { ChangeEvent, SetStateAction, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import HeaderMenu from "./components/header/header";
 import Button from "./components/Button";
-import FileUploader from "./components/fileUploader/fileUploader";
 
 export default function CalculateCost({
   handleSignIn,
@@ -13,8 +12,6 @@ export default function CalculateCost({
   setIsOpen,
   onSignIn,
   setUserProfileData,
-  resetPass,
-  setResetPass,
 }: any) {
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1160px" });
   const isPhoneScreen = useMediaQuery({ query: "(max-width: 760px" });
@@ -102,8 +99,6 @@ export default function CalculateCost({
           modalIsOpen={modalIsOpen}
           setIsOpen={setIsOpen}
           onSignIn={onSignIn}
-          resetPass={resetPass}
-          setResetPass={setResetPass}
         />
         <section
           className="main-content container"

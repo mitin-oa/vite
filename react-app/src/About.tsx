@@ -10,8 +10,6 @@ export default function About({
   setUserProfileData,
   modalIsOpen,
   setIsOpen,
-  serverAnswerMessage,
-  setServerAnswerMessage,
 }: any) {
   return (
     <>
@@ -24,8 +22,6 @@ export default function About({
           setUserProfileData={setUserProfileData}
           modalIsOpen={modalIsOpen}
           setIsOpen={setIsOpen}
-          serverAnswerMessage={serverAnswerMessage}
-          setServerAnswerMessage={setServerAnswerMessage}
         />
         {/* <!-- Bootstrap "Containers" component. Taken from https://getbootstrap.com/docs/5.2/layout/containers/#how-they-work --> */}
         <section className="main-content">

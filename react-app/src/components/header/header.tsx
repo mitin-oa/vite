@@ -19,8 +19,6 @@ interface IHeaderProps {
   onSignIn: Dispatch<SetStateAction<boolean>>;
   modalIsOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
-  serverAnswerMessage?: string;
-  setServerAnswerMessage?: any;
 }
 
 export default function HeaderMenu({
@@ -31,8 +29,6 @@ export default function HeaderMenu({
   onSignIn,
   modalIsOpen,
   setIsOpen,
-  serverAnswerMessage,
-  setServerAnswerMessage,
 }: IHeaderProps) {
   const signedIn = useContext(SignedInContext);
   const signedUp = useContext(SignedUpContext);
@@ -108,8 +104,6 @@ export default function HeaderMenu({
                               modalIsOpen={modalIsOpen}
                               resetPass={resetPass}
                               setResetPass={setResetPass}
-                              serverAnswerMessage={serverAnswerMessage}
-                              setServerAnswerMessage={setServerAnswerMessage}
                             />
                           ) : (
                             <ResetPassForm
@@ -122,7 +116,6 @@ export default function HeaderMenu({
                           <SignUpForm
                             handleSignUpForm={handleSignUp}
                             setUserProfileData={setUserProfileData}
-                            serverAnswerMessage={serverAnswerMessage}
                           />
                         )
                       ) : (
@@ -186,8 +179,6 @@ export default function HeaderMenu({
                               modalIsOpen={modalIsOpen}
                               resetPass={resetPass}
                               setResetPass={setResetPass}
-                              serverAnswerMessage={serverAnswerMessage}
-                              setServerAnswerMessage={setServerAnswerMessage}
                             />
                           ) : (
                             <ResetPassForm
@@ -201,7 +192,6 @@ export default function HeaderMenu({
                             handleSignUp={handleSignUp}
                             onCloseModal={closeModal}
                             setUserProfileData={setUserProfileData}
-                            serverAnswerMessage={serverAnswerMessage}
                           />
                         )
                       ) : (

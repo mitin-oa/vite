@@ -133,8 +133,6 @@ function App() {
                   handleSignUp={handleSignUp}
                   modalIsOpen={modalIsOpen}
                   setIsOpen={setIsOpen}
-                  serverAnswerMessage={serverAnswerMessage}
-                  setServerAnswerMessage={setServerAnswerMessage}
                 />
               }
             />
@@ -150,8 +148,6 @@ function App() {
                   handleSignUp={handleSignUp}
                   modalIsOpen={modalIsOpen}
                   setIsOpen={setIsOpen}
-                  serverAnswerMessage={serverAnswerMessage}
-                  setServerAnswerMessage={setServerAnswerMessage}
                 />
               }
             />

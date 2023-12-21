@@ -14,8 +14,6 @@ export default function Home({
   handleSignUp,
   modalIsOpen,
   setIsOpen,
-  serverAnswerMessage,
-  setServerAnswerMessage,
 }: any) {
   function openModal() {
     setIsOpen(true);
@@ -42,8 +40,6 @@ export default function Home({
           handleSignUp={handleSignUp}
           modalIsOpen={modalIsOpen}
           setIsOpen={setIsOpen}
-          serverAnswerMessage={serverAnswerMessage}
-          setServerAnswerMessage={setServerAnswerMessage}
         />
       </div>
 

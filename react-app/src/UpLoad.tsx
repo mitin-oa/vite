@@ -11,15 +11,11 @@ export default function UpLoad({
   handleSignUp,
   modalIsOpen,
   setIsOpen,
-  resetPass,
-  setResetPass,
 }: any) {
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1160px" });
   const isPhoneScreen = useMediaQuery({ query: "(max-width: 760px" });
   const signedIn = useContext(SignedInContext);
   const signedUp = useContext(SignedUpContext);
-  console.log(signedIn);
-  console.log(signedUp);
 
   const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
@@ -37,8 +33,6 @@ export default function UpLoad({
           modalIsOpen={modalIsOpen}
           setIsOpen={setIsOpen}
           setUserProfileData={undefined}
-          resetPass={resetPass}
-          setResetPass={setResetPass}
         />
         {/* <!-- Bootstrap "Containers" component. Taken from https://getbootstrap.com/docs/5.2/layout/containers/#how-they-work --> */}
 
@@ -55,27 +49,6 @@ export default function UpLoad({
               />
             </form>
           </div>
-          {/* {signedIn ? (
-            <Button
-              children="Proceed"
-              color={""}
-              onClick={() => handleSubmit}
-            />
-          ) : (
-            <ModalWindow
-              title={"Proceed"}
-              childComp={
-                signedUp ? (
-                  <LogInForm onSignIn={handleSignIn} onSignUp={handleSignUp} />
-                ) : (
-                  <SignInForm onSignUp={handleSignUp} />
-                )
-              }
-              modalIsOpen={modalIsOpen}
-              openModal={openModal}
-              closeModal={closeModal}
-            />
-          )}{" "} */}
         </section>
 
         {/* <!-- END OF Bootstrap "Containers" component --> */}
