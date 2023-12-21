@@ -2,7 +2,7 @@ import Button from "./Button";
 
 function DownLoadFile({ fileName }: any) {
   const downloadFile = (filePath: string, fileName: string) => {
-    fetch("https://chronolegal.com/" + filePath, {
+    fetch(filePath, {
       method: "GET",
       headers: {
         "Content-Type": "application/pdf",
@@ -31,7 +31,7 @@ function DownLoadFile({ fileName }: any) {
       <Button
         children={"Download file"}
         color={"orange"}
-        onClick={() => downloadFile("api/downloadOriginalFile", fileName)}
+        onClick={() => downloadFile("/api/downloadOriginalFile", fileName)}
         style={"table-btn"}
       />
     </div>

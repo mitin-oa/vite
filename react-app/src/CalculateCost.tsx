@@ -104,7 +104,7 @@ export default function CalculateCost({
           className="main-content container"
           style={{ flexDirection: "column" }}
         >
-          <h2>To calculate cost</h2>
+          <h2>Calculate cost</h2>
           <p>
             The length of agreement determines number of credits to be used (20$
             per page). Delivery within 23-72 hours is +50% to total amount.
