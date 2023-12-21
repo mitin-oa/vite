@@ -10,6 +10,7 @@ import Button from "./components/Button";
 import ModalWindow from "./components/modal/modal";
 import { Link } from "react-router-dom";
 import SignUpForm from "./components/modal/SignUpForm";
+import DownLoadFile from "./components/DownloadFile";
 
 export default function Dashboard({
   kind,
@@ -242,9 +243,9 @@ export default function Dashboard({
                                 }
                                 color={"orange"}
                                 style={"table-btn"}
-                                onClick={function (): void {
-                                  throw new Error("Function not implemented.");
-                                }}
+                                onClick={() => (
+                                  <DownLoadFile fileName={e.name} />
+                                )}
                               />
                             ) : (
                               <></>

@@ -131,7 +131,6 @@ export default function DashBoardEditor({
                   <td style={{ minWidth: "7vw" }}>File name</td>
                   <td>Pages</td>
                   <td>Client name</td>
-
                   <td>Date work started</td>
                   <td>Manage</td>
                   <td>Status</td>

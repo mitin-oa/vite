@@ -129,12 +129,13 @@ export default function DashBoardManager({
             <table className="table dashboard-table">
               <tbody>
                 <tr>
-                  <td>Name</td>
-                  <td>Status</td>
-                  <td>Date</td>
-                  <td>Download</td>
-                  <td>Upload Edited File</td>
-                  <td>Notes</td>
+                  <td>Editor</td>
+                  <td>Current in-work orders number</td>
+                  <td>
+                    Current working pages number (sum of pages for orders)
+                  </td>
+                  <td>Assign order</td>
+                  <td>Rating (by clients)</td>
                 </tr>
                 {userDataForDashboard
                   ? userDataForDashboard.data.fileData
@@ -210,163 +211,9 @@ export default function DashBoardManager({
               </tbody>
             </table>
           </div>
-          <div className="row">
-            <p>Recent edited files</p>
-            <table className="table dashboard-table">
-              <tbody>
-                <tr>
-                  <td>Name</td>
-                  <td>Status</td>
-                  <td>Date</td>
-                  <td>Manage</td>
-                  <td>Download</td>
-                </tr>
-                {userDataForDashboard
-                  ? userDataForDashboard.data.fileData
-                      .slice(-10, userDataForDashboard.data.fileData.length)
-                      .sort((a: any, b: any) =>
-                        a.created_at.date > b.created_at.date ? 1 : -1
-                      )
-                      .map((e: any) => (
-                        <tr>
-                          <td>{userDataForDashboard ? e.original_name : ""}</td>
-                          <td>{userDataForDashboard ? e.order_status : ""}</td>
-                          <td>
-                            {userDataForDashboard
-                              ? e.created_at.toString().split("T")[0] +
-                                " " +
-                                e.created_at
-                                  .toString()
-                                  .split("T")[1]
-                                  .split(".")[0]
-                              : ""}
-                          </td>
-                          <td>
-                            {e.order_status === "pending" ? (
-                              e.points_cost <
-                              userDataForDashboard.data.userData[0].points ? (
-                                <Button
-                                  children={"Start processing"}
-                                  color={"orange"}
-                                  style={"table-btn"}
-                                  disable={true}
-                                  onClick={() => {
-                                    handleOrder(e.order_id, e.points_cost);
-                                  }}
-                                />
-                              ) : (
-                                <>
-                                  <a>Not enough credits</a>
-                                </>
-                              )
-                            ) : (
-                              <></>
-                            )}
-                          </td>
-                          <td>
-                            {e.order_status !== "pending" ? (
-                              <Button
-                                children={
-                                  e.completed ? "Download" : "Not completed"
-                                }
-                                color={"orange"}
-                                style={"table-btn"}
-                                onClick={function (): void {
-                                  throw new Error("Function not implemented.");
-                                }}
-                              />
-                            ) : (
-                              <></>
-                            )}
-                          </td>
-                        </tr>
-                      ))
-                  : ""}
-              </tbody>
-            </table>
-          </div>
         </section>
       </div>
       <Footer kind="short" />
     </>
   );
-}
-
-{
-  /* <form
-                  className="form mx-4 mb-4"
-                  action="/api/signup"
-                  method="post"
-                  id="reg-form"
-                >
-                  <div className="col-xs-12">
-                    <div className="form-group ">
-                      <label htmlFor="username">User name:</label>
-                      <input
-                        type="text"
-                        className="input-field"
-                        id="username"
-                        name="username"
-                        placeholder="Enter user name"
-                        defaultValue="user1"
-                        required
-                      />
-                      <br />
-                    </div>
-                  </div>
-                  <div className="col-xs-12">
-                    <div className="form-group">
-                      <label htmlFor="email">Email:</label>
-                      <input
-                        type="email"
-                        className="input-field"
-                        id="email"
-                        name="email"
-                        placeholder="Enter email"
-                        defaultValue={"client@example.com"}
-                        value={
-                          userDataForDashboard
-                            ? userDataForDashboard.data.userData[0].email
-                            : "client@example.com"
-                        }
-                        required
-                      />
-                      <br />
-                    </div>
-                  </div>
-                  <div className="col-xs-12">
-                    <div className="form-group">
-                      <label htmlFor="phone">Phone number:</label>
-                      <input
-                        type="text"
-                        className="input-field"
-                        id="phone"
-                        name="phone"
-                        placeholder="Enter phone"
-                        defaultValue="+3530000000"
-                        value={
-                          userDataForDashboard
-                            ? userDataForDashboard.data.userData[0].phone
-                            : "+3530000000"
-                        }
-                        required
-                      />
-                      <br />
-                    </div>
-                  </div>
-                  <div className="col-xs-12">
-                    <div className="form-group">
-                      <label htmlFor="password">Password:</label>
-                      <input
-                        type="password"
-                        className="input-field"
-                        id="password"
-                        name="password"
-                        placeholder="Enter password"
-                        defaultValue="pass"
-                        required
-                      />
-                    </div>
-                  </div> 
-                </form>*/
 }
