@@ -15,7 +15,7 @@ const SignUpForm = ({
   const [inputPassword, setInputPassword] = useState("pass");
 
   const handleClick = async () => {
-    handleSignUp();
+    () => handleSignUp();
     onCloseModal();
     const data = {
       userName: inputName,
@@ -24,6 +24,7 @@ const SignUpForm = ({
       userPassword: inputPassword,
     };
     setUserProfileData(data);
+
     try {
       const response = await fetch("/api/signup", {
         method: "POST",

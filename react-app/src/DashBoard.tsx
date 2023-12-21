@@ -8,8 +8,8 @@ import { sendHandleOrderRequest } from "./components/scripts/handleOrderRequest"
 
 import Button from "./components/Button";
 import ModalWindow from "./components/modal/modal";
-import SignInForm from "./components/modal/SignUpForm";
 import { Link } from "react-router-dom";
+import SignUpForm from "./components/modal/SignUpForm";
 
 export default function Dashboard({
   kind,
@@ -107,7 +107,7 @@ export default function Dashboard({
                       <ModalWindow
                         title={"Change"}
                         childComp={
-                          <SignInForm
+                          <SignUpForm
                             onSignUp={handleSignUp}
                             onCloseModal={closeModal}
                             setUserProfileData={setUserProfileData}
