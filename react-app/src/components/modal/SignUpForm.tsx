@@ -62,7 +62,7 @@ const SignUpForm = ({
 
   return (
     <>
-      <form className="form " action="/api/signup" method="post" id="reg-form">
+      <form className="form">
         <div className="col-xs-12">
           <div className="form-group ">
             <label htmlFor="username">User name:</label>
@@ -81,7 +81,7 @@ const SignUpForm = ({
         </div>
         <div className="col-xs-12">
           <div className="form-group">
-            <label htmlFor="email">Email adress:</label>
+            <label htmlFor="email">Email address:</label>
             <input
               type="email"
               className="input-field"
