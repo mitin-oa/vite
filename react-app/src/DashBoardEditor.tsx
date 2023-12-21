@@ -9,8 +9,8 @@ import { sendHandleOrderRequest } from "./components/scripts/handleOrderRequest"
 import Button from "./components/Button";
 import ModalWindow from "./components/modal/modal";
 import SignInForm from "./components/modal/SignUpForm";
-import { Link } from "react-router-dom";
 import InputText from "./components/InputText";
+import DownLoadFile from "./components/DownloadFile";
 
 export default function DashBoardEditor({
   kind,
@@ -185,18 +185,7 @@ export default function DashBoardEditor({
                           <td>
                             {
                               (e.order_status = "paid" ? (
-                                <Button
-                                  children={
-                                    e.completed ? "Download" : "Not completed"
-                                  }
-                                  color={"orange"}
-                                  style={"table-btn"}
-                                  onClick={function (): void {
-                                    throw new Error(
-                                      "Function not implemented."
-                                    );
-                                  }}
-                                />
+                                <DownLoadFile fileName={e.file_name} />
                               ) : (
                                 <></>
                               ))

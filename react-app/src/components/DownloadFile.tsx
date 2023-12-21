@@ -1,6 +1,8 @@
+import Button from "./Button";
+
 function DownLoadFile({ fileName }: any) {
   const downloadFile = (filePath: string, fileName: string) => {
-    fetch("https://sassagreementftd.com.ghanastudyfair.com/" + filePath, {
+    fetch("https://chronolegal.com/" + filePath, {
       method: "GET",
       headers: {
         "Content-Type": "application/pdf",
@@ -26,11 +28,12 @@ function DownLoadFile({ fileName }: any) {
 
   return (
     <div>
-      <button
-        onClick={() => downloadFile("/api/downloadOriginalFile", fileName)}
-      >
-        Download file
-      </button>
+      <Button
+        children={"Download file"}
+        color={"orange"}
+        onClick={() => downloadFile("api/downloadOriginalFile", fileName)}
+        style={"table-btn"}
+      />
     </div>
   );
 }
