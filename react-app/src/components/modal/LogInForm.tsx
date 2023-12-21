@@ -13,7 +13,8 @@ const LogInForm = ({
 }: any) => {
   // * ↓ VK: Significant for the backend area. Please exercise caution when making alterations
   useEffect(() => {
-    setServerAnswerMessage(serverAnswerMessage);
+    // Похоже, этот код не имеет функциональной важности и вызывает ошибку в мобильной версии приложения
+    // setServerAnswerMessage(serverAnswerMessage);
   }, []);
   const handleLogInSubmit = () => {
     // * VK: Form fields data entered by the user

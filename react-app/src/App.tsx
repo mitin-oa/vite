@@ -19,6 +19,7 @@ import { useMediaQuery } from "react-responsive";
 import DashBoardEditor from "./DashBoardEditor";
 import DashBoardManager from "./DashBoardManager";
 import Swal from "sweetalert2";
+import ResetPassword from "./ResetPassword";
 
 export function deleteCookie(name: string) {
   const date = new Date();
@@ -239,6 +240,7 @@ function App() {
               }
             />
             <Route path="*" element={<NotFound />} />
+            <Route path="/resetPassword" Component={ResetPassword} />
           </Routes>
         </SignedInContext.Provider>
       </SignedUpContext.Provider>
