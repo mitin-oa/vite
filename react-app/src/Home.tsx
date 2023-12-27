@@ -10,6 +10,7 @@ export default function Home({
   kind,
   handleSignIn,
   onSignIn,
+  onSignUp,
   setUserProfileData,
   handleSignUp,
   modalIsOpen,
@@ -36,6 +37,7 @@ export default function Home({
           kind={kind}
           handleSignIn={handleSignIn}
           onSignIn={onSignIn}
+          onSignUp={onSignUp}
           setUserProfileData={setUserProfileData}
           handleSignUp={handleSignUp}
           modalIsOpen={modalIsOpen}

@@ -99,7 +99,7 @@ export default function DashBoardManager({
         />
         <section className="main-content flex-column">
           <div className="row">
-            <h2>Editor Dashboard Panel</h2>
+            <h2>Manager Dashboard Panel</h2>
           </div>
           <div className="row">
             <div className="col-md-6 leftColumn" id="leftColumn">
