@@ -13,6 +13,7 @@ export default function StartScreen({
   setUserProfileData,
   handleSignUp,
   onSignIn,
+  onSignUp,
   modalIsOpen,
   setIsOpen,
 }: any) {
@@ -27,6 +28,7 @@ export default function StartScreen({
         setUserProfileData={setUserProfileData}
         handleSignUp={handleSignUp}
         onSignIn={onSignIn}
+        onSignUp={onSignUp}
         modalIsOpen={modalIsOpen}
         setIsOpen={setIsOpen}
       />

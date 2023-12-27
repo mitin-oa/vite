@@ -17,6 +17,7 @@ interface IHeaderProps {
   setUserProfileData: any;
   handleSignUp: boolean;
   onSignIn: Dispatch<SetStateAction<boolean>>;
+  onSignUp: Dispatch<SetStateAction<boolean>>;
   modalIsOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
 }
@@ -27,6 +28,7 @@ export default function HeaderMenu({
   handleSignUp,
   setUserProfileData,
   onSignIn,
+  onSignUp,
   modalIsOpen,
   setIsOpen,
 }: IHeaderProps) {
@@ -43,6 +45,11 @@ export default function HeaderMenu({
   function closeModal() {
     setIsOpen(false);
     resetPass && setResetPass(!resetPass);
+  }
+
+  function closeSignUp() {
+    setIsOpen(false);
+    onSignUp(!signedUp);
   }
 
   return (
@@ -115,6 +122,8 @@ export default function HeaderMenu({
                         ) : (
                           <SignUpForm
                             handleSignUpForm={handleSignUp}
+                            onSignUp={onSignUp}
+                            onCloseModal={closeModal}
                             setUserProfileData={setUserProfileData}
                           />
                         )
@@ -191,6 +200,7 @@ export default function HeaderMenu({
                           <SignUpForm
                             handleSignUp={handleSignUp}
                             onCloseModal={closeModal}
+                            onSignUp={onSignUp}
                             setUserProfileData={setUserProfileData}
                           />
                         )
@@ -211,7 +221,7 @@ export default function HeaderMenu({
                     }
                     modalIsOpen={modalIsOpen}
                     openModal={openModal}
-                    closeModal={closeModal}
+                    closeModal={signedUp ? closeModal : closeSignUp}
                   />
                 </Link>
               ) : (

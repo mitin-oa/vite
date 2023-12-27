@@ -130,6 +130,7 @@ function App() {
                   handleSignIn={handleSignIn}
                   setUserProfileData={setUserProfileData}
                   signedUp={signedUp}
+                  onSignUp={onSignUp}
                   handleSignUp={handleSignUp}
                   modalIsOpen={modalIsOpen}
                   setIsOpen={setIsOpen}

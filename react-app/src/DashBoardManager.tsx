@@ -9,7 +9,7 @@ import { sendHandleOrderRequest } from "./components/scripts/handleOrderRequest"
 import Button from "./components/Button";
 import ModalWindow from "./components/modal/modal";
 import SignInForm from "./components/modal/SignUpForm";
-import { Link } from "react-router-dom";
+import Select from "react-select";
 
 export default function DashBoardManager({
   kind,
@@ -17,6 +17,7 @@ export default function DashBoardManager({
   handleSignIn,
   modalIsOpen,
   setIsOpen,
+  onSignUp,
   handleSignUp,
   setUserProfileData,
 }: any) {
@@ -24,6 +25,7 @@ export default function DashBoardManager({
   const [userDataForDashboard, setUserDataForDashboard] = useState<any | null>(
     null
   );
+  const [selectOptions, setSelectOptions]: any[] = useState([]);
 
   useEffect(() => {
     const requestData = async () => {
@@ -31,7 +33,14 @@ export default function DashBoardManager({
         // Запрос комбинированных данных о пользователе при загрузке компонента
         const serverAnswer = await getUserDataForDashboard();
         console.log(serverAnswer);
-        setUserDataForDashboard(serverAnswer); // Сохраняем данные в состоянии
+        setUserDataForDashboard(serverAnswer);
+        // Сохраняем данные в состоянии
+        const newSelectOptions = serverAnswer.data.unassignedOrders.map(
+          (e: any) => {
+            return { value: e.order_id, label: `Order Id #${e.order_id}` };
+          }
+        );
+        setSelectOptions(newSelectOptions);
       } catch (error) {
         console.error("An error occurred while loading data:", error);
       }
@@ -45,7 +54,7 @@ export default function DashBoardManager({
     console.log("userDataForDashboard", userDataForDashboard);
   }
 
-  async function handleOrder(orderId: string, points_cost: string) {
+  async function AssignOrder(orderId: string, points_cost: string) {
     //How pass order_id to server handle with order?
     const serverAnswer = await sendHandleOrderRequest(orderId, points_cost);
 
@@ -84,6 +93,7 @@ export default function DashBoardManager({
           handleSignIn={handleSignIn}
           modalIsOpen={modalIsOpen}
           setIsOpen={setIsOpen}
+          onSignUp={onSignUp}
           setUserProfileData={setUserProfileData}
           handleSignUp={handleSignUp}
         />
@@ -100,7 +110,7 @@ export default function DashBoardManager({
                     <td>User name</td>
                     <td>
                       {userDataForDashboard
-                        ? userDataForDashboard.data.userData[0].username
+                        ? userDataForDashboard.data.managerData[0].username
                         : 0}
                     </td>
                     <td>
@@ -138,75 +148,31 @@ export default function DashBoardManager({
                   <td>Rating (by clients)</td>
                 </tr>
                 {userDataForDashboard
-                  ? userDataForDashboard.data.fileData
-                      .slice(-10, userDataForDashboard.data.fileData.length)
-                      .sort((a: any, b: any) =>
-                        a.created_at.date > b.created_at.date ? 1 : -1
-                      )
-                      .map((e: any) => (
-                        <tr>
-                          <td>{userDataForDashboard ? e.original_name : ""}</td>
-                          <td>{userDataForDashboard ? e.order_status : ""}</td>
-                          <td>
-                            {userDataForDashboard
-                              ? e.created_at.toString().split("T")[0] +
-                                " " +
-                                e.created_at
-                                  .toString()
-                                  .split("T")[1]
-                                  .split(".")[0]
-                              : ""}
-                          </td>
+                  ? userDataForDashboard.data.editorsWorkload.map((e: any) => (
+                      <tr>
+                        <td>{userDataForDashboard ? e.editor_name : ""}</td>
+                        <td>{userDataForDashboard ? e.total_orders : ""}</td>
+                        <td>{userDataForDashboard ? e.total_pages : ""}</td>
 
-                          <td>
-                            {e.order_status !== "pending" ? (
-                              <Button
-                                children={
-                                  e.completed ? "Download" : "Not completed"
-                                }
-                                color={"orange"}
-                                style={"table-btn"}
-                                onClick={function (): void {
-                                  throw new Error("Function not implemented.");
-                                }}
-                              />
-                            ) : (
-                              <></>
-                            )}
-                          </td>
-                          <td>
-                            {e.order_status !== "pending" ? (
-                              <Button
-                                children={
-                                  e.completed ? "Download" : "Not completed"
-                                }
-                                color={"orange"}
-                                style={"table-btn"}
-                                onClick={function (): void {
-                                  throw new Error("Function not implemented.");
-                                }}
-                              />
-                            ) : (
-                              <></>
-                            )}
-                          </td>
-                          <td style={{ minWidth: "40vw" }}>
-                            <div className="form-group mb-3">
-                              <textarea
-                                className="form-control"
-                                name="addInformation"
-                                id="addInformation"
-                                rows={4}
-                                placeholder="Enter text"
-                                value={addInformation}
-                                onChange={(e) =>
-                                  setAddInformation(e.target.value)
-                                }
-                              ></textarea>
-                            </div>
-                          </td>
-                        </tr>
-                      ))
+                        <td>
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "space-between",
+                            }}
+                          >
+                            <Select options={selectOptions} />
+                            <Button
+                              children={"Assign Order"}
+                              color={"orange"}
+                              style={"table-btn"}
+                              onClick={() => AssignOrder}
+                            />
+                          </div>
+                        </td>
+                        <td>...</td>
+                      </tr>
+                    ))
                   : ""}
               </tbody>
             </table>

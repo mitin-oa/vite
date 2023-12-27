@@ -1,13 +1,12 @@
 import { useContext, useState } from "react";
 import Button from "../Button";
-import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
-import { stripVTControlCharacters } from "util";
 import { SignedUpContext } from "../../App";
 
 const SignUpForm = ({
   handleSignUp,
   onCloseModal,
+  onSignUp,
   setUserProfileData,
 }: any) => {
   const [inputName, setInputName] = useState("username");
@@ -15,10 +14,13 @@ const SignUpForm = ({
   const [inputPhone, setInputPhone] = useState("+3530000000");
   const [inputPassword, setInputPassword] = useState("pass");
   const signedUp = useContext(SignedUpContext);
-
+  function closeModal() {
+    onCloseModal;
+    onSignUp(!signedUp);
+  }
   const handleClick = async () => {
     !signedUp && handleSignUp();
-    onCloseModal();
+    closeModal();
     const data = {
       userName: inputName,
       userEmail: inputEmail,

@@ -17,6 +17,7 @@ export default function DashBoardEditor({
   handleSignIn,
   modalIsOpen,
   setIsOpen,
+  onSignUp,
   handleSignUp,
   setUserProfileData,
 }: any) {
@@ -83,6 +84,7 @@ export default function DashBoardEditor({
           handleSignIn={handleSignIn}
           modalIsOpen={modalIsOpen}
           setIsOpen={setIsOpen}
+          onSignUp={onSignUp}
           setUserProfileData={setUserProfileData}
           handleSignUp={handleSignUp}
         />

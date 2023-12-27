@@ -18,6 +18,7 @@ export default function Dashboard({
   handleSignIn,
   modalIsOpen,
   setIsOpen,
+  onSignUp,
   handleSignUp,
   setUserProfileData,
 }: any) {
@@ -85,6 +86,7 @@ export default function Dashboard({
           handleSignIn={handleSignIn}
           modalIsOpen={modalIsOpen}
           setIsOpen={setIsOpen}
+          onSignUp={onSignUp}
           setUserProfileData={setUserProfileData}
           handleSignUp={handleSignUp}
         />
