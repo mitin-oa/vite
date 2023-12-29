@@ -2,6 +2,7 @@ import { useState } from "react";
 import Button from "../Button";
 
 import { sendResetPassRequest } from "../scripts/fetch.resetPass"; // * VK Backend: Connecting an external script
+import Swal from "sweetalert2";
 
 const ResetPassForm = ({ setIsOpen, resetPass, setResetPass }: any) => {
   const [inputEmail, setInputEmail] = useState("");
@@ -13,13 +14,29 @@ const ResetPassForm = ({ setIsOpen, resetPass, setResetPass }: any) => {
   const handleClick = async () => {
     try {
       const serverAnswer: any = await sendResetPassRequest(inputEmail);
-      alert(
+      Swal.fire({
+        title: "Good job!",
+        text:
+          "If you have an account on our system with the specified username or password, " +
+          "you will receive an email with a link to reset your password. " +
+          "The link will be valid for 15 minutes.",
+        icon: "success",
+      });
+      /* alert(
         "If you have an account on our system with the specified username or password, " +
-        "you will receive an email with a link to reset your password. " +
-        "The link will be valid for 15 minutes."
-      );
+          "you will receive an email with a link to reset your password. " +
+          "The link will be valid for 15 minutes."
+      ); */
     } catch (error) {
-      console.error("There was an error handling the password reset request:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: `There was an error handling the password reset request: ${error}`,
+      });
+      /* console.error(
+        "There was an error handling the password reset request:",
+        error
+      ); */
     }
     closeModal();
   };

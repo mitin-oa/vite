@@ -6,8 +6,7 @@ export default function Home() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [serverAnswerMessage, setServerAnswerMessage] = useState("");
 
-  useEffect(() => {
-  }, []);
+  useEffect(() => {}, []);
 
   const handleResetPassword = () => {
     // Извлекаем параметры из адреса при загрузке компонента

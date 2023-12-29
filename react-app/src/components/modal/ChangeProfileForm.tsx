@@ -1,18 +1,12 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Button from "../Button";
 import Swal from "sweetalert2";
 import { SignedUpContext } from "../../App";
 
-const ChangeProfileForm = ({
-  handleSignUp,
-  onCloseModal,
-  onSignUp,
-  setUserProfileData,
-}: any) => {
+const ChangeProfileForm = ({ onCloseModal }: any) => {
   const [inputName, setInputName] = useState("username");
   const [inputEmail, setInputEmail] = useState("email");
   const [inputPhone, setInputPhone] = useState("+3530000000");
-  const [inputPassword, setInputPassword] = useState("pass");
   const [newPassword, setNewPassword] = useState("pass");
   const [confirmNewPassword, setConfirmPassword] = useState("pass");
   const [serverAnswerMessage, setServerAnswerMessage] = useState("");
@@ -22,24 +16,20 @@ const ChangeProfileForm = ({
   }
 
   const handleResetPassword = () => {
-    // Извлекаем параметры из адреса при загрузке компонента
-    const urlParams = new URLSearchParams(window.location.search);
-    const emailParam = urlParams.get("email");
-    const tokenParam = urlParams.get("token");
-
     // Проверка, что newPassword и confirmPassword совпадают перед отправкой
     if (newPassword !== confirmNewPassword) {
       setServerAnswerMessage("Пароли не совпадают.");
       return;
     }
-
+    closeModal();
     // Kод для отправки нового пароля на сервер
+
     const data = {
-      email: emailParam,
-      token: tokenParam,
+      username: inputName,
+      email: inputEmail,
+      phone: inputPhone,
       newPassword: newPassword,
     };
-
     // Пример использования fetch для отправки данных на сервер
     fetch("/api/resetPassword", {
       method: "POST",
@@ -76,7 +66,7 @@ const ChangeProfileForm = ({
               id="username"
               name="username"
               placeholder="Enter user name"
-              defaultValue="user1"
+              value={inputName}
               required
               onChange={(event) => setInputName(event.target.value)}
             />
@@ -92,7 +82,7 @@ const ChangeProfileForm = ({
               id="email"
               name="email"
               placeholder="Enter email"
-              defaultValue="user1@example.com"
+              value={inputEmail}
               required
               onChange={(event) => setInputEmail(event.target.value)}
             />
@@ -108,7 +98,7 @@ const ChangeProfileForm = ({
               id="phone"
               name="phone"
               placeholder="Enter phone"
-              defaultValue="+3530000000"
+              value={inputPhone}
               required
               onChange={(event) => setInputPhone(event.target.value)}
             />
@@ -148,7 +138,7 @@ const ChangeProfileForm = ({
             children="Submit"
             color="orange"
             onClick={() => {
-              handleResetPassword();
+              handleResetPassword(), onCloseModal();
             }}
             style="modal-btn"
           />
