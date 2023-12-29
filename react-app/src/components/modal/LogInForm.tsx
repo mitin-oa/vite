@@ -8,7 +8,6 @@ const LogInForm = ({
   setResetPass,
 }: any) => {
   // * ↓ VK: Significant for the backend area. Please exercise caution when making alterations
-
   const handleLogInSubmit = () => {
     // * VK: Form fields data entered by the user
     const formData = new FormData(
