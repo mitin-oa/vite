@@ -10,6 +10,7 @@ import ModalWindow from "./components/modal/modal";
 import InputText from "./components/InputText";
 import DownLoadFile from "./components/DownloadFile";
 import SignUpForm from "./components/modal/SignUpForm";
+import ChangeProfileForm from "./components/modal/ChangeProfileForm";
 
 export default function DashBoardEditor({
   kind,
@@ -106,9 +107,9 @@ export default function DashBoardEditor({
                     </td>
                     <td>
                       <ModalWindow
-                        title={"Change"}
+                        title={"Change profile data"}
                         childComp={
-                          <SignUpForm
+                          <ChangeProfileForm
                             onSignUp={handleSignUp}
                             onCloseModal={closeModal}
                             setUserProfileData={setUserProfileData}

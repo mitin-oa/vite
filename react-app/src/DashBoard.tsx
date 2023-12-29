@@ -11,6 +11,7 @@ import ModalWindow from "./components/modal/modal";
 import { Link } from "react-router-dom";
 import SignUpForm from "./components/modal/SignUpForm";
 import DownLoadFile from "./components/DownloadFile";
+import ChangeProfileForm from "./components/modal/ChangeProfileForm";
 
 export default function Dashboard({
   kind,
@@ -110,7 +111,7 @@ export default function Dashboard({
                       <ModalWindow
                         title={"Change"}
                         childComp={
-                          <SignUpForm
+                          <ChangeProfileForm
                             onSignUp={handleSignUp}
                             onCloseModal={closeModal}
                             setUserProfileData={setUserProfileData}

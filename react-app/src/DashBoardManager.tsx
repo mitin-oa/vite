@@ -11,6 +11,7 @@ import ModalWindow from "./components/modal/modal";
 import SignInForm from "./components/modal/SignUpForm";
 import Select from "react-select";
 import DownLoadFile from "./components/DownloadFile";
+import ChangeProfileForm from "./components/modal/ChangeProfileForm";
 
 export default function DashBoardManager({
   kind,
@@ -116,9 +117,9 @@ export default function DashBoardManager({
                     </td>
                     <td>
                       <ModalWindow
-                        title={"Change"}
+                        title={"Change profile data"}
                         childComp={
-                          <SignInForm
+                          <ChangeProfileForm
                             onSignUp={handleSignUp}
                             onCloseModal={closeModal}
                             setUserProfileData={setUserProfileData}
