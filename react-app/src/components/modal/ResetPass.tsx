@@ -1,48 +1,40 @@
 import { useState } from "react";
 import Button from "../Button";
 
+import { sendResetPassRequest } from "../scripts/fetch.resetPass"; // * VK Backend: Connecting an external script
+
 const ResetPassForm = ({ setIsOpen, resetPass, setResetPass }: any) => {
-  const [inputEmail, setInputEmail] = useState("email");
+  const [inputEmail, setInputEmail] = useState("");
   function closeModal() {
     setIsOpen(false);
     console.log(resetPass);
     setResetPass(!resetPass);
   }
   const handleClick = async () => {
-    closeModal();
-    //setResetPass(!resetPass);
-
-    /*  try {
-      const response = await fetch("/api/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-      console.log("-------", response);
-      if (response.status === 200) alert("Successfully registered!");
-      else if (response.status === 400) alert("User Already Exist");
+    try {
+      const serverAnswer: any = await sendResetPassRequest(inputEmail);
+      alert(
+        "If you have an account on our system with the specified username or password, " +
+        "you will receive an email with a link to reset your password. " +
+        "The link will be valid for 15 minutes."
+      );
     } catch (error) {
-      console.error("There was a problem with the fetch operation:", error);
-      alert("Error Occured");
-      throw error;
-    } */
+      console.error("There was an error handling the password reset request:", error);
+    }
+    closeModal();
   };
-
   return (
     <>
-      <form className="form " action="/api/signup" method="post" id="reg-form">
+      <form className="form">
         <div className="col-xs-12">
           <div className="form-group">
-            <label htmlFor="email">Email adress:</label>
+            <label htmlFor="email">Email address:</label>
             <input
               type="email"
               className="input-field"
               id="email"
               name="email"
               placeholder="Enter email"
-              defaultValue="user1@example.com"
               required
               onChange={(event) => setInputEmail(event.target.value)}
             />
