@@ -11,6 +11,7 @@ export default function CalculateCost({
   modalIsOpen,
   setIsOpen,
   onSignIn,
+  onSignUp,
   setUserProfileData,
 }: any) {
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1160px" });
@@ -99,6 +100,7 @@ export default function CalculateCost({
           modalIsOpen={modalIsOpen}
           setIsOpen={setIsOpen}
           onSignIn={onSignIn}
+          onSignUp={onSignUp}
         />
         <section
           className="main-content container"

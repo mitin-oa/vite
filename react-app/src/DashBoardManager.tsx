@@ -10,6 +10,7 @@ import Button from "./components/Button";
 import ModalWindow from "./components/modal/modal";
 import SignInForm from "./components/modal/SignUpForm";
 import Select from "react-select";
+import DownLoadFile from "./components/DownloadFile";
 
 export default function DashBoardManager({
   kind,
@@ -134,8 +135,77 @@ export default function DashBoardManager({
               </table>
             </div>
           </div>
+
           <div className="row">
-            <p>Recent uploaded files</p>
+            <p>Recent files (eg. 10 last files) with all the info of each</p>
+            <table className="table dashboard-table">
+              <tbody>
+                <tr>
+                  <td>Name</td>
+                  <td>Status</td>
+                  <td>Date</td>
+                  <td>Manage</td>
+                  <td>Download</td>
+                </tr>
+                {userDataForDashboard
+                  ? userDataForDashboard.data.unassignedOrders
+                      .slice(
+                        -10,
+                        userDataForDashboard.data.unassignedOrders.length
+                      )
+                      .sort((a: any, b: any) =>
+                        a.created_at.date > b.created_at.date ? 1 : -1
+                      )
+                      .map((e: any) => (
+                        <tr>
+                          <td>{userDataForDashboard ? e.client_id : ""}</td>
+                          <td>{userDataForDashboard ? e.status : ""}</td>
+                          <td>
+                            {userDataForDashboard
+                              ? e.created_at.toString().split("T")[0] +
+                                " " +
+                                e.created_at
+                                  .toString()
+                                  .split("T")[1]
+                                  .split(".")[0]
+                              : ""}
+                          </td>
+                          <td>
+                            <Button
+                              children={"Start processing"}
+                              color={"orange"}
+                              style={"table-btn"}
+                              disable={true}
+                              onClick={() => {
+                                "handleOrder(e.order_id, e.points_cost);";
+                              }}
+                            />
+                          </td>
+                          <td>
+                            {e.order_status !== "pending" ? (
+                              <Button
+                                children={
+                                  e.completed ? "Download" : "Not completed"
+                                }
+                                color={"orange"}
+                                style={"table-btn"}
+                                onClick={() =>
+                                  "<DownLoadFile fileName={e.name} />"
+                                }
+                              />
+                            ) : (
+                              <></>
+                            )}
+                          </td>
+                        </tr>
+                      ))
+                  : ""}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="row">
+            <p>Editors workload table</p>
             <table className="table dashboard-table">
               <tbody>
                 <tr>

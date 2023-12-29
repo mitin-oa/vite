@@ -5,6 +5,7 @@ import HeaderMenu from "./components/header/header";
 
 export default function About({
   onSignIn,
+  onSignUp,
   handleSignIn,
   handleSignUp,
   setUserProfileData,
@@ -17,6 +18,7 @@ export default function About({
         <HeaderMenu
           kind="short"
           onSignIn={onSignIn}
+          onSignUp={onSignUp}
           handleSignUp={handleSignUp}
           handleSignIn={handleSignIn}
           setUserProfileData={setUserProfileData}

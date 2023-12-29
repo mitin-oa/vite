@@ -7,6 +7,7 @@ import { SignedInContext, SignedUpContext } from "./App";
 
 export default function UpLoad({
   onSignIn,
+  onSignUp,
   handleSignIn,
   handleSignUp,
   modalIsOpen,
@@ -28,6 +29,7 @@ export default function UpLoad({
         <HeaderMenu
           kind="short"
           onSignIn={onSignIn}
+          onSignUp={onSignUp}
           handleSignIn={handleSignIn}
           handleSignUp={handleSignUp}
           modalIsOpen={modalIsOpen}

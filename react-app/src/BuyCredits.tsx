@@ -12,6 +12,7 @@ import Alert from "./components/Alert";
 export default function BuyCredits({
   kind,
   onSignIn,
+  onSignUp,
   handleSignIn,
   handleSignUp,
   setUserProfileData,
@@ -57,6 +58,7 @@ export default function BuyCredits({
         <HeaderMenu
           kind={kind}
           onSignIn={onSignIn}
+          onSignUp={onSignUp}
           handleSignIn={handleSignIn}
           handleSignUp={handleSignUp}
           modalIsOpen={modalIsOpen}
