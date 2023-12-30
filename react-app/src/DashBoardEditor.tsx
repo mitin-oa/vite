@@ -186,16 +186,19 @@ export default function DashBoardEditor({
                               : ""}
                           </td>
                           <td>
-                            {!e.assigned_editor_id &&
-                            e.order_status == "paid" ? (
-                              <Button
-                                children={"Assign to me"}
-                                color={"orange"}
-                                style={"table-btn"}
-                                onClick={() =>
-                                  handleOrder(e.order_id, e.points_cost)
-                                }
-                              />
+                            {!e.assigned_editor_id ? (
+                              e.order_status == "paid" ? (
+                                <Button
+                                  children={"Assign to me"}
+                                  color={"orange"}
+                                  style={"table-btn"}
+                                  onClick={() =>
+                                    handleOrder(e.order_id, e.points_cost)
+                                  }
+                                />
+                              ) : (
+                                <></>
+                              )
                             ) : (
                               <>
                                 <a>assigned</a>

@@ -12,7 +12,7 @@ const ChangeProfileForm = ({ onCloseModal }: any) => {
   const [serverAnswerMessage, setServerAnswerMessage] = useState("");
   const signedUp = useContext(SignedUpContext);
 
-  const handleResetPassword = () => {
+  const handleChangeProfile = () => {
     // Проверка, что newPassword и confirmPassword совпадают перед отправкой
     if (newPassword !== confirmNewPassword) {
       setServerAnswerMessage("Пароли не совпадают.");
@@ -29,7 +29,7 @@ const ChangeProfileForm = ({ onCloseModal }: any) => {
     };
     // Пример использования fetch для отправки данных на сервер
     fetch("/api/resetPassword", {
-      method: "POST",
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
@@ -135,7 +135,7 @@ const ChangeProfileForm = ({ onCloseModal }: any) => {
             children="Submit"
             color="orange"
             onClick={() => {
-              handleResetPassword(), onCloseModal();
+              handleChangeProfile(), onCloseModal();
             }}
             style="modal-btn"
           />
