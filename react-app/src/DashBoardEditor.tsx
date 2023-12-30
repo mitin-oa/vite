@@ -47,12 +47,32 @@ export default function DashBoardEditor({
     console.log("userDataForDashboard", userDataForDashboard);
   }
 
-  async function handleOrder(orderId: string) {
+  async function handleOrder(orderId: string, points_cost: number) {
     //How pass order_id to server handle with order?
-    //const serverAnswer = await sendHandleOrderRequest(orderId, points_cost);
+    const serverAnswer = await sendHandleOrderRequest(orderId, points_cost);
+    alert(serverAnswer.message);
+    let answer = serverAnswer.message === "Low balance" ? true : false;
+    const index = userDataForDashboard.data.orderData.findIndex(
+      (e: any) => e.order_id === orderId
+    );
+
+    userDataForDashboard.data.orderData[index] = {
+      ...userDataForDashboard.data.orderData[index],
+      assigned_editor_id: "",
+    };
+
+    setUserDataForDashboard(userDataForDashboard);
+    console.log(userDataForDashboard);
+    console.log(index);
+    console.log("add_information");
+  }
+
+  async function handleNotes(orderId: string) {
+    //How pass order_id to server handle with order?
+    //const serverAnswer = await sendHandleOrderRequest(orderId);
     //alert(serverAnswer.message);
-    //let answer = serverAnswer.message === "Low balance" ? true : false;
-    /* const index = userDataForDashboard.data.orderData.findIndex(
+
+    const index = userDataForDashboard.data.orderData.findIndex(
       (e: any) => e.order_id === orderId
     );
 
@@ -64,7 +84,7 @@ export default function DashBoardEditor({
     setUserDataForDashboard(userDataForDashboard);
     console.log(userDataForDashboard);
     console.log(index);
-    console.log("add_information"); */
+    console.log("add_information");
   }
 
   function openModal() {
@@ -166,16 +186,15 @@ export default function DashBoardEditor({
                               : ""}
                           </td>
                           <td>
-                            {e.order_status === "paid" ? (
+                            {!e.assigned_editor_id &&
+                            e.order_status == "paid" ? (
                               <Button
-                                children={
-                                  e.completed ? "Download" : "Not completed"
-                                }
+                                children={"Assign to me"}
                                 color={"orange"}
                                 style={"table-btn"}
-                                onClick={function (): void {
-                                  throw new Error("Function not implemented.");
-                                }}
+                                onClick={() =>
+                                  handleOrder(e.order_id, e.points_cost)
+                                }
                               />
                             ) : (
                               <></>
@@ -216,7 +235,7 @@ export default function DashBoardEditor({
                             {
                               <InputText
                                 order_id={e.order_id}
-                                onChange={() => handleOrder(e.order_id)}
+                                onChange={() => handleNotes(e.order_id)}
                                 userDataForDashboard={userDataForDashboard}
                                 setUserDataForDashboard={
                                   setUserDataForDashboard

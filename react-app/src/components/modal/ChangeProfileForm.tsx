@@ -11,9 +11,6 @@ const ChangeProfileForm = ({ onCloseModal }: any) => {
   const [confirmNewPassword, setConfirmPassword] = useState("pass");
   const [serverAnswerMessage, setServerAnswerMessage] = useState("");
   const signedUp = useContext(SignedUpContext);
-  function closeModal() {
-    onCloseModal;
-  }
 
   const handleResetPassword = () => {
     // Проверка, что newPassword и confirmPassword совпадают перед отправкой
@@ -21,7 +18,7 @@ const ChangeProfileForm = ({ onCloseModal }: any) => {
       setServerAnswerMessage("Пароли не совпадают.");
       return;
     }
-    closeModal();
+
     // Kод для отправки нового пароля на сервер
 
     const data = {
