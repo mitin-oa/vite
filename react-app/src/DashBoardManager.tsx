@@ -27,6 +27,7 @@ export default function DashBoardManager({
   const [userDataForDashboard, setUserDataForDashboard] = useState<any | null>(
     null
   );
+  const [selectEditor, setSelectEditor]: any[] = useState([]);
   const [selectOptions, setSelectOptions]: any[] = useState([]);
 
   useEffect(() => {
@@ -43,6 +44,15 @@ export default function DashBoardManager({
           }
         );
         setSelectOptions(newSelectOptions);
+        const newSelectEditor = serverAnswer.data.editorsWorkload.map(
+          (e: any) => {
+            return {
+              value: e.editor_id,
+              label: `Editor name: ${e.editor_name}`,
+            };
+          }
+        );
+        setSelectEditor(newSelectEditor);
       } catch (error) {
         console.error("An error occurred while loading data:", error);
       }
@@ -145,8 +155,9 @@ export default function DashBoardManager({
                   <td>Name</td>
                   <td>Status</td>
                   <td>Date</td>
+                  <td>Number of pages</td>
+                  <td>Express delivery</td>
                   <td>Manage</td>
-                  <td>Download</td>
                 </tr>
                 {userDataForDashboard
                   ? userDataForDashboard.data.unassignedOrders
@@ -172,31 +183,36 @@ export default function DashBoardManager({
                               : ""}
                           </td>
                           <td>
-                            <Button
-                              children={"Start processing"}
-                              color={"orange"}
-                              style={"table-btn"}
-                              disable={true}
-                              onClick={() => {
-                                "handleOrder(e.order_id, e.points_cost);";
-                              }}
-                            />
+                            {userDataForDashboard ? e.number_of_pages : ""}
                           </td>
                           <td>
-                            {e.order_status !== "pending" ? (
+                            {userDataForDashboard && e.express_delivery
+                              ? "yes"
+                              : ""}
+                          </td>
+                          <td>
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "center",
+                              }}
+                            >
+                              {e.status === "paid" ? (
+                                <Select options={selectEditor} />
+                              ) : (
+                                ""
+                              )}
                               <Button
                                 children={
-                                  e.completed ? "Download" : "Not completed"
+                                  e.status == "pending"
+                                    ? "Send reminder letter"
+                                    : "Assign order"
                                 }
                                 color={"orange"}
                                 style={"table-btn"}
-                                onClick={() =>
-                                  "<DownLoadFile fileName={e.name} />"
-                                }
+                                onClick={() => AssignOrder}
                               />
-                            ) : (
-                              <></>
-                            )}
+                            </div>
                           </td>
                         </tr>
                       ))
