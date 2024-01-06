@@ -3,10 +3,23 @@ import Button from "../Button";
 import Swal from "sweetalert2";
 import { SignedUpContext } from "../../App";
 
-const ChangeProfileForm = ({ onCloseModal }: any) => {
-  const [inputName, setInputName] = useState("username");
-  const [inputEmail, setInputEmail] = useState("email");
-  const [inputPhone, setInputPhone] = useState("+3530000000");
+const ChangeProfileForm = ({ onCloseModal, userDataForDashboard }: any) => {
+  const [inputName, setInputName] = useState(
+    userDataForDashboard !== null && userDataForDashboard !== undefined
+      ? userDataForDashboard.data.managerData[0].username
+      : "user"
+  );
+  console.log(userDataForDashboard);
+  const [inputEmail, setInputEmail] = useState(
+    userDataForDashboard !== null && userDataForDashboard !== undefined
+      ? userDataForDashboard.data.managerData[0].email
+      : "email"
+  );
+  const [inputPhone, setInputPhone] = useState(
+    userDataForDashboard !== null && userDataForDashboard !== undefined
+      ? userDataForDashboard.data.managerData[0].phone
+      : "+3530000000"
+  );
   const [newPassword, setNewPassword] = useState("pass");
   const [confirmNewPassword, setConfirmPassword] = useState("pass");
   const [serverAnswerMessage, setServerAnswerMessage] = useState("");
@@ -29,7 +42,7 @@ const ChangeProfileForm = ({ onCloseModal }: any) => {
     };
     // Пример использования fetch для отправки данных на сервер
     fetch("/api/resetPassword", {
-      method: "GET",
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
@@ -40,9 +53,9 @@ const ChangeProfileForm = ({ onCloseModal }: any) => {
         console.log(result);
         // Обработка ответа от сервера
         if (result.HTTP_status) {
-          setServerAnswerMessage("Пароль успешно сброшен.");
+          setServerAnswerMessage("Success");
         } else {
-          setServerAnswerMessage("Произошла ошибка при сбросе пароля.");
+          setServerAnswerMessage("Error");
         }
       })
       .catch((error) => {

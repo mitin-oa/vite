@@ -132,6 +132,7 @@ export default function DashBoardEditor({
                           <ChangeProfileForm
                             onSignUp={handleSignUp}
                             onCloseModal={closeModal}
+                            userDataForDashboard={userDataForDashboard}
                             setUserProfileData={setUserProfileData}
                           />
                         }

@@ -132,6 +132,7 @@ export default function DashBoardManager({
                           <ChangeProfileForm
                             onSignUp={handleSignUp}
                             onCloseModal={closeModal}
+                            userDataForDashboard={userDataForDashboard}
                             setUserProfileData={setUserProfileData}
                           />
                         }
@@ -260,6 +261,71 @@ export default function DashBoardManager({
                         <td>...</td>
                       </tr>
                     ))
+                  : ""}
+              </tbody>
+            </table>
+          </div>
+          <div className="row">
+            <p>Edited files (eg. 10 last files) with all the info of each</p>
+            <table className="table dashboard-table">
+              <tbody>
+                <tr>
+                  <td>Name</td>
+
+                  <td>Date of order</td>
+                  <td>Date of delivering</td>
+                  <td>Number of pages</td>
+                  <td>Express delivery</td>
+                  <td>Dwnload</td>
+                </tr>
+                {userDataForDashboard
+                  ? userDataForDashboard.data.unassignedOrders
+                      .slice(
+                        -10,
+                        userDataForDashboard.data.unassignedOrders.length
+                      )
+                      .sort((a: any, b: any) =>
+                        a.created_at.date > b.created_at.date ? 1 : -1
+                      )
+                      .map((e: any) => (
+                        <tr>
+                          <td>{userDataForDashboard ? e.client_id : ""}</td>
+                          <td>{userDataForDashboard ? e.status : ""}</td>
+                          <td>
+                            {userDataForDashboard
+                              ? e.created_at.toString().split("T")[0] +
+                                " " +
+                                e.created_at
+                                  .toString()
+                                  .split("T")[1]
+                                  .split(".")[0]
+                              : ""}
+                          </td>
+                          <td>
+                            {userDataForDashboard ? e.number_of_pages : ""}
+                          </td>
+                          <td>
+                            {userDataForDashboard && e.express_delivery
+                              ? "yes"
+                              : ""}
+                          </td>
+                          <td>
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "center",
+                              }}
+                            >
+                              <Button
+                                children={"Download"}
+                                color={"orange"}
+                                style={"table-btn"}
+                                onClick={() => ""}
+                              />
+                            </div>
+                          </td>
+                        </tr>
+                      ))
                   : ""}
               </tbody>
             </table>
