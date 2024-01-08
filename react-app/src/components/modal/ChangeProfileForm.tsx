@@ -5,20 +5,14 @@ import { SignedUpContext } from "../../App";
 
 const ChangeProfileForm = ({ onCloseModal, userDataForDashboard }: any) => {
   const [inputName, setInputName] = useState(
-    userDataForDashboard !== null && userDataForDashboard !== undefined
-      ? userDataForDashboard.data.managerData[0].username
-      : "user"
+    userDataForDashboard.data.managerData[0].username
   );
   console.log(userDataForDashboard);
   const [inputEmail, setInputEmail] = useState(
-    userDataForDashboard !== null && userDataForDashboard !== undefined
-      ? userDataForDashboard.data.managerData[0].email
-      : "email"
+    userDataForDashboard.data.managerData[0].email
   );
   const [inputPhone, setInputPhone] = useState(
-    userDataForDashboard !== null && userDataForDashboard !== undefined
-      ? userDataForDashboard.data.managerData[0].phone
-      : "+3530000000"
+    userDataForDashboard.data.managerData[0].phone
   );
   const [newPassword, setNewPassword] = useState("pass");
   const [confirmNewPassword, setConfirmPassword] = useState("pass");
@@ -41,7 +35,7 @@ const ChangeProfileForm = ({ onCloseModal, userDataForDashboard }: any) => {
       newPassword: newPassword,
     };
     // Пример использования fetch для отправки данных на сервер
-    fetch("/api/resetPassword", {
+    fetch("/api/changeUserData", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

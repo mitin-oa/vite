@@ -1,14 +1,11 @@
 import { useEffect, useState } from "react";
-
 import { Footer } from "./components/footer/footer";
 import HeaderMenu from "./components/header/header";
 // * VK: Significant for the backend area. Please exercise caution when making alterations
 import { getUserDataForDashboard } from "./components/scripts/getUserDataForDashboard";
 import { sendHandleOrderRequest } from "./components/scripts/handleOrderRequest";
-
 import Button from "./components/Button";
 import ModalWindow from "./components/modal/modal";
-import SignInForm from "./components/modal/SignUpForm";
 import Select from "react-select";
 import DownLoadFile from "./components/DownloadFile";
 import ChangeProfileForm from "./components/modal/ChangeProfileForm";
@@ -27,8 +24,10 @@ export default function DashBoardManager({
   const [userDataForDashboard, setUserDataForDashboard] = useState<any | null>(
     null
   );
-  const [selectEditor, setSelectEditor]: any[] = useState([]);
-  const [selectOptions, setSelectOptions]: any[] = useState([]);
+  const [editor, setEditor] = useState([]);
+  const [selectedEditor, setSelectedEditor]: any = useState(null);
+  const [options, setOptions] = useState([]);
+  const [selectOptions, setSelectedOptions]: any = useState(null);
 
   useEffect(() => {
     const requestData = async () => {
@@ -38,21 +37,17 @@ export default function DashBoardManager({
         console.log(serverAnswer);
         setUserDataForDashboard(serverAnswer);
         // Сохраняем данные в состоянии
-        const newSelectOptions = serverAnswer.data.unassignedOrders.map(
-          (e: any) => {
-            return { value: e.order_id, label: `Order Id #${e.order_id}` };
-          }
-        );
-        setSelectOptions(newSelectOptions);
-        const newSelectEditor = serverAnswer.data.editorsWorkload.map(
-          (e: any) => {
-            return {
-              value: e.editor_id,
-              label: `Editor name: ${e.editor_name}`,
-            };
-          }
-        );
-        setSelectEditor(newSelectEditor);
+        const newOptions = serverAnswer.data.unassignedOrders.map((e: any) => {
+          return { value: e.order_id, label: e.order_id };
+        });
+        setOptions(newOptions);
+        const newEditor = serverAnswer.data.editorsWorkload.map((e: any) => {
+          return {
+            value: e.editor_id,
+            label: e.editor_name,
+          };
+        });
+        setEditor(newEditor);
       } catch (error) {
         console.error("An error occurred while loading data:", error);
       }
@@ -66,21 +61,42 @@ export default function DashBoardManager({
     console.log("userDataForDashboard", userDataForDashboard);
   }
 
-  async function AssignOrder(orderId: string, points_cost: string) {
-    //How pass order_id to server handle with order?
-    const serverAnswer = await sendHandleOrderRequest(orderId, points_cost);
+  async function AssignEditor(orderId: any, editorId: string) {
+    //How pass editor_id to server handle with order?
+    //const serverAnswer = await sendHandleOrderRequest(orderId, points_cost);
 
-    alert(serverAnswer.message);
+    //alert(serverAnswer.message);
 
-    let answer = serverAnswer.message === "Low balance" ? true : false;
-
-    const index = userDataForDashboard.data.fileData.findIndex(
-      (e: any) => e.order_id === orderId
+    //let answer = serverAnswer.message === "Low balance" ? true : false;
+    console.log(orderId.value);
+    const index = userDataForDashboard.data.unassignedOrders.findIndex(
+      (e: any) => e.order_id === orderId.value
     );
 
-    userDataForDashboard.data.fileData[index] = {
-      ...userDataForDashboard.data.fileData[index],
-      order_status: "paid",
+    userDataForDashboard.data.unassignedOrders[index] = {
+      ...userDataForDashboard.data.unassignedOrders[index],
+      assigned_editor_id: editorId,
+    };
+
+    //console.log(userDataForDashboard);
+    setUserDataForDashboard(userDataForDashboard);
+  }
+
+  async function AssignOrder(editorId: string, orderId: any) {
+    //How pass editor_id to server handle with order?
+    //const serverAnswer = await sendHandleOrderRequest(orderId, points_cost);
+
+    //alert(serverAnswer.message);
+
+    //let answer = serverAnswer.message === "Low balance" ? true : false;
+    console.log(orderId.value);
+    const index = userDataForDashboard.data.unassignedOrders.findIndex(
+      (e: any) => e.order_id === orderId.value
+    );
+
+    userDataForDashboard.data.unassignedOrders[index] = {
+      ...userDataForDashboard.data.unassignedOrders[index],
+      assigned_editor_id: editorId,
     };
 
     //console.log(userDataForDashboard);
@@ -170,7 +186,7 @@ export default function DashBoardManager({
                         a.created_at.date > b.created_at.date ? 1 : -1
                       )
                       .map((e: any) => (
-                        <tr>
+                        <tr key={e.index}>
                           <td>{userDataForDashboard ? e.client_id : ""}</td>
                           <td>{userDataForDashboard ? e.status : ""}</td>
                           <td>
@@ -199,7 +215,10 @@ export default function DashBoardManager({
                               }}
                             >
                               {e.status === "paid" ? (
-                                <Select options={selectEditor} />
+                                <Select
+                                  options={editor}
+                                  onChange={setSelectedEditor}
+                                />
                               ) : (
                                 ""
                               )}
@@ -211,7 +230,9 @@ export default function DashBoardManager({
                                 }
                                 color={"orange"}
                                 style={"table-btn"}
-                                onClick={() => AssignOrder}
+                                onClick={() =>
+                                  AssignEditor(selectedEditor, e.order_id)
+                                }
                               />
                             </div>
                           </td>
@@ -249,12 +270,17 @@ export default function DashBoardManager({
                               justifyContent: "space-between",
                             }}
                           >
-                            <Select options={selectOptions} />
+                            <Select
+                              options={options}
+                              onChange={setSelectedOptions}
+                            />
                             <Button
                               children={"Assign Order"}
                               color={"orange"}
                               style={"table-btn"}
-                              onClick={() => AssignOrder}
+                              onClick={() =>
+                                AssignOrder(selectOptions, e.editor_id)
+                              }
                             />
                           </div>
                         </td>
@@ -271,12 +297,11 @@ export default function DashBoardManager({
               <tbody>
                 <tr>
                   <td>Name</td>
-
                   <td>Date of order</td>
                   <td>Date of delivering</td>
                   <td>Number of pages</td>
                   <td>Express delivery</td>
-                  <td>Dwnload</td>
+                  <td>Download</td>
                 </tr>
                 {userDataForDashboard
                   ? userDataForDashboard.data.unassignedOrders
