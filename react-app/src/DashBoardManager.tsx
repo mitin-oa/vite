@@ -268,7 +268,7 @@ export default function DashBoardManager({
                                 children={
                                   e.status == "pending"
                                     ? "Send reminder letter"
-                                    : "Assign order"
+                                    : "Assign editor"
                                 }
                                 color={"orange"}
                                 style={"table-btn"}
