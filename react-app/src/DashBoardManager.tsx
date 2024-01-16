@@ -338,11 +338,12 @@ export default function DashBoardManager({
             <table className="table dashboard-table">
               <tbody>
                 <tr>
-                  <td>Name</td>
+                  <td>Client name</td>
                   <td>Date of order</td>
                   <td>Date of delivering</td>
                   <td>Number of pages</td>
                   <td>Express delivery</td>
+                  <td>Editor name</td>
                   <td>Download</td>
                 </tr>
                 {userDataForDashboard
@@ -357,7 +358,6 @@ export default function DashBoardManager({
                       .map((e: any) => (
                         <tr>
                           <td>{userDataForDashboard ? e.client_name : ""}</td>
-                          <td>{userDataForDashboard ? e.status : ""}</td>
                           <td>
                             {userDataForDashboard
                               ? e.created_at.toString().split("T")[0] +
@@ -369,13 +369,24 @@ export default function DashBoardManager({
                               : ""}
                           </td>
                           <td>
+                            {userDataForDashboard
+                              ? e.completed_at.toString().split("T")[0] +
+                                " " +
+                                e.completed_at
+                                  .toString()
+                                  .split("T")[1]
+                                  .split(".")[0]
+                              : ""}
+                          </td>
+                          <td>
                             {userDataForDashboard ? e.number_of_pages : ""}
                           </td>
                           <td>
                             {userDataForDashboard && e.express_delivery
                               ? "yes"
-                              : ""}
+                              : "no"}
                           </td>
+                          <td>{userDataForDashboard ? e.editor_name : ""}</td>
                           <td>
                             <div
                               style={{
