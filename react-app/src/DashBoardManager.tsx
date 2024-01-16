@@ -63,44 +63,67 @@ export default function DashBoardManager({
 
   async function AssignEditor(orderId: any, editorId: string) {
     //How pass editor_id to server handle with order?
-    //const serverAnswer = await sendHandleOrderRequest(orderId, points_cost);
+    try {
+      const response = await fetch(
+        `/api/assignOrder?editorId=${editorId}&orderId=${orderId}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log(orderId.value);
+      const index = userDataForDashboard.data.unassignedOrders.findIndex(
+        (e: any) => e.order_id === orderId.value
+      );
 
-    //alert(serverAnswer.message);
+      userDataForDashboard.data.unassignedOrders[index] = {
+        ...userDataForDashboard.data.unassignedOrders[index],
+        assigned_editor_id: editorId,
+      };
 
-    //let answer = serverAnswer.message === "Low balance" ? true : false;
-    console.log(orderId.value);
-    const index = userDataForDashboard.data.unassignedOrders.findIndex(
-      (e: any) => e.order_id === orderId.value
-    );
-
-    userDataForDashboard.data.unassignedOrders[index] = {
-      ...userDataForDashboard.data.unassignedOrders[index],
-      assigned_editor_id: editorId,
-    };
-
-    //console.log(userDataForDashboard);
-    setUserDataForDashboard(userDataForDashboard);
+      //console.log(userDataForDashboard);
+      setUserDataForDashboard(userDataForDashboard);
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("There was a problem with the fetch operation:", error);
+      throw error;
+    }
   }
 
   async function AssignOrder(editorId: string, orderId: any) {
     //How pass editor_id to server handle with order?
-    //const serverAnswer = await sendHandleOrderRequest(orderId, points_cost);
+    try {
+      const response = await fetch(
+        `/api/assignOrder?editorId=${editorId}&orderId=${orderId}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
-    //alert(serverAnswer.message);
+      console.log(orderId.value);
+      const index = userDataForDashboard.data.unassignedOrders.findIndex(
+        (e: any) => e.order_id === orderId.value
+      );
 
-    //let answer = serverAnswer.message === "Low balance" ? true : false;
-    console.log(orderId.value);
-    const index = userDataForDashboard.data.unassignedOrders.findIndex(
-      (e: any) => e.order_id === orderId.value
-    );
+      userDataForDashboard.data.unassignedOrders[index] = {
+        ...userDataForDashboard.data.unassignedOrders[index],
+        assigned_editor_id: editorId,
+      };
 
-    userDataForDashboard.data.unassignedOrders[index] = {
-      ...userDataForDashboard.data.unassignedOrders[index],
-      assigned_editor_id: editorId,
-    };
-
-    //console.log(userDataForDashboard);
-    setUserDataForDashboard(userDataForDashboard);
+      //console.log(userDataForDashboard);
+      setUserDataForDashboard(userDataForDashboard);
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("There was a problem with the fetch operation:", error);
+      throw error;
+    }
   }
 
   function openModal() {
@@ -158,6 +181,23 @@ export default function DashBoardManager({
                         btnModalStyle="table-btn"
                       />
                     </td>
+                    <td>
+                      <ModalWindow
+                        title={"Add new editor"}
+                        childComp={
+                          <ChangeProfileForm
+                            onSignUp={handleSignUp}
+                            onCloseModal={closeModal}
+                            userDataForDashboard={userDataForDashboard}
+                            setUserProfileData={setUserProfileData}
+                          />
+                        }
+                        modalIsOpen={modalIsOpen}
+                        openModal={openModal}
+                        closeModal={closeModal}
+                        btnModalStyle="table-btn"
+                      />
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -187,7 +227,7 @@ export default function DashBoardManager({
                       )
                       .map((e: any) => (
                         <tr key={e.index}>
-                          <td>{userDataForDashboard ? e.client_id : ""}</td>
+                          <td>{userDataForDashboard ? e.client_name : ""}</td>
                           <td>{userDataForDashboard ? e.status : ""}</td>
                           <td>
                             {userDataForDashboard
@@ -304,17 +344,17 @@ export default function DashBoardManager({
                   <td>Download</td>
                 </tr>
                 {userDataForDashboard
-                  ? userDataForDashboard.data.unassignedOrders
+                  ? userDataForDashboard.data.processedOrders
                       .slice(
                         -10,
-                        userDataForDashboard.data.unassignedOrders.length
+                        userDataForDashboard.data.processedOrders.length
                       )
                       .sort((a: any, b: any) =>
                         a.created_at.date > b.created_at.date ? 1 : -1
                       )
                       .map((e: any) => (
                         <tr>
-                          <td>{userDataForDashboard ? e.client_id : ""}</td>
+                          <td>{userDataForDashboard ? e.client_name : ""}</td>
                           <td>{userDataForDashboard ? e.status : ""}</td>
                           <td>
                             {userDataForDashboard
