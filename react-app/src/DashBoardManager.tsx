@@ -37,9 +37,11 @@ export default function DashBoardManager({
         console.log(serverAnswer);
         setUserDataForDashboard(serverAnswer);
         // Сохраняем данные в состоянии
-        const newOptions = serverAnswer.data.unassignedOrders.map((e: any) => {
-          return { value: e.order_id, label: e.order_id };
-        });
+        const newOptions = serverAnswer.data.unassignedOrders
+          .filter((e: any) => e.status === "paid")
+          .map((e: any) => {
+            return { value: e.order_id, label: e.order_id };
+          });
         setOptions(newOptions);
         const newEditor = serverAnswer.data.editorsWorkload.map((e: any) => {
           return {
