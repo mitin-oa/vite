@@ -43,25 +43,22 @@ export default function UploadFiles() {
       setFileData(filesWithAdditionalData);
     }
   };
+
   return (
     <>
-      <div className="form-group mb-3">
-        <div style={{ display: "flex" }}>
-          <div style={{ margin: "0 auto", padding: "10px 0" }}>
-            <div className="file-upload">
-              <label>
-                <input
-                  type="file"
-                  name="fileToUpload"
-                  id="fileToUpload"
-                  accept=".doc, .docx, .rtf, .pdf, .odt, .txt"
-                  multiple // Add the 'multiple' attribute to enable multiple file selection
-                  onChange={handleFileChange}
-                />
-                <span>Upload files</span>
-              </label>
-            </div>
-          </div>
+      <div style={{ display: "flex" }}>
+        <div className="file-upload" style={{ width: "100px" }}>
+          <label>
+            <input
+              type="file"
+              name="fileToUpload"
+              id="fileToUpload"
+              accept=".doc, .docx, .rtf, .pdf, .odt, .txt"
+              multiple // Add the 'multiple' attribute to enable multiple file selection
+              onChange={handleFileChange}
+            />
+            <span>Upload files</span>
+          </label>
         </div>
       </div>
     </>

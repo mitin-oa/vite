@@ -220,14 +220,7 @@ export default function DashBoardEditor({
                           <td>
                             {
                               (e.order_status = "paid" ? (
-                                <Button
-                                  children={
-                                    e.completed ? "Upload" : "Not completed"
-                                  }
-                                  color={"orange"}
-                                  style={"table-btn"}
-                                  onClick={() => <UploadFiles />}
-                                />
+                                <UploadFiles />
                               ) : (
                                 <></>
                               ))
