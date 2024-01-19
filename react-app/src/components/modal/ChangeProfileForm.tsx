@@ -3,17 +3,29 @@ import Button from "../Button";
 import Swal from "sweetalert2";
 import { SignedUpContext } from "../../App";
 
+const userRole = localStorage.getItem("userRole");
+
 const ChangeProfileForm = ({ onCloseModal, userDataForDashboard }: any) => {
-  const [inputName, setInputName] = useState(
-    userDataForDashboard.data.managerData[0].username
-  );
+  const username =
+    userRole === "manager"
+      ? userDataForDashboard.data.managerData[0].username
+      : userDataForDashboard.data.userData[0].username;
+
+  const email =
+    userRole === "manager"
+      ? userDataForDashboard.data.managerData[0].email
+      : userDataForDashboard.data.userData[0].email;
+
+  const phone =
+    userRole === "manager"
+      ? userDataForDashboard.data.managerData[0].phone
+      : userDataForDashboard.data.userData[0].phone;
+
   console.log(userDataForDashboard);
-  const [inputEmail, setInputEmail] = useState(
-    userDataForDashboard.data.managerData[0].email
-  );
-  const [inputPhone, setInputPhone] = useState(
-    userDataForDashboard.data.managerData[0].phone
-  );
+
+  const [inputName, setInputName] = useState(username);
+  const [inputEmail, setInputEmail] = useState(email);
+  const [inputPhone, setInputPhone] = useState(phone);
   const [newPassword, setNewPassword] = useState("pass");
   const [confirmNewPassword, setConfirmPassword] = useState("pass");
   const [serverAnswerMessage, setServerAnswerMessage] = useState("");
