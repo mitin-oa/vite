@@ -56,7 +56,10 @@ export default function UploadFiles(props: UploadFilesProps) {
   return (
     <>
       <div style={{ display: "flex" }}>
-        <div className="file-upload" style={{ width: "100px" }}>
+        <div
+          className="file-upload dashboard"
+          style={{ width: "80px", height: "33px" }}
+        >
           <label>
             <input
               type="file"
