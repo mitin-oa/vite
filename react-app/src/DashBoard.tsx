@@ -76,6 +76,38 @@ export default function Dashboard({
     setIsOpen(false);
   }
 
+  function downloadProcessedFile(fileName: any) {
+    console.log(fileName);
+    let pathToFile = "/api/downloadProcessedFile/" + fileName;
+    fetch(pathToFile, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/pdf",
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Server returned an error response');
+        }
+        return response.blob();
+      })
+      .then((blob) => {
+        const url = window.URL.createObjectURL(new Blob([blob]));
+
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = fileName;
+
+        document.body.appendChild(link);
+
+        link.click();
+
+        if (link.parentNode) {
+          link.parentNode.removeChild(link);
+        }
+      });
+  };
+
   // * ↑ VK: Significant for the backend area. Please exercise caution when making alterations
 
   return (
@@ -166,19 +198,19 @@ export default function Dashboard({
 
                   {userDataForDashboard
                     ? userDataForDashboard.data.paymentsData.map((e: any) => (
-                        <tr>
-                          <td>
-                            {userDataForDashboard ? e.paypal_order_id : ""}
-                          </td>
-                          <td>
-                            {userDataForDashboard
-                              ? e.created_at.toLocaleString().split("T")[0]
-                              : ""}
-                          </td>
-                          <td>{userDataForDashboard ? e.status : ""}</td>
-                          <td>{userDataForDashboard ? e.amount : ""}</td>
-                        </tr>
-                      ))
+                      <tr>
+                        <td>
+                          {userDataForDashboard ? e.paypal_order_id : ""}
+                        </td>
+                        <td>
+                          {userDataForDashboard
+                            ? e.created_at.toLocaleString().split("T")[0]
+                            : ""}
+                        </td>
+                        <td>{userDataForDashboard ? e.status : ""}</td>
+                        <td>{userDataForDashboard ? e.amount : ""}</td>
+                      </tr>
+                    ))
                     : ""}
                 </tbody>
               </table>
@@ -198,64 +230,64 @@ export default function Dashboard({
                 </tr>
                 {userDataForDashboard
                   ? userDataForDashboard.data.fileData
-                      .slice(-10, userDataForDashboard.data.fileData.length)
-                      .sort((a: any, b: any) =>
-                        a.created_at.date > b.created_at.date ? 1 : -1
-                      )
-                      .map((e: any) => (
-                        <tr>
-                          <td>{userDataForDashboard ? e.original_name : ""}</td>
-                          <td>{userDataForDashboard ? e.order_status : ""}</td>
-                          <td>
-                            {userDataForDashboard
-                              ? e.created_at.toString().split("T")[0] +
-                                " " +
-                                e.created_at
-                                  .toString()
-                                  .split("T")[1]
-                                  .split(".")[0]
-                              : ""}
-                          </td>
-                          <td>
-                            {e.order_status === "pending" ? (
-                              e.points_cost <
+                    .slice(-10, userDataForDashboard.data.fileData.length)
+                    .sort((a: any, b: any) =>
+                      a.created_at.date > b.created_at.date ? 1 : -1
+                    )
+                    .map((e: any) => (
+                      <tr>
+                        <td>{userDataForDashboard ? e.original_name : ""}</td>
+                        <td>{userDataForDashboard ? e.order_status : ""}</td>
+                        <td>
+                          {userDataForDashboard
+                            ? e.created_at.toString().split("T")[0] +
+                            " " +
+                            e.created_at
+                              .toString()
+                              .split("T")[1]
+                              .split(".")[0]
+                            : ""}
+                        </td>
+                        <td>
+                          {e.order_status === "pending" ? (
+                            e.points_cost <
                               userDataForDashboard.data.userData[0].points ? (
-                                <Button
-                                  children={"Start processing"}
-                                  color={"orange"}
-                                  style={"table-btn"}
-                                  disable={true}
-                                  onClick={() => {
-                                    handleOrder(e.order_id, e.points_cost);
-                                  }}
-                                />
-                              ) : (
-                                <>
-                                  <a>Not enough credits</a>
-                                </>
-                              )
-                            ) : (
-                              <></>
-                            )}
-                          </td>
-                          <td>
-                            {e.order_status !== "pending" ? (
                               <Button
-                                children={
-                                  e.completed ? "Download" : "Not completed"
-                                }
+                                children={"Start processing"}
                                 color={"orange"}
                                 style={"table-btn"}
-                                onClick={() => (
-                                  <DownLoadFile fileName={e.name} />
-                                )}
+                                disable={true}
+                                onClick={() => {
+                                  handleOrder(e.order_id, e.points_cost);
+                                }}
                               />
                             ) : (
-                              <></>
-                            )}
-                          </td>
-                        </tr>
-                      ))
+                              <>
+                                <a>Not enough credits</a>
+                              </>
+                            )
+                          ) : (
+                            <></>
+                          )}
+                        </td>
+                        <td>
+                          {e.order_status !== "pending" ? (
+                            e.completed ? (
+                              <Button
+                                children={"Download"}
+                                color={"orange"}
+                                style={"table-btn"}
+                                onClick={() => downloadProcessedFile(e.processed_file)}
+                              />
+                            ) : (
+                              "Not completed"
+                            )
+                          ) : (
+                            <></>
+                          )}
+                        </td>
+                      </tr>
+                    ))
                   : ""}
               </tbody>
             </table>
