@@ -65,9 +65,11 @@ export default function DashBoardManager({
 
   async function AssignEditor(editorId: any, orderId: any) {
     //How pass editor_id to server handle with order?
+    const editorId2 = editorId.value;
+    const orderId2 = orderId;
     try {
       const response = await fetch(
-        `/api/assignOrder?editorId=${editorId}&orderId=${orderId.value}`,
+        `/api/assignOrder?editorId=${editorId2}&orderId=${orderId2}`,
         {
           method: "GET",
           headers: {
@@ -76,8 +78,8 @@ export default function DashBoardManager({
         }
       );
 
-      console.log(editorId.value);
-      console.log(orderId);
+      console.log(editorId2);
+      console.log(orderId2);
 
       const index = userDataForDashboard.data.unassignedOrders.findIndex(
         (e: any) => e.order_id === orderId.value
@@ -100,9 +102,11 @@ export default function DashBoardManager({
 
   async function AssignOrder(editorId: any, orderId: any) {
     //How pass editor_id to server handle with order?
+    const editorId2 = editorId;
+    const orderId2 = orderId.value;
     try {
       const response = await fetch(
-        `/api/assignOrder?editorId=${editorId}&orderId=${orderId.value}`,
+        `/api/assignOrder?editorId=${editorId2}&orderId=${orderId2}`,
         {
           method: "GET",
           headers: {
