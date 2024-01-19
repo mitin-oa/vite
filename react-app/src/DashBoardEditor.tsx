@@ -93,6 +93,7 @@ export default function DashBoardEditor({
   function closeModal() {
     setIsOpen(false);
   }
+  
 
   // * ↑ VK: Significant for the backend area. Please exercise caution when making alterations
   //const [addInformation, setAddInformation] = useState("Add information");
@@ -220,7 +221,7 @@ export default function DashBoardEditor({
                           <td>
                             {
                               (e.order_status = "paid" ? (
-                                <UploadFiles />
+                                <UploadFiles orderId={e.order_id} />
                               ) : (
                                 <></>
                               ))
