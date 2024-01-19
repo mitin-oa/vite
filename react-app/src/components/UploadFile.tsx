@@ -1,7 +1,14 @@
 import { useMediaQuery } from "react-responsive";
 import { ChangeEvent, useState } from "react";
 
-export default function UploadFiles() {
+// Определение интерфейса для пропсов
+// Defining the interface for props
+interface UploadFilesProps {
+  orderId: number;
+}
+
+export default function UploadFiles(props: UploadFilesProps) {
+  const orderId = props;
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1160px" });
   const isPhoneScreen = useMediaQuery({ query: "(max-width: 760px" });
   const [numPages, setNumPages]: any = useState();
@@ -12,37 +19,39 @@ export default function UploadFiles() {
     setNumPages(numPages);
   };
 
-  type FileData = {
-    index: number;
-    file: File;
-    expressDelivery: boolean;
-    pages: number;
-    costInPoints: number;
-  };
-  const [fileData, setFileData] = useState<FileData[]>([]);
-
-  // VK: Adds a value to the FileData fields
-  // * VK: Добавляет значение в поля FileData
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      const newFileList = e.target.files;
-      /* setFiles(newFileList);
-       */
-      // VK: Create file objects with unique indexes
-      // * VK: Создаем объекты файлов с уникальными индексами
-      const filesWithAdditionalData: FileData[] = Array.from(newFileList).map(
-        (file, index) => ({
-          index,
-          file,
-          expressDelivery: false,
-          pages: 1,
-          costInPoints: 20,
-        })
-      );
-
-      setFileData(filesWithAdditionalData);
+    console.log("orderId ", orderId);
+    if (e.target.files && e.target.files.length > 0) {
+      const file = e.target.files[0];
+      console.log(file);
+      uploadProcessedFile(file, orderId);
     }
   };
+
+  async function uploadProcessedFile(file: any, orderId: any) {
+    const orderIdToSend = orderId.orderId
+    const formData = new FormData();
+
+    formData.append('file', file);
+    formData.append('orderId', orderIdToSend);
+
+    try {
+      const response = await fetch('/api/uploadModifiedFiles', {
+        method: 'POST',
+        body: formData,
+        credentials: 'include'
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        console.log('Success:', result);
+      } else {
+        console.error('Error:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error sending request:', error);
+    }
+  }
 
   return (
     <>
@@ -57,7 +66,6 @@ export default function UploadFiles() {
               name="fileToUpload"
               id="fileToUpload"
               accept=".doc, .docx, .rtf, .pdf, .odt, .txt"
-              multiple // Add the 'multiple' attribute to enable multiple file selection
               onChange={handleFileChange}
             />
             <span>Upload files</span>
