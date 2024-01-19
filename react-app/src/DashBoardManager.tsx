@@ -102,7 +102,7 @@ export default function DashBoardManager({
     //How pass editor_id to server handle with order?
     try {
       const response = await fetch(
-        `/api/assignOrder?editorId=${editorId.value}&orderId=${orderId}`,
+        `/api/assignOrder?editorId=${editorId}&orderId=${orderId.value}`,
         {
           method: "GET",
           headers: {
@@ -112,7 +112,7 @@ export default function DashBoardManager({
       );
 
       console.log(editorId);
-      console.log(orderId);
+      console.log(orderId.value);
 
       const index = userDataForDashboard.data.unassignedOrders.findIndex(
         (e: any) => e.order_id === orderId.value
@@ -326,7 +326,7 @@ export default function DashBoardManager({
                               color={"orange"}
                               style={"table-btn"}
                               onClick={() =>
-                                AssignOrder(selectOptions, e.editor_id)
+                                AssignOrder(e.editor_id, selectOptions)
                               }
                             />
                           </div>

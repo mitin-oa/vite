@@ -9,8 +9,8 @@ import Button from "./components/Button";
 import ModalWindow from "./components/modal/modal";
 import InputText from "./components/InputText";
 import DownLoadFile from "./components/DownloadFile";
-import SignUpForm from "./components/modal/SignUpForm";
 import ChangeProfileForm from "./components/modal/ChangeProfileForm";
+import UploadFiles from "./components/UploadFile";
 
 export default function DashBoardEditor({
   kind,
@@ -222,15 +222,11 @@ export default function DashBoardEditor({
                               (e.order_status = "paid" ? (
                                 <Button
                                   children={
-                                    e.completed ? "Download" : "Not completed"
+                                    e.completed ? "Upload" : "Not completed"
                                   }
                                   color={"orange"}
                                   style={"table-btn"}
-                                  onClick={function (): void {
-                                    throw new Error(
-                                      "Function not implemented."
-                                    );
-                                  }}
+                                  onClick={() => <UploadFiles />}
                                 />
                               ) : (
                                 <></>
