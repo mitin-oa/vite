@@ -6,6 +6,8 @@ import { SignedUpContext } from "../../App";
 const userRole = localStorage.getItem("userRole");
 
 const ChangeProfileForm = ({ onCloseModal, userDataForDashboard }: any) => {
+  console.log(userDataForDashboard);
+
   const username =
     userRole === "manager"
       ? userDataForDashboard.data.managerData[0].username

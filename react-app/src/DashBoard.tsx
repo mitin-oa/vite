@@ -87,7 +87,7 @@ export default function Dashboard({
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error('Server returned an error response');
+          throw new Error("Server returned an error response");
         }
         return response.blob();
       })
@@ -106,7 +106,7 @@ export default function Dashboard({
           link.parentNode.removeChild(link);
         }
       });
-  };
+  }
 
   // * ↑ VK: Significant for the backend area. Please exercise caution when making alterations
 
@@ -146,6 +146,7 @@ export default function Dashboard({
                           <ChangeProfileForm
                             onSignUp={handleSignUp}
                             onCloseModal={closeModal}
+                            userDataForDashboard={userDataForDashboard}
                             setUserProfileData={setUserProfileData}
                           />
                         }
@@ -186,7 +187,7 @@ export default function Dashboard({
             </div>
 
             <div className="col-md-6 rightColumn">
-              <p>Recent transactions (eg. 5 last transactions)</p>
+              <p>Recent transactions</p>
               <table className="table">
                 <tbody>
                   <tr>
@@ -198,19 +199,21 @@ export default function Dashboard({
 
                   {userDataForDashboard
                     ? userDataForDashboard.data.paymentsData.map((e: any) => (
-                      <tr>
-                        <td>
-                          {userDataForDashboard ? e.paypal_order_id : ""}
-                        </td>
-                        <td>
-                          {userDataForDashboard
-                            ? e.created_at.toLocaleString().split("T")[0]
-                            : ""}
-                        </td>
-                        <td>{userDataForDashboard ? e.status : ""}</td>
-                        <td>{userDataForDashboard ? e.amount : ""}</td>
-                      </tr>
-                    ))
+                        <tr>
+                          <td>
+                            {userDataForDashboard
+                              ? e.paypal_seller_transaction_id
+                              : ""}
+                          </td>
+                          <td>
+                            {userDataForDashboard
+                              ? e.created_at.toLocaleString().split("T")[0]
+                              : ""}
+                          </td>
+                          <td>{userDataForDashboard ? e.status : ""}</td>
+                          <td>{userDataForDashboard ? e.amount : ""}</td>
+                        </tr>
+                      ))
                     : ""}
                 </tbody>
               </table>
@@ -218,76 +221,80 @@ export default function Dashboard({
           </div>
 
           <div className="row">
-            <p>Recent files (eg. 10 last files) with all the info of each</p>
+            <p>Recent orders</p>
             <table className="table dashboard-table">
               <tbody>
                 <tr>
                   <td>Name</td>
                   <td>Status</td>
+                  <td>Price in credits</td>
                   <td>Date</td>
                   <td>Manage</td>
                   <td>Download</td>
                 </tr>
                 {userDataForDashboard
                   ? userDataForDashboard.data.fileData
-                    .slice(-10, userDataForDashboard.data.fileData.length)
-                    .sort((a: any, b: any) =>
-                      a.created_at.date > b.created_at.date ? 1 : -1
-                    )
-                    .map((e: any) => (
-                      <tr>
-                        <td>{userDataForDashboard ? e.original_name : ""}</td>
-                        <td>{userDataForDashboard ? e.order_status : ""}</td>
-                        <td>
-                          {userDataForDashboard
-                            ? e.created_at.toString().split("T")[0] +
-                            " " +
-                            e.created_at
-                              .toString()
-                              .split("T")[1]
-                              .split(".")[0]
-                            : ""}
-                        </td>
-                        <td>
-                          {e.order_status === "pending" ? (
-                            e.points_cost <
+                      .slice(-50, userDataForDashboard.data.fileData.length)
+                      .sort((a: any, b: any) =>
+                        a.created_at.date > b.created_at.date ? 1 : -1
+                      )
+                      .map((e: any) => (
+                        <tr>
+                          <td>{userDataForDashboard ? e.original_name : ""}</td>
+                          <td>{userDataForDashboard ? e.order_status : ""}</td>
+                          <td>{userDataForDashboard ? e.points_cost : ""}</td>
+                          <td>
+                            {userDataForDashboard
+                              ? e.created_at.toString().split("T")[0] +
+                                " " +
+                                e.created_at
+                                  .toString()
+                                  .split("T")[1]
+                                  .split(".")[0]
+                              : ""}
+                          </td>
+                          <td>
+                            {e.order_status === "pending" ? (
+                              e.points_cost <
                               userDataForDashboard.data.userData[0].points ? (
-                              <Button
-                                children={"Start processing"}
-                                color={"orange"}
-                                style={"table-btn"}
-                                disable={true}
-                                onClick={() => {
-                                  handleOrder(e.order_id, e.points_cost);
-                                }}
-                              />
+                                <Button
+                                  children={"Start processing"}
+                                  color={"orange"}
+                                  style={"table-btn"}
+                                  disable={true}
+                                  onClick={() => {
+                                    handleOrder(e.order_id, e.points_cost);
+                                  }}
+                                />
+                              ) : (
+                                <>
+                                  <a>Not enough credits</a>
+                                </>
+                              )
                             ) : (
-                              <>
-                                <a>Not enough credits</a>
-                              </>
-                            )
-                          ) : (
-                            <></>
-                          )}
-                        </td>
-                        <td>
-                          {e.order_status !== "pending" ? (
-                            e.completed ? (
-                              <Button
-                                children={"Download"}
-                                color={"orange"}
-                                style={"table-btn"}
-                                onClick={() => downloadProcessedFile(e.processed_file)}
-                              />
+                              <></>
+                            )}
+                          </td>
+                          <td>
+                            {e.order_status !== "pending" ? (
+                              e.completed ? (
+                                <Button
+                                  children={"Download"}
+                                  color={"orange"}
+                                  style={"table-btn"}
+                                  onClick={() =>
+                                    downloadProcessedFile(e.processed_file)
+                                  }
+                                />
+                              ) : (
+                                "Not completed"
+                              )
                             ) : (
-                              "Not completed"
-                            )
-                          ) : (
-                            <></>
-                          )}
-                        </td>
-                      </tr>
-                    ))
+                              <></>
+                            )}
+                          </td>
+                        </tr>
+                      ))
                   : ""}
               </tbody>
             </table>

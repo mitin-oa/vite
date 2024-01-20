@@ -81,21 +81,16 @@ export default function HeaderMenu({
         <ul className={kind === "short" ? "nav__short" : "nav"}>
           {signedIn ? (
             <>
-              {kind === "full" ? (
-                <>
-                  <Link className="nav__link nav__text" to="Dashboard">
-                    Dashboard
-                  </Link>
-                  <Link className="nav__link nav__text" to="UpLoad">
-                    File Upload
-                  </Link>
-                  <Link className="nav__link nav__text" to="BuyCredits">
-                    Buy Credits
-                  </Link>
-                </>
-              ) : (
-                <></>
-              )}
+              <Link className="nav__link nav__text" to="/Dashboard">
+                Dashboard
+              </Link>
+              <Link className="nav__link nav__text" to="/UpLoad">
+                File Upload
+              </Link>
+              <Link className="nav__link nav__text" to="/BuyCredits">
+                Buy Credits
+              </Link>
+
               {!isMobileScreen ? (
                 <Link to="/">
                   <ModalWindow
@@ -156,18 +151,13 @@ export default function HeaderMenu({
             </>
           ) : (
             <>
-              {kind === "full" ? (
-                <>
-                  <Link className="nav__link nav__text" to="About">
-                    About the service
-                  </Link>
-                  <Link className="nav__link nav__text" to="CalculateCost">
-                    Calculate Cost
-                  </Link>
-                </>
-              ) : (
-                <></>
-              )}
+              <Link className="nav__link nav__text" to="/About">
+                About the service
+              </Link>
+              <Link className="nav__link nav__text" to="/CalculateCost">
+                Calculate Cost
+              </Link>
+
               {!isMobileScreen ? (
                 <Link to="/">
                   <ModalWindow

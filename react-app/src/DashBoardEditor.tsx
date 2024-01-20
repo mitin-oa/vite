@@ -47,24 +47,42 @@ export default function DashBoardEditor({
     console.log("userDataForDashboard", userDataForDashboard);
   }
 
-  async function handleOrder(orderId: string, points_cost: number) {
-    //How pass order_id to server handle with order?
-    const serverAnswer = await sendHandleOrderRequest(orderId, points_cost);
-    alert(serverAnswer.message);
-    let answer = serverAnswer.message === "Low balance" ? true : false;
-    const index = userDataForDashboard.data.orderData.findIndex(
-      (e: any) => e.order_id === orderId
-    );
+  async function handleOrder(orderId: any, editorId: any) {
+    //How pass editor_id to server handle with order?
 
-    userDataForDashboard.data.orderData[index] = {
-      ...userDataForDashboard.data.orderData[index],
-      assigned_editor_id: "",
-    };
+    const orderId2 = orderId;
+    const editorId2 = editorId;
+    try {
+      const response = await fetch(
+        `/api/assignOrder?editorId=${editorId2}&orderId=${orderId2}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
-    setUserDataForDashboard(userDataForDashboard);
-    console.log(userDataForDashboard);
-    console.log(index);
-    console.log("add_information");
+      console.log(editorId);
+      console.log(orderId.value);
+
+      const index = userDataForDashboard.data.unassignedOrders.findIndex(
+        (e: any) => e.order_id === orderId.value
+      );
+
+      userDataForDashboard.data.unassignedOrders[index] = {
+        ...userDataForDashboard.data.unassignedOrders[index],
+        assigned_editor_id: editorId,
+      };
+
+      //console.log(userDataForDashboard);
+      setUserDataForDashboard(userDataForDashboard);
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("There was a problem with the fetch operation:", error);
+      throw error;
+    }
   }
 
   async function handleNotes(orderId: string) {
@@ -93,7 +111,6 @@ export default function DashBoardEditor({
   function closeModal() {
     setIsOpen(false);
   }
-  
 
   // * ↑ VK: Significant for the backend area. Please exercise caution when making alterations
   //const [addInformation, setAddInformation] = useState("Add information");
@@ -195,7 +212,10 @@ export default function DashBoardEditor({
                                   color={"orange"}
                                   style={"table-btn"}
                                   onClick={() =>
-                                    handleOrder(e.order_id, e.points_cost)
+                                    handleOrder(
+                                      e.order_id,
+                                      userDataForDashboard.data.userData[0].id
+                                    )
                                   }
                                 />
                               ) : (
