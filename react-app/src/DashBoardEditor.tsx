@@ -63,11 +63,11 @@ export default function DashBoardEditor({
         }
       );
 
-      console.log(editorId);
-      console.log(orderId.value);
+      console.log(editorId2);
+      console.log(orderId2);
 
       const index = userDataForDashboard.data.unassignedOrders.findIndex(
-        (e: any) => e.order_id === orderId.value
+        (e: any) => e.order_id === orderId
       );
 
       userDataForDashboard.data.unassignedOrders[index] = {
