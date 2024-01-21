@@ -241,7 +241,7 @@ export default function DashBoardEditor({
                           <td>
                             {
                               (e.order_status = "paid" ? (
-                                <UploadFiles orderId={e.order_id} />
+                                <UploadFiles orderId={e.order_id} sourceFileName={e.file_name} />
                               ) : (
                                 <></>
                               ))

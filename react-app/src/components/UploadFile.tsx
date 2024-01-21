@@ -5,10 +5,12 @@ import { ChangeEvent, useState } from "react";
 // Defining the interface for props
 interface UploadFilesProps {
   orderId: number;
+  sourceFileName: string;
 }
 
 export default function UploadFiles(props: UploadFilesProps) {
-  const orderId = props;
+  const orderId = props.orderId;
+  const sourceFileName = props.sourceFileName;
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1160px" });
   const isPhoneScreen = useMediaQuery({ query: "(max-width: 760px" });
   const [numPages, setNumPages]: any = useState();
@@ -19,24 +21,41 @@ export default function UploadFiles(props: UploadFilesProps) {
     setNumPages(numPages);
   };
 
+  // const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   console.log("orderId ", orderId);
+  //   if (e.target.files && e.target.files.length > 0) {
+  //     const file = e.target.files[0];
+  //     console.log(file);
+  //     uploadProcessedFile(file, orderId);
+  //   }
+  // };
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log("orderId ", orderId);
+    console.log("sourceFileName ", sourceFileName);
+
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
       console.log(file);
-      uploadProcessedFile(file, orderId);
+  
+      // Создаем новый объект File с новым именем файла
+      const renamedFile = new File([file], sourceFileName, { type: file.type });
+  
+      uploadProcessedFile(renamedFile, orderId);
     }
   };
 
   async function uploadProcessedFile(file: any, orderId: any) {
+    console.log("file");
+    console.log(file);
     const orderIdToSend = orderId.orderId
     const formData = new FormData();
-
+    
     formData.append('file', file);
     formData.append('orderId', orderIdToSend);
 
     try {
-      const response = await fetch('/api/uploadModifiedFiles', {
+      const response = await fetch('/api/uploadProcessedFile', {
         method: 'POST',
         body: formData,
         credentials: 'include'
