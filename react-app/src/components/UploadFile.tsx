@@ -6,6 +6,7 @@ import { ChangeEvent, useState } from "react";
 interface UploadFilesProps {
   orderId: number;
   sourceFileName: string;
+  isDisabled?: boolean;
 }
 
 export default function UploadFiles(props: UploadFilesProps) {
@@ -46,7 +47,7 @@ export default function UploadFiles(props: UploadFilesProps) {
   };
 
   async function uploadProcessedFile(file: any, orderId: any) {
-    console.log("file");
+    console.log("isDisabled", props.isDisabled);
     console.log(file);
     const orderIdToSend = orderId.orderId
     const formData = new FormData();
@@ -76,7 +77,7 @@ export default function UploadFiles(props: UploadFilesProps) {
     <>
       <div style={{ display: "flex" }}>
         <div
-          className="file-upload dashboard"
+          className={`file-upload dashboard ${props.isDisabled ? 'disabled' : ''}`}
           style={{ width: "80px", height: "33px" }}
         >
           <label>
@@ -86,8 +87,9 @@ export default function UploadFiles(props: UploadFilesProps) {
               id="fileToUpload"
               accept=".doc, .docx, .rtf, .pdf, .odt, .txt"
               onChange={handleFileChange}
+              disabled={props.isDisabled}
             />
-            <span>Upload files</span>
+            <span>Upload file</span>
           </label>
         </div>
       </div>
