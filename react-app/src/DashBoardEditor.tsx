@@ -236,7 +236,7 @@ export default function DashBoardEditor({
                         </td>
                         <td>
                           {
-                            (e.order_status !== "pending" ? (
+                            (e.order_status === "in work" ? (
                               <UploadFiles orderId={e.order_id} sourceFileName={e.file_name} />
                             ) : (
                               <UploadFiles orderId={e.order_id} sourceFileName={e.file_name} isDisabled={true} />
