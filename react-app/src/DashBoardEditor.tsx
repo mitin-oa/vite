@@ -227,7 +227,7 @@ export default function DashBoardEditor({
                         <td>{userDataForDashboard ? e.order_status : ""}</td>
                         <td>
                           {
-                            (e.order_status === "paid" ? (
+                            (['pending','paid','processed','in work'].includes(e.order_status) ? (
                               <DownLoadFile fileName={e.file_name} />
                             ) : (
                               <></>
