@@ -62,9 +62,6 @@ export default function DashBoardEditor({
         }
       );
 
-      console.log(editorId2);
-      console.log(orderId2);
-
       const index = userDataForDashboard.data.unassignedOrders.findIndex(
         (e: any) => e.order_id === orderId
       );

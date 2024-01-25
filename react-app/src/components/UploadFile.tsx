@@ -32,8 +32,8 @@ export default function UploadFiles(props: UploadFilesProps) {
   // };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("orderId ", orderId);
-    console.log("sourceFileName ", sourceFileName);
+    // console.log("orderId ", orderId);
+    // console.log("sourceFileName ", sourceFileName);
 
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
@@ -47,13 +47,10 @@ export default function UploadFiles(props: UploadFilesProps) {
   };
 
   async function uploadProcessedFile(file: any, orderId: any) {
-    console.log("isDisabled", props.isDisabled);
-    console.log(file);
-    const orderIdToSend = orderId.orderId
     const formData = new FormData();
     
     formData.append('file', file);
-    formData.append('orderId', orderIdToSend);
+    formData.append('orderId', orderId);
 
     try {
       const response = await fetch('/api/uploadProcessedFile', {
