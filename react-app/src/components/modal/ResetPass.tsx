@@ -1,7 +1,5 @@
 import { useState } from "react";
 import Button from "../Button";
-
-import { sendResetPassRequest } from "../scripts/fetch.resetPass"; // * VK Backend: Connecting an external script
 import Swal from "sweetalert2";
 
 const ResetPassForm = ({ setIsOpen, resetPass, setResetPass }: any) => {
@@ -17,29 +15,45 @@ const ResetPassForm = ({ setIsOpen, resetPass, setResetPass }: any) => {
       Swal.fire({
         title: "Good job!",
         text:
-          "If you have an account on our system with the specified username or password, " +
+          "If you have an account on our system with the specified username, " +
           "you will receive an email with a link to reset your password. " +
           "The link will be valid for 15 minutes.",
         icon: "success",
       });
-      /* alert(
-        "If you have an account on our system with the specified username or password, " +
-          "you will receive an email with a link to reset your password. " +
-          "The link will be valid for 15 minutes."
-      ); */
     } catch (error) {
       Swal.fire({
         icon: "error",
         title: "Oops...",
         text: `There was an error handling the password reset request: ${error}`,
       });
-      /* console.error(
-        "There was an error handling the password reset request:",
-        error
-      ); */
     }
     closeModal();
   };
+
+  async function sendResetPassRequest(inputEmail: any) {
+    const data = {
+      emailToResetPass: inputEmail,
+    };
+  
+    return new Promise((resolve, reject) => {
+      fetch('/api/forgotPassword', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+        .then(response => response.json())
+        .then(data => {
+          resolve(data);
+        })
+        .catch(error => {
+          console.error('Error sending payment data:', error);
+          reject(error);
+        });
+    });
+  }
+
   return (
     <>
       <form className="form">

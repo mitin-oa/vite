@@ -39,15 +39,18 @@ export default function Home() {
       .then((result) => {
         console.log(result);
         // Обработка ответа от сервера
-        if (result.HTTP_status) {
-          setServerAnswerMessage("Пароль успешно сброшен.");
+        if (result.HTTP_status == 200) {
+          console.log(result);
+          setServerAnswerMessage("Password successfully reset.");
+        } else if (result.message == 'Expiring token') {
+          setServerAnswerMessage("The link has expired.");
         } else {
-          setServerAnswerMessage("Произошла ошибка при сбросе пароля.");
+          setServerAnswerMessage("An error occurred when resetting the password.");
         }
       })
       .catch((error) => {
-        console.error("Ошибка при отправке запроса:", error);
-        setServerAnswerMessage("Произошла ошибка при сбросе пароля.");
+        console.error("Error when sending a request:", error);
+        setServerAnswerMessage("An error occurred when resetting the password.");
       });
   };
 

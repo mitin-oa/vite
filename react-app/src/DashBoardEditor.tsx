@@ -32,7 +32,6 @@ export default function DashBoardEditor({
       try {
         // Запрос комбинированных данных о пользователе при загрузке компонента
         const serverAnswer = await getUserDataForDashboard();
-        console.log(serverAnswer);
         setUserDataForDashboard(serverAnswer); // Сохраняем данные в состоянии
       } catch (error) {
         console.error("An error occurred while loading data:", error);
@@ -62,9 +61,6 @@ export default function DashBoardEditor({
           },
         }
       );
-
-      console.log(editorId2);
-      console.log(orderId2);
 
       const index = userDataForDashboard.data.unassignedOrders.findIndex(
         (e: any) => e.order_id === orderId
@@ -182,85 +178,85 @@ export default function DashBoardEditor({
                 </tr>
                 {userDataForDashboard
                   ? userDataForDashboard.data.orderData
-                      .slice(-10, userDataForDashboard.data.orderData.length)
-                      .sort((a: any, b: any) =>
-                        a.created_at.date > b.created_at.date ? 1 : -1
-                      )
-                      .map((e: any) => (
-                        <tr key={e.order_id}>
-                          <td>{userDataForDashboard ? e.original_name : ""}</td>
-                          <td>
-                            {userDataForDashboard ? e.number_of_pages : ""}
-                          </td>
-                          <td>{userDataForDashboard ? e.client_name : ""}</td>
+                    .slice(-10, userDataForDashboard.data.orderData.length)
+                    .sort((a: any, b: any) =>
+                      a.created_at.date > b.created_at.date ? 1 : -1
+                    )
+                    .map((e: any) => (
+                      <tr key={e.order_id}>
+                        <td>{userDataForDashboard ? e.original_name : ""}</td>
+                        <td>
+                          {userDataForDashboard ? e.number_of_pages : ""}
+                        </td>
+                        <td>{userDataForDashboard ? e.client_name : ""}</td>
 
-                          <td>
-                            {userDataForDashboard
-                              ? e.created_at.toString().split("T")[0] +
-                                " " +
-                                e.created_at
-                                  .toString()
-                                  .split("T")[1]
-                                  .split(".")[0]
-                              : ""}
-                          </td>
-                          <td>
-                            {!e.assigned_editor_id ? (
-                              e.order_status == "paid" ? (
-                                <Button
-                                  children={"Assign to me"}
-                                  color={"orange"}
-                                  style={"table-btn"}
-                                  onClick={() =>
-                                    handleOrder(
-                                      e.order_id,
-                                      userDataForDashboard.data.userData[0].id
-                                    )
-                                  }
-                                />
-                              ) : (
-                                <></>
-                              )
-                            ) : (
-                              <>
-                                <a>assigned</a>
-                              </>
-                            )}
-                          </td>
-
-                          <td>{userDataForDashboard ? e.order_status : ""}</td>
-                          <td>
-                            {
-                              (e.order_status = "paid" ? (
-                                <DownLoadFile fileName={e.file_name} />
-                              ) : (
-                                <></>
-                              ))
-                            }
-                          </td>
-                          <td>
-                            {
-                              (e.order_status = "paid" ? (
-                                <UploadFiles orderId={e.order_id} />
-                              ) : (
-                                <></>
-                              ))
-                            }
-                          </td>
-                          <td style={{ minWidth: "30vw" }}>
-                            {
-                              <InputText
-                                order_id={e.order_id}
-                                onChange={() => handleNotes(e.order_id)}
-                                userDataForDashboard={userDataForDashboard}
-                                setUserDataForDashboard={
-                                  setUserDataForDashboard
+                        <td>
+                          {userDataForDashboard
+                            ? e.created_at.toString().split("T")[0] +
+                            " " +
+                            e.created_at
+                              .toString()
+                              .split("T")[1]
+                              .split(".")[0]
+                            : ""}
+                        </td>
+                        <td>
+                          {!e.assigned_editor_id ? (
+                            e.order_status === "paid" ? (
+                              <Button
+                                children={"Assign to me"}
+                                color={"orange"}
+                                style={"table-btn"}
+                                onClick={() =>
+                                  handleOrder(
+                                    e.order_id,
+                                    userDataForDashboard.data.userData[0].id
+                                  )
                                 }
                               />
-                            }
-                          </td>
-                        </tr>
-                      ))
+                            ) : (
+                              <></>
+                            )
+                          ) : (
+                            <>
+                              <a>assigned</a>
+                            </>
+                          )}
+                        </td>
+
+                        <td>{userDataForDashboard ? e.order_status : ""}</td>
+                        <td>
+                          {
+                            (['pending','paid','processed','in work'].includes(e.order_status) ? (
+                              <DownLoadFile fileName={e.file_name} />
+                            ) : (
+                              <></>
+                            ))
+                          }
+                        </td>
+                        <td>
+                          {
+                            (e.order_status === "in work" ? (
+                              <UploadFiles orderId={e.order_id} sourceFileName={e.file_name} />
+                            ) : (
+                              <UploadFiles orderId={e.order_id} sourceFileName={e.file_name} isDisabled={true} />
+                            ))
+                          }
+                        </td>
+                        <td style={{ minWidth: "30vw" }}>
+                          {
+                            <InputText
+                              order_id={e.order_id}
+                              onChange={() => handleNotes(e.order_id)}
+                              userDataForDashboard={userDataForDashboard}
+                              setUserDataForDashboard={
+                                setUserDataForDashboard
+                              }
+                            />
+                          }
+                        </td>
+                      </tr>
+                    ))
                   : ""}
               </tbody>
             </table>

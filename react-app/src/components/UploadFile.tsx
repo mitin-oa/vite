@@ -5,10 +5,13 @@ import { ChangeEvent, useState } from "react";
 // Defining the interface for props
 interface UploadFilesProps {
   orderId: number;
+  sourceFileName: string;
+  isDisabled?: boolean;
 }
 
 export default function UploadFiles(props: UploadFilesProps) {
-  const orderId = props;
+  const orderId = props.orderId;
+  const sourceFileName = props.sourceFileName;
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1160px" });
   const isPhoneScreen = useMediaQuery({ query: "(max-width: 760px" });
   const [numPages, setNumPages]: any = useState();
@@ -19,24 +22,38 @@ export default function UploadFiles(props: UploadFilesProps) {
     setNumPages(numPages);
   };
 
+  // const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   console.log("orderId ", orderId);
+  //   if (e.target.files && e.target.files.length > 0) {
+  //     const file = e.target.files[0];
+  //     console.log(file);
+  //     uploadProcessedFile(file, orderId);
+  //   }
+  // };
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("orderId ", orderId);
+    // console.log("orderId ", orderId);
+    // console.log("sourceFileName ", sourceFileName);
+
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
       console.log(file);
-      uploadProcessedFile(file, orderId);
+  
+      // Создаем новый объект File с новым именем файла
+      const renamedFile = new File([file], sourceFileName, { type: file.type });
+  
+      uploadProcessedFile(renamedFile, orderId);
     }
   };
 
   async function uploadProcessedFile(file: any, orderId: any) {
-    const orderIdToSend = orderId.orderId
     const formData = new FormData();
-
+    
     formData.append('file', file);
-    formData.append('orderId', orderIdToSend);
+    formData.append('orderId', orderId);
 
     try {
-      const response = await fetch('/api/uploadModifiedFiles', {
+      const response = await fetch('/api/uploadProcessedFile', {
         method: 'POST',
         body: formData,
         credentials: 'include'
@@ -57,7 +74,7 @@ export default function UploadFiles(props: UploadFilesProps) {
     <>
       <div style={{ display: "flex" }}>
         <div
-          className="file-upload dashboard"
+          className={`file-upload dashboard ${props.isDisabled ? 'disabled' : ''}`}
           style={{ width: "80px", height: "33px" }}
         >
           <label>
@@ -67,8 +84,9 @@ export default function UploadFiles(props: UploadFilesProps) {
               id="fileToUpload"
               accept=".doc, .docx, .rtf, .pdf, .odt, .txt"
               onChange={handleFileChange}
+              disabled={props.isDisabled}
             />
-            <span>Upload files</span>
+            <span>Upload file</span>
           </label>
         </div>
       </div>

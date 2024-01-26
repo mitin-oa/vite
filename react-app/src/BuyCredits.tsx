@@ -4,8 +4,6 @@ import { Footer } from "./components/footer/footer";
 import { ChangeEvent, useState } from "react";
 import NumInput from "./components/InputNumber";
 import ModalWindow from "./components/modal/modal";
-// * VK Backend: connecting an external script to process requests to the backend
-import { sendPaymentDataToServer } from "../src/components/scripts/fetch";
 import HeaderMenu from "./components/header/header";
 import Alert from "./components/Alert";
 
@@ -34,23 +32,46 @@ export default function BuyCredits({
   const [showModal, setShowModal] = useState(false); // * VK: State to control the visibility of a modal window
   const [paymentStatus, setPaymentStatus] = useState(false);
 
-  const handlePayment = async (transactionId: string, amount: number) => {
-    console.log("Transaction ID:", transactionId);
-    console.log("Amount:", amount);
-
+  const handlePayment = async (payPalOrderId: string, totalAmount: number, sellerTransactionId: string, paymentStatus: string, paymentCaptureId: string) => {
     // * VK Backend: sending payment data to server
-    const serverResponse: any = await sendPaymentDataToServer(
-      transactionId,
-      amount
-    );
+    const dataToSend = {
+      payPalOrderId: payPalOrderId,
+      totalAmount: totalAmount,
+      sellerTransactionId: sellerTransactionId,
+      paymentStatus: paymentStatus,
+      paymentCaptureId: paymentCaptureId
+    };
+
+    const serverResponse: any = await sendPaymentDataToServer(dataToSend);
     console.log("serverResponse", serverResponse);
     setPaymentStatus(serverResponse.success);
     // * VK: Closing the modal window after successful payment
     setShowModal(!showModal);
   };
+
+  function sendPaymentDataToServer(dataToSend: any) {
+
+    return new Promise((resolve, reject) => {
+      fetch('/api/process-payment', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(dataToSend)
+      })
+        .then(response => response.json())
+        .then(data => {
+          resolve(data);
+        })
+        .catch(error => {
+          console.error('Error sending payment data:', error);
+          reject(error);
+        });
+    });
+  }
   // * ↑ VK: Significant for the backend area. Please exercise caution when making alterations
 
-  console.log(show);
+  // console.log(show);
 
   return (
     <>
