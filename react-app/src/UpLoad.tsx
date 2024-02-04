@@ -1,12 +1,13 @@
 import { useMediaQuery } from "react-responsive";
 import { Footer } from "./components/footer/footer";
 import { useContext, useState } from "react";
-import FileUploader from "./components/fileUploader/fileUploaderValia";
+import FileUploader from "./components/fileUploader/fileUploader";
 import HeaderMenu from "./components/header/header";
 import { SignedInContext, SignedUpContext } from "./App";
 
 export default function UpLoad({
   onSignIn,
+  onSignUp,
   handleSignIn,
   handleSignUp,
   modalIsOpen,
@@ -16,21 +17,6 @@ export default function UpLoad({
   const isPhoneScreen = useMediaQuery({ query: "(max-width: 760px" });
   const signedIn = useContext(SignedInContext);
   const signedUp = useContext(SignedUpContext);
-  console.log(signedIn);
-  console.log(signedUp);
-  function openModal() {
-    setIsOpen(true);
-  }
-  function closeModal() {
-    setIsOpen(false);
-  }
-
-  /* const [newUserInfo, setNewUserInfo] = useState({
-    profileImages: [],
-  }); */
-
-  /* const updateUploadedFiles = (files: any) =>
-    setNewUserInfo({ ...newUserInfo, profileImages: files }); */
 
   const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
@@ -43,6 +29,7 @@ export default function UpLoad({
         <HeaderMenu
           kind="short"
           onSignIn={onSignIn}
+          onSignUp={onSignUp}
           handleSignIn={handleSignIn}
           handleSignUp={handleSignUp}
           modalIsOpen={modalIsOpen}
@@ -64,27 +51,6 @@ export default function UpLoad({
               />
             </form>
           </div>
-          {/* {signedIn ? (
-            <Button
-              children="Proceed"
-              color={""}
-              onClick={() => handleSubmit}
-            />
-          ) : (
-            <ModalWindow
-              title={"Proceed"}
-              childComp={
-                signedUp ? (
-                  <LogInForm onSignIn={handleSignIn} onSignUp={handleSignUp} />
-                ) : (
-                  <SignInForm onSignUp={handleSignUp} />
-                )
-              }
-              modalIsOpen={modalIsOpen}
-              openModal={openModal}
-              closeModal={closeModal}
-            />
-          )}{" "} */}
         </section>
 
         {/* <!-- END OF Bootstrap "Containers" component --> */}

@@ -1,19 +1,26 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Button from "../Button";
+import Swal from "sweetalert2";
+import { SignedUpContext } from "../../App";
 
 const SignUpForm = ({
   handleSignUp,
   onCloseModal,
+  onSignUp,
   setUserProfileData,
 }: any) => {
   const [inputName, setInputName] = useState("username");
   const [inputEmail, setInputEmail] = useState("email");
   const [inputPhone, setInputPhone] = useState("+3530000000");
   const [inputPassword, setInputPassword] = useState("pass");
-
+  const signedUp = useContext(SignedUpContext);
+  function closeModal() {
+    onCloseModal;
+    onSignUp(!signedUp);
+  }
   const handleClick = async () => {
-    handleSignUp();
-    onCloseModal();
+    !signedUp && handleSignUp();
+    closeModal();
     const data = {
       userName: inputName,
       userEmail: inputEmail,
@@ -21,6 +28,7 @@ const SignUpForm = ({
       userPassword: inputPassword,
     };
     setUserProfileData(data);
+
     try {
       const response = await fetch("/api/signup", {
         method: "POST",
@@ -30,22 +38,31 @@ const SignUpForm = ({
         body: JSON.stringify(data),
       });
       console.log("-------", response);
-      if (response.status === 200) alert("Successfully registered!");
-      else if (response.status === 400) alert("User Already Exist");
+      if (response.status === 200) {
+        //alert("Successfully registered!");
+        Swal.fire({
+          title: "Good job!",
+          text: "Successfully registered!",
+          icon: "success",
+        });
+      } else if (response.status === 400) {
+        //alert("User Already Exist");
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "User Already Exist!",
+        });
+      }
     } catch (error) {
       console.error("There was a problem with the fetch operation:", error);
       alert("Error Occured");
       throw error;
     }
   };
+
   return (
     <>
-      <form
-        className="form mx-4 mb-4"
-        action="/api/signup"
-        method="post"
-        id="reg-form"
-      >
+      <form className="form">
         <div className="col-xs-12">
           <div className="form-group ">
             <label htmlFor="username">User name:</label>
@@ -64,7 +81,7 @@ const SignUpForm = ({
         </div>
         <div className="col-xs-12">
           <div className="form-group">
-            <label htmlFor="email">Email:</label>
+            <label htmlFor="email">Email address:</label>
             <input
               type="email"
               className="input-field"
@@ -96,7 +113,7 @@ const SignUpForm = ({
         </div>
         <div className="col-xs-12">
           <div className="form-group">
-            <label htmlFor="password">Password:</label>
+            <label htmlFor="password">Choose a password:</label>
             <input
               type="password"
               className="input-field"
@@ -108,10 +125,21 @@ const SignUpForm = ({
               onChange={(event) => setInputPassword(event.target.value)}
             />
           </div>
+          <a style={{ fontSize: "14px" }}>
+            At least 16 characters OR at least 8 characters including a number
+            and a letter.
+          </a>
         </div>
         <div className="text-left col-xs-12">
           {/* <input type="submit" className="btn btn-default" value="Submit" /> */}
-          <Button children="Submit" color="orange" onClick={handleClick} />
+          <Button
+            children="Submit"
+            color="orange"
+            onClick={() => {
+              handleClick();
+            }}
+            style="modal-btn"
+          />
         </div>
       </form>
     </>

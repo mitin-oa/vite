@@ -1,5 +1,5 @@
 import "./App.scss";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { HashLink as Link } from "react-router-hash-link";
 import { Route, Routes } from "react-router-dom";
 import Home from "./Home";
@@ -16,6 +16,10 @@ export const MobileScreenContext = createContext(false);
 // * VK: Significant for the backend area. Please exercise caution when making alterations
 import { sendLogInRequest } from "./components/scripts/logIn";
 import { useMediaQuery } from "react-responsive";
+import DashBoardEditor from "./DashBoardEditor";
+import DashBoardManager from "./DashBoardManager";
+import Swal from "sweetalert2";
+import ResetPassword from "./ResetPassword";
 
 export function deleteCookie(name: string) {
   const date = new Date();
@@ -25,17 +29,21 @@ export function deleteCookie(name: string) {
 
   // Set it
   document.cookie = name + "=; expires=" + date.toUTCString() + "; path=/";
-  console.log(document.cookie);
 }
 //deleteCookie("token");
 
 function App() {
   const value = `; ${document.cookie}`;
   const parts = value.split(`; token=`);
+  console.log(document.cookie);
+  console.log(parts);
   const token =
     parts.length === 2 ? parts.pop()?.split(";").shift() !== null : false;
   const [signedIn, onSignIn] = useState(token);
   const [signedUp, onSignUp] = useState(true);
+  const [userRole, setUserRole] = useState(localStorage.getItem("userRole"));
+  const [serverAnswerMessage, setServerAnswerMessage] = useState("");
+
   const [modalIsOpen, setIsOpen] = useState(false);
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1028px" });
   /* const isPhoneScreen = useMediaQuery({ query: "(max-width: 760px" }); */
@@ -46,25 +54,30 @@ function App() {
     userPassword: "password",
   });
   console.log(userProfileData);
-
   function handleSignUp() {
     onSignUp(!signedUp);
   }
 
   // * ↓ VK: Significant for the backend area. Please exercise caution when making alterations
+
   async function handleSignIn(userData: {
     username: string;
     password: string;
   }) {
     // * VK: userData содержит имя пользователя и пароль из формы
-    const answer = await sendLogInRequest(userData);
+    const answer: any = await sendLogInRequest(userData);
     console.log(answer, "answer");
-
-    if (answer.status === "success") {
+    setUserRole(answer.userRole);
+    localStorage.setItem("userRole", answer.userRole);
+    if (answer.HTTP_status === 200) {
       // * VK: Логика в случае успешной авторизации
       // console.log('Server response OK:', data);
-      alert(answer.message);
-
+      //alert(answer.message);
+      Swal.fire({
+        title: "Good job!",
+        text: `${answer.message}!`,
+        icon: "success",
+      });
       // * VK: Прежний код, который выполнялся после LogIn и вызова функции handleSignIn
       onSignIn(!signedIn);
       // * VK: Передача данных для закрытия модального окна
@@ -74,18 +87,36 @@ function App() {
       // console.log('Server response NOT OK:', data);
       if (answer.HTTP_status === 400) {
         // TODO VK: дополнить логику на случай неуспешной авторизации
-        alert(answer.message);
-      } else if (answer.HTTP_status === 400) {
+        //alert(answer.message);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: `${answer.message}`,
+        });
+      } else if (answer.HTTP_status === 500) {
         // TODO VK: дополнить логику на случай сбоя в работе сервера
-        alert(answer.message);
+        //alert(answer.message);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: `${answer.message}`,
+        });
       } else {
         // TODO VK: пересмотреть этот способ обработки ошибок, он не работает
-        alert("Unknown error!");
+        //alert("Unknown error!");
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: `${answer.message}`,
+        });
       }
     }
+    setServerAnswerMessage(answer.message);
   }
-  // * ↑ VK: Significant for the backend area. Please exercise caution when making alterations
 
+  console.log(serverAnswerMessage);
+  // * ↑ VK: Significant for the backend area. Please exercise caution when making alterations
+  console.log(userRole);
   return (
     <>
       <SignedUpContext.Provider value={signedUp}>
@@ -100,6 +131,7 @@ function App() {
                   handleSignIn={handleSignIn}
                   setUserProfileData={setUserProfileData}
                   signedUp={signedUp}
+                  onSignUp={onSignUp}
                   handleSignUp={handleSignUp}
                   modalIsOpen={modalIsOpen}
                   setIsOpen={setIsOpen}
@@ -168,19 +200,44 @@ function App() {
             <Route
               path="DashBoard"
               element={
-                <DashBoard
-                  kind="short"
-                  onSignIn={onSignIn}
-                  handleSignIn={handleSignIn}
-                  signedUp={signedUp}
-                  setUserProfileData={setUserProfileData}
-                  handleSignUp={handleSignUp}
-                  modalIsOpen={modalIsOpen}
-                  setIsOpen={setIsOpen}
-                />
+                userRole === "client" ? (
+                  <DashBoard
+                    kind="short"
+                    onSignIn={onSignIn}
+                    handleSignIn={handleSignIn}
+                    signedUp={signedUp}
+                    setUserProfileData={setUserProfileData}
+                    handleSignUp={handleSignUp}
+                    modalIsOpen={modalIsOpen}
+                    setIsOpen={setIsOpen}
+                  />
+                ) : userRole === "editor" ? (
+                  <DashBoardEditor
+                    kind="short"
+                    onSignIn={onSignIn}
+                    handleSignIn={handleSignIn}
+                    signedUp={signedUp}
+                    setUserProfileData={setUserProfileData}
+                    handleSignUp={handleSignUp}
+                    modalIsOpen={modalIsOpen}
+                    setIsOpen={setIsOpen}
+                  />
+                ) : (
+                  <DashBoardManager
+                    kind="short"
+                    onSignIn={onSignIn}
+                    handleSignIn={handleSignIn}
+                    signedUp={signedUp}
+                    setUserProfileData={setUserProfileData}
+                    handleSignUp={handleSignUp}
+                    modalIsOpen={modalIsOpen}
+                    setIsOpen={setIsOpen}
+                  />
+                )
               }
             />
             <Route path="*" element={<NotFound />} />
+            <Route path="/resetPassword" Component={ResetPassword} />
           </Routes>
         </SignedInContext.Provider>
       </SignedUpContext.Provider>

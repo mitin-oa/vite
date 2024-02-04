@@ -11,20 +11,25 @@ interface UserData {
   password: string;
 }
 
-export async function sendLogInRequest(userData: UserData): Promise<any> {
-  try {
-    const response = await fetch("/api/signin", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userData),
-    });
+function sendLogInRequest(userData: UserData) {
 
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("There was a problem with the fetch operation:", error);
-    throw error;
-  }
+  return new Promise((resolve, reject) => {
+    fetch('/api/signin', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(userData)
+    })
+      .then(response => response.json())
+      .then(data => {
+        resolve(data);
+      })
+      .catch(error => {
+        console.error('Error sending payment data:', error);
+        reject(error);
+      });
+  });
 }
+
+export { sendLogInRequest };

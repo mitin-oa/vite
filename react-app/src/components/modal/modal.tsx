@@ -2,6 +2,7 @@ import React from "react";
 import Modal from "react-modal";
 import "./modal.scss";
 import Button from "../Button";
+import { useMediaQuery } from "react-responsive";
 
 const customStyles = {
   content: {
@@ -15,6 +16,18 @@ const customStyles = {
   },
 };
 
+const customStylesMobile = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    width: "280px",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+  },
+};
+
 interface ParentCompProps {
   title?: any;
   childComp?: React.ReactNode;
@@ -22,6 +35,7 @@ interface ParentCompProps {
   openModal?: any;
   closeModal?: any;
   btnModalStyle?: string;
+  btnCloseVisible?: string;
 }
 let subtitle: any;
 // Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
@@ -36,22 +50,15 @@ const ModalWindow: React.FC<ParentCompProps> = (props) => {
     openModal,
     closeModal,
     btnModalStyle,
+    btnCloseVisible,
   } = props;
-  /* const [modalIsOpen, setIsOpen] = React.useState(false);
-
-  function openModal() {
-    setIsOpen(true);
-  } */
+  const isMobileScreen = useMediaQuery({ query: "(max-width: 760px" });
 
   function afterOpenModal() {
     // references are now sync'd and can be accessed.
     subtitle.style.color = "#ec720b";
   }
 
-  /* function closeModal() {
-    setIsOpen(false);
-  }
- */
   return (
     <div>
       <Button
@@ -64,17 +71,17 @@ const ModalWindow: React.FC<ParentCompProps> = (props) => {
         isOpen={modalIsOpen}
         onAfterOpen={afterOpenModal}
         onRequestClose={closeModal}
-        style={customStyles}
+        style={!isMobileScreen ? customStyles : customStylesMobile}
         contentLabel="Example Modal"
       >
         <button
           type="button"
-          className="btn-close"
+          className={"btn-close" + " " + { btnCloseVisible }}
           aria-label="Close"
           onClick={closeModal}
         ></button>
         <h2
-          style={{ marginLeft: 25 }}
+          style={{ textAlign: "center" }}
           ref={(_subtitle) => (subtitle = _subtitle)}
         >
           {title}

@@ -6,7 +6,7 @@ interface Props {
 }
 
 export default function InputPages({ pages, setPages }: Props) {
-  const [numOfPages, setNumOfPages] = useState<number>(0);
+  const [numOfPages, setNumOfPages] = useState<number>(1);
 
   const onPagesChange = (e: ChangeEvent<HTMLInputElement>) => {
     // In general, use Number.isNaN over global isNaN as isNaN will coerce the value to a number first

@@ -1,6 +1,12 @@
 import Button from "../Button";
+import { useEffect } from "react";
 
-const LogInForm = ({ handleSignIn, onSignUp }: any) => {
+const LogInForm = ({
+  handleSignIn,
+  onSignUp,
+  resetPass,
+  setResetPass,
+}: any) => {
   // * ↓ VK: Significant for the backend area. Please exercise caution when making alterations
   const handleLogInSubmit = () => {
     // * VK: Form fields data entered by the user
@@ -11,16 +17,23 @@ const LogInForm = ({ handleSignIn, onSignUp }: any) => {
     const password = formData.get("password") as string;
 
     // * VK: Pass the data to the onSignIn function
+
     handleSignIn({
       login,
       password,
     });
   };
+
   // * ↑ VK: Significant for the backend area. Please exercise caution when making alterations
+
+  function handleResetPass() {
+    setResetPass(!resetPass);
+  }
+
   return (
     <>
       <form
-        className="form mx-4 mb-4"
+        className="form "
         action="/api/signin"
         method="post"
         id="login-form"
@@ -54,17 +67,40 @@ const LogInForm = ({ handleSignIn, onSignUp }: any) => {
             />
           </div>
         </div>
+
+        <Button
+          children="Reset password?"
+          color={"white"}
+          onClick={handleResetPass}
+          style="resetPass-btn"
+        />
+
         <div className="text-left col-xs-12">
           {/* // * VK: Significant for the backend area. Please exercise caution when making alterations */}
-          <Button
-            children="Submit"
-            color="orange"
-            onClick={handleLogInSubmit}
-          />
+          <div className="btn-container">
+            <Button
+              children="Submit"
+              color="orange"
+              onClick={() => {
+                handleLogInSubmit();
+              }}
+              style="modal-btn"
+            />
+          </div>
         </div>
-        <p>Not registred? Push Sign Up.</p>
         <div className="text-left col-xs-12">
-          <Button children="Sign Up" color="orange" onClick={onSignUp} />
+          <p>Not registred? Push Sign Up.</p>
+        </div>
+
+        <div className="text-left col-xs-12">
+          <div className="btn-container">
+            <Button
+              children="Sign Up"
+              color="orange"
+              onClick={onSignUp}
+              style="modal-btn"
+            />
+          </div>
         </div>
       </form>
     </>

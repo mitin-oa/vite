@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useContext } from "react";
+import { Dispatch, SetStateAction, useContext, useState } from "react";
 import "./header.scss";
 import Logo from "../../../public/logo-white-ec720b-background-033c5a.png";
 import { HashLink as Link } from "react-router-hash-link";
@@ -9,6 +9,7 @@ import { SignedInContext, SignedUpContext, deleteCookie } from "../../App";
 import Button from "../Button";
 import { useMediaQuery } from "react-responsive";
 import SignUpForm from "../modal/SignUpForm";
+import ResetPassForm from "../modal/ResetPass";
 
 interface IHeaderProps {
   kind?: "full" | "short";
@@ -16,6 +17,8 @@ interface IHeaderProps {
   setUserProfileData: any;
   handleSignUp: boolean;
   onSignIn: Dispatch<SetStateAction<boolean>>;
+  onSignUp: Dispatch<SetStateAction<boolean>>;
+
   modalIsOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
 }
@@ -26,12 +29,13 @@ export default function HeaderMenu({
   handleSignUp,
   setUserProfileData,
   onSignIn,
+  onSignUp,
   modalIsOpen,
   setIsOpen,
 }: IHeaderProps) {
   const signedIn = useContext(SignedInContext);
   const signedUp = useContext(SignedUpContext);
-
+  const [resetPass, setResetPass] = useState(false);
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1028px" });
 
   const signedInStatus = signedIn ? "Sign Out" : "Sign In";
@@ -40,6 +44,12 @@ export default function HeaderMenu({
     setIsOpen(true);
   }
   function closeModal() {
+    setIsOpen(false);
+    resetPass && setResetPass(!resetPass);
+  }
+
+  function closeSignUp() {
+    onSignUp(!signedUp);
     setIsOpen(false);
   }
 
@@ -71,21 +81,16 @@ export default function HeaderMenu({
         <ul className={kind === "short" ? "nav__short" : "nav"}>
           {signedIn ? (
             <>
-              {kind === "full" ? (
-                <>
-                  <Link className="nav__link nav__text" to="Dashboard">
-                    Dashboard
-                  </Link>
-                  <Link className="nav__link nav__text" to="UpLoad">
-                    File Upload
-                  </Link>
-                  <Link className="nav__link nav__text" to="BuyCredits">
-                    Buy Credits
-                  </Link>
-                </>
-              ) : (
-                <></>
-              )}
+              <Link className="nav__link nav__text" to="/Dashboard">
+                Dashboard
+              </Link>
+              <Link className="nav__link nav__text" to="/UpLoad">
+                File Upload
+              </Link>
+              <Link className="nav__link nav__text" to="/BuyCredits">
+                Buy Credits
+              </Link>
+
               {!isMobileScreen ? (
                 <Link to="/">
                   <ModalWindow
@@ -94,13 +99,27 @@ export default function HeaderMenu({
                     childComp={
                       signedInStatus == "Sign In" ? (
                         !signedIn && signedUp ? (
-                          <LogInForm
-                            handleSignIn={handleSignIn}
-                            onSignUp={handleSignUp}
-                          />
+                          !resetPass ? (
+                            <LogInForm
+                              handleSignIn={handleSignIn}
+                              onSignUp={handleSignUp}
+                              setIsOpen={setIsOpen}
+                              modalIsOpen={modalIsOpen}
+                              resetPass={resetPass}
+                              setResetPass={setResetPass}
+                            />
+                          ) : (
+                            <ResetPassForm
+                              setIsOpen={setIsOpen}
+                              resetPass={resetPass}
+                              setResetPass={setResetPass}
+                            />
+                          )
                         ) : (
                           <SignUpForm
                             handleSignUpForm={handleSignUp}
+                            onSignUp={onSignUp}
+                            onCloseModal={closeModal}
                             setUserProfileData={setUserProfileData}
                           />
                         )
@@ -108,13 +127,14 @@ export default function HeaderMenu({
                         <Link to="/">
                           <>
                             <Button
-                              children={signedInStatus}
+                              children={`Want to ${signedInStatus}?`}
                               color="orange"
                               onClick={() => {
                                 onSignIn(false);
                                 setIsOpen(false);
                                 deleteCookie("token");
                               }}
+                              style="modal-btn"
                             />
                           </>
                         </Link>
@@ -122,7 +142,7 @@ export default function HeaderMenu({
                     }
                     modalIsOpen={modalIsOpen}
                     openModal={openModal}
-                    closeModal={closeModal}
+                    closeModal={signedUp ? closeModal : closeSignUp}
                   />
                 </Link>
               ) : (
@@ -131,36 +151,47 @@ export default function HeaderMenu({
             </>
           ) : (
             <>
-              {kind === "full" ? (
-                <>
-                  <Link className="nav__link nav__text" to="About">
-                    About the service
-                  </Link>
-                  <Link className="nav__link nav__text" to="CalculateCost">
-                    Calculate Cost
-                  </Link>
-                  <Link className="nav__link nav__text" to="UpLoad">
-                    Upload Form
-                  </Link>
-                </>
-              ) : (
-                <></>
-              )}
+              <Link className="nav__link nav__text" to="/About">
+                About the service
+              </Link>
+              <Link className="nav__link nav__text" to="/CalculateCost">
+                Calculate Cost
+              </Link>
+
               {!isMobileScreen ? (
                 <Link to="/">
                   <ModalWindow
-                    title={signedUp ? signedInStatus : "Sign Up"}
+                    title={
+                      signedUp
+                        ? resetPass
+                          ? "Reset password"
+                          : signedInStatus
+                        : "Sign Up"
+                    }
                     childComp={
                       signedInStatus == "Sign In" ? (
                         !signedIn && signedUp ? (
-                          <LogInForm
-                            handleSignIn={handleSignIn}
-                            onSignUp={handleSignUp}
-                          />
+                          !resetPass ? (
+                            <LogInForm
+                              handleSignIn={handleSignIn}
+                              onSignUp={handleSignUp}
+                              setIsOpen={setIsOpen}
+                              modalIsOpen={modalIsOpen}
+                              resetPass={resetPass}
+                              setResetPass={setResetPass}
+                            />
+                          ) : (
+                            <ResetPassForm
+                              setIsOpen={setIsOpen}
+                              resetPass={resetPass}
+                              setResetPass={setResetPass}
+                            />
+                          )
                         ) : (
                           <SignUpForm
                             handleSignUp={handleSignUp}
                             onCloseModal={closeModal}
+                            onSignUp={onSignUp}
                             setUserProfileData={setUserProfileData}
                           />
                         )
@@ -174,13 +205,14 @@ export default function HeaderMenu({
                               setIsOpen(false);
                               deleteCookie("token");
                             }}
+                            style="modal-btn"
                           />
                         </Link>
                       )
                     }
                     modalIsOpen={modalIsOpen}
                     openModal={openModal}
-                    closeModal={closeModal}
+                    closeModal={signedUp ? closeModal : closeSignUp}
                   />
                 </Link>
               ) : (
@@ -199,6 +231,8 @@ export default function HeaderMenu({
             onSignIn={onSignIn}
             modalIsOpen={modalIsOpen}
             setIsOpen={setIsOpen}
+            resetPass={resetPass}
+            setResetPass={setResetPass}
           />
         ) : (
           <></>

@@ -9,6 +9,7 @@ import ModalWindow from "../modal/modal";
 import Button from "../Button";
 import { SignedInContext, SignedUpContext, deleteCookie } from "../../App";
 import SignUpForm from "../modal/SignUpForm";
+import ResetPassForm from "../modal/ResetPass";
 
 const colors = {
   yellowmellow: "#fbe69b",
@@ -67,6 +68,8 @@ interface IHeaderProps {
   onSignIn: Dispatch<SetStateAction<boolean>>;
   modalIsOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
+  resetPass: boolean;
+  setResetPass: Dispatch<SetStateAction<boolean>>;
 }
 
 export const Navbar = ({
@@ -76,6 +79,8 @@ export const Navbar = ({
   onSignIn,
   modalIsOpen,
   setIsOpen,
+  resetPass,
+  setResetPass,
 }: IHeaderProps) => {
   const [open, setOpen] = useState<boolean>(false);
   const close = () => setOpen(false);
@@ -141,26 +146,44 @@ export const Navbar = ({
             >
               Calculate Cost
             </Link>
-            <Link
+            {/* <Link
               className="burger_visible__Link"
               to="/UpLoad"
               onClick={() => close()}
             >
               Upload Form
-            </Link>
+            </Link> */}
           </>
         )}
 
         <Link to="/">
           <ModalWindow
-            title={signedUp ? signedInStatus : "Sign Up"}
+            title={
+              signedUp
+                ? resetPass
+                  ? "Reset password"
+                  : signedInStatus
+                : "Sign Up"
+            }
             childComp={
               signedInStatus == "Sign In" ? (
                 !signedIn && signedUp ? (
-                  <LogInForm
-                    handleSignIn={handleSignIn}
-                    onSignUp={handleSignUp}
-                  />
+                  !resetPass ? (
+                    <LogInForm
+                      handleSignIn={handleSignIn}
+                      onSignUp={handleSignUp}
+                      setIsOpen={setIsOpen}
+                      modalIsOpen={modalIsOpen}
+                      resetPass={resetPass}
+                      setResetPass={setResetPass}
+                    />
+                  ) : (
+                    <ResetPassForm
+                      setIsOpen={setIsOpen}
+                      resetPass={resetPass}
+                      setResetPass={setResetPass}
+                    />
+                  )
                 ) : (
                   <SignUpForm
                     handleSignUp={handleSignUp}
@@ -178,6 +201,7 @@ export const Navbar = ({
                       setIsOpen(false);
                       deleteCookie("token");
                     }}
+                    style="modal-btn"
                   />
                 </Link>
               )

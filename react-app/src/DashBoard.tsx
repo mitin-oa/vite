@@ -8,8 +8,10 @@ import { sendHandleOrderRequest } from "./components/scripts/handleOrderRequest"
 
 import Button from "./components/Button";
 import ModalWindow from "./components/modal/modal";
-import SignInForm from "./components/modal/SignUpForm";
 import { Link } from "react-router-dom";
+import SignUpForm from "./components/modal/SignUpForm";
+import DownLoadFile from "./components/DownloadFile";
+import ChangeProfileForm from "./components/modal/ChangeProfileForm";
 
 export default function Dashboard({
   kind,
@@ -17,6 +19,7 @@ export default function Dashboard({
   handleSignIn,
   modalIsOpen,
   setIsOpen,
+  onSignUp,
   handleSignUp,
   setUserProfileData,
 }: any) {
@@ -24,7 +27,6 @@ export default function Dashboard({
   const [userDataForDashboard, setUserDataForDashboard] = useState<any | null>(
     null
   );
-  const [serverAnswerMessage, setServerAnswerMessage] = useState(false);
 
   useEffect(() => {
     const requestData = async () => {
@@ -54,8 +56,6 @@ export default function Dashboard({
 
     let answer = serverAnswer.message === "Low balance" ? true : false;
 
-    setServerAnswerMessage(answer);
-
     const index = userDataForDashboard.data.fileData.findIndex(
       (e: any) => e.order_id === orderId
     );
@@ -76,6 +76,38 @@ export default function Dashboard({
     setIsOpen(false);
   }
 
+  function downloadProcessedFile(fileName: any) {
+    console.log(fileName);
+    let pathToFile = "/api/downloadProcessedFile/" + fileName;
+    fetch(pathToFile, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/pdf",
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Server returned an error response");
+        }
+        return response.blob();
+      })
+      .then((blob) => {
+        const url = window.URL.createObjectURL(new Blob([blob]));
+
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = fileName;
+
+        document.body.appendChild(link);
+
+        link.click();
+
+        if (link.parentNode) {
+          link.parentNode.removeChild(link);
+        }
+      });
+  }
+
   // * ↑ VK: Significant for the backend area. Please exercise caution when making alterations
 
   return (
@@ -87,6 +119,7 @@ export default function Dashboard({
           handleSignIn={handleSignIn}
           modalIsOpen={modalIsOpen}
           setIsOpen={setIsOpen}
+          onSignUp={onSignUp}
           setUserProfileData={setUserProfileData}
           handleSignUp={handleSignUp}
         />
@@ -110,9 +143,10 @@ export default function Dashboard({
                       <ModalWindow
                         title={"Change"}
                         childComp={
-                          <SignInForm
+                          <ChangeProfileForm
                             onSignUp={handleSignUp}
                             onCloseModal={closeModal}
+                            userDataForDashboard={userDataForDashboard}
                             setUserProfileData={setUserProfileData}
                           />
                         }
@@ -153,7 +187,7 @@ export default function Dashboard({
             </div>
 
             <div className="col-md-6 rightColumn">
-              <p>Recent transactions (eg. 5 last transactions)</p>
+              <p>Recent transactions</p>
               <table className="table">
                 <tbody>
                   <tr>
@@ -167,7 +201,9 @@ export default function Dashboard({
                     ? userDataForDashboard.data.paymentsData.map((e: any) => (
                         <tr>
                           <td>
-                            {userDataForDashboard ? e.paypal_order_id : ""}
+                            {userDataForDashboard
+                              ? e.paypal_seller_transaction_id
+                              : ""}
                           </td>
                           <td>
                             {userDataForDashboard
@@ -185,19 +221,20 @@ export default function Dashboard({
           </div>
 
           <div className="row">
-            <p>Recent files (eg. 10 last files) with all the info of each</p>
+            <p>Recent orders</p>
             <table className="table dashboard-table">
               <tbody>
                 <tr>
                   <td>Name</td>
                   <td>Status</td>
+                  <td>Price in credits</td>
                   <td>Date</td>
                   <td>Manage</td>
                   <td>Download</td>
                 </tr>
                 {userDataForDashboard
                   ? userDataForDashboard.data.fileData
-                      .slice(-10, userDataForDashboard.data.fileData.length)
+                      .slice(-50, userDataForDashboard.data.fileData.length)
                       .sort((a: any, b: any) =>
                         a.created_at.date > b.created_at.date ? 1 : -1
                       )
@@ -205,6 +242,7 @@ export default function Dashboard({
                         <tr>
                           <td>{userDataForDashboard ? e.original_name : ""}</td>
                           <td>{userDataForDashboard ? e.order_status : ""}</td>
+                          <td>{userDataForDashboard ? e.points_cost : ""}</td>
                           <td>
                             {userDataForDashboard
                               ? e.created_at.toString().split("T")[0] +
@@ -239,16 +277,18 @@ export default function Dashboard({
                           </td>
                           <td>
                             {e.order_status !== "pending" ? (
-                              <Button
-                                children={
-                                  e.completed ? "Download" : "Not completed"
-                                }
-                                color={"orange"}
-                                style={"table-btn"}
-                                onClick={function (): void {
-                                  throw new Error("Function not implemented.");
-                                }}
-                              />
+                              e.completed ? (
+                                <Button
+                                  children={"Download"}
+                                  color={"orange"}
+                                  style={"table-btn"}
+                                  onClick={() =>
+                                    downloadProcessedFile(e.processed_file)
+                                  }
+                                />
+                              ) : (
+                                "Not completed"
+                              )
                             ) : (
                               <></>
                             )}
@@ -264,83 +304,4 @@ export default function Dashboard({
       <Footer kind="short" />
     </>
   );
-}
-
-{
-  /* <form
-                className="form mx-4 mb-4"
-                action="/api/signup"
-                method="post"
-                id="reg-form"
-              >
-                <div className="col-xs-12">
-                  <div className="form-group ">
-                    <label htmlFor="username">User name:</label>
-                    <input
-                      type="text"
-                      className="input-field"
-                      id="username"
-                      name="username"
-                      placeholder="Enter user name"
-                      defaultValue="user1"
-                      required
-                    />
-                    <br />
-                  </div>
-                </div>
-                <div className="col-xs-12">
-                  <div className="form-group">
-                    <label htmlFor="email">Email:</label>
-                    <input
-                      type="email"
-                      className="input-field"
-                      id="email"
-                      name="email"
-                      placeholder="Enter email"
-                      defaultValue={"client@example.com"}
-                      value={
-                        userDataForDashboard
-                          ? userDataForDashboard.data.userData[0].email
-                          : "client@example.com"
-                      }
-                      required
-                    />
-                    <br />
-                  </div>
-                </div>
-                <div className="col-xs-12">
-                  <div className="form-group">
-                    <label htmlFor="phone">Phone number:</label>
-                    <input
-                      type="text"
-                      className="input-field"
-                      id="phone"
-                      name="phone"
-                      placeholder="Enter phone"
-                      defaultValue="+3530000000"
-                      value={
-                        userDataForDashboard
-                          ? userDataForDashboard.data.userData[0].phone
-                          : "+3530000000"
-                      }
-                      required
-                    />
-                    <br />
-                  </div>
-                </div>
-                <div className="col-xs-12">
-                  <div className="form-group">
-                    <label htmlFor="password">Password:</label>
-                    <input
-                      type="password"
-                      className="input-field"
-                      id="password"
-                      name="password"
-                      placeholder="Enter password"
-                      defaultValue="pass"
-                      required
-                    />
-                  </div>
-                </div> 
-              </form>*/
 }

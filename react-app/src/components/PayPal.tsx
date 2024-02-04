@@ -4,15 +4,16 @@ import * as React from "react";
 const debug = true;
 
 // * VK: Significant for the backend area. Please exercise caution when making alterations
-/** * VK: Defining the type of properties (props) for the PayPal component.
- * - amountPay: a required number representing the payment amount.
- * - onSuccess: an optional callback function called when the PayPal transaction completes successfully.
- * Takes two parameters: transactionId (transaction ID) and amount (payment amount).
- * If passed, this function will be called by the component upon successful payment.
- */
+// * VK: Defining the type of properties (props) for the PayPal component.
 type PaymentProps = {
   amountPay: number;
-  onSuccess?: (transactionId: string, amount: number) => void;
+  onSuccess?: (
+    payPalOrderId: string,
+    totalAmount: number,
+    sellerTransactionId: string,
+    paymentStatus: string,
+    paymentCaptureId: string
+  ) => void;
 };
 
 type InitState = {
@@ -39,6 +40,8 @@ export default class PayPal extends React.Component<PaymentProps, InitState> {
   }
 
   createOrder(data: Record<string, unknown>, actions: any) {
+    console.log("createOrder");
+    console.log(actions);
     if (debug) console.log("Creating order for amount", this.state.amount);
 
     return actions.order
@@ -53,6 +56,7 @@ export default class PayPal extends React.Component<PaymentProps, InitState> {
         ],
       })
       .then((orderID: any) => {
+        console.log(orderID);
         this.setState({ orderID: orderID });
         return orderID;
       });
@@ -72,8 +76,11 @@ export default class PayPal extends React.Component<PaymentProps, InitState> {
       // !
     } else {
       return actions.order.capture().then(function (details: any) {
-        // console.log(details.id);
-        // console.log(app.state.amount);
+        const orderId = details.id;
+        const sellerTransactionId = details.purchase_units[0].payments.captures[0].id;
+        const paymentStatus = details.purchase_units[0].payments.captures[0].status;
+        const paymentCaptureId = details.purchase_units[0].payments.captures[0].id
+        const amount = app.state.amount;
 
         app.setState({
           onApproveMessage: `Transaction completed by ${details.payer.name.given_name}!`,
@@ -82,7 +89,7 @@ export default class PayPal extends React.Component<PaymentProps, InitState> {
         // * VK: Significant for the backend area. Please exercise caution when making alterations
         // * VK: Call the onSuccess callback if it has been passed
         if (app.props.onSuccess) {
-          app.props.onSuccess(details.id, app.state.amount);
+          app.props.onSuccess(orderId, amount, sellerTransactionId, paymentStatus, paymentCaptureId);
         }
       });
     }
@@ -101,7 +108,7 @@ export default class PayPal extends React.Component<PaymentProps, InitState> {
   render() {
     return (
       <div style={{ minHeight: "300px" }}>
-        <table className="table" style={{ maxWidth: "400px" }}>
+        <table className="table" style={{ margin: "30px 0 30px" }}>
           <tbody>
             <tr>
               <th>
@@ -116,7 +123,7 @@ export default class PayPal extends React.Component<PaymentProps, InitState> {
         <PayPalScriptProvider
           options={{
             clientId:
-              "ATLcPG0Iju719cAPBCZfb_8CgpSv4Pg8xt73NQW4C8Qf6STnU84kWdVDGPHPBllV6kJbwWHiPZPvEtD4",
+              "AUprT9UtwMMy-HhFsqQf4jYc0_0HtkOK9PWJBvVuMm5MlBZEv6MO-2MuWxHM5xqcEqUl0DYmnr9OBGv6",
           }}
         >
           <PayPalButtons
