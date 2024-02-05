@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Alert from "./components/Alert";
-import { Footer } from "./components/footer/footer";
+import Footer from "./components/footer/footer";
 import ModalWindow from "./components/modal/modal";
 import StartScreen from "./components/startScreen/startScreen";
 import Swal from "sweetalert2";

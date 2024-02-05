@@ -1,5 +1,5 @@
 import { useMediaQuery } from "react-responsive";
-import { Footer } from "./components/footer/footer";
+import Footer from "./components/footer/footer";
 import AboutPicture from "../public/about_pic.png";
 import HeaderMenu from "./components/header/header";
 

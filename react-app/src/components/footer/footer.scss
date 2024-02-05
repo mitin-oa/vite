@@ -2,7 +2,7 @@
     width: 100%;
     min-height: 16vh;
     background-color: white;
-    padding: 15px 40px 15px;
+    padding: 22px 40px 15px;
     margin: 0 auto;
     overflow: auto;
     @media (max-width: 760px) {
@@ -24,7 +24,7 @@
     &__logo {
         font-style:normal;
         font-weight: 500;
-        font-size: 32px;
+        font-size: 30px;
         line-height: 45px;
         letter-spacing: 0.2em;
         text-align: center;
@@ -69,7 +69,7 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
-        align-items:flex-start;
+        align-items:center;
         @media (max-width: 1028px) {
             flex-direction: column;
             align-items: center;
@@ -230,8 +230,8 @@
     }
 
     &__icon {
-        width: 40px;
-        height: 40px;
+        width: 35px;
+        height: 35px;
     }
 }
 .gap {

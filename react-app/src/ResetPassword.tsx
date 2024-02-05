@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Footer } from "./components/footer/footer";
+import Footer from "./components/footer/footer";
 
 export default function Home() {
   const [newPassword, setNewPassword] = useState("");
@@ -42,15 +42,19 @@ export default function Home() {
         if (result.HTTP_status == 200) {
           console.log(result);
           setServerAnswerMessage("Password successfully reset.");
-        } else if (result.message == 'Expiring token') {
+        } else if (result.message == "Expiring token") {
           setServerAnswerMessage("The link has expired.");
         } else {
-          setServerAnswerMessage("An error occurred when resetting the password.");
+          setServerAnswerMessage(
+            "An error occurred when resetting the password."
+          );
         }
       })
       .catch((error) => {
         console.error("Error when sending a request:", error);
-        setServerAnswerMessage("An error occurred when resetting the password.");
+        setServerAnswerMessage(
+          "An error occurred when resetting the password."
+        );
       });
   };
 

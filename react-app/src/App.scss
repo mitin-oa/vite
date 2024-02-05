@@ -746,3 +746,44 @@ legend {
     width: 100% !important;
   }
 }
+
+//messageWiget styles
+.rcw-conversation-container > .rcw-header {
+  background-color: #ec720b !important;
+}
+
+.rcw-widget-container > button {
+  background-color: #ec720b !important;
+  min-width: 70px !important;
+  padding: 0 !important;
+  color: white;
+}
+
+.rcw-sender > button {
+  background-color: white !important;
+  min-width: 50px !important;
+  padding: 8px !important;
+  color: white;
+}
+
+button.emoji-mart-anchor {
+  min-width: 40px !important;
+  padding: 10px !important;
+}
+
+button.emoji-mart-search-icon {
+  min-width: 40px !important;
+  padding: 0px !important;
+  background-color: white !important;
+}
+
+button.emoji-mart-emoji {
+  min-width: 40px !important;
+  padding: 10px !important;
+  background-color: white !important;
+}
+
+.rcw-avatar {
+  width: 50px !important;
+  height: 50px !important;
+}

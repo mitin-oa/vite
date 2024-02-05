@@ -1,5 +1,5 @@
 import { useMediaQuery } from "react-responsive";
-import { Footer } from "./components/footer/footer";
+import Footer from "./components/footer/footer";
 import NumInput from "./components/InputNumber";
 import { ChangeEvent, useState } from "react";
 import HeaderMenu from "./components/header/header";

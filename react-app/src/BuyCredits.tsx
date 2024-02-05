@@ -1,6 +1,6 @@
 import { useMediaQuery } from "react-responsive";
 import PayPal from "./components/PayPal";
-import { Footer } from "./components/footer/footer";
+import Footer from "./components/footer/footer";
 import { ChangeEvent, useState } from "react";
 import NumInput from "./components/InputNumber";
 import ModalWindow from "./components/modal/modal";
@@ -32,14 +32,20 @@ export default function BuyCredits({
   const [showModal, setShowModal] = useState(false); // * VK: State to control the visibility of a modal window
   const [paymentStatus, setPaymentStatus] = useState(false);
 
-  const handlePayment = async (payPalOrderId: string, totalAmount: number, sellerTransactionId: string, paymentStatus: string, paymentCaptureId: string) => {
+  const handlePayment = async (
+    payPalOrderId: string,
+    totalAmount: number,
+    sellerTransactionId: string,
+    paymentStatus: string,
+    paymentCaptureId: string
+  ) => {
     // * VK Backend: sending payment data to server
     const dataToSend = {
       payPalOrderId: payPalOrderId,
       totalAmount: totalAmount,
       sellerTransactionId: sellerTransactionId,
       paymentStatus: paymentStatus,
-      paymentCaptureId: paymentCaptureId
+      paymentCaptureId: paymentCaptureId,
     };
 
     const serverResponse: any = await sendPaymentDataToServer(dataToSend);
@@ -50,21 +56,20 @@ export default function BuyCredits({
   };
 
   function sendPaymentDataToServer(dataToSend: any) {
-
     return new Promise((resolve, reject) => {
-      fetch('/api/process-payment', {
-        method: 'POST',
+      fetch("/api/process-payment", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(dataToSend)
+        body: JSON.stringify(dataToSend),
       })
-        .then(response => response.json())
-        .then(data => {
+        .then((response) => response.json())
+        .then((data) => {
           resolve(data);
         })
-        .catch(error => {
-          console.error('Error sending payment data:', error);
+        .catch((error) => {
+          console.error("Error sending payment data:", error);
           reject(error);
         });
     });

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { Footer } from "./components/footer/footer";
+import Footer from "./components/footer/footer";
 import HeaderMenu from "./components/header/header";
 // * VK: Significant for the backend area. Please exercise caution when making alterations
 import { getUserDataForDashboard } from "./components/scripts/getUserDataForDashboard";

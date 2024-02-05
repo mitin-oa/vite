@@ -154,8 +154,11 @@ export default function HeaderMenu({
               <Link className="nav__link nav__text" to="/About">
                 About the service
               </Link>
+              <Link className="nav__link nav__text" to="/About">
+                How it works
+              </Link>
               <Link className="nav__link nav__text" to="/CalculateCost">
-                Calculate Cost
+                Order a review
               </Link>
 
               {!isMobileScreen ? (
