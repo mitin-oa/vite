@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 
 import Button from "../Button";
 
-import sendToServer from "../scripts/uploadHandler"; // * VK Backend: Connecting an external script
+import sendToServer from "../../fetchScripts/uploadHandler"; // * VK Backend: Connecting an external script
 import { SignedInContext, SignedUpContext } from "../../App";
 import ModalWindow from "../modal/modal";
 import LogInForm from "../modal/LogInForm";
@@ -11,7 +11,6 @@ import NumInput from "../InputNumber";
 import Alert from "../Alert";
 
 // TODO LIST VK:
-// 1. Search "TODO 1" in file
 // 2. Search "TODO 2" in file
 
 const FileUploader = ({
@@ -106,49 +105,26 @@ const FileUploader = ({
   };
 
   const handleUpload = async () => {
-    if (fileData.length < 1) {
-      alert("No files selected!"); // TODO 2 VK: Improve the logic in case of an attempt to send a request without downloading files
-      return;
-    }
-
-    // ! VK: Временно - проверка авторизации перед проведением платежа.
-    // ! Заменить на логику, работающую с сервером
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; token=`);
-    const token =
-      parts.length === 2 ? parts.pop()?.split(";").shift() !== null : false;
-    if (!token) {
-      alert("Please, LogIn again");
-    } else {
-      /* VK: This data can be used for frontend layout
-       * server returns JSON response { "message": "...", "pointsBalance": -97 }
-       * if pointsBalance is negative - display a message about the need to purchase credits
-       */
-      const data = await sendToServer(fileData, totalCredits);
-      console.log("Server processed the request successfully: ", data);
-      // TODO 1 VK: Improve the logic in case insufficient of balance and confirmation in case of sufficient balance
-      // * TODO 1 ВК: Внедрить логику при недостаточном балансе и подтверждение при достаточном балансе
-      if (data.needTopUpBalance) {
-        alert(
-          `File has been sent for processing. Need to top up your balance!`
-        );
-      } else {
-        alert(`File has been sent for processing.`);
-      }
+    /* VK: This data can be used for frontend layout
+     * server returns JSON response { "message": "...", " needTopUpBalance": false }
+     * if needTopUpBalance is true - display a message about the need to purchase credits
+     */
+    const data = await sendToServer(fileData, totalCredits);
+    console.log("Server processed the request successfully: ", data);
+    // TODO 1 VK: Improve the logic in case insufficient of balance and confirmation in case of sufficient balance
+    // * TODO 1 ВК: Внедрить логику при недостаточном балансе и подтверждение при достаточном балансе
+    if (data.status == 200) {
       setFileUploadMessage(
         data.needTopUpBalance
           ? "File has been sent for processing. Need to top up your balance!"
           : "File has been sent for processing."
       );
+    } else if (data.status != 401) {
+      setFileUploadMessage("");
+      alert("Unknown error");
     }
-
     setFilesUploaded(!filesUploaded);
   };
-
-  /* VK: This data can be used for frontend layout
-   * server returns JSON response { "message": "...", "pointsBalance": -97 }
-   * if pointsBalance is negative - display a message about the need to purchase credits
-   */
 
   // ! Temporarily. For debugging
   const logContents = async () => {
@@ -164,9 +140,9 @@ const FileUploader = ({
   fileData.map((file) => (totalPages += Number(file.pages)));
   fileData.map(
     (file) =>
-      (totalCredits += file.expressDelivery
-        ? file.pages * creditsPerPage * 1.5
-        : file.pages * creditsPerPage)
+    (totalCredits += file.expressDelivery
+      ? file.pages * creditsPerPage * 1.5
+      : file.pages * creditsPerPage)
   );
 
   return (
@@ -264,33 +240,15 @@ const FileUploader = ({
             </table>
           </div>
           <div>
-            {signedIn ? (
-              fileData.length > 0 ? (
-                <Button
-                  children="Proceed to upload"
-                  color={""}
-                  onClick={handleUpload}
-                />
-              ) : (
-                <></>
-              )
-            ) : (
-              <ModalWindow
-                title={"Proceed"}
-                childComp={
-                  signedUp ? (
-                    <LogInForm
-                      onSignIn={handleSignIn}
-                      onSignUp={handleSignUp}
-                    />
-                  ) : (
-                    <SignInForm onSignUp={handleSignUp} />
-                  )
-                }
-                modalIsOpen={modalIsOpen}
-                openModal={openModal}
-                closeModal={closeModal}
+            {(fileData.length > 0 ? (
+              <Button
+                children="Proceed to upload"
+                color={""}
+                onClick={handleUpload}
               />
+            ) : (
+              <></>
+            )
             )}{" "}
             {/* <button onClick={logContents}>Log Contents</button> */}
           </div>

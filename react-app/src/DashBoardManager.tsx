@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import { Footer } from "./components/footer/footer";
 import HeaderMenu from "./components/header/header";
-// * VK: Significant for the backend area. Please exercise caution when making alterations
-import { getUserDataForDashboard } from "./components/scripts/getUserDataForDashboard";
-import { sendHandleOrderRequest } from "./components/scripts/handleOrderRequest";
 import Button from "./components/Button";
 import ModalWindow from "./components/modal/modal";
 import Select from "react-select";
 import DownLoadFile from "./components/DownloadFile";
 import ChangeProfileForm from "./components/modal/ChangeProfileForm";
+
+// * VK: Significant for the backend area. Please exercise caution when making alterations
+import { getUserDataForDashboard } from "./fetchScripts/getUserDataForDashboard";
+import { fetchWithRefreshAuth } from "./fetchScripts/fetchWithRefreshAuth";
+
 
 export default function DashBoardManager({
   kind,
@@ -68,7 +70,7 @@ export default function DashBoardManager({
     const editorId2 = editorId.value;
     const orderId2 = orderId;
     try {
-      const response = await fetch(
+      const response = await fetchWithRefreshAuth(
         `/api/assignOrder?editorId=${editorId2}&orderId=${orderId2}`,
         {
           method: "GET",
@@ -105,7 +107,7 @@ export default function DashBoardManager({
     const editorId2 = editorId;
     const orderId2 = orderId.value;
     try {
-      const response = await fetch(
+      const response = await fetchWithRefreshAuth(
         `/api/assignOrder?editorId=${editorId2}&orderId=${orderId2}`,
         {
           method: "GET",
@@ -147,7 +149,7 @@ export default function DashBoardManager({
   function downloadProcessedFile(fileName: any) {
     console.log(fileName);
     let pathToFile = "/api/downloadProcessedFile/" + fileName;
-    fetch(pathToFile, {
+    fetchWithRefreshAuth(pathToFile, {
       method: "GET",
       headers: {
         "Content-Type": "application/pdf",

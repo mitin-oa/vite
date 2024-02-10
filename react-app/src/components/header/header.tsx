@@ -5,7 +5,7 @@ import { HashLink as Link } from "react-router-hash-link";
 import { Navbar } from "../burger/navBar";
 import ModalWindow from "../modal/modal";
 import LogInForm from "../modal/LogInForm";
-import { SignedInContext, SignedUpContext, deleteCookie } from "../../App";
+import { SignedInContext, SignedUpContext, deleteCookie, handleSignOut } from "../../App";
 import Button from "../Button";
 import { useMediaQuery } from "react-responsive";
 import SignUpForm from "../modal/SignUpForm";
@@ -132,7 +132,8 @@ export default function HeaderMenu({
                               onClick={() => {
                                 onSignIn(false);
                                 setIsOpen(false);
-                                deleteCookie("token");
+                                // deleteCookie("token");
+                                handleSignOut();
                               }}
                               style="modal-btn"
                             />
@@ -203,7 +204,8 @@ export default function HeaderMenu({
                             onClick={() => {
                               onSignIn(false);
                               setIsOpen(false);
-                              deleteCookie("token");
+                              // deleteCookie("token");
+                              handleSignOut;
                             }}
                             style="modal-btn"
                           />
