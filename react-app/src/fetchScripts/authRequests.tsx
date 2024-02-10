@@ -32,4 +32,24 @@ function sendLogInRequest(userData: UserData) {
   });
 }
 
-export { sendLogInRequest };
+function sendLogOutRequest() {
+
+  return new Promise((resolve, reject) => {
+    fetch('/api/signout', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+      .then(response => response.json())
+      .then(data => {
+        resolve(data);
+      })
+      .catch(error => {
+        console.error('Error sending payment data:', error);
+        reject(error);
+      });
+  });
+}
+
+export { sendLogInRequest, sendLogOutRequest };

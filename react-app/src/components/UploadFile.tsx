@@ -1,6 +1,9 @@
 import { useMediaQuery } from "react-responsive";
 import { ChangeEvent, useState } from "react";
 
+// * VK: Significant for the backend area. Please exercise caution when making alterations
+import { fetchWithRefreshAuth } from "../fetchScripts/fetchWithRefreshAuth";
+
 // Определение интерфейса для пропсов
 // Defining the interface for props
 interface UploadFilesProps {
@@ -53,7 +56,7 @@ export default function UploadFiles(props: UploadFilesProps) {
     formData.append('orderId', orderId);
 
     try {
-      const response = await fetch('/api/uploadProcessedFile', {
+      const response = await fetchWithRefreshAuth('/api/uploadProcessedFile', {
         method: 'POST',
         body: formData,
         credentials: 'include'

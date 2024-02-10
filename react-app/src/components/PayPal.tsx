@@ -1,6 +1,8 @@
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import * as React from "react";
 
+import { refreshToken } from "../fetchScripts/fetchWithRefreshAuth";
+
 const debug = true;
 
 // * VK: Significant for the backend area. Please exercise caution when making alterations
@@ -14,6 +16,7 @@ type PaymentProps = {
     paymentStatus: string,
     paymentCaptureId: string
   ) => void;
+  onError?: (error: string) => void; // * VK: Adding a collback for error handling
 };
 
 type InitState = {
@@ -62,43 +65,51 @@ export default class PayPal extends React.Component<PaymentProps, InitState> {
       });
   }
 
-  onApprove(data: any, actions: any) {
+  async onApprove(data: any, actions: any) {
     let app = this;
 
-    // ! VK: Временно - проверка авторизации перед проведением платежа.
-    // ! Заменить на логику, работающую с сервером
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; token=`);
-    const token =
-      parts.length === 2 ? parts.pop()?.split(";").shift() !== null : false;
-    if (!token) {
-      alert("Authorization required. Payment will be canceled");
-      // !
-    } else {
-      return actions.order.capture().then(function (details: any) {
-        const orderId = details.id;
-        const sellerTransactionId = details.purchase_units[0].payments.captures[0].id;
-        const paymentStatus = details.purchase_units[0].payments.captures[0].status;
-        const paymentCaptureId = details.purchase_units[0].payments.captures[0].id
-        const amount = app.state.amount;
-
-        app.setState({
-          onApproveMessage: `Transaction completed by ${details.payer.name.given_name}!`,
-        });
-
-        // * VK: Significant for the backend area. Please exercise caution when making alterations
-        // * VK: Call the onSuccess callback if it has been passed
-        if (app.props.onSuccess) {
-          app.props.onSuccess(orderId, amount, sellerTransactionId, paymentStatus, paymentCaptureId);
-        }
-      });
+    // * VK: Additional rechecking of authorization before making a payment.
+    const validTokens = await refreshToken();
+    if (validTokens == false) {
+      const errorMessage = {
+        message: "Transaction terminated due to the expiration of the session!",
+      };
+      app.onError(errorMessage); // Pass the error object to the onError method
+      return;
     }
+
+
+    return actions.order.capture().then(function (details: any) {
+      const orderId = details.id;
+      const sellerTransactionId = details.purchase_units[0].payments.captures[0].id;
+      const paymentStatus = details.purchase_units[0].payments.captures[0].status;
+      const paymentCaptureId = details.purchase_units[0].payments.captures[0].id
+      const amount = app.state.amount;
+
+      app.setState({
+        onApproveMessage: `Transaction completed by ${details.payer.name.given_name}!`,
+      });
+
+      // * VK: Significant for the backend area. Please exercise caution when making alterations
+      // * VK: Call the onSuccess callback if it has been passed
+      if (app.props.onSuccess) {
+        app.props.onSuccess(orderId, amount, sellerTransactionId, paymentStatus, paymentCaptureId);
+      }
+    });
   }
 
   onError(err: Record<string, unknown>) {
+    // * VK: заменить на сообщение, передаваемое в параметрах
+    // * VK: требуется согласовать типы данных, onErrorMessage не принимает тип unknown
+    const errorMessage = "An error occurred"; 
     this.setState({
-      onErrorMessage: err.toString(),
+      onErrorMessage: errorMessage,
     });
+
+    // Проверяем, что колбэк onError был предоставлен и вызываем его
+    if (this.props.onError) {
+      this.props.onError(errorMessage);
+    }
   }
 
   onClick() {

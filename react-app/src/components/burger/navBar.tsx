@@ -7,7 +7,7 @@ import { Dispatch, SetStateAction, useContext } from "react";
 import LogInForm from "../modal/LogInForm";
 import ModalWindow from "../modal/modal";
 import Button from "../Button";
-import { SignedInContext, SignedUpContext, deleteCookie } from "../../App";
+import { SignedInContext, SignedUpContext, deleteCookie, handleSignOut } from "../../App";
 import SignUpForm from "../modal/SignUpForm";
 import ResetPassForm from "../modal/ResetPass";
 
@@ -199,7 +199,8 @@ export const Navbar = ({
                     onClick={() => {
                       onSignIn(false);
                       setIsOpen(false);
-                      deleteCookie("token");
+                      // deleteCookie("token");
+                      handleSignOut();
                     }}
                     style="modal-btn"
                   />

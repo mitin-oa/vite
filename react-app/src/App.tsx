@@ -9,8 +9,6 @@ import "vite/modulepreload-polyfill";
 import About from "./About";
 import CalculateCost from "./CalculateCost";
 import DashBoard from "./DashBoard";
-// * VK: Significant for the backend area. Please exercise caution when making alterations
-import { sendLogInRequest } from "./components/scripts/logIn";
 import { useMediaQuery } from "react-responsive";
 import DashBoardEditor from "./DashBoardEditor";
 import DashBoardManager from "./DashBoardManager";
@@ -22,6 +20,9 @@ export const SignedInContext = createContext(false);
 export const SignedUpContext = createContext(true);
 export const MobileScreenContext = createContext(false);
 
+// * VK: Significant for the backend area. Please exercise caution when making alterations
+import { sendLogInRequest, sendLogOutRequest } from "./fetchScripts/authRequests";
+
 export function deleteCookie(name: string) {
   const date = new Date();
   // Set it expire in -1 days
@@ -29,15 +30,27 @@ export function deleteCookie(name: string) {
   // Set it
   document.cookie = name + "=; expires=" + date.toUTCString() + "; path=/";
 }
+
+export function handleSignOut() {
+  localStorage.removeItem('accessToken');
+  localStorage.removeItem('userRole');
+  sendLogOutRequest();
+}
+
+
 //deleteCookie("token");
 
 function App() {
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; token=`);
-  console.log(document.cookie);
-  console.log(parts);
-  const token =
-    parts.length === 2 ? parts.pop()?.split(";").shift() !== null : false;
+  // const value = `; ${document.cookie}`;
+  // const parts = value.split(`; token=`);
+  // console.log(document.cookie);
+  // console.log(parts);
+  // const token =
+  //   parts.length === 2 ? parts.pop()?.split(";").shift() !== null : false;
+
+  // * VK: Changing the method of authorization verification (instead of cookies, data from local storage is used)
+  const token = localStorage.getItem('accessToken')!== null ? true : false;
+  
   const [signedIn, onSignIn] = useState(token);
   const [signedUp, onSignUp] = useState(true);
   const [userRole, setUserRole] = useState(localStorage.getItem("userRole"));
@@ -63,13 +76,14 @@ function App() {
     username: string;
     password: string;
   }) {
-    // * VK: userData содержит имя пользователя и пароль из формы
+    // * VK: userData contains the username and password from the form
     const answer: any = await sendLogInRequest(userData);
-    console.log(answer, "answer");
     setUserRole(answer.userRole);
-    localStorage.setItem("userRole", answer.userRole);
+
     if (answer.HTTP_status === 200) {
-      // * VK: Логика в случае успешной авторизации
+      // * VK: Logic in case of successful authorization
+      localStorage.setItem('accessToken', "valid");
+      localStorage.setItem("userRole", answer.userRole);
       // console.log('Server response OK:', data);
       //alert(answer.message);
       Swal.fire({
@@ -77,12 +91,12 @@ function App() {
         text: `${answer.message}!`,
         icon: "success",
       });
-      // * VK: Прежний код, который выполнялся после LogIn и вызова функции handleSignIn
+      // Previous code that was executed after LogIn and the call of the handleSignIn function
       onSignIn(!signedIn);
-      // * VK: Передача данных для закрытия модального окна
+      // Transmit data to close a modal window
       setIsOpen(!modalIsOpen);
     } else {
-      // * VK: Логика в случае неуспешной авторизации
+      // Logic in case of unsuccessful authorization
       // console.log('Server response NOT OK:', data);
       if (answer.HTTP_status === 400) {
         // TODO VK: дополнить логику на случай неуспешной авторизации

@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 import Footer from "./components/footer/footer";
 import HeaderMenu from "./components/header/header";
-// * VK: Significant for the backend area. Please exercise caution when making alterations
-import { getUserDataForDashboard } from "./components/scripts/getUserDataForDashboard";
-import { sendHandleOrderRequest } from "./components/scripts/handleOrderRequest";
 import Button from "./components/Button";
 import ModalWindow from "./components/modal/modal";
 import InputText from "./components/InputText";
 import DownLoadFile from "./components/DownloadFile";
 import ChangeProfileForm from "./components/modal/ChangeProfileForm";
 import UploadFiles from "./components/UploadFile";
+
+// * VK: Significant for the backend area. Please exercise caution when making alterations
+import { getUserDataForDashboard } from "./fetchScripts/getUserDataForDashboard";
+import { fetchWithRefreshAuth } from "./fetchScripts/fetchWithRefreshAuth";
 
 export default function DashBoardEditor({
   kind,
@@ -50,8 +51,9 @@ export default function DashBoardEditor({
 
     const orderId2 = orderId;
     const editorId2 = editorId;
+
     try {
-      const response = await fetch(
+      const response = await fetchWithRefreshAuth(
         `/api/assignOrder?editorId=${editorId2}&orderId=${orderId2}`,
         {
           method: "GET",
@@ -82,7 +84,6 @@ export default function DashBoardEditor({
 
   async function handleNotes(orderId: string) {
     //How pass order_id to server handle with order?
-    //const serverAnswer = await sendHandleOrderRequest(orderId);
     //alert(serverAnswer.message);
 
     const index = userDataForDashboard.data.orderData.findIndex(
