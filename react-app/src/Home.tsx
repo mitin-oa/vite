@@ -5,6 +5,8 @@ import ModalWindow from "./components/modal/modal";
 import StartScreen from "./components/startScreen/startScreen";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import HowItWorks from "./components/startScreen/HowItWorks";
+import WhyChronoLegal from "./components/startScreen/WhyChronoLegal";
 
 export default function Home({
   kind,
@@ -43,6 +45,8 @@ export default function Home({
           modalIsOpen={modalIsOpen}
           setIsOpen={setIsOpen}
         />
+        <HowItWorks />
+        <WhyChronoLegal />
       </div>
 
       <Footer kind="full" />

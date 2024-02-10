@@ -152,13 +152,16 @@ export default function HeaderMenu({
           ) : (
             <>
               <Link className="nav__link nav__text" to="/About">
-                About the service
+                About
               </Link>
-              <Link className="nav__link nav__text" to="/About">
-                How it works
+              <Link className="nav__link nav__text" to="/Services">
+                Services
+              </Link>
+              <Link className="nav__link nav__text" to="/FAQs">
+                FAQs
               </Link>
               <Link className="nav__link nav__text" to="/CalculateCost">
-                Order a review
+                Order a Review
               </Link>
 
               {!isMobileScreen ? (

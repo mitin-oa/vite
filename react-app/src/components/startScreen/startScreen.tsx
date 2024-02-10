@@ -34,36 +34,85 @@ export default function StartScreen({
       />
       <div className="wrapper start_screen_content d-flex flex-lm-row flex-md-block">
         <div className="Content">
-          <h1 className="only_title">
-            Get the legal service for you <br></br> was never been easier!
-          </h1>
+          <div
+            className="only_title"
+            style={{
+              width: "100%",
+              fontSize: "100px",
+              fontWeight: "bold",
+              textAlign: "start",
+              lineHeight: "130px",
+              fontFamily: "Montserrat",
+            }}
+          >
+            <a
+              style={{
+                color: "#fbd0ac",
+                marginLeft: "7vw",
+              }}
+            >
+              drafting
+            </a>
+            <br />
+            <a
+              style={{
+                color: "#f9b174",
+                marginLeft: "14vw",
+              }}
+            >
+              negotiation
+            </a>
+            <br />
+            <a
+              style={{
+                color: "#f6913c",
+                marginLeft: "21vw",
+              }}
+            >
+              automation
+            </a>
+            <br />
+            <a
+              style={{
+                color: "#ec720b",
+                marginLeft: "28vw",
+              }}
+            >
+              management
+            </a>
+            <br />
+          </div>
+          <h2
+            style={{
+              color: "white",
+              textAlign: "center",
+              margin: "20px 0",
+            }}
+          >
+            24/7 contract review services simplified and delivered on time, and
+            on budget!
+          </h2>
           <p className="only_text">
-            We offer to give a chance to make all your legal stuff ease. Lorem
-            ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Laoreet id donec
-            ultrices tincidunt.
+            Your contracts drafted, reviewed, and negotiated by experienced
+            lawyers when you need it and how you want it.
           </p>
-          {signedIn ? (
-            <>
-              <Link to="Upload">
-                <Button
-                  children="Order Now"
-                  color="warning"
-                  onClick={() => null}
-                />
-              </Link>
-            </>
-          ) : (
-            <Link to="CalculateCost">
-              <Button
-                children="Order Now"
-                color="warning"
-                onClick={() => null}
-              />
-            </Link>
-          )}
+
+          <Link to="/Services">
+            <Button
+              children="Get started"
+              color="warning"
+              onClick={() => null}
+            />
+          </Link>
+          <p className="only_text">
+            ChronoLegal helps businesses contract and close more deals, on time
+            and on budget! Our attorneys, legal technologists, and consultants
+            live and breathe commercial contracts. It’s all we do and think
+            about. We won’t attempt to fix all your legal and business issues,
+            but we will conquer your contracts!!!
+          </p>
         </div>
-        {!isPhoneScreen ? (
+        {/* {!isPhoneScreen ? (
           <div className="Content">
             <img
               className="start_screen_pet"
@@ -73,7 +122,7 @@ export default function StartScreen({
           </div>
         ) : (
           <></>
-        )}
+        )} */}
       </div>
     </section>
   );

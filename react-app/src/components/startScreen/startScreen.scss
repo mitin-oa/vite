@@ -1,10 +1,17 @@
+@font-face {
+  font-family: "Montserrat";
+  src:
+    url("../../public/Montserrat/static/Montserrat-Regular.ttf")
+    
+}
+
 /* start screen styles starts */
 
 .start_screen {
-    min-height: 84vh;
-    padding: 30px 40px 0px;
+    min-height: 88vh;
+    padding: 50px 40px 20px;
     background-color: #033c5a;
-    background-image:  url("../../public/Vector.png") ;
+    //background-image:  url("../../public/Vector.png") ;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: bottom 100px right;
@@ -28,7 +35,7 @@
   .Content {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     @media (max-width: 1028px) {
       max-width: 600px;
       align-items: center;
@@ -66,9 +73,9 @@
     font-family: 'Arial';
     font-size: 20px;
     line-height: 160%;
-    margin-bottom: 1.6rem;
-    padding-right: 20px;
+    margin: 1.6rem;
     color: #CDCDCD;
+    text-align: center;
     @media screen and (max-width: 1028px) {
         font-size: 15px;
         line-height: 24px;
@@ -176,5 +183,18 @@
     //overflow-clip-margin: content-box;
     //overflow: clip;
   //}
+  .HIV {
+    display: flex;
+    flex-direction: column;
+    font-size: 34px;
+    font-weight: 600;
+    text-align: center;
+    color: #033c5a;
+    margin-bottom: 0px;
+    background-color: #ec720b;
+    height: 200px;
+    width: 200px;
+    border-radius: 30px;
+  }
   
   /* start screen styles ends */

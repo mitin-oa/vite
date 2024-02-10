@@ -3,7 +3,7 @@ import Footer from "./components/footer/footer";
 import AboutPicture from "../public/about_pic.png";
 import HeaderMenu from "./components/header/header";
 
-export default function About({
+export default function FAQs({
   onSignIn,
   onSignUp,
   handleSignIn,

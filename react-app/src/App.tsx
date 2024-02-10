@@ -9,10 +9,6 @@ import "vite/modulepreload-polyfill";
 import About from "./About";
 import CalculateCost from "./CalculateCost";
 import DashBoard from "./DashBoard";
-export const SignedInContext = createContext(false);
-export const SignedUpContext = createContext(true);
-export const MobileScreenContext = createContext(false);
-
 // * VK: Significant for the backend area. Please exercise caution when making alterations
 import { sendLogInRequest } from "./components/scripts/logIn";
 import { useMediaQuery } from "react-responsive";
@@ -20,13 +16,16 @@ import DashBoardEditor from "./DashBoardEditor";
 import DashBoardManager from "./DashBoardManager";
 import Swal from "sweetalert2";
 import ResetPassword from "./ResetPassword";
+import Contacts from "./Contacts";
+import Services from "./Services";
+export const SignedInContext = createContext(false);
+export const SignedUpContext = createContext(true);
+export const MobileScreenContext = createContext(false);
 
 export function deleteCookie(name: string) {
   const date = new Date();
-
   // Set it expire in -1 days
   date.setTime(date.getTime() + -1 * 24 * 60 * 60 * 1000);
-
   // Set it
   document.cookie = name + "=; expires=" + date.toUTCString() + "; path=/";
 }
@@ -117,6 +116,7 @@ function App() {
   console.log(serverAnswerMessage);
   // * ↑ VK: Significant for the backend area. Please exercise caution when making alterations
   console.log(userRole);
+
   return (
     <>
       <SignedUpContext.Provider value={signedUp}>
@@ -140,6 +140,37 @@ function App() {
             />
             <Route
               path="About"
+              element={
+                <About
+                  kind="short"
+                  onSignIn={onSignIn}
+                  handleSignIn={handleSignIn}
+                  signedUp={signedUp}
+                  setUserProfileData={setUserProfileData}
+                  handleSignUp={handleSignUp}
+                  modalIsOpen={modalIsOpen}
+                  setIsOpen={setIsOpen}
+                />
+              }
+            />
+            <Route
+              path="Services"
+              element={
+                <Services
+                  kind="short"
+                  onSignIn={onSignIn}
+                  handleSignIn={handleSignIn}
+                  signedUp={signedUp}
+                  setUserProfileData={setUserProfileData}
+                  handleSignUp={handleSignUp}
+                  modalIsOpen={modalIsOpen}
+                  setIsOpen={setIsOpen}
+                />
+              }
+            />
+
+            <Route
+              path="FAQs"
               element={
                 <About
                   kind="short"
@@ -186,6 +217,21 @@ function App() {
               path="BuyCredits"
               element={
                 <BuyCredits
+                  kind="short"
+                  onSignIn={onSignIn}
+                  handleSignIn={handleSignIn}
+                  signedUp={signedUp}
+                  setUserProfileData={setUserProfileData}
+                  handleSignUp={handleSignUp}
+                  modalIsOpen={modalIsOpen}
+                  setIsOpen={setIsOpen}
+                />
+              }
+            />
+            <Route
+              path="Contacts"
+              element={
+                <Contacts
                   kind="short"
                   onSignIn={onSignIn}
                   handleSignIn={handleSignIn}

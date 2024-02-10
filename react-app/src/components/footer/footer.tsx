@@ -8,10 +8,11 @@ import { HashLink as Link } from "react-router-hash-link";
 import { Widget, addResponseMessage } from "react-chat-widget";
 import "react-chat-widget/lib/styles.css";
 import logo from "../../../public/ChronoLegal_icon.png";
+addResponseMessage("Welcome to this **awesome** chat!");
 
-export default function Footer(kind: any) {
+export default function Footer({ kind }: any) {
   useEffect(() => {
-    addResponseMessage("Welcome to this **awesome** chat!");
+    //addResponseMessage("Welcome to this **awesome** chat!");
   }, []);
 
   const handleNewUserMessage = (newMessage: any) => {
@@ -24,15 +25,6 @@ export default function Footer(kind: any) {
       <div className="wrapper footer__content">
         <div className="footer__content__contacts">
           <div className="contacts">
-            {/* <p
-                className={
-                  this.props.kind === "short"
-                    ? "contacts__title__short"
-                    : "contacts__title"
-                }
-              >
-                Help
-              </p> */}
             <ul
               className={
                 kind === "short" ? "footer__nav__short" : "footer__nav"
@@ -47,9 +39,9 @@ export default function Footer(kind: any) {
                         ? " contacts__info__short"
                         : " contacts__info")
                     }
-                    to=""
+                    to="/Contacts"
                   >
-                    FAQ's
+                    Contacts
                   </Link>
                   <Link
                     className={
@@ -60,7 +52,7 @@ export default function Footer(kind: any) {
                     }
                     to=""
                   >
-                    Help
+                    Careers
                   </Link>
                   <Link
                     className={
@@ -71,22 +63,13 @@ export default function Footer(kind: any) {
                     }
                     to=""
                   >
-                    Case Studies
+                    Legal (Terms of services, Legal Notices)
                   </Link>
                 </>
               }
             </ul>
           </div>
-          <div className="contacts">
-            {/*  <p
-                className={
-                  this.props.kind === "short"
-                    ? "contacts__title__short"
-                    : "contacts__title"
-                }
-              >
-                Resourses
-              </p> */}
+          {/* <div className="contacts">
             <ul
               className={
                 kind === "short" ? "footer__nav__short" : "footer__nav"
@@ -121,15 +104,6 @@ export default function Footer(kind: any) {
             </ul>
           </div>
           <div className="contacts">
-            {/* <p
-                className={
-                  this.props.kind === "short"
-                    ? "contacts__title__short"
-                    : "contacts__title"
-                }
-              >
-                Extra Links
-              </p> */}
             <ul
               className={
                 kind === "short" ? "footer__nav__short" : "footer__nav"
@@ -162,7 +136,7 @@ export default function Footer(kind: any) {
                 </>
               }
             </ul>
-          </div>
+          </div> */}
         </div>
 
         <div className="contacts__social">
@@ -176,7 +150,7 @@ export default function Footer(kind: any) {
           {/* <img className="footer__logo-img" alt="LOGO" src={Logo}></img> */}
           <div className="gap"></div>
           <div className="contacts__links">
-            <a href="https://www.facebook.com/">
+            {/*  <a href="https://www.facebook.com/">
               <img
                 src={FacebookPic}
                 className="contacts__icon"
@@ -203,7 +177,7 @@ export default function Footer(kind: any) {
                 className="contacts__icon"
                 alt="Picture telegram"
               />
-            </a>
+            </a> */}
             <Widget
               handleNewUserMessage={handleNewUserMessage}
               profileAvatar={logo}

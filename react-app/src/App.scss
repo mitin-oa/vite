@@ -12,7 +12,7 @@ body {
 
 .app {
   width: 100%;
-  min-height: 84vh;
+  min-height: 88vh;
   margin: 0;
   background-color: #032a5a10;
 
@@ -91,14 +91,6 @@ h1,
   color: #033c5a;
 }
 
-h2 {
-  font-size: 25px !important;
-
-  @media (max-width: 760px) {
-    /* apply styles for md screens and larger */
-    font-size: 20px !important;
-  }
-}
 
 p {
   font-size: 18px;
@@ -749,7 +741,11 @@ legend {
 
 //messageWiget styles
 .rcw-conversation-container > .rcw-header {
-  background-color: #ec720b !important;
+  background-color: #033c5a !important;
+}
+
+.rcw-conversation-container .rcw-title {
+  color: #ec720b;
 }
 
 .rcw-widget-container > button {
