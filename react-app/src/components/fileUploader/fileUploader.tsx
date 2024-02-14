@@ -154,7 +154,7 @@ const FileUploader = ({
                   type="file"
                   name="fileToUpload"
                   id="fileToUpload"
-                  accept=".doc, .docx, .rtf, .pdf, .odt, .txt"
+                  accept=".doc, .docx, .rtf, .pdf, .odt"
                   multiple // Add the 'multiple' attribute to enable multiple file selection
                   onChange={handleFileChange}
                 />
