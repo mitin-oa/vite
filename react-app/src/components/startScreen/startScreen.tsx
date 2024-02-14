@@ -107,21 +107,21 @@ export default function StartScreen({
               }}
             >
               <Parallax
-                opacity={[5, -1.0]}
+                opacity={[5, -1.2]}
                 speed={0}
                 translateY={["0px", "-100px"]}
               >
                 <a style={{ letterSpacing: "20px" }}>drafting</a>
               </Parallax>
               <Parallax
-                opacity={[3, -0.1]}
+                opacity={[3, -0.5]}
                 speed={0}
                 translateY={["0px", "-100px"]}
               >
                 <a style={{ letterSpacing: "5px" }}>negotiation</a>
               </Parallax>
               <Parallax
-                opacity={[0.7, 0.7]}
+                opacity={[3, -1]}
                 speed={0}
                 translateY={["0px", "-100px"]}
               >
