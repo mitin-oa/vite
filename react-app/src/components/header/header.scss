@@ -1,7 +1,17 @@
 /* header styles starts */
+@font-face {
+    font-family: "Montserrat";
+    src:
+      url("../../public/Montserrat/static/Montserrat-Regular.ttf")
+}
+
 .header { 
+    display: flex;
+    justify-content: space-between;
     width: 100%;
     background-color: #033c5a;
+    //position:fixed;
+    
     &__short {
         padding: 20px 40px;
         background-color: #033c5a;
@@ -22,6 +32,7 @@
     align-items: center;
     list-style-type: none;
     height: 60px;
+    font-family: "Montserrat";
 
     @media only screen and (max-width : 1028px){
         display: none;
@@ -57,8 +68,8 @@
     
     }
     &__text {
-        margin-right: 15px;
-        font-family: 'Arial';
+        margin-right: 25px;
+        font-family: "Montserrat";
         font-size: 17px;
         line-height: 27px;
         font-weight: 600;

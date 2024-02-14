@@ -54,8 +54,8 @@ export default function HeaderMenu({
   }
 
   return (
-    <header className={kind === "short" ? "header__short" : "header"}>
-      <div className="wrapper">
+    <div className="wrapper">
+      <header className={kind === "short" ? "header__short" : "header"}>
         {kind === "full" ? (
           <div className="logo">
             <img className="logo__img" alt="LOGO" src={Logo}></img>
@@ -153,16 +153,16 @@ export default function HeaderMenu({
           ) : (
             <>
               <Link className="nav__link nav__text" to="/About">
-                About
+                ABOUT
               </Link>
               <Link className="nav__link nav__text" to="/Services">
-                Services
+                SERVICES
               </Link>
               <Link className="nav__link nav__text" to="/FAQs">
                 FAQs
               </Link>
               <Link className="nav__link nav__text" to="/CalculateCost">
-                Order a Review
+                ORDER A REWIEW
               </Link>
 
               {!isMobileScreen ? (
@@ -245,7 +245,7 @@ export default function HeaderMenu({
         ) : (
           <></>
         )}
-      </div>
-    </header>
+      </header>
+    </div>
   );
 }
