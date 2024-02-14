@@ -78,12 +78,12 @@ function App() {
   }) {
     // * VK: userData contains the username and password from the form
     const answer: any = await sendLogInRequest(userData);
-    setUserRole(answer.userRole);
 
     if (answer.HTTP_status === 200) {
       // * VK: Logic in case of successful authorization
       localStorage.setItem('accessToken', "valid");
       localStorage.setItem("userRole", answer.userRole);
+      setUserRole(answer.userRole);
       // console.log('Server response OK:', data);
       //alert(answer.message);
       Swal.fire({
