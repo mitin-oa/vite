@@ -8,16 +8,7 @@ import { useContext, useEffect, useState } from "react";
 import { SignedInContext } from "../../App";
 import { Parallax } from "react-scroll-parallax";
 
-export default function StartScreen({
-  kind,
-  handleSignIn,
-  setUserProfileData,
-  handleSignUp,
-  onSignIn,
-  onSignUp,
-  modalIsOpen,
-  setIsOpen,
-}: any) {
+export default function StartScreen() {
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1160px" });
   const isPhoneScreen = useMediaQuery({ query: "(max-width: 760px" });
   const signedIn = useContext(SignedInContext);
@@ -31,18 +22,19 @@ export default function StartScreen({
             style={{
               display: "flex",
               width: "100%",
-              fontSize: "50px",
+              fontSize: "55px",
               fontWeight: "bold",
               textAlign: "start",
               lineHeight: "70px",
               fontFamily: "Montserrat",
               marginBottom: "0px",
+              color: "#ec720b",
             }}
           >
             <Parallax
-              speed={1}
+              speed={5}
               translateY={["-350px", "350px"]}
-              opacity={[7, -2]}
+              opacity={[7, -3.0]}
             >
               <div
                 style={{
@@ -54,9 +46,9 @@ export default function StartScreen({
                 <div
                   style={{
                     height: "60px",
-                    minWidth: "350px",
+                    minWidth: "380px",
                     textAlign: "start",
-                    margin: "150px 0",
+                    margin: "130px 0",
                   }}
                 >
                   24/7 contract
@@ -65,6 +57,7 @@ export default function StartScreen({
                     style={{
                       textAlign: "start",
                       margin: "20px 20px 0 0",
+                      color: "white",
                     }}
                   >
                     Your contracts drafted, reviewed, and negotiated by
@@ -74,8 +67,9 @@ export default function StartScreen({
 
                 <Link to="/Services">
                   <Button
-                    children="Get started"
-                    color="warning"
+                    children="GET STARTED"
+                    color=""
+                    style={"btn_get_started"}
                     onClick={() => null}
                   />
                 </Link>
@@ -86,61 +80,59 @@ export default function StartScreen({
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "center",
-                //width: "100%",
-                //marginTop: "200px",
-                fontSize: "50px",
+                fontSize: "55px",
                 fontWeight: "bold",
                 textAlign: "start",
                 lineHeight: "60px",
                 fontFamily: "Montserrat",
+                color: "white",
               }}
             >
               <Parallax
-                opacity={[5, -1.2]}
+                opacity={[4, -1.0]}
                 speed={0}
-                translateY={["0px", "-100px"]}
+                translateY={["-40px", "-175px"]}
               >
-                <a style={{ letterSpacing: "20px" }}>drafting</a>
+                <a style={{ letterSpacing: "23px" }}>drafting</a>
               </Parallax>
               <Parallax
                 opacity={[3, -0.5]}
                 speed={0}
-                translateY={["0px", "-100px"]}
+                translateY={["-40px", "-175px"]}
               >
-                <a style={{ letterSpacing: "5px" }}>negotiation</a>
+                <a style={{ letterSpacing: "6px" }}>negotiation</a>
               </Parallax>
               <Parallax
-                opacity={[3, -1]}
+                opacity={[1.5, 0.2]}
                 speed={0}
-                translateY={["0px", "-100px"]}
+                translateY={["-40px", "-175px"]}
               >
-                <a style={{ letterSpacing: "5px" }}>automation</a>
+                <a style={{ letterSpacing: "6px" }}>automation</a>
               </Parallax>
               <Parallax
-                opacity={[-0.2, 1.2]}
+                opacity={[-0.2, 2.2]}
                 speed={0}
-                translateY={["0px", "-100px"]}
+                translateY={["-40px", "-175px"]}
               >
                 <a>management</a>
               </Parallax>
               <Parallax
-                opacity={[-0.5, 1.5]}
+                opacity={[-0.5, 2.5]}
                 speed={0}
-                translateY={["0px", "-100px"]}
+                translateY={["-40px", "-175px"]}
               >
-                <a style={{ letterSpacing: "32px" }}>rewiew</a>
+                <a style={{ letterSpacing: "36px" }}>rewiew</a>
               </Parallax>
             </div>
 
             <Parallax
-              speed={1}
+              speed={5}
               translateY={["-350px", "350px"]}
-              opacity={[7, -2]}
+              opacity={[7, -3.0]}
             >
               <div
                 style={{
                   display: "flex",
-
                   height: "680px",
                 }}
               >
@@ -149,7 +141,7 @@ export default function StartScreen({
                     height: "60px",
                     minWidth: "350px",
                     textAlign: "start",
-                    margin: "150px 0",
+                    margin: "130px 0",
                   }}
                 >
                   services simplified and delivered on time, and on budget!
@@ -162,6 +154,7 @@ export default function StartScreen({
             className="only_text"
             style={{
               margin: "0px 0px 30px",
+              color: "#ec720b",
             }}
           >
             ChronoLegal helps businesses contract and close more deals, on time

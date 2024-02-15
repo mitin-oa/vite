@@ -10,11 +10,11 @@
 .start_screen {
     min-height: 88vh;
     padding: 50px 40px 20px;
-    background-color: #033c5a;
-    //background-image:  url("../../public/start_screen_pic.png") ;
-    background-size: contain;
+    //background-color: #033c5a;
+    background-image:  url("../../public/home-pic.jpg") ;
+    background-size:cover;
     background-repeat: no-repeat;
-    background-position: bottom 100px right;
+    //background-position: bottom 100px right;
     @media (max-width: 1028px) {
       padding: 30px 40px 0px;
     };
@@ -24,7 +24,32 @@
     };
     &_content {
       //margin-top: 100px;
-      align-items: flex-start; 
+      align-items: flex-start;
+       
+      @media (max-width: 1028px) {
+        flex-direction: column;
+        margin-top: 80px;
+      };
+    };
+  }
+
+  .how-it-works {
+    padding: 0px 40px 20px;
+    background-color: #033c5a;
+    background-size:cover;
+    background-repeat: no-repeat;
+    //background-position: bottom 100px right;
+    @media (max-width: 1028px) {
+      padding: 30px 40px 0px;
+    };
+    @media (max-width: 760px) {
+      min-height: 55vh;
+      padding: 30px 10px 10px;
+    };
+    &_content {
+      //margin-top: 100px;
+      align-items: flex-start;
+       
       @media (max-width: 1028px) {
         flex-direction: column;
         margin-top: 80px;
@@ -35,7 +60,8 @@
   .Content {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items:flex-start;
+    width: 100%;
     @media (max-width: 1028px) {
       max-width: 600px;
       align-items: center;
@@ -71,11 +97,11 @@
   
   .only_text {
     font-family: 'Arial';
-    font-size: 20px;
+    font-size: 18px;
     line-height: 160%;
-    margin: 1.6rem;
+    margin: 1.0rem 0 0;
     color: #CDCDCD;
-    text-align: center;
+    text-align: left;
     @media screen and (max-width: 1028px) {
         font-size: 15px;
         line-height: 24px;
@@ -83,6 +109,28 @@
     @media screen and (max-width: 760px) {
       font-size: 15px;
       line-height: 24px;
+      text-align: center;
+      padding-right: 0px;
+  }
+  }
+
+  .home_title {
+    width: 100%;
+    font-size: 40px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 50px;
+    font-family: 'Montserrat';
+    color: #ec720b;
+    background-color: #ffffff;
+    padding: 20px 0;
+    @media screen and (max-width: 1028px) {
+        font-size: 25px;
+        line-height: 32.5px;
+    }
+    @media screen and (max-width: 760px) {
+      font-size: 25px;
+      line-height: 32.5px;
       text-align: center;
       padding-right: 0px;
   }
@@ -99,6 +147,22 @@
     border: none;
     border-radius: 0.05rem;
     background-color: #ec720b;
+    @media screen and (max-width: 1028px) {
+        margin: 0 auto;
+    }
+  }
+
+  .btn_get_started {
+    text-decoration: none;
+    background-color: #033c5a !important;
+    color: #ffffff !important;
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: .06em;
+    padding: 15px 45px;
+    border: none;
+    border-radius: 0.05rem;
+    
     @media screen and (max-width: 1028px) {
         margin: 0 auto;
     }
@@ -131,70 +195,42 @@
     }
   }
   
-  .logo {
-    display: flex;
-    flex-direction: column;
-    &__img {
-      height: 60px;
-      width: 270px;
-      @media screen and (max-width: 1028px){
-        height: 45px;
-        width: 200px;
-      }
-    }
-    &__text {
-      margin: 10px 0 0;
-      font-size: 16px;
-      line-height: 15px;
-      font-weight: 400;
-      letter-spacing: 0.09em;
-      color: #ffffff;
-      &__short {
-        margin: 10px 0 0;
-        font-size: 16px;
-        line-height: 15px;
-        font-weight: 400;
-        letter-spacing: 0.09em;
-        color: black;
-      };
-    }
-    &__title {
-        font-family: Georgia;
-        font-weight: 400;
-        font-style:normal;
-        font-size: 32px;
-        text-align: Left;
-        letter-spacing: 0.12em;
-        color: #F1CDB3;
-        margin: 0px;
-        &__short {
-          font-family: Georgia;
-          font-weight: 400;
-          font-style:normal;
-          font-size: 32px;
-          text-align: Left;
-          letter-spacing: 0.12em;
-          color: black;
-          margin-top: 0px;
-        };
-    }
-  }
+
   //img {
     //overflow-clip-margin: content-box;
     //overflow: clip;
   //}
   .HIV {
     display: flex;
-    flex-direction: column;
-    font-size: 34px;
+    width: 100%;
+    font-size: 22px;
     font-weight: 600;
-    text-align: center;
+    text-align: left;
     color: #033c5a;
-    margin-bottom: 0px;
-    background-color: #ec720b;
-    height: 200px;
-    width: 200px;
-    border-radius: 30px;
+    margin-bottom: 10px;
+    background-color:white;
+    height: 40px;
+    border-radius: 2px;
   }
   
+  .HIW_picture {
+    width: 100%;
+    background-image:  url("../../public/start_screen_pic3.png") ;
+    background-size:cover;
+    background-repeat: no-repeat;
+    border-radius: 40vw 0 0 40vw;
+  }
+
+  .WCL_picture {
+    width: 100%;
+    background-image:  url("../../public/about_pic.png") ;
+    background-size:auto;
+    background-repeat: no-repeat;
+  }
+
+  .vertical-strip {
+width: 20px;
+height: 600px;
+background-color: #ec720b;
+  }
   /* start screen styles ends */

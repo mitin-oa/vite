@@ -52,6 +52,7 @@ const ModalWindow: React.FC<ParentCompProps> = (props) => {
     btnModalStyle,
     btnCloseVisible,
   } = props;
+
   const isMobileScreen = useMediaQuery({ query: "(max-width: 760px" });
 
   function afterOpenModal() {
