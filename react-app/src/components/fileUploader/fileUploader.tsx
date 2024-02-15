@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import Button from "../Button";
-import sendToServer from "../scripts/uploadHandler"; // * VK Backend: Connecting an external script
+
+import sendToServer from "../../fetchScripts/uploadHandler"; // * VK Backend: Connecting an external script
 import { SignedInContext, SignedUpContext } from "../../App";
 import ModalWindow from "../modal/modal";
 import LogInForm from "../modal/LogInForm";
@@ -8,7 +9,6 @@ import SignInForm from "../modal/SignUpForm";
 import Alert from "../Alert";
 
 // TODO LIST VK:
-// 1. Search "TODO 1" in file
 // 2. Search "TODO 2" in file
 
 const FileUploader = ({
@@ -103,13 +103,9 @@ const FileUploader = ({
   };
 
   const handleUpload = async () => {
-    if (fileData.length < 1) {
-      alert("No files selected!"); // TODO 2 VK: Improve the logic in case of an attempt to send a request without downloading files
-      return;
-    }
     /* VK: This data can be used for frontend layout
-     * server returns JSON response { "message": "...", "pointsBalance": -97 }
-     * if pointsBalance is negative - display a message about the need to purchase credits
+     * server returns JSON response { "message": "...", " needTopUpBalance": false }
+     * if needTopUpBalance is true - display a message about the need to purchase credits
      */
     const data = await sendToServer(fileData, totalCredits);
     console.log("Server processed the request successfully: ", data);
@@ -128,11 +124,6 @@ const FileUploader = ({
     setFilesUploaded(!filesUploaded);
   };
 
-  /* VK: This data can be used for frontend layout
-   * server returns JSON response { "message": "...", "pointsBalance": -97 }
-   * if pointsBalance is negative - display a message about the need to purchase credits
-   */
-
   // ! Temporarily. For debugging
   const logContents = async () => {
     console.log("!!!!!");
@@ -147,9 +138,9 @@ const FileUploader = ({
   fileData.map((file) => (totalPages += Number(file.pages)));
   fileData.map(
     (file) =>
-      (totalCredits += file.expressDelivery
-        ? file.pages * creditsPerPage * 1.5
-        : file.pages * creditsPerPage)
+    (totalCredits += file.expressDelivery
+      ? file.pages * creditsPerPage * 1.5
+      : file.pages * creditsPerPage)
   );
 
   return (
@@ -247,7 +238,7 @@ const FileUploader = ({
             </table>
           </div>
           <div>
-            {fileData.length > 0 ? (
+            {(fileData.length > 0 ? (
               <Button
                 children="Proceed to upload"
                 color={""}
@@ -255,6 +246,7 @@ const FileUploader = ({
               />
             ) : (
               <></>
+            )
             )}{" "}
             {/* <button onClick={logContents}>Log Contents</button> */}
           </div>

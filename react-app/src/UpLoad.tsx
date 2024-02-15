@@ -36,7 +36,6 @@ export default function UpLoad({
           setIsOpen={setIsOpen}
           setUserProfileData={undefined}
         />
-        {/* <!-- Bootstrap "Containers" component. Taken from https://getbootstrap.com/docs/5.2/layout/containers/#how-they-work --> */}
 
         <section className="main-content">
           <div className="row">
@@ -53,7 +52,6 @@ export default function UpLoad({
           </div>
         </section>
 
-        {/* <!-- END OF Bootstrap "Containers" component --> */}
       </div>
       <Footer kind={"short"} />
     </>

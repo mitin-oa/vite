@@ -76,6 +76,13 @@ export default function BuyCredits({
   }
   // * ↑ VK: Significant for the backend area. Please exercise caution when making alterations
 
+
+  // * VK: Function for error handling
+  const handlePayPalError = (error: string) => {
+    console.log("An error occurred while making a payment: " + error);
+    setPaymentStatus(false);
+    setShowModal(!showModal);
+  };
   // console.log(show);
 
   return (
@@ -162,6 +169,7 @@ export default function BuyCredits({
                       <PayPal
                         amountPay={1 * numCredits}
                         onSuccess={handlePayment}
+                        onError={handlePayPalError} // * VK: Pass the error handling function
                       />
                     }
                     modalIsOpen={showModal}

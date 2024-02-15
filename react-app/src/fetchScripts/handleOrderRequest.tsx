@@ -1,3 +1,6 @@
+import { fetchWithRefreshAuth } from "./fetchWithRefreshAuth";
+
+
 /**
  * Sends a GET request to initiate the processing of the specified order
  * (implies assigning the "paid" status to the order).
@@ -13,7 +16,7 @@
 
 async function sendHandleOrderRequest(orderId: any, points_cost: any) {
   try {
-    const response = await fetch(`/api/putOrderToWork?orderId=${orderId}&points_cost=${points_cost}`, {
+    const response = await fetchWithRefreshAuth(`/api/putOrderToWork?orderId=${orderId}&points_cost=${points_cost}`, {
 
       method: "GET",
       headers: {

@@ -1,9 +1,13 @@
 import Button from "./Button";
 
+// * VK: Significant for the backend area. Please exercise caution when making alterations
+import { fetchWithRefreshAuth } from "../fetchScripts/fetchWithRefreshAuth";
+
+
 function DownLoadFile({ fileName }: any) {
   const downloadFile = (fileName: string) => {
     let pathToFile = "/api/downloadOriginalFile/" + fileName;
-    fetch(pathToFile, {
+    fetchWithRefreshAuth(pathToFile, {
       method: "GET",
       headers: {
         "Content-Type": "application/pdf",

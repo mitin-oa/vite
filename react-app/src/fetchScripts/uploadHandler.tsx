@@ -6,16 +6,17 @@
  *  server { "message": "...", "pointsBalance": ... }
  */
 
+import { fetchWithRefreshAuth } from "./fetchWithRefreshAuth";
+
+
 const sendToServer = async (
   fileData: any,
   totalCredits: number
 ): Promise<any> => {
   const formData = new FormData();
 
-  //   console.log(fileData);
-
-    formData.append(`filesCount`, fileData.length.toString());
-    formData.append(`totalPointsCost`, totalCredits.toString());
+  formData.append(`filesCount`, fileData.length.toString());
+  formData.append(`totalPointsCost`, totalCredits.toString());
 
   for (const file of fileData) {
     formData.append(`file_${file.index}`, file.file);
@@ -28,18 +29,25 @@ const sendToServer = async (
   }
 
   return new Promise((resolve, reject) => {
-    fetch("/api/initiateFileProcessing", {
+    fetchWithRefreshAuth("/api/initiateFileProcessing", {
       method: "POST",
       body: formData,
     })
-      .then((response) => response.json())
-      .then((data) => {
-        resolve(data);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-        reject(error);
+    .then(response => {
+      const status = response.status;
+      return response.json().then(data => {
+        // Сразу вызываем resolve, чтобы вернуть данные вызывающему коду
+        resolve({
+          status,
+          message: data // предполагаем, что сервер возвращает сообщение в JSON
+        });
       });
+    })
+    .catch(error => {
+      console.error("Произошла ошибка:", error);
+      // Вызываем reject для передачи ошибки вызывающему коду
+      reject(error);
+    });
   });
 };
 

@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import Footer from "./components/footer/footer";
 import HeaderMenu from "./components/header/header";
 // * VK: Significant for the backend area. Please exercise caution when making alterations
-import { getUserDataForDashboard } from "./components/scripts/getUserDataForDashboard";
-import { sendHandleOrderRequest } from "./components/scripts/handleOrderRequest";
+import { getUserDataForDashboard } from "./fetchScripts/getUserDataForDashboard";
+import { sendHandleOrderRequest } from "./fetchScripts/handleOrderRequest";
+import { fetchWithRefreshAuth } from "./fetchScripts/fetchWithRefreshAuth";
 
 import Button from "./components/Button";
 import ModalWindow from "./components/modal/modal";
@@ -51,8 +52,6 @@ export default function Dashboard({
     //How pass order_id to server handle with order?
     const serverAnswer = await sendHandleOrderRequest(orderId, points_cost);
 
-    alert(serverAnswer.message);
-
     let answer = serverAnswer.message === "Low balance" ? true : false;
 
     const index = userDataForDashboard.data.fileData.findIndex(
@@ -75,37 +74,38 @@ export default function Dashboard({
     setIsOpen(false);
   }
 
-  function downloadProcessedFile(fileName: any) {
+  function downloadProcessedFile(fileName: string) {
     console.log(fileName);
     let pathToFile = "/api/downloadProcessedFile/" + fileName;
-    fetch(pathToFile, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/pdf",
-      },
+
+    // Используем fetchWithRetry вместо прямого вызова fetch
+    fetchWithRefreshAuth(pathToFile, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/pdf",
+        },
     })
-      .then((response) => {
+    .then((response: { ok: any; blob: () => any; }) => {
         if (!response.ok) {
-          throw new Error("Server returned an error response");
+            throw new Error("Server returned an error response");
         }
         return response.blob();
-      })
-      .then((blob) => {
+    })
+    .then((blob: BlobPart) => {
         const url = window.URL.createObjectURL(new Blob([blob]));
 
         const link = document.createElement("a");
         link.href = url;
-        link.download = fileName;
+        link.setAttribute("download", fileName); // Устанавливаем атрибут download для тега <a>
 
         document.body.appendChild(link);
-
         link.click();
-
-        if (link.parentNode) {
-          link.parentNode.removeChild(link);
-        }
-      });
-  }
+        document.body.removeChild(link); // Удаляем ссылку после клика
+    })
+    .catch((error: any) => {
+        console.error('Ошибка:', error);
+    });
+}
 
   // * ↑ VK: Significant for the backend area. Please exercise caution when making alterations
 
