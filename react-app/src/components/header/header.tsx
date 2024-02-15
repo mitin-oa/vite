@@ -54,8 +54,8 @@ export default function HeaderMenu({
   }
 
   return (
-    <div className="wrapper">
-      <header className={kind === "short" ? "header__short" : "header"}>
+    <header className={kind === "short" ? "header__short" : "header"}>
+      <div className="wrapper header">
         {kind === "full" ? (
           <div className="logo">
             <img className="logo__img" alt="LOGO" src={Logo}></img>
@@ -243,7 +243,7 @@ export default function HeaderMenu({
         ) : (
           <></>
         )}
-      </header>
-    </div>
+      </div>
+    </header>
   );
 }

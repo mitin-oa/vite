@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import HowItWorks from "./components/startScreen/HowItWorks";
 import WhyChronoLegal from "./components/startScreen/WhyChronoLegal";
+import HeaderMenu from "./components/header/header";
 
 export default function Home({
   kind,
@@ -35,6 +36,16 @@ export default function Home({
   return (
     <>
       <div className="app">
+        <HeaderMenu
+          kind={kind}
+          handleSignIn={handleSignIn}
+          setUserProfileData={setUserProfileData}
+          handleSignUp={handleSignUp}
+          onSignIn={onSignIn}
+          onSignUp={onSignUp}
+          modalIsOpen={modalIsOpen}
+          setIsOpen={setIsOpen}
+        />
         <StartScreen
           kind={kind}
           handleSignIn={handleSignIn}

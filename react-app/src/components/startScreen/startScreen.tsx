@@ -24,17 +24,6 @@ export default function StartScreen({
 
   return (
     <section className="start_screen">
-      <HeaderMenu
-        kind={kind}
-        handleSignIn={handleSignIn}
-        setUserProfileData={setUserProfileData}
-        handleSignUp={handleSignUp}
-        onSignIn={onSignIn}
-        onSignUp={onSignUp}
-        modalIsOpen={modalIsOpen}
-        setIsOpen={setIsOpen}
-      />
-
       <div className="wrapper start_screen_content d-flex flex-lm-row flex-md-block">
         <div className="Content">
           <div
