@@ -46,16 +46,7 @@ export default function Home({
           modalIsOpen={modalIsOpen}
           setIsOpen={setIsOpen}
         />
-        <StartScreen
-          kind={kind}
-          handleSignIn={handleSignIn}
-          onSignIn={onSignIn}
-          onSignUp={onSignUp}
-          setUserProfileData={setUserProfileData}
-          handleSignUp={handleSignUp}
-          modalIsOpen={modalIsOpen}
-          setIsOpen={setIsOpen}
-        />
+        <StartScreen />
         <HowItWorks />
         <WhyChronoLegal />
       </div>
