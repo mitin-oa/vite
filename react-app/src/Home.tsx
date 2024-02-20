@@ -8,6 +8,7 @@ import withReactContent from "sweetalert2-react-content";
 import HowItWorks from "./components/startScreen/HowItWorks";
 import WhyChronoLegal from "./components/startScreen/WhyChronoLegal";
 import HeaderMenu from "./components/header/header";
+import WhoWeServe from "./components/startScreen/WhoWeServe";
 
 export default function Home({
   kind,
@@ -49,6 +50,7 @@ export default function Home({
         <StartScreen />
         <HowItWorks />
         <WhyChronoLegal />
+        <WhoWeServe />
       </div>
 
       <Footer kind="full" />

@@ -1,8 +1,7 @@
 @font-face {
   font-family: "Montserrat";
   src:
-    url("../../public/Montserrat/static/Montserrat-Regular.ttf")
-    
+    url("../../public/Montserrat/static/Montserrat-Regular.ttf") 
 }
 
 /* start screen styles starts */
@@ -223,14 +222,28 @@
 
   .WCL_picture {
     width: 100%;
-    background-image:  url("../../public/about_pic.png") ;
-    background-size:auto;
+    background-image:  url("../../public/start_screen_pic1.png") ;
+    background-size:contain;
     background-repeat: no-repeat;
+  }
+
+  .WWS_picture {
+    width: 100%;
+    background-image:  url("../../public/WWS-pic.jpg") ;
+    background-size:cover;
+    background-repeat: no-repeat;
+  }
+
+  .WCL_icon {
+    width: 32px;
+    height: 32px;
+    margin: 0 10px 10px 0;
+
   }
 
   .vertical-strip {
 width: 20px;
-height: 600px;
+height: 560px;
 background-color: #ec720b;
   }
   /* start screen styles ends */
