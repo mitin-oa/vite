@@ -9,6 +9,7 @@ import HowItWorks from "./components/startScreen/HowItWorks";
 import WhyChronoLegal from "./components/startScreen/WhyChronoLegal";
 import HeaderMenu from "./components/header/header";
 import WhoWeServe from "./components/startScreen/WhoWeServe";
+import OurClients from "./components/startScreen/OurClients";
 
 export default function Home({
   kind,
@@ -51,6 +52,7 @@ export default function Home({
         <HowItWorks />
         <WhyChronoLegal />
         <WhoWeServe />
+        <OurClients />
       </div>
 
       <Footer kind="full" />

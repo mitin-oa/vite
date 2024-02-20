@@ -121,18 +121,17 @@
     line-height: 50px;
     font-family: 'Montserrat';
     color: #ec720b;
-    background-color: #ffffff;
     padding: 20px 0;
     @media screen and (max-width: 1028px) {
-        font-size: 25px;
-        line-height: 32.5px;
+      font-size: 25px;
+      line-height: 32.5px;
     }
     @media screen and (max-width: 760px) {
       font-size: 25px;
       line-height: 32.5px;
       text-align: center;
       padding-right: 0px;
-  }
+    }
   }
   
   .button_only {
@@ -147,7 +146,7 @@
     border-radius: 0.05rem;
     background-color: #ec720b;
     @media screen and (max-width: 1028px) {
-        margin: 0 auto;
+      margin: 0 auto;
     }
   }
 
@@ -246,4 +245,29 @@ width: 20px;
 height: 560px;
 background-color: #ec720b;
   }
+
+  .slider-container {
+    width: 100%;
+  }
+  .slider-card {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    padding: 50px;
+    height: 40vh;
+    background-color: #ec720b;
+    opacity: 0.5;
+    &__text {
+      text-align: start;
+      color: #ffffff;
+      font-size: 22px;
+      margin-bottom: 0;
+    }
+  } 
+button.slick-arrow {
+  min-width: 0;
+  padding: 0;
+  background-color: transparent;
+  opacity: 1;
+}
   /* start screen styles ends */
