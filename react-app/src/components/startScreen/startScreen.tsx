@@ -34,7 +34,7 @@ export default function StartScreen() {
             <Parallax
               speed={5}
               translateY={["-350px", "350px"]}
-              opacity={[7, -3.0]}
+              opacity={[7, -2.8]}
             >
               <div
                 style={{
@@ -48,7 +48,7 @@ export default function StartScreen() {
                     height: "60px",
                     minWidth: "380px",
                     textAlign: "start",
-                    margin: "130px 0",
+                    margin: "145px 0",
                   }}
                 >
                   24/7 contract
@@ -91,35 +91,35 @@ export default function StartScreen() {
               <Parallax
                 opacity={[4, -1.0]}
                 speed={0}
-                translateY={["-40px", "-175px"]}
+                translateY={["-100px", "-100px"]}
               >
                 <a style={{ letterSpacing: "23px" }}>drafting</a>
               </Parallax>
               <Parallax
-                opacity={[3, -0.5]}
+                opacity={[2.5, -0.5]}
                 speed={0}
-                translateY={["-40px", "-175px"]}
+                translateY={["-100px", "-100px"]}
               >
                 <a style={{ letterSpacing: "6px" }}>negotiation</a>
               </Parallax>
               <Parallax
-                opacity={[1.5, 0.2]}
+                opacity={[0.2, 1.0]}
                 speed={0}
-                translateY={["-40px", "-175px"]}
+                translateY={["-100px", "-100px"]}
               >
                 <a style={{ letterSpacing: "6px" }}>automation</a>
               </Parallax>
               <Parallax
-                opacity={[-0.2, 2.2]}
+                opacity={[-0.2, 1.5]}
                 speed={0}
-                translateY={["-40px", "-175px"]}
+                translateY={["-100px", "-100px"]}
               >
                 <a>management</a>
               </Parallax>
               <Parallax
-                opacity={[-0.5, 2.5]}
+                opacity={[-0.3, 1.2]}
                 speed={0}
-                translateY={["-40px", "-175px"]}
+                translateY={["-100px", "-100px"]}
               >
                 <a style={{ letterSpacing: "36px" }}>rewiew</a>
               </Parallax>
@@ -128,7 +128,7 @@ export default function StartScreen() {
             <Parallax
               speed={5}
               translateY={["-350px", "350px"]}
-              opacity={[7, -3.0]}
+              opacity={[7, -2.8]}
             >
               <div
                 style={{
@@ -141,7 +141,7 @@ export default function StartScreen() {
                     height: "60px",
                     minWidth: "350px",
                     textAlign: "start",
-                    margin: "130px 0",
+                    margin: "145px 0",
                   }}
                 >
                   services simplified and delivered on time, and on budget!

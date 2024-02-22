@@ -275,6 +275,17 @@
             margin: 0 auto;
         };
     }
+    &__links-btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 35px;
+        height: 35px;
+        background-color: #ffffff;
+        @media (max-width: 760px) {
+            margin: 0 auto;
+        };
+    }
     &__phone {
         display: flex;
         align-items: center;
@@ -364,7 +375,7 @@
     }
 
     &__icon {
-        width: 30px;
-        height: 30px;
+        width: 18px;
+        height: 18px;
     }
 }

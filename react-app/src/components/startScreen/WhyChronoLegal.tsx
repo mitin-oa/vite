@@ -2,6 +2,9 @@ import "../startScreen/startScreen.scss";
 import { useMediaQuery } from "react-responsive";
 import { useContext } from "react";
 import { SignedInContext } from "../../App";
+import Time from "../../../public/time-fast.png";
+import Money from "../../../public/piggy-bank.png";
+import Revenue from "../../../public/revenue.png";
 
 export default function WhyChronoLegal() {
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1160px" });
@@ -22,6 +25,11 @@ export default function WhyChronoLegal() {
                 margin: "20px 0",
               }}
             >
+              <img
+                src={Time}
+                className="WCL_icon"
+                alt="Picture social-list"
+              ></img>
               Save time!
             </h2>
             <p
@@ -40,6 +48,11 @@ export default function WhyChronoLegal() {
                 margin: "20px 0",
               }}
             >
+              <img
+                src={Money}
+                className="WCL_icon"
+                alt="Picture social-list"
+              ></img>
               Save money!
             </h2>
             <p
@@ -58,6 +71,11 @@ export default function WhyChronoLegal() {
                 margin: "20px 0",
               }}
             >
+              <img
+                src={Revenue}
+                className="WCL_icon"
+                alt="Picture social-list"
+              ></img>
               Grow your revenue!
             </h2>
             <p

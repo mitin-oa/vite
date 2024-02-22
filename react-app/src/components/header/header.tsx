@@ -5,10 +5,10 @@ import { HashLink as Link } from "react-router-hash-link";
 import { Navbar } from "../burger/navBar";
 import ModalWindow from "../modal/modal";
 import LogInForm from "../modal/LogInForm";
-import FacebookPic from "../../../public/facebook.png";
-import MailPic from "../../../public/gmail.png";
-import PhonePic from "../../../public/telephone-call.png";
-import TelegramPic from "../../../public/telegram.png";
+import FacebookPic from "../../../public/facebook1.png";
+import MailPic from "../../../public/twitter.png";
+import PhonePic from "../../../public/instagram.png";
+import TelegramPic from "../../../public/linkedin.png";
 import {
   SignedInContext,
   SignedUpContext,
@@ -67,28 +67,40 @@ export default function HeaderMenu({
       <div className="header__links">
         <div className="contacts__links">
           <a href="https://www.facebook.com/">
-            <img
-              src={FacebookPic}
-              className="contacts__icon"
-              alt="Picture social-list"
-            />
+            <div className="contacts__links-btn">
+              <img
+                src={FacebookPic}
+                className="contacts__icon"
+                alt="Picture social-list"
+              />
+            </div>
           </a>
           <a href="mailto:mitin.oa@gmail.com">
-            <img src={MailPic} className="contacts__icon" alt="Picture mail" />
+            <div className="contacts__links-btn">
+              <img
+                src={MailPic}
+                className="contacts__icon"
+                alt="Picture mail"
+              />
+            </div>
           </a>
           <a href="tel:+48000000000">
-            <img
-              src={PhonePic}
-              className="contacts__icon"
-              alt="Picture phone"
-            />
+            <div className="contacts__links-btn">
+              <img
+                src={PhonePic}
+                className="contacts__icon"
+                alt="Picture phone"
+              />
+            </div>
           </a>
           <a href="https://t.me/">
-            <img
-              src={TelegramPic}
-              className="contacts__icon"
-              alt="Picture telegram"
-            />
+            <div className="contacts__links-btn">
+              <img
+                src={TelegramPic}
+                className="contacts__icon"
+                alt="Picture telegram"
+              />
+            </div>
           </a>
         </div>
       </div>
