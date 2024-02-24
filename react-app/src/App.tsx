@@ -14,6 +14,7 @@ import DashBoardEditor from "./DashBoardEditor";
 import DashBoardManager from "./DashBoardManager";
 import Swal from "sweetalert2";
 import ResetPassword from "./ResetPassword";
+import OrderRewiew from "./OrderRewiew";
 import Contacts from "./Contacts";
 import Services from "./Services";
 import { ParallaxProvider } from "react-scroll-parallax";
@@ -300,6 +301,7 @@ function App() {
               />
               <Route path="*" element={<NotFound />} />
               <Route path="/resetPassword" Component={ResetPassword} />
+              <Route path="/orderRewiew" Component={OrderRewiew} />
             </Routes>
           </ParallaxProvider>
         </SignedInContext.Provider>

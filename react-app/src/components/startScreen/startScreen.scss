@@ -1,7 +1,7 @@
 @font-face {
   font-family: "Montserrat";
   src:
-    url("../../public/Montserrat/static/Montserrat-Regular.ttf") 
+    url("/public/Montserrat/static/Montserrat-Regular.ttf") 
 }
 
 /* start screen styles starts */
@@ -10,7 +10,7 @@
     min-height: 88vh;
     padding: 50px 40px 20px;
     //background-color: #033c5a;
-    background-image:  url("../../public/home-pic.jpg") ;
+    background-image:  url("/public/home-pic.jpg") ;
     background-size:cover;
     background-repeat: no-repeat;
     //background-position: bottom 100px right;
@@ -213,7 +213,7 @@
   
   .HIW_picture {
     width: 100%;
-    background-image:  url("../../public/start_screen_pic3.png") ;
+    background-image:  url("/public/start_screen_pic3.png") ;
     background-size:cover;
     background-repeat: no-repeat;
     border-radius: 40vw 0 0 40vw;
@@ -221,14 +221,14 @@
 
   .WCL_picture {
     width: 100%;
-    background-image:  url("../../public/start_screen_pic1.png") ;
+    background-image:  url("/public/start_screen_pic1.png") ;
     background-size:contain;
     background-repeat: no-repeat;
   }
 
   .WWS_picture {
     width: 100%;
-    background-image:  url("../../public/WWS-pic.jpg") ;
+    background-image:  url("/public/WWS-pic.jpg") ;
     background-size:cover;
     background-repeat: no-repeat;
   }
