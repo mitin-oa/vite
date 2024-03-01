@@ -42,10 +42,10 @@ export default function BuyCredits({
     // * VK Backend: sending payment data to server
     const dataToSend = {
       payPalOrderId: payPalOrderId,
-      totalAmount: totalAmount,
-      sellerTransactionId: sellerTransactionId,
-      paymentStatus: paymentStatus,
-      paymentCaptureId: paymentCaptureId,
+      payPalTotalAmount: totalAmount,
+      payPalSellerTransactionId: sellerTransactionId,
+      payPalPaymentStatus: paymentStatus,
+      payPalPaymentCaptureId: paymentCaptureId,
     };
 
     const serverResponse: any = await sendPaymentDataToServer(dataToSend);
@@ -69,7 +69,7 @@ export default function BuyCredits({
           resolve(data);
         })
         .catch((error) => {
-          console.error("Error sending payment data:", error);
+          console.error("Error sending data:", error);
           reject(error);
         });
     });

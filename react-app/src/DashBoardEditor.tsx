@@ -166,7 +166,7 @@ export default function DashBoardEditor({
             <table className="table dashboard-table">
               <tbody>
                 <tr>
-                  <td style={{ minWidth: "7vw" }}>File name</td>
+                  <td style={{ minWidth: "7vw" }}>Order #</td>
                   <td>Pages</td>
                   <td>Client name</td>
                   <td>Date work started</td>
@@ -184,7 +184,7 @@ export default function DashBoardEditor({
                       )
                       .map((e: any) => (
                         <tr key={e.order_id}>
-                          <td>{userDataForDashboard ? e.original_name : ""}</td>
+                          <td>{userDataForDashboard ? e.order_id : ""}</td>
                           <td>
                             {userDataForDashboard ? e.number_of_pages : ""}
                           </td>
@@ -232,7 +232,7 @@ export default function DashBoardEditor({
                               "processed",
                               "in work",
                             ].includes(e.order_status) ? (
-                              <DownLoadFile fileName={e.file_name} />
+                              <DownLoadFile orderId={e.order_id} />
                             ) : (
                               <></>
                             )}
@@ -241,12 +241,10 @@ export default function DashBoardEditor({
                             {e.order_status === "in work" ? (
                               <UploadFiles
                                 orderId={e.order_id}
-                                sourceFileName={e.file_name}
                               />
                             ) : (
                               <UploadFiles
                                 orderId={e.order_id}
-                                sourceFileName={e.file_name}
                                 isDisabled={true}
                               />
                             )}

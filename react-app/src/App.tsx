@@ -216,9 +216,9 @@ function App() {
                 }
               />
               <Route
-                path="CalculateCost"
+                path="OrderRewiew"
                 element={
-                  <CalculateCost
+                  <OrderRewiew
                     kind="short"
                     onSignIn={onSignIn}
                     handleSignIn={handleSignIn}
@@ -301,7 +301,6 @@ function App() {
               />
               <Route path="*" element={<NotFound />} />
               <Route path="/resetPassword" Component={ResetPassword} />
-              <Route path="/orderRewiew" Component={OrderRewiew} />
             </Routes>
           </ParallaxProvider>
         </SignedInContext.Provider>

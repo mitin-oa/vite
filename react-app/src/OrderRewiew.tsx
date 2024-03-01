@@ -1,12 +1,14 @@
 import { useMediaQuery } from "react-responsive";
 import Footer from "./components/footer/footer";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState, useEffect } from "react";
 import HeaderMenu from "./components/header/header";
 import Button from "./components/Button";
 import FileChooser from "./components/fileUploader/fileChooser";
 import ModalWindow from "./components/modal/modal";
 import PayPal from "./components/PayPalGuest";
 
+// * VK: Significant for the backend area. Please exercise caution when making alterations
+import { createTempUser } from "./fetchScripts/authRequests";
 
 export default function CalculateCost({
   handleSignIn,
@@ -19,180 +21,218 @@ export default function CalculateCost({
 }: any) {
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1160px" });
   const isPhoneScreen = useMediaQuery({ query: "(max-width: 760px" });
-  const [numPages, setNumPages]: any = useState();
-  const onPagesChange: any = (e: ChangeEvent<HTMLInputElement>) => {
-    const numPages = !Number.isNaN(e.target.valueAsNumber)
-      ? e.target.valueAsNumber
-      : null;
-    setNumPages(numPages);
-  };
-  const [checkedEmail, setCheckedEmail] = useState(false);
-  const [buttonClicked, setButtonClicked] = useState(false);
 
-  const [calculateCost, setCalculateCost] = useState(false);
+  // Utility variables
+  const [showModal, setShowModal] = useState(false); // * VK: State to control the visibility of a modal window
+  const [checkedEmail, setCheckedEmail] = useState(false); // Используется для отображения остальных полей после подтверждения имейла
+  const [totalCostCalculated, setTotalCostCalculated] = useState(false);
+  const [paymentStatus, setPaymentStatus] = useState(false);
+  const [costCalculating, setCostCalculating] = useState(false);
 
-
-  const [expressDelivery, setExpressDelivery] = useState(false);
-  const [addInformation, setAddInformation] = useState("Add information");
+  // Client data
   const [inputName, setInputName] = useState("John Boil");
-  const [inputEmail, setInputEmail] = useState(
-    "sb-yhbsi27086563@personal.example.com"
-  );
-  const [inputPhone, setInputPhone] = useState("+343 12345678");
+  const [inputEmail, setInputEmail] = useState("sb-yhbsi27086563@personal.example.com");
+  const [inputPhone, setInputPhone] = useState("+34312345678");
+  const [userId, setUserId] = useState(undefined);
 
   const [companyName, setCompanyName] = useState("Company 1");
   const [companyAddress, setCompanyAddress] = useState("Company 1 address");
   const [companyIndustry, setCompanyIndustry] = useState("Company 1 Industry");
 
-  // Определяем тип данных для переменной contractType
-  type ContractType = 'type 1' | 'type 2' | 'type 3' | '';
+  // Contract data
+  type ContractType = 'type 1' | 'type 2' | 'type 3' | ''; // Определяем тип данных для переменной contractType
   const [contractType, setContractType] = useState<ContractType>('');
-
-
   const [contractDescription, setContractDescription] = useState("Contract Description 1");
   const [contractValue, setContractValue] = useState("10000 $");
 
   const [counterpartyName, setCounterpartyName] = useState("Counterparty 1");
   const [counterpartyAddress, setCounterpartyAddress] = useState("Counterparty 1 address");
 
-  // Определяем тип данных для переменной serviceType
-  type ServiceType = 'review' | 'redlining' | 'negotiation' | '';
+  // Order data
+  type ServiceType = 'review' | 'redlining' | 'negotiation' | ''; // Определяем тип данных для переменной serviceType
   const [serviceType, setServiceType] = useState<ServiceType>('');
-  const [deliveryTime, setDeliveryTime] = useState('');
-
-
-
-  const [calculateCostInf, setCalcCostInf] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    numberOfPages: "",
-    express: false,
-    notes: "",
-  });
-
-  function handleCalculation() {
-    setCalculateCost(true);
-  }
-  const handleSubmit = (event: { preventDefault: () => void }) => {
-    event.preventDefault();
-    //logic ...
-  };
-
-  function handleOrder() {
-    setCalcCostInf({
-      name: inputName,
-      email: inputEmail,
-      phone: inputPhone,
-      numberOfPages: numPages,
-      express: expressDelivery,
-      notes: addInformation,
-    });
-    // add logic...
-  }
-
-  function checkEmail() {
-    setCheckedEmail(true);
-    setButtonClicked(true);
-    console.log("checkEmail");
-  }
+  const [deliveryTime, setDeliveryTime] = useState('whenever');
   const [uploadedContracts, setUploadedContracts] = useState<File[]>([]);
-  const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
-
   const [totalPages, setTotalPages] = useState(0);
   const [totalCost, setTotalCost] = useState(0);
   const [totalCostInCerdits, setTotalCostInCerdits] = useState(0);
-  const [totalCostCalculated, setTotalCostCalculated] = useState(false);
+  const [orderId, setOrderId] = useState(0);
 
+  // Addition order data
+  const [uploadedClientGuides, setUploadedClientGuides] = useState<File[]>([]);
+  const [addInformation, setAddInformation] = useState("Add information");
 
-  const [showModal, setShowModal] = useState(false); // * VK: State to control the visibility of a modal window
-  const [paymentStatus, setPaymentStatus] = useState(false);
+  // CLIENT'S 
+
+  async function checkEmail() {
+    
+    const addedUser: any = await createTempUser([inputName, inputEmail, inputPhone]);
+    if (addedUser.message == 'User with the same name or email already exists') {
+      alert('User with the same email already exists. Please log in or choose a different e-mail address.');
+      return;
+    }
+    
+    setCheckedEmail(true); // Используется для отображения остальных полей после подтверждения имейла
+    setUserId(addedUser.userId);
+  }
+
+  // ORDER'S
 
   const handleContractsUpload = (files: File[]) => {
     setTotalCostCalculated(false);
-    console.log("handleContractsUpload");
-
-    console.log(files);
-    // Сохраняем список полученных файлов в состоянии
     setUploadedContracts(files);
     setTotalPages(0);
   };
 
-  const handleFilesUpload = (files: File[]) => {
-    console.log("handleFilesUpload");
+  function calculateOrderCost() {
+    setCostCalculating(true); // Меняет значение на кнопке Посчитать ецену на "В работе"
+    // Создание объекта FormData
+    const formData = new FormData();
 
-    console.log(files);
-    // Сохраняем список полученных файлов в состоянии
-    setUploadedFiles(files);
-    setTotalPages(0);
-  };
+    // Добавление файлов в объект FormData
+    uploadedContracts.forEach((file) => {
+      formData.append("uploadedContracts", file);
+    });
 
-  function calculateTotalCost() {
-    console.log("calculateTotalCost");
-    setTotalCost(100);
-    setTotalCostInCerdits(20);
-    setTotalCostCalculated(true);
+    // Добавление остальных данных
+    formData.append("serviceType", serviceType);
+    formData.append("deliveryTime", deliveryTime);
+    formData.append("contractType", contractType);
+
+    // Отправка запроса на сервер
+    return new Promise((resolve, reject) => {
+      fetch("/api/calculateOrderCost", {
+        method: "POST",
+        body: formData  // Передача объекта FormData в качестве тела запроса
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          setTotalPages(data.totalPages);
+          setTotalCost(data.totalCost);
+          setTotalCostInCerdits(data.totalCostInCerdits);
+          setTotalCostCalculated(true);
+          setCostCalculating(false); // Возврашает значние на кнопке Посчитать ецену на "В работе"
+          resolve(data);
+        })
+        .catch((error) => {
+          console.error("Error sending data:", error);
+          reject(error);
+        });
+    });
+
   }
 
-  function proceed() {
-    console.log("proceed");
-  }
-
-  function sendOtherInstructions() {
-    console.log("sendOtherInstructions");
-  }
-
-  const handlePayment = async (
+  function handleOrder(
     payPalOrderId: string,
     totalAmount: number,
     sellerTransactionId: string,
     paymentStatus: string,
     paymentCaptureId: string
-  ) => {
-    // * VK Backend: sending payment data to server
-    const dataToSend = {
-      payPalOrderId: payPalOrderId,
-      totalAmount: totalAmount,
-      sellerTransactionId: sellerTransactionId,
-      paymentStatus: paymentStatus,
-      paymentCaptureId: paymentCaptureId,
-    };
+  ) {
 
-    const serverResponse: any = await sendPaymentDataToServer(dataToSend);
-    setPaymentStatus(true); // потом удалить!!!
-    // console.log("serverResponse", serverResponse);
-    // setPaymentStatus(serverResponse.success);
-    // // // * VK: Closing the modal window after successful payment
-    setShowModal(!showModal);
+    const formData = new FormData();
+
+    // Добавление текстовых данных в объект FormData
+    formData.append("companyName", companyName);
+    formData.append("companyAddress", companyAddress);
+    formData.append("companyIndustry", companyIndustry);
+    formData.append("contractType", contractType);
+    formData.append("contractDescription", contractDescription);
+    formData.append("contractValue", contractValue);
+    formData.append("counterpartyName", counterpartyName);
+    formData.append("counterpartyAddress", counterpartyAddress);
+    formData.append("serviceType", serviceType);
+    formData.append("deliveryTime", deliveryTime);
+    formData.append("totalPages", String(totalPages));
+    formData.append("totalCost", String(totalCost));
+    formData.append("totalCostInCerdits", String(totalCostInCerdits));
+    formData.append("userId", String(userId));
+
+    // Добавление информации о платеже
+    formData.append("payPalOrderId", payPalOrderId);
+    formData.append("payPalTotalAmount", String(totalAmount));
+    formData.append("payPalSellerTransactionId", sellerTransactionId);
+    formData.append("payPalPaymentStatus", paymentStatus);
+    formData.append("payPalPaymentCaptureId", paymentCaptureId);
+
+    // Добавление файлов в объект FormData
+    uploadedContracts.forEach((file) => {
+      formData.append("uploadedContracts", file);
+    });
+
+    return new Promise((resolve, reject) => {
+      fetch("/api/saveOnFlyOrder", {
+        method: "POST",
+        body: formData
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          // ! Добавить обработку ответов сервера
+          setPaymentStatus(true);
+          setShowModal(!showModal);
+          setOrderId(data.orderId)
+          resolve(data);
+        })
+        .catch((error) => {
+          console.error("Error sending data:", error);
+          reject(error);
+        });
+    });
+  }
+
+  const handleClientGuidesUpload = (files: File[]) => {
+    console.log("handleClientGuidesUpload");
+    setUploadedClientGuides(files);
   };
 
-  function sendPaymentDataToServer(dataToSend: any) {
-    console.log("данные отправлены");
-    // return new Promise((resolve, reject) => {
-    //   fetch("/api/process-payment", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify(dataToSend),
-    //   })
-    //     .then((response) => response.json())
-    //     .then((data) => {
-    //       resolve(data);
-    //     })
-    //     .catch((error) => {
-    //       console.error("Error sending payment data:", error);
-    //       reject(error);
-    //     });
-    // });
+  function sendOtherInstructions() {
+    const formData = new FormData();
+
+    formData.append("orderId", String(orderId));
+    formData.append("addInformation", addInformation);
+
+    // Добавление файлов в объект FormData
+    uploadedClientGuides.forEach((file) => {
+      formData.append("uploadedClientGuides", file);
+    });
+
+    return new Promise((resolve, reject) => {
+      fetch("/api/saveClientGuides", {
+        method: "POST",
+        body: formData
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          // ! Добавить обработку ответов сервера
+          setPaymentStatus(true);
+          setShowModal(!showModal);
+          alert('Success')
+          resolve(data);
+        })
+        .catch((error) => {
+          console.error("Error sending data:", error);
+          reject(error);
+        });
+    });
   }
+
+  useEffect(() => {
+    console.log('useEffect'); // Выводим значение userId в консоль
+
+    console.log(totalCost); // Выводим значение userId в консоль
+  }, [totalCost]); // Вызываем useEffect при изменении userId
+
+
+  // PAYMENT'S
 
   const handlePayPalError = (error: string) => {
     console.log("An error occurred while making a payment: " + error);
     setPaymentStatus(false);
     setShowModal(!showModal);
   };
-  console.log(addInformation);
+
+
   return (
     <>
       <div className="app">
@@ -223,7 +263,7 @@ export default function CalculateCost({
                             Upload your playbook or a model template to use if any. <br />
                             (File extensions allowed: .doc, .docx, .rtf, .pdf, .odt)
                           </label>
-                          <FileChooser onFilesSelected={handleFilesUpload} />
+                          <FileChooser onFilesSelected={handleClientGuidesUpload} />
                         </div>
                         <div className="form-group mb-3">
                           <label htmlFor="addInformation">
@@ -305,7 +345,7 @@ export default function CalculateCost({
                           />
                         </div>
                         <div className="form-group">
-                          {!buttonClicked && (
+                          {!checkedEmail && (
                             <Button
                               children="Next"
                               color="orange"
@@ -368,24 +408,34 @@ export default function CalculateCost({
                         <div className="frame-container">
                           <h3>Tell us about the contract</h3>
                           <div className="form-group mb-3">
-                            <div className="form-group mb-3">
-                              <label htmlFor="contractType">
-                                Contract type
-                              </label>
-                              <select
-                                className="form-control"
-                                name="contractType"
-                                id="contractType"
-                                value={contractType}
-                                required={true}
-                                onChange={(e) => setContractType(e.target.value as ContractType)}
-                              >
-                                <option value="" disabled hidden>Select contract type</option>
-                                <option value="type 1">type 1</option>
-                                <option value="type 2">type 2</option>
-                                <option value="type 3">type 3</option>
-                              </select>
-                            </div>
+                            <label htmlFor="contractType">Тип контракта</label>
+                            <select
+                              className="form-control"
+                              name="contractType"
+                              id="contractType"
+                              value={contractType}
+                              required={true}
+                              onChange={(e) => setContractType(e.target.value as ContractType)}
+                            >
+                              <option value="" disabled hidden>Select contract type</option>
+                              <option value="Non-Disclosure Agreements (NDAs)">Non-Disclosure Agreements (NDAs)</option>
+                              <option value="Master Service Agreements (MSAs)">Master Service Agreements (MSAs)</option>
+                              <option value="Data Processing Agreements (DPAs)">Data Processing Agreements (DPAs)</option>
+                              <option value="Software as a Service Agreements (SaaS)">Software as a Service Agreements (SaaS)</option>
+                              <option value="End-user license agreements (EULAs)">End-user license agreements (EULAs)</option>
+                              <option value="Licensing Agreements">Licensing Agreements</option>
+                              <option value="Consulting Agreements">Consulting Agreements</option>
+                              <option value="Sales agreements">Sales agreements</option>
+                              <option value="Supply Agreements">Supply Agreements</option>
+                              <option value="Real Estate Agreements">Real Estate Agreements</option>
+                              <option value="Construction Agreements">Construction Agreements</option>
+                              <option value="Employment contracts">Employment contracts</option>
+                              <option value="Partnership Agreements">Partnership Agreements</option>
+                              <option value="Statements of Work (SOWs)">Statements of Work (SOWs)</option>
+                              <option value="Work Orders (WOs)">Work Orders (WOs)</option>
+                              <option value="Amendments">Amendments</option>
+                              <option value="Other">Other</option>
+                            </select>
                           </div>
 
                           <div className="form-group mb-3">
@@ -510,9 +560,9 @@ export default function CalculateCost({
                           <div className="form-group">
                             {uploadedContracts.length > 0 && (
                               <Button
-                                children="Calculate cost"
+                                children={costCalculating ? "Processing..." : "Calculate cost"}
                                 color="orange"
-                                onClick={calculateTotalCost}
+                                onClick={calculateOrderCost}
                                 style="modal-btn"
                               />
                             )}
@@ -549,12 +599,10 @@ export default function CalculateCost({
                             {totalCostCalculated && (
                               <ModalWindow
                                 title={"Proceed to pay"}
-                                // * VK: Significant for the backend area. Please exercise caution when making alterations
-                                // * VK: Passing the handlePaymentSuccess function to the PayPal component via the onSuccess property
                                 childComp={
                                   <PayPal
-                                    amountPay={1}
-                                    onSuccess={handlePayment}
+                                    amountPay={totalCost}
+                                    onSuccess={handleOrder}
                                     onError={handlePayPalError} // * VK: Pass the error handling function
                                   />
                                 }
