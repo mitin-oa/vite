@@ -258,7 +258,7 @@ export default function DashBoardManager({
                   <td>Status</td>
                   <td>Date</td>
                   <td>Number of pages</td>
-                  <td>Express delivery</td>
+                  <td>Delivery time</td>
                   <td>Manage</td>
                 </tr>
                 {userDataForDashboard
@@ -288,9 +288,7 @@ export default function DashBoardManager({
                           {userDataForDashboard ? e.number_of_pages : ""}
                         </td>
                         <td>
-                          {userDataForDashboard && e.express_delivery
-                            ? "yes"
-                            : ""}
+                          {userDataForDashboard ? e.delivery_time : ""}
                         </td>
                         <td>
                           <div
@@ -385,7 +383,7 @@ export default function DashBoardManager({
                   <td>Date of order</td>
                   <td>Date of delivering</td>
                   <td>Number of pages</td>
-                  <td>Express delivery</td>
+                  <td>Delivery time</td>
                   <td>Editor name</td>
                   <td>Download</td>
                 </tr>
@@ -425,11 +423,11 @@ export default function DashBoardManager({
                           {userDataForDashboard ? e.number_of_pages : ""}
                         </td>
                         <td>
-                          {userDataForDashboard && e.express_delivery
-                            ? "yes"
-                            : "no"}
+                          {userDataForDashboard ? e.delivery_time : ""}
                         </td>
-                        <td>{userDataForDashboard ? e.editor_name : ""}</td>
+                        <td>
+                          {userDataForDashboard ? e.editor_name : ""}
+                        </td>
                         <td>
                           <Button
                             children={"Download"}
