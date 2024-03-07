@@ -14,6 +14,10 @@ import DashBoardEditor from "./DashBoardEditor";
 import DashBoardManager from "./DashBoardManager";
 import Swal from "sweetalert2";
 import ResetPassword from "./ResetPassword";
+import DashBoardTempClient from "./DashBoardTempClient";
+
+
+
 import OrderRewiew from "./OrderRewiew";
 import Contacts from "./Contacts";
 import Services from "./Services";
@@ -51,8 +55,8 @@ function App() {
   //   parts.length === 2 ? parts.pop()?.split(";").shift() !== null : false;
 
   // * VK: Changing the method of authorization verification (instead of cookies, data from local storage is used)
-  const token = localStorage.getItem('accessToken')!== null ? true : false;
-  
+  const token = localStorage.getItem('accessToken') !== null ? true : false;
+
   const [signedIn, onSignIn] = useState(token);
   const [signedUp, onSignUp] = useState(true);
   const [userRole, setUserRole] = useState(localStorage.getItem("userRole"));
@@ -299,8 +303,23 @@ function App() {
                   )
                 }
               />
+              // * VK: Temporary User Dashboard
+              <Route path="/TemporaryDashboard" element={
+                <DashBoardTempClient
+                  kind="short"
+                  onSignIn={onSignIn}
+                  handleSignIn={handleSignIn}
+                  signedUp={signedUp}
+                  setUserProfileData={setUserProfileData}
+                  handleSignUp={handleSignUp}
+                  modalIsOpen={modalIsOpen}
+                  setIsOpen={setIsOpen}
+                />
+              } />
+
               <Route path="*" element={<NotFound />} />
               <Route path="/resetPassword" Component={ResetPassword} />
+
             </Routes>
           </ParallaxProvider>
         </SignedInContext.Provider>
