@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import Footer from "./components/footer/footer";
 import HeaderMenu from "./components/header/header";
 import Button from "./components/Button";
@@ -22,29 +22,33 @@ export default function DashBoardEditor({
   handleSignUp,
   setUserProfileData,
 }: any) {
+  // * ↓ VK: Significant for the backend area. Please exercise caution when making alterations
   const [userDataForDashboard, setUserDataForDashboard] = useState<any | null>(
     null
   );
-  const [expandedOrderId, setExpandedOrderId] = useState(null);
 
   useEffect(() => {
     const requestData = async () => {
       try {
+        // Запрос комбинированных данных о пользователе при загрузке компонента
         const serverAnswer = await getUserDataForDashboard();
-        setUserDataForDashboard(serverAnswer);
+        setUserDataForDashboard(serverAnswer); // Сохраняем данные в состоянии
       } catch (error) {
         console.error("An error occurred while loading data:", error);
       }
     };
 
-    requestData();
+    requestData(); // Вызываем асинхронную функцию внутри useEffect
   }, []);
 
-  function toggleOrderDetails(orderId: React.SetStateAction<null>) {
-    setExpandedOrderId(expandedOrderId === orderId ? null : orderId);
+  // Проверка наличия данных перед обработкой
+  if (userDataForDashboard !== null && userDataForDashboard !== undefined) {
+    console.log("userDataForDashboard", userDataForDashboard);
   }
 
   async function handleOrder(orderId: any, editorId: any) {
+    //How pass editor_id to server handle with order?
+
     const orderId2 = orderId;
     const editorId2 = editorId;
 
@@ -68,6 +72,7 @@ export default function DashBoardEditor({
         assigned_editor_id: editorId,
       };
 
+      //console.log(userDataForDashboard);
       setUserDataForDashboard(userDataForDashboard);
       const data = await response.json();
       return data;
@@ -77,35 +82,10 @@ export default function DashBoardEditor({
     }
   }
 
-  function downloadClientGuides(orderId: any) {
-    let pathToFile = "/api/downloadClientGuides/" + orderId;
-    fetchWithRefreshAuth(pathToFile, {
-      method: 'GET',
-      headers: {
-      },
-    })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Server returned an error response');
-        }
-        return response.blob();
-      })
-      .then(blob => {
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.style.display = 'none';
-        a.href = url;
-        a.download = orderId + '-Guides.zip';
-        document.body.appendChild(a);
-        a.click();
-        window.URL.revokeObjectURL(url);
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  }
-
   async function handleNotes(orderId: string) {
+    //How pass order_id to server handle with order?
+    //alert(serverAnswer.message);
+
     const index = userDataForDashboard.data.orderData.findIndex(
       (e: any) => e.order_id === orderId
     );
@@ -116,16 +96,20 @@ export default function DashBoardEditor({
     };
 
     setUserDataForDashboard(userDataForDashboard);
+    console.log(userDataForDashboard);
+    console.log(index);
+    console.log("add_information");
   }
 
   function openModal() {
     setIsOpen(true);
   }
-
   function closeModal() {
     setIsOpen(false);
   }
 
+  // * ↑ VK: Significant for the backend area. Please exercise caution when making alterations
+  //const [addInformation, setAddInformation] = useState("Add information");
   return (
     <>
       <div className="app">
@@ -182,46 +166,40 @@ export default function DashBoardEditor({
             <table className="table dashboard-table">
               <tbody>
                 <tr>
-                  <td style={{ minWidth: "7vw" }}>Order #</td>
+                  <td style={{ minWidth: "7vw" }}>File name</td>
                   <td>Pages</td>
                   <td>Client name</td>
-                  <td>Date</td>
-                  <td>Delivery time</td>
+                  <td>Date work started</td>
                   <td>Manage</td>
                   <td>Status</td>
                   <td>Download file</td>
                   <td>Upload Edited File</td>
                   <td>Notes or Flag to manager</td>
                 </tr>
-                {userDataForDashboard &&
-                  userDataForDashboard.data.orderData
-                    .slice(-10, userDataForDashboard.data.orderData.length)
-                    .sort((a: any, b: any) =>
-                      a.created_at.date > b.created_at.date ? 1 : -1
-                    )
-                    .map((e: any) => (
-                      <React.Fragment key={e.order_id}>
-                        <tr>
-                          <td onClick={() => toggleOrderDetails(e.order_id)}>
-                            {expandedOrderId === e.order_id ? "▲" : "▼"}{" "}
-                            {/* Стрелка */}
-                            {userDataForDashboard ? e.order_id : ""}
-                          </td>
+                {userDataForDashboard
+                  ? userDataForDashboard.data.orderData
+                      .slice(-10, userDataForDashboard.data.orderData.length)
+                      .sort((a: any, b: any) =>
+                        a.created_at.date > b.created_at.date ? 1 : -1
+                      )
+                      .map((e: any) => (
+                        <tr key={e.order_id}>
+                          <td>{userDataForDashboard ? e.original_name : ""}</td>
                           <td>
                             {userDataForDashboard ? e.number_of_pages : ""}
                           </td>
                           <td>{userDataForDashboard ? e.client_name : ""}</td>
+
                           <td>
                             {userDataForDashboard
                               ? e.created_at.toString().split("T")[0] +
-                              " " +
-                              e.created_at
-                                .toString()
-                                .split("T")[1]
-                                .split(".")[0]
+                                " " +
+                                e.created_at
+                                  .toString()
+                                  .split("T")[1]
+                                  .split(".")[0]
                               : ""}
                           </td>
-                          <td>{userDataForDashboard ? e.delivery_time : ""}</td>
                           <td>
                             {!e.assigned_editor_id ? (
                               e.order_status === "paid" ? (
@@ -245,6 +223,7 @@ export default function DashBoardEditor({
                               </>
                             )}
                           </td>
+
                           <td>{userDataForDashboard ? e.order_status : ""}</td>
                           <td>
                             {[
@@ -253,7 +232,7 @@ export default function DashBoardEditor({
                               "processed",
                               "in work",
                             ].includes(e.order_status) ? (
-                              <DownLoadFile orderId={e.order_id} />
+                              <DownLoadFile fileName={e.file_name} />
                             ) : (
                               <></>
                             )}
@@ -262,13 +241,17 @@ export default function DashBoardEditor({
                             {e.order_status === "in work" ? (
                               <UploadFiles
                                 orderId={e.order_id}
-                                clientEmail={e.client_email}
+                                sourceFileName={e.file_name}
                               />
                             ) : (
-                              <UploadFiles orderId={e.order_id} isDisabled />
+                              <UploadFiles
+                                orderId={e.order_id}
+                                sourceFileName={e.file_name}
+                                isDisabled={true}
+                              />
                             )}
                           </td>
-                          <td style={{ minWidth: "20vw" }}>
+                          <td style={{ minWidth: "30vw" }}>
                             {
                               <InputText
                                 order_id={e.order_id}
@@ -281,27 +264,8 @@ export default function DashBoardEditor({
                             }
                           </td>
                         </tr>
-                        {expandedOrderId === e.order_id && (
-                          <tr>
-                            <td colSpan={10}>
-                              <p><b>Service type:</b> {e.service_type} </p>
-                              {e.add_information ? <p><b>Additional information:</b> {e.add_information} </p> : null}
-                              {e.user_guides ? <p><a href="#" onClick={() => downloadClientGuides(e.order_id)}>Download instructions for work</a></p> : null}
-                              <p><b>Client info:</b></p>
-                              <p><b>Email:</b> {e.client_email} </p>
-                              <p><b>Company:</b> {e.clients_company_name} </p>
-                              <p><b>Address:</b> {e.clients_company_address} </p>
-                              <p><b>Industry:</b> {e.clients_company_industry} </p>
-                              <p><b>Contract info:</b></p>
-                              <p><b>Description</b> {e.contract_description} </p>
-                              <p><b>Value:</b> {e.contract_value} </p>
-                              <p><b>Counterparty name:</b> {e.counterparty_name} </p>
-                              <p><b>Counterparty address:</b> {e.counterparty_address} </p>
-                            </td>
-                          </tr>
-                        )}
-                      </React.Fragment>
-                    ))}
+                      ))
+                  : ""}
               </tbody>
             </table>
           </div>

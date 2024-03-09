@@ -92,6 +92,7 @@ export default function Dashboard({
   interface FileListProps {
     files: FileData[];
   }
+
   const FileList: React.FC<FileListProps> = ({ files }) => {
     console.log(files);
     return (
@@ -105,6 +106,22 @@ export default function Dashboard({
       </div>
     );
   }
+
+  const AddInstructions: React.FC<FileListProps> = ({ files }) => {
+    return (
+      <div>
+        <p>Your additional instructions</p>
+        <ul>
+          {files.map((file, index) => (
+            <li key={index}>{file.original_name}</li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+
+
+  
 
   // * ↑ VK: Significant for the backend area. Please exercise caution when making alterations
 
@@ -238,8 +255,9 @@ export default function Dashboard({
               </tbody>
             </table>
             {/* Добавляем компонент FileList с передачей списка файлов */}
-            {userDataForDashboard &&
-              <FileList files={userDataForDashboard.filesData} />}
+            {userDataForDashboard && <FileList files={userDataForDashboard.filesData} />}
+            {/* Добавляем компонент FileList с передачей списка файлов */}
+            {userDataForDashboard && <AddInstructions files={userDataForDashboard.filesData} />}
           </div>
         </section>
       </div>

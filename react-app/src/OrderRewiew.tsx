@@ -40,7 +40,7 @@ export default function CalculateCost({
   const [companyIndustry, setCompanyIndustry] = useState("Company 1 Industry");
 
   // Contract data
-  type ContractType = 'type 1' | 'type 2' | 'type 3' | ''; // Определяем тип данных для переменной contractType
+  type ContractType = 'type 1' | 'type 2' | 'type 3' | '';
   const [contractType, setContractType] = useState<ContractType>('');
   const [contractDescription, setContractDescription] = useState("Contract Description 1");
   const [contractValue, setContractValue] = useState("10000 $");
@@ -49,7 +49,7 @@ export default function CalculateCost({
   const [counterpartyAddress, setCounterpartyAddress] = useState("Counterparty 1 address");
 
   // Order data
-  type ServiceType = 'review' | 'redlining' | 'negotiation' | ''; // Определяем тип данных для переменной serviceType
+  type ServiceType = 'review' | 'redlining' | 'negotiation' | '';
   const [serviceType, setServiceType] = useState<ServiceType>('');
   const [deliveryTime, setDeliveryTime] = useState('whenever');
   const [uploadedContracts, setUploadedContracts] = useState<File[]>([]);
@@ -65,14 +65,14 @@ export default function CalculateCost({
   // CLIENT'S 
 
   async function checkEmail() {
-    
+
     const addedUser: any = await createTempUser([inputName, inputEmail, inputPhone]);
     if (addedUser.message == 'User with the same name or email already exists') {
       alert('User with the same email already exists. Please log in or choose a different e-mail address.');
       return;
     }
-    
-    setCheckedEmail(true); // Используется для отображения остальных полей после подтверждения имейла
+
+    setCheckedEmail(true); // * VK: Used to display the rest of the fields after the email has been confirmed
     setUserId(addedUser.userId);
   }
 
@@ -85,25 +85,21 @@ export default function CalculateCost({
   };
 
   function calculateOrderCost() {
-    setCostCalculating(true); // Меняет значение на кнопке Посчитать ецену на "В работе"
-    // Создание объекта FormData
+    setCostCalculating(true); // * VK: Changes the value on the Calculate Price button to "In Progress"
     const formData = new FormData();
 
-    // Добавление файлов в объект FormData
     uploadedContracts.forEach((file) => {
       formData.append("uploadedContracts", file);
     });
 
-    // Добавление остальных данных
     formData.append("serviceType", serviceType);
     formData.append("deliveryTime", deliveryTime);
     formData.append("contractType", contractType);
 
-    // Отправка запроса на сервер
     return new Promise((resolve, reject) => {
       fetch("/api/calculateOrderCost", {
         method: "POST",
-        body: formData  // Передача объекта FormData в качестве тела запроса
+        body: formData
       })
         .then((response) => response.json())
         .then((data) => {
@@ -112,7 +108,7 @@ export default function CalculateCost({
           setTotalCost(data.totalCost);
           setTotalCostInCerdits(data.totalCostInCerdits);
           setTotalCostCalculated(true);
-          setCostCalculating(false); // Возврашает значние на кнопке Посчитать ецену на "В работе"
+          setCostCalculating(false); // * VK: Returns the initial value on the button
           resolve(data);
         })
         .catch((error) => {
@@ -133,10 +129,14 @@ export default function CalculateCost({
 
     const formData = new FormData();
 
-    // Добавление текстовых данных в объект FormData
+    // Add customer information
+    formData.append("userEmail", inputEmail);
+    formData.append("userId", String(userId));
     formData.append("companyName", companyName);
     formData.append("companyAddress", companyAddress);
     formData.append("companyIndustry", companyIndustry);
+
+    // Adding contract data
     formData.append("contractType", contractType);
     formData.append("contractDescription", contractDescription);
     formData.append("contractValue", contractValue);
@@ -147,16 +147,15 @@ export default function CalculateCost({
     formData.append("totalPages", String(totalPages));
     formData.append("totalCost", String(totalCost));
     formData.append("totalCostInCerdits", String(totalCostInCerdits));
-    formData.append("userId", String(userId));
 
-    // Добавление информации о платеже
+    // Adding payment information
     formData.append("payPalOrderId", payPalOrderId);
     formData.append("payPalTotalAmount", String(totalAmount));
     formData.append("payPalSellerTransactionId", sellerTransactionId);
     formData.append("payPalPaymentStatus", paymentStatus);
     formData.append("payPalPaymentCaptureId", paymentCaptureId);
 
-    // Добавление файлов в объект FormData
+    // Add files
     uploadedContracts.forEach((file) => {
       formData.append("uploadedContracts", file);
     });
@@ -168,7 +167,7 @@ export default function CalculateCost({
       })
         .then((response) => response.json())
         .then((data) => {
-          // ! Добавить обработку ответов сервера
+          // TODO VK: Add server response handling
           setPaymentStatus(true);
           setShowModal(!showModal);
           setOrderId(data.orderId)
@@ -182,7 +181,6 @@ export default function CalculateCost({
   }
 
   const handleClientGuidesUpload = (files: File[]) => {
-    console.log("handleClientGuidesUpload");
     setUploadedClientGuides(files);
   };
 
@@ -192,7 +190,6 @@ export default function CalculateCost({
     formData.append("orderId", String(orderId));
     formData.append("addInformation", addInformation);
 
-    // Добавление файлов в объект FormData
     uploadedClientGuides.forEach((file) => {
       formData.append("uploadedClientGuides", file);
     });
@@ -204,11 +201,12 @@ export default function CalculateCost({
       })
         .then((response) => response.json())
         .then((data) => {
-          // ! Добавить обработку ответов сервера
+          // TODO VK: Add server response handling
           setPaymentStatus(true);
           setShowModal(!showModal);
-          alert('Success')
           resolve(data);
+          // * VK: Redirects to the temporary client panel
+          window.location.href = '/TemporaryDashboard?orderId=' + orderId;
         })
         .catch((error) => {
           console.error("Error sending data:", error);
@@ -218,10 +216,8 @@ export default function CalculateCost({
   }
 
   useEffect(() => {
-    console.log('useEffect'); // Выводим значение userId в консоль
-
-    console.log(totalCost); // Выводим значение userId в консоль
-  }, [totalCost]); // Вызываем useEffect при изменении userId
+    console.log(totalCost);
+  }, [totalCost]);
 
 
   // PAYMENT'S
@@ -248,9 +244,13 @@ export default function CalculateCost({
         />
         <section className="main-content container" style={{ flexDirection: "column" }}>
           {paymentStatus ? (
-            // Если платеж выполнен, будет отображать эти данные
+            // * VK: If the payment has been made, it will display this data
             <>
-              <h2>Payment completed successfully! Your order has been processed.</h2>
+              <h3>Payment completed successfully! Your order has been processed.</h3>
+
+              <p>Details and access to your temporary dashboard have been sent to your email.</p>
+              <p>Now you can add additional instructions or <a href={`/TemporaryDashboard?orderId=${orderId}`}>click here</a> to go to the order management dashboard.</p>
+
 
               <div className="container mt-5 form-container">
                 <div className="row">
@@ -295,7 +295,7 @@ export default function CalculateCost({
             </>
 
           ) : (
-            // Если платеж пока не выполнен, отображаем форму
+            // * VK: If the payment has not yet been made, display the form
             <>
               <h2>ORDER A REVIEW</h2>
 
@@ -408,7 +408,7 @@ export default function CalculateCost({
                         <div className="frame-container">
                           <h3>Tell us about the contract</h3>
                           <div className="form-group mb-3">
-                            <label htmlFor="contractType">Тип контракта</label>
+                            <label htmlFor="contractType">Contract type</label>
                             <select
                               className="form-control"
                               name="contractType"
@@ -528,7 +528,7 @@ export default function CalculateCost({
                           </div>
                           <div className="form-group mb-3">
                             <label htmlFor="serviceType">
-                              Delivery time (drop down menu) same day, 1 day, 3 days, 5 days,
+                              Delivery time
                             </label>
                             <select
                               className="form-control"
@@ -554,7 +554,7 @@ export default function CalculateCost({
                           <div className="form-group">
                             <h3>Upload files</h3>
                             <p>File extensions allowed: .doc, .docx, .rtf, .pdf, .odt</p>
-                            {/* Передаем функцию обратного вызова в компонент FileChooser */}
+                            {/* VK: Pass the callback function to the FileChooser component */}
                             <FileChooser onFilesSelected={handleContractsUpload} />
                           </div>
                           <div className="form-group">
@@ -567,7 +567,7 @@ export default function CalculateCost({
                               />
                             )}
                           </div>
-                          {/* Отображаем данные о стоимости заказа */}
+                          {/* VK: Display order value data */}
                           {totalCostCalculated && (
                             <table className="table">
                               <tbody>
