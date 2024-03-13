@@ -10,6 +10,7 @@ import WhyChronoLegal from "./components/startScreen/WhyChronoLegal";
 import HeaderMenu from "./components/header/header";
 import WhoWeServe from "./components/startScreen/WhoWeServe";
 import OurClients from "./components/startScreen/OurClients";
+import SliderTop from "./components/startScreen/SliderTop";
 
 export default function Home({
   kind,
@@ -48,7 +49,7 @@ export default function Home({
           modalIsOpen={modalIsOpen}
           setIsOpen={setIsOpen}
         />
-        <StartScreen />
+        <SliderTop />
         <HowItWorks />
         <WhyChronoLegal />
         <WhoWeServe />

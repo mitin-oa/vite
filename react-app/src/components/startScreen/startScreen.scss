@@ -7,10 +7,11 @@
 /* start screen styles starts */
 
 .start_screen {
-    min-height: 88vh;
-    padding: 50px 40px 20px;
+    min-height: 80vh;
+    padding: 0px 0px 20px;
+    width: 100%;
     //background-color: #033c5a;
-    background-image:  url("/public/home-pic.jpg") ;
+
     background-size:cover;
     background-repeat: no-repeat;
     //background-position: bottom 100px right;
@@ -263,11 +264,74 @@ background-color: #ec720b;
       font-size: 22px;
       margin-bottom: 0;
     }
+  }
+  .slider-top-card {
+    display: flex !important;
+    justify-content: flex-end;
+    align-items: center;
+    //padding: 150px;
+    height: 80vh;
+    background-size:cover;
+    background-repeat: no-repeat;
+    opacity: 1.0;
+    z-index: 3;
+    &__text {
+      text-align: start;
+      color: white;
+      font-size: 62px;
+      letter-spacing: 5px;
+      font-weight: bolder;
+      margin-bottom: 0;
+      opacity: 1.0;
+    }
   } 
+  .slider-top-content {
+    width: 40vw;
+    margin-left: 12vw;
+    z-index: 10;
+  }
+
+  .card1 {
+    background-image:  url("/public/home-pic.jpg");
+  }
+  .card2 {
+    background-image:  url("/public/WWS-pic.jpg");
+  }
+  .card3 {
+    background-image:  url("/public/start_screen_pic.png");
+  }
+  .slider-top-card-shadow {
+    display: flex;
+    align-items: center;
+    width: 65%;
+    height: 80vh;
+    clip-path: polygon(20% 0%, 100% 0, 100% 100%, 0% 100%);
+    background-color: #ec720b;
+    opacity: 0.3;
+    z-index: 1;
+  }
+  
 button.slick-arrow {
   min-width: 0;
   padding: 0;
   background-color: transparent;
   opacity: 1;
+}
+
+button.slick-arrow.slick-prev {
+  width: 30px;
+  height: 30px;
+  left: 50px;
+  z-index: 2;
+}
+button.slick-arrow.slick-prev::before {
+  width: 30px;
+  height: 30px;
+}
+button.slick-arrow.slick-next {
+  width: 30px;
+  height: 30px;
+  right: 50px;
+  z-index: 2;
 }
   /* start screen styles ends */
