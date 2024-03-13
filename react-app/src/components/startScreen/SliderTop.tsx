@@ -86,41 +86,53 @@ export default function SliderTop() {
           </div>
         </div>
         <div className="slider-top-card card2">
-          <div
-            className="wrapper"
-            style={{ flexDirection: "column", marginLeft: "40%" }}
-          >
-            <h1 className="slider-top-card__text">
-              Seamless automation of your contracts, creation, approval and
-              signature processes and workflows
-            </h1>
-            <Link to="/Services">
-              <Button
-                children="GET STARTED"
-                color=""
-                style={"btn_get_started"}
-                onClick={() => null}
-              />
-            </Link>
+          <div className="slider-top-card-shadow">
+            <div
+              className="slider-top-content"
+              style={{
+                flexDirection: "column",
+                justifyContent: "center",
+                zIndex: "10",
+              }}
+            >
+              <h1 className="slider-top-card__text">
+                Seamless automation of your contracts, creation, approval and
+                signature processes and workflows
+              </h1>
+              <Link to="/Services">
+                <Button
+                  children="GET STARTED"
+                  color=""
+                  style={"btn_get_started"}
+                  onClick={() => null}
+                />
+              </Link>
+            </div>
           </div>
         </div>
         <div className="slider-top-card card3">
-          <div
-            className="wrapper"
-            style={{ flexDirection: "column", marginLeft: "40%" }}
-          >
-            <h1 className="slider-top-card__text">
-              Smart contract lifecycle management solution SaaS-based or
-              deployed in your SharePoint environment
-            </h1>
-            <Link to="/Services">
-              <Button
-                children="GET STARTED"
-                color=""
-                style={"btn_get_started"}
-                onClick={() => null}
-              />
-            </Link>
+          <div className="slider-top-card-shadow">
+            <div
+              className="slider-top-content"
+              style={{
+                flexDirection: "column",
+                justifyContent: "center",
+                zIndex: "10",
+              }}
+            >
+              <h1 className="slider-top-card__text">
+                Smart contract lifecycle management solution SaaS-based or
+                deployed in your SharePoint environment
+              </h1>
+              <Link to="/Services">
+                <Button
+                  children="GET STARTED"
+                  color=""
+                  style={"btn_get_started"}
+                  onClick={() => null}
+                />
+              </Link>
+            </div>
           </div>
         </div>
       </Slider>
