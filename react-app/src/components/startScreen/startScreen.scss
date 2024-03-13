@@ -1,7 +1,7 @@
 @font-face {
   font-family: "Montserrat";
   src:
-    url("/public/Montserrat/static/Montserrat-Regular.ttf") 
+    url("/Montserrat/static/Montserrat-Regular.ttf") 
 }
 
 /* start screen styles starts */
@@ -10,8 +10,8 @@
     min-height: 80vh;
     padding: 0px 0px 20px;
     width: 100%;
-    background-size:cover;
-    background-repeat: no-repeat;
+    //background-size:cover;
+    //background-repeat: no-repeat;
     //background-position: bottom 100px right;
     @media (max-width: 1028px) {
       padding: 30px 40px 0px;
