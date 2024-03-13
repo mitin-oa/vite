@@ -146,13 +146,12 @@ export default function DashBoardManager({
     setIsOpen(false);
   }
 
-  function downloadProcessedFile(fileName: any) {
-    console.log(fileName);
-    let pathToFile = "/api/downloadProcessedFile/" + fileName;
+  function downloadProcessedFile(orderId: any) {
+    console.log(orderId);
+    let pathToFile = "/api/downloadProcessedFile/" + orderId;
     fetchWithRefreshAuth(pathToFile, {
       method: "GET",
       headers: {
-        "Content-Type": "application/pdf",
       },
     })
       .then((response) => {
@@ -162,19 +161,20 @@ export default function DashBoardManager({
         return response.blob();
       })
       .then((blob) => {
-        const url = window.URL.createObjectURL(new Blob([blob]));
-
-        const link = document.createElement("a");
-        link.href = url;
-        link.download = fileName;
-
-        document.body.appendChild(link);
-
-        link.click();
-
-        if (link.parentNode) {
-          link.parentNode.removeChild(link);
-        }
+        // Создаем URL для скачивания файла
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = url;
+        // Указываем имя файла для скачивания
+        a.download = orderId + '.zip';
+        document.body.appendChild(a);
+        a.click();
+        // Очищаем ссылку
+        window.URL.revokeObjectURL(url);
+      })
+      .catch(error => {
+        console.error('Ошибка при скачивании файла:', error);
       });
   }
 
@@ -258,71 +258,69 @@ export default function DashBoardManager({
                   <td>Status</td>
                   <td>Date</td>
                   <td>Number of pages</td>
-                  <td>Express delivery</td>
+                  <td>Delivery time</td>
                   <td>Manage</td>
                 </tr>
                 {userDataForDashboard
                   ? userDataForDashboard.data.unassignedOrders
-                      .slice(
-                        -10,
-                        userDataForDashboard.data.unassignedOrders.length
-                      )
-                      .sort((a: any, b: any) =>
-                        a.created_at.date > b.created_at.date ? 1 : -1
-                      )
-                      .map((e: any) => (
-                        <tr key={e.index}>
-                          <td>{userDataForDashboard ? e.client_name : ""}</td>
-                          <td>{userDataForDashboard ? e.status : ""}</td>
-                          <td>
-                            {userDataForDashboard
-                              ? e.created_at.toString().split("T")[0] +
-                                " " +
-                                e.created_at
-                                  .toString()
-                                  .split("T")[1]
-                                  .split(".")[0]
-                              : ""}
-                          </td>
-                          <td>
-                            {userDataForDashboard ? e.number_of_pages : ""}
-                          </td>
-                          <td>
-                            {userDataForDashboard && e.express_delivery
-                              ? "yes"
-                              : ""}
-                          </td>
-                          <td>
-                            <div
-                              style={{
-                                display: "flex",
-                                justifyContent: "center",
-                              }}
-                            >
-                              {e.status === "paid" ? (
-                                <Select
-                                  options={editor}
-                                  onChange={setSelectedEditor}
-                                />
-                              ) : (
-                                ""
-                              )}
-                              <Button
-                                children={
-                                  e.status == "pending"
-                                    ? "Send reminder letter"
-                                    : "Assign editor"
-                                }
-                                color={"orange"}
-                                style={"table-btn"}
-                                onClick={() =>
-                                  AssignEditor(selectedEditor, e.order_id)
-                                }
+                    .slice(
+                      -10,
+                      userDataForDashboard.data.unassignedOrders.length
+                    )
+                    .sort((a: any, b: any) =>
+                      a.created_at.date > b.created_at.date ? 1 : -1
+                    )
+                    .map((e: any) => (
+                      <tr key={e.index}>
+                        <td>{userDataForDashboard ? e.client_name : ""}</td>
+                        <td>{userDataForDashboard ? e.status : ""}</td>
+                        <td>
+                          {userDataForDashboard
+                            ? e.created_at.toString().split("T")[0] +
+                            " " +
+                            e.created_at
+                              .toString()
+                              .split("T")[1]
+                              .split(".")[0]
+                            : ""}
+                        </td>
+                        <td>
+                          {userDataForDashboard ? e.number_of_pages : ""}
+                        </td>
+                        <td>
+                          {userDataForDashboard ? e.delivery_time : ""}
+                        </td>
+                        <td>
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "center",
+                            }}
+                          >
+                            {e.status === "paid" ? (
+                              <Select
+                                options={editor}
+                                onChange={setSelectedEditor}
                               />
-                            </div>
-                          </td>
-                        </tr>
-                      ))
+                            ) : (
+                              ""
+                            )}
+                            <Button
+                              children={
+                                e.status == "pending"
+                                  ? "Send reminder letter"
+                                  : "Assign editor"
+                              }
+                              color={"orange"}
+                              style={"table-btn"}
+                              onClick={() =>
+                                AssignEditor(selectedEditor, e.order_id)
+                              }
+                            />
+                          </div>
+                        </td>
+                      </tr>
+                    ))
                   : ""}
               </tbody>
             </table>
@@ -343,35 +341,35 @@ export default function DashBoardManager({
                 </tr>
                 {userDataForDashboard
                   ? userDataForDashboard.data.editorsWorkload.map((e: any) => (
-                      <tr>
-                        <td>{userDataForDashboard ? e.editor_name : ""}</td>
-                        <td>{userDataForDashboard ? e.total_orders : ""}</td>
-                        <td>{userDataForDashboard ? e.total_pages : ""}</td>
+                    <tr>
+                      <td>{userDataForDashboard ? e.editor_name : ""}</td>
+                      <td>{userDataForDashboard ? e.total_orders : ""}</td>
+                      <td>{userDataForDashboard ? e.total_pages : ""}</td>
 
-                        <td>
-                          <div
-                            style={{
-                              display: "flex",
-                              justifyContent: "space-between",
-                            }}
-                          >
-                            <Select
-                              options={options}
-                              onChange={setSelectedOptions}
-                            />
-                            <Button
-                              children={"Assign Order"}
-                              color={"orange"}
-                              style={"table-btn"}
-                              onClick={() =>
-                                AssignOrder(e.editor_id, selectOptions)
-                              }
-                            />
-                          </div>
-                        </td>
-                        <td>...</td>
-                      </tr>
-                    ))
+                      <td>
+                        <div
+                          style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                          }}
+                        >
+                          <Select
+                            options={options}
+                            onChange={setSelectedOptions}
+                          />
+                          <Button
+                            children={"Assign Order"}
+                            color={"orange"}
+                            style={"table-btn"}
+                            onClick={() =>
+                              AssignOrder(e.editor_id, selectOptions)
+                            }
+                          />
+                        </div>
+                      </td>
+                      <td>...</td>
+                    </tr>
+                  ))
                   : ""}
               </tbody>
             </table>
@@ -385,63 +383,63 @@ export default function DashBoardManager({
                   <td>Date of order</td>
                   <td>Date of delivering</td>
                   <td>Number of pages</td>
-                  <td>Express delivery</td>
+                  <td>Delivery time</td>
                   <td>Editor name</td>
                   <td>Download</td>
                 </tr>
                 {userDataForDashboard
                   ? userDataForDashboard.data.processedOrders
-                      .slice(
-                        -10,
-                        userDataForDashboard.data.processedOrders.length
-                      )
-                      .sort((a: any, b: any) =>
-                        a.created_at.date > b.created_at.date ? 1 : -1
-                      )
-                      .map((e: any) => (
-                        <tr>
-                          <td>{userDataForDashboard ? e.client_name : ""}</td>
-                          <td>
-                            {userDataForDashboard
-                              ? e.created_at.toString().split("T")[0] +
-                                " " +
-                                e.created_at
-                                  .toString()
-                                  .split("T")[1]
-                                  .split(".")[0]
-                              : ""}
-                          </td>
-                          <td>
-                            {userDataForDashboard
-                              ? e.completed_at.toString().split("T")[0] +
-                                " " +
-                                e.completed_at
-                                  .toString()
-                                  .split("T")[1]
-                                  .split(".")[0]
-                              : ""}
-                          </td>
-                          <td>
-                            {userDataForDashboard ? e.number_of_pages : ""}
-                          </td>
-                          <td>
-                            {userDataForDashboard && e.express_delivery
-                              ? "yes"
-                              : "no"}
-                          </td>
-                          <td>{userDataForDashboard ? e.editor_name : ""}</td>
-                          <td>
-                            <Button
-                              children={"Download"}
-                              color={"orange"}
-                              style={"table-btn"}
-                              onClick={() =>
-                                downloadProcessedFile(e.processed_file)
-                              }
-                            />
-                          </td>
-                        </tr>
-                      ))
+                    .slice(
+                      -10,
+                      userDataForDashboard.data.processedOrders.length
+                    )
+                    .sort((a: any, b: any) =>
+                      a.created_at.date > b.created_at.date ? 1 : -1
+                    )
+                    .map((e: any) => (
+                      <tr>
+                        <td>{userDataForDashboard ? e.client_name : ""}</td>
+                        <td>
+                          {userDataForDashboard
+                            ? e.created_at.toString().split("T")[0] +
+                            " " +
+                            e.created_at
+                              .toString()
+                              .split("T")[1]
+                              .split(".")[0]
+                            : ""}
+                        </td>
+                        <td>
+                          {userDataForDashboard
+                            ? e.completed_at.toString().split("T")[0] +
+                            " " +
+                            e.completed_at
+                              .toString()
+                              .split("T")[1]
+                              .split(".")[0]
+                            : ""}
+                        </td>
+                        <td>
+                          {userDataForDashboard ? e.number_of_pages : ""}
+                        </td>
+                        <td>
+                          {userDataForDashboard ? e.delivery_time : ""}
+                        </td>
+                        <td>
+                          {userDataForDashboard ? e.editor_name : ""}
+                        </td>
+                        <td>
+                          <Button
+                            children={"Download"}
+                            color={"orange"}
+                            style={"table-btn"}
+                            onClick={() =>
+                              downloadProcessedFile(e.order_id)
+                            }
+                          />
+                        </td>
+                      </tr>
+                    ))
                   : ""}
               </tbody>
             </table>

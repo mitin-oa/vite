@@ -30,5 +30,28 @@ async function getUserDataForDashboard() {
   }
 }
 
+
+async function getUserDataForDashboard1(orderId: string | null) {
+  console.log(orderId, 'getUserDataForDashboard1');
+  
+  try {
+    const response = await fetch("/api/getUserDataForDashboard1/" + orderId);
+
+    // Extracts data from the response in JSON format.
+    const data = await response.json();
+
+    console.log('data', data);
+    if (data.status == "fail") {
+      alert("Please log in.");
+      console.log(data.message);
+    } else {
+      return data;
+    }
+  } catch (error) {
+    console.error("Error while requesting the server:", error);
+    throw error;
+  }
+}
+
 // Exports the function for use in other parts of the code.
-export { getUserDataForDashboard };
+export { getUserDataForDashboard, getUserDataForDashboard1};

@@ -48,7 +48,7 @@ const ResetPassForm = ({ setIsOpen, resetPass, setResetPass }: any) => {
           resolve(data);
         })
         .catch(error => {
-          console.error('Error sending payment data:', error);
+          console.error('Error sending data:', error);
           reject(error);
         });
     });

@@ -4,44 +4,45 @@ import Button from "./Button";
 import { fetchWithRefreshAuth } from "../fetchScripts/fetchWithRefreshAuth";
 
 
-function DownLoadFile({ fileName }: any) {
-  const downloadFile = (fileName: string) => {
-    let pathToFile = "/api/downloadOriginalFile/" + fileName;
+function DownLoadFile({ orderId }: any) {
+  const downloadFile = (orderId: string) => {
+    let pathToFile = "/api/downloadOriginalFile/" + orderId;
     fetchWithRefreshAuth(pathToFile, {
-      method: "GET",
+      method: 'GET',
       headers: {
-        "Content-Type": "application/pdf",
       },
     })
-      .then((response) => {
+      .then(response => {
         if (!response.ok) {
           throw new Error('Server returned an error response');
         }
         return response.blob();
       })
-      .then((blob) => {
-        const url = window.URL.createObjectURL(new Blob([blob]));
-
-        const link = document.createElement("a");
-        link.href = url;
-        link.download = fileName;
-
-        document.body.appendChild(link);
-
-        link.click();
-
-        if (link.parentNode) {
-          link.parentNode.removeChild(link);
-        }
+      .then(blob => {
+        // Создаем URL для скачивания файла
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = url;
+        // Указываем имя файла для скачивания
+        a.download = orderId + '.zip';
+        document.body.appendChild(a);
+        a.click();
+        // Очищаем ссылку
+        window.URL.revokeObjectURL(url);
+      })
+      .catch(error => {
+        console.error('Ошибка при скачивании файла:', error);
       });
+
   };
 
   return (
     <div>
       <Button
-        children={"Download file"}
+        children={"Download files"}
         color={"orange"}
-        onClick={() => downloadFile(fileName)}
+        onClick={() => downloadFile(orderId)}
         style={"table-btn"}
       />
     </div>
