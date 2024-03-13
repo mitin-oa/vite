@@ -2,9 +2,6 @@ import "../startScreen/startScreen.scss";
 import { useMediaQuery } from "react-responsive";
 import { useContext } from "react";
 import { SignedInContext } from "../../App";
-import Time from "../../../public/time-fast.png";
-import Money from "../../../public/piggy-bank.png";
-import Revenue from "../../../public/revenue.png";
 
 export default function WhoWeServe() {
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1160px" });
