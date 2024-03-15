@@ -248,14 +248,15 @@ background-color: #ec720b;
   .slider-container {
     width: 100%;
   }
-  .slider-card {
+
+  .slider-bottom-card {
     display: flex !important;
     flex-direction: column;
     justify-content: center;
-    padding: 50px;
+    padding: 50px 130px;
     height: 40vh;
     background-color: #ec720b;
-    //opacity: 0.5;
+    opacity: 0.5;
     &__text {
       text-align: start;
       color: #ffffff;
@@ -267,7 +268,6 @@ background-color: #ec720b;
     display: flex !important;
     justify-content: flex-end;
     align-items: center;
-    //padding: 150px;
     height: 80vh;
     background-size:cover;
     background-repeat: no-repeat;
