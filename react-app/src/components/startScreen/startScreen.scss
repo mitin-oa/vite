@@ -255,7 +255,7 @@ background-color: #ec720b;
     padding: 50px;
     height: 40vh;
     background-color: #ec720b;
-    opacity: 0.5;
+    //opacity: 0.5;
     &__text {
       text-align: start;
       color: #ffffff;
@@ -271,32 +271,31 @@ background-color: #ec720b;
     height: 80vh;
     background-size:cover;
     background-repeat: no-repeat;
-    opacity: 1.0;
     z-index: 3;
     &__text {
       text-align: start;
       color: white;
-      font-size: 62px;
+      font-size: 55px;
       letter-spacing: 5px;
-      font-weight: bolder;
-      margin-bottom: 0;
-      opacity: 1.0;
+      font-weight: bold;
+      margin-bottom: 5vh;
     }
   } 
   .slider-top-content {
-    width: 40vw;
+    width: 39vw;
     margin-left: 12vw;
     z-index: 10;
+    opacity: 1.0 !important;
   }
 
   .card1 {
     background-image:  url("/public/home-pic.jpg");
   }
   .card2 {
-    background-image:  url("/public/WWS-pic.jpg");
+    background-image:  url("/public/slider-top-pic-2.png");
   }
   .card3 {
-    background-image:  url("/public/start_screen_pic.png");
+    background-image:  url("/public/slider-top-pic-3.png");
   }
   .slider-top-card-shadow {
     display: flex;
@@ -305,7 +304,7 @@ background-color: #ec720b;
     height: 80vh;
     clip-path: polygon(20% 0%, 100% 0, 100% 100%, 0% 100%);
     background-color: #ec720b;
-    opacity: 0.3;
+    background: rgb(236 114 11 / 35%);
     z-index: 1;
   }
   

@@ -104,6 +104,65 @@ export default function HeaderMenu({
           </a>
         </div>
       </div>
+      <div className="header-middle-bar">
+        <div className="header-middle-bar__left"></div>
+        <div className="header-middle-bar__right">
+          <Link to="/">
+            <ModalWindow
+              // * VK: This part of the code will be displayed if the variable signedIn == true
+              title={signedUp ? signedInStatus : "Sign Up"}
+              childComp={
+                signedInStatus == "Sign In" ? (
+                  !signedIn && signedUp ? (
+                    !resetPass ? (
+                      <LogInForm
+                        handleSignIn={handleSignIn}
+                        onSignUp={handleSignUp}
+                        setIsOpen={setIsOpen}
+                        modalIsOpen={modalIsOpen}
+                        resetPass={resetPass}
+                        setResetPass={setResetPass}
+                      />
+                    ) : (
+                      <ResetPassForm
+                        setIsOpen={setIsOpen}
+                        resetPass={resetPass}
+                        setResetPass={setResetPass}
+                      />
+                    )
+                  ) : (
+                    <SignUpForm
+                      handleSignUpForm={handleSignUp}
+                      onSignUp={onSignUp}
+                      onCloseModal={closeModal}
+                      setUserProfileData={setUserProfileData}
+                    />
+                  )
+                ) : (
+                  <Link to="/">
+                    <>
+                      <Button
+                        children={`Want to ${signedInStatus}?`}
+                        color="orange"
+                        onClick={() => {
+                          onSignIn(false);
+                          setIsOpen(false);
+                          // deleteCookie("token");
+                          handleSignOut();
+                        }}
+                        style="modal-btn"
+                      />
+                    </>
+                  </Link>
+                )
+              }
+              modalIsOpen={modalIsOpen}
+              openModal={openModal}
+              closeModal={signedUp ? closeModal : closeSignUp}
+            />
+          </Link>
+        </div>
+      </div>
 
       <header className={kind === "short" ? "header__short" : "header"}>
         <div className="wrapper header">
