@@ -11,10 +11,8 @@ export default function OurClients() {
   return (
     <>
       <div
+        className="OCL_picture"
         style={{
-          backgroundImage: "url(/public/WWS-pic.jpg)",
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
           padding: "40px 20vw 150px",
         }}
       >
