@@ -12,7 +12,7 @@ export default function OurClients() {
     <>
       <div
         style={{
-          backgroundImage: "url(../../public/WWS-pic.jpg)",
+          backgroundImage: "url(/public/WWS-pic.jpg)",
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
           padding: "40px 20vw 150px",
