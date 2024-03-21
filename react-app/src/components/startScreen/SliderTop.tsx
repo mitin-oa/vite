@@ -4,6 +4,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "../startScreen/startScreen.scss";
 import Button from "../Button";
 import { Link } from "react-router-dom";
+
 function SampleNextArrow(props: any) {
   const { className, style, onClick } = props;
   return (

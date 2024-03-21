@@ -2,7 +2,7 @@ import "../startScreen/startScreen.scss";
 import { useMediaQuery } from "react-responsive";
 import { useContext } from "react";
 import { SignedInContext } from "../../App";
-import SimpleSlider from "./Slider";
+import SimpleSlider from "./SliderBottom";
 
 export default function OurClients() {
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1160px" });

@@ -2,7 +2,7 @@ import { useState } from "react";
 import Alert from "./components/Alert";
 import Footer from "./components/footer/footer";
 import ModalWindow from "./components/modal/modal";
-import StartScreen from "./components/startScreen/startScreen";
+import StartScreen from "./components/startScreen/StartScreen";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import HowItWorks from "./components/startScreen/HowItWorks";

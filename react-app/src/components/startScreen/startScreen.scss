@@ -237,6 +237,7 @@
     background-image:  url("/public/WWS-pic.jpg") ;
     background-size:cover;
     background-repeat: no-repeat;
+    background-attachment:fixed
   }
 
   .WCL_icon {
@@ -247,9 +248,9 @@
   }
 
   .vertical-strip {
-width: 20px;
-height: 560px;
-background-color: #ec720b;
+    width: 20px;
+    height: 560px;
+    background-color: #ec720b;
   }
 
   .slider-container {
@@ -260,15 +261,29 @@ background-color: #ec720b;
     display: flex !important;
     flex-direction: column;
     justify-content: center;
-    padding: 50px 130px;
+    padding: 50px 100px;
     height: 40vh;
     background-color: #ec720b;
-    opacity: 0.5;
+    background: rgb(236 114 11 / 55%);
     &__text {
-      text-align: start;
+      text-align: center;
       color: #ffffff;
-      font-size: 22px;
+      font-size: 24px;
+      font-style: italic;
+      margin-bottom: 10px;
+    }
+    &__name {
+      text-align: center;
+      color: #033c5a;
+      font-size: 28px;
+      font-weight: bold;
       margin-bottom: 0;
+    }
+    &__title {
+      text-align: center;
+      color: #ffffff;
+      font-size: 20px;
+      text-transform:uppercase;
     }
   }
   .slider-top-card {
@@ -291,8 +306,6 @@ background-color: #ec720b;
   .slider-top-content {
     width: 39vw;
     margin-left: 12vw;
-    z-index: 10;
-    opacity: 1.0 !important;
   }
 
   .card1 {
