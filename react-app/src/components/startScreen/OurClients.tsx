@@ -20,9 +20,10 @@ export default function OurClients() {
           OUR CLIENTS LOVE US
           <div className="wrapper">
             <p
-              className=" only_text"
+              className="only_text"
               style={{
                 color: "#ec720b",
+                fontWeight: "bold",
                 textAlign: "center",
               }}
             >

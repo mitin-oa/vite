@@ -1,7 +1,7 @@
 @font-face {
-  font-family: "Montserrat";
+  font-family: "MontserratB";
   src:
-    url("/Montserrat/static/Montserrat-Regular.ttf") 
+    url("/Montserrat/static/Montserrat-Bold.ttf")
 }
 
 /* start screen styles starts */
@@ -72,33 +72,12 @@
     };
   }
   
-  .only_title {
-    font-family: 'Georgia';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 44px;
-    line-height: 57px;
-    color: #ffffff;
-    margin-bottom: 20px;
-    //padding-right: 20px;
-    @media screen and (max-width: 1028px) {
-        font-size: 25px;
-        line-height: 32.5px;
-    }
-    @media screen and (max-width: 760px) {
-      font-size: 25px;
-      line-height: 32.5px;
-      text-align: center;
-      padding-right: 0px;
-  }
-  }
-  
   .only_text {
     font-family: 'Arial';
-    font-size: 18px;
+    font-size: 20px;
     line-height: 160%;
     margin: 1.0rem 0 0;
-    color: #CDCDCD;
+    color: white;
     text-align: left;
     @media screen and (max-width: 1028px) {
         font-size: 15px;
@@ -115,10 +94,9 @@
   .home_title {
     width: 100%;
     font-size: 40px;
-    font-weight: bold;
     text-align: center;
     line-height: 50px;
-    font-family: 'Montserrat';
+    font-family: 'MontserratB';
     color: #ec720b;
     padding: 20px 0;
     @media screen and (max-width: 1028px) {

@@ -9,8 +9,8 @@ export default function WhoWeServe() {
   const signedIn = useContext(SignedInContext);
   return (
     <>
-      <div className="home_title">WHO WE SERVE</div>
-      <div style={{ backgroundColor: "#033c5a", padding: "40px 40px 50px" }}>
+      <div style={{ backgroundColor: "#033c5a", padding: "0px 40px 50px" }}>
+        <div className="home_title">WHO WE SERVE</div>
         <div className="wrapper d-flex flex-lm-row flex-md-block">
           <div className="Content" style={{ marginLeft: "10px" }}>
             <h3
