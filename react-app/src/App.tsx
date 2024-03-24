@@ -16,9 +16,7 @@ import Swal from "sweetalert2";
 import ResetPassword from "./ResetPassword";
 import DashBoardTempClient from "./DashBoardTempClient";
 
-
-
-import OrderRewiew from "./OrderRewiew";
+import OrderRewiew from "./OrderReview";
 import Contacts from "./Contacts";
 import Services from "./Services";
 import { ParallaxProvider } from "react-scroll-parallax";
@@ -27,7 +25,10 @@ export const SignedUpContext = createContext(true);
 export const MobileScreenContext = createContext(false);
 
 // * VK: Significant for the backend area. Please exercise caution when making alterations
-import { sendLogInRequest, sendLogOutRequest } from "./fetchScripts/authRequests";
+import {
+  sendLogInRequest,
+  sendLogOutRequest,
+} from "./fetchScripts/authRequests";
 
 export function deleteCookie(name: string) {
   const date = new Date();
@@ -38,11 +39,10 @@ export function deleteCookie(name: string) {
 }
 
 export function handleSignOut() {
-  localStorage.removeItem('accessToken');
-  localStorage.removeItem('userRole');
+  localStorage.removeItem("accessToken");
+  localStorage.removeItem("userRole");
   sendLogOutRequest();
 }
-
 
 //deleteCookie("token");
 
@@ -55,7 +55,7 @@ function App() {
   //   parts.length === 2 ? parts.pop()?.split(";").shift() !== null : false;
 
   // * VK: Changing the method of authorization verification (instead of cookies, data from local storage is used)
-  const token = localStorage.getItem('accessToken') !== null ? true : false;
+  const token = localStorage.getItem("accessToken") !== null ? true : false;
 
   const [signedIn, onSignIn] = useState(token);
   const [signedUp, onSignUp] = useState(true);
@@ -87,7 +87,7 @@ function App() {
 
     if (answer.HTTP_status === 200) {
       // * VK: Logic in case of successful authorization
-      localStorage.setItem('accessToken', "valid");
+      localStorage.setItem("accessToken", "valid");
       localStorage.setItem("userRole", answer.userRole);
       setUserRole(answer.userRole);
       // console.log('Server response OK:', data);
@@ -189,7 +189,6 @@ function App() {
                   />
                 }
               />
-
               <Route
                 path="FAQs"
                 element={
@@ -304,22 +303,23 @@ function App() {
                 }
               />
               // * VK: Temporary User Dashboard
-              <Route path="/TemporaryDashboard" element={
-                <DashBoardTempClient
-                  kind="short"
-                  onSignIn={onSignIn}
-                  handleSignIn={handleSignIn}
-                  signedUp={signedUp}
-                  setUserProfileData={setUserProfileData}
-                  handleSignUp={handleSignUp}
-                  modalIsOpen={modalIsOpen}
-                  setIsOpen={setIsOpen}
-                />
-              } />
-
+              <Route
+                path="/TemporaryDashboard"
+                element={
+                  <DashBoardTempClient
+                    kind="short"
+                    onSignIn={onSignIn}
+                    handleSignIn={handleSignIn}
+                    signedUp={signedUp}
+                    setUserProfileData={setUserProfileData}
+                    handleSignUp={handleSignUp}
+                    modalIsOpen={modalIsOpen}
+                    setIsOpen={setIsOpen}
+                  />
+                }
+              />
               <Route path="*" element={<NotFound />} />
               <Route path="/resetPassword" Component={ResetPassword} />
-
             </Routes>
           </ParallaxProvider>
         </SignedInContext.Provider>

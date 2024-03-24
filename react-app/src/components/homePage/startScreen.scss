@@ -6,7 +6,7 @@
 
 /* start screen styles starts */
 
-.start_screen {
+.start-screen {
     min-height: 80vh;
     padding: 0px 0px 20px;
     width: 100%;
@@ -76,6 +76,7 @@
     font-family: 'Arial';
     font-size: 20px;
     line-height: 160%;
+    letter-spacing: normal;
     margin: 1.0rem 0 0;
     color: white;
     text-align: left;
@@ -93,7 +94,8 @@
 
   .home_title {
     width: 100%;
-    font-size: 40px;
+    font-size: 38px;
+    letter-spacing: 2px;
     text-align: center;
     line-height: 50px;
     font-family: 'MontserratB';
@@ -273,11 +275,12 @@
     background-repeat: no-repeat;
     z-index: 3;
     &__text {
+      font-family: "MontserratB";
       text-align: start;
       color: white;
-      font-size: 55px;
+      font-size: 48px;
       letter-spacing: 5px;
-      font-weight: bold;
+      //font-weight: bold;
       margin-bottom: 5vh;
     }
   } 
@@ -302,7 +305,7 @@
     height: 80vh;
     clip-path: polygon(20% 0%, 100% 0, 100% 100%, 0% 100%);
     background-color: #ec720b;
-    background: rgb(236 114 11 / 35%);
+    background: rgb(236 114 11 / 40%);
     z-index: 1;
   }
   

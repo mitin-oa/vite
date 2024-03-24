@@ -1,4 +1,4 @@
-import "../startScreen/startScreen.scss";
+import "../homePage/startScreen.scss";
 import HeaderMenu from "../header/header";
 import StartScreenPic from "../../../public/start_screen_pic3.png";
 import { Link } from "react-router-dom";

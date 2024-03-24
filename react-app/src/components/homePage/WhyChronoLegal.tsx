@@ -1,4 +1,4 @@
-import "../startScreen/startScreen.scss";
+import "../homePage/startScreen.scss";
 import { useMediaQuery } from "react-responsive";
 import { useContext } from "react";
 import { SignedInContext } from "../../App";

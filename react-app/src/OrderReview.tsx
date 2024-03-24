@@ -10,7 +10,7 @@ import PayPal from "./components/PayPalGuest";
 // * VK: Significant for the backend area. Please exercise caution when making alterations
 import { createTempUser } from "./fetchScripts/authRequests";
 
-export default function CalculateCost({
+export default function OrderReview({
   handleSignIn,
   handleSignUp,
   modalIsOpen,
@@ -31,7 +31,9 @@ export default function CalculateCost({
 
   // Client data
   const [inputName, setInputName] = useState("John Boil");
-  const [inputEmail, setInputEmail] = useState("sb-yhbsi27086563@personal.example.com");
+  const [inputEmail, setInputEmail] = useState(
+    "sb-yhbsi27086563@personal.example.com"
+  );
   const [inputPhone, setInputPhone] = useState("+34312345678");
   const [userId, setUserId] = useState(undefined);
 
@@ -40,18 +42,22 @@ export default function CalculateCost({
   const [companyIndustry, setCompanyIndustry] = useState("Company 1 Industry");
 
   // Contract data
-  type ContractType = 'type 1' | 'type 2' | 'type 3' | '';
-  const [contractType, setContractType] = useState<ContractType>('');
-  const [contractDescription, setContractDescription] = useState("Contract Description 1");
+  type ContractType = "type 1" | "type 2" | "type 3" | "";
+  const [contractType, setContractType] = useState<ContractType>("");
+  const [contractDescription, setContractDescription] = useState(
+    "Contract Description 1"
+  );
   const [contractValue, setContractValue] = useState("10000 $");
 
   const [counterpartyName, setCounterpartyName] = useState("Counterparty 1");
-  const [counterpartyAddress, setCounterpartyAddress] = useState("Counterparty 1 address");
+  const [counterpartyAddress, setCounterpartyAddress] = useState(
+    "Counterparty 1 address"
+  );
 
   // Order data
-  type ServiceType = 'review' | 'redlining' | 'negotiation' | '';
-  const [serviceType, setServiceType] = useState<ServiceType>('');
-  const [deliveryTime, setDeliveryTime] = useState('whenever');
+  type ServiceType = "review" | "redlining" | "negotiation" | "";
+  const [serviceType, setServiceType] = useState<ServiceType>("");
+  const [deliveryTime, setDeliveryTime] = useState("whenever");
   const [uploadedContracts, setUploadedContracts] = useState<File[]>([]);
   const [totalPages, setTotalPages] = useState(0);
   const [totalCost, setTotalCost] = useState(0);
@@ -62,13 +68,20 @@ export default function CalculateCost({
   const [uploadedClientGuides, setUploadedClientGuides] = useState<File[]>([]);
   const [addInformation, setAddInformation] = useState("Add information");
 
-  // CLIENT'S 
+  // CLIENT'S
 
   async function checkEmail() {
-
-    const addedUser: any = await createTempUser([inputName, inputEmail, inputPhone]);
-    if (addedUser.message == 'User with the same name or email already exists') {
-      alert('User with the same email already exists. Please log in or choose a different e-mail address.');
+    const addedUser: any = await createTempUser([
+      inputName,
+      inputEmail,
+      inputPhone,
+    ]);
+    if (
+      addedUser.message == "User with the same name or email already exists"
+    ) {
+      alert(
+        "User with the same email already exists. Please log in or choose a different e-mail address."
+      );
       return;
     }
 
@@ -99,7 +112,7 @@ export default function CalculateCost({
     return new Promise((resolve, reject) => {
       fetch("/api/calculateOrderCost", {
         method: "POST",
-        body: formData
+        body: formData,
       })
         .then((response) => response.json())
         .then((data) => {
@@ -116,7 +129,6 @@ export default function CalculateCost({
           reject(error);
         });
     });
-
   }
 
   function handleOrder(
@@ -126,7 +138,6 @@ export default function CalculateCost({
     paymentStatus: string,
     paymentCaptureId: string
   ) {
-
     const formData = new FormData();
 
     // Add customer information
@@ -163,14 +174,14 @@ export default function CalculateCost({
     return new Promise((resolve, reject) => {
       fetch("/api/saveOnFlyOrder", {
         method: "POST",
-        body: formData
+        body: formData,
       })
         .then((response) => response.json())
         .then((data) => {
           // TODO VK: Add server response handling
           setPaymentStatus(true);
           setShowModal(!showModal);
-          setOrderId(data.orderId)
+          setOrderId(data.orderId);
           resolve(data);
         })
         .catch((error) => {
@@ -197,7 +208,7 @@ export default function CalculateCost({
     return new Promise((resolve, reject) => {
       fetch("/api/saveClientGuides", {
         method: "POST",
-        body: formData
+        body: formData,
       })
         .then((response) => response.json())
         .then((data) => {
@@ -206,7 +217,7 @@ export default function CalculateCost({
           setShowModal(!showModal);
           resolve(data);
           // * VK: Redirects to the temporary client panel
-          window.location.href = '/TemporaryDashboard?orderId=' + orderId;
+          window.location.href = "/TemporaryDashboard?orderId=" + orderId;
         })
         .catch((error) => {
           console.error("Error sending data:", error);
@@ -219,7 +230,6 @@ export default function CalculateCost({
     console.log(totalCost);
   }, [totalCost]);
 
-
   // PAYMENT'S
 
   const handlePayPalError = (error: string) => {
@@ -227,7 +237,6 @@ export default function CalculateCost({
     setPaymentStatus(false);
     setShowModal(!showModal);
   };
-
 
   return (
     <>
@@ -242,15 +251,28 @@ export default function CalculateCost({
           onSignIn={onSignIn}
           onSignUp={onSignUp}
         />
-        <section className="main-content container" style={{ flexDirection: "column" }}>
+        <section
+          className="main-content container"
+          style={{ flexDirection: "column" }}
+        >
           {paymentStatus ? (
             // * VK: If the payment has been made, it will display this data
             <>
-              <h3>Payment completed successfully! Your order has been processed.</h3>
+              <h3>
+                Payment completed successfully! Your order has been processed.
+              </h3>
 
-              <p>Details and access to your temporary dashboard have been sent to your email.</p>
-              <p>Now you can add additional instructions or <a href={`/TemporaryDashboard?orderId=${orderId}`}>click here</a> to go to the order management dashboard.</p>
-
+              <p>
+                Details and access to your temporary dashboard have been sent to
+                your email.
+              </p>
+              <p>
+                Now you can add additional instructions or{" "}
+                <a href={`/TemporaryDashboard?orderId=${orderId}`}>
+                  click here
+                </a>{" "}
+                to go to the order management dashboard.
+              </p>
 
               <div className="container mt-5 form-container">
                 <div className="row">
@@ -260,10 +282,14 @@ export default function CalculateCost({
                         <h3>Other instructions</h3>
                         <div className="form-group">
                           <label htmlFor="files">
-                            Upload your playbook or a model template to use if any. <br />
-                            (File extensions allowed: .doc, .docx, .rtf, .pdf, .odt)
+                            Upload your playbook or a model template to use if
+                            any. <br />
+                            (File extensions allowed: .doc, .docx, .rtf, .pdf,
+                            .odt)
                           </label>
-                          <FileChooser onFilesSelected={handleClientGuidesUpload} />
+                          <FileChooser
+                            onFilesSelected={handleClientGuidesUpload}
+                          />
                         </div>
                         <div className="form-group mb-3">
                           <label htmlFor="addInformation">
@@ -291,9 +317,8 @@ export default function CalculateCost({
                     </form>
                   </div>
                 </div>
-              </div >
+              </div>
             </>
-
           ) : (
             // * VK: If the payment has not yet been made, display the form
             <>
@@ -306,9 +331,7 @@ export default function CalculateCost({
                       <div className="frame-container">
                         <h3>Tell us about you</h3>
                         <div className="form-group mb-3">
-                          <label htmlFor="contactPersonName">
-                            Your name
-                          </label>
+                          <label htmlFor="contactPersonName">Your name</label>
                           <input
                             type="text"
                             className="form-control"
@@ -384,7 +407,9 @@ export default function CalculateCost({
                               id="companyAddress"
                               value={companyAddress}
                               required={true}
-                              onChange={(e) => setCompanyAddress(e.target.value)}
+                              onChange={(e) =>
+                                setCompanyAddress(e.target.value)
+                              }
                             />
                           </div>
                           <div className="form-group mb-3">
@@ -398,7 +423,9 @@ export default function CalculateCost({
                               id="companyIndustry"
                               value={companyIndustry}
                               required={true}
-                              onChange={(e) => setCompanyIndustry(e.target.value)}
+                              onChange={(e) =>
+                                setCompanyIndustry(e.target.value)
+                              }
                             />
                           </div>
                         </div>
@@ -415,24 +442,58 @@ export default function CalculateCost({
                               id="contractType"
                               value={contractType}
                               required={true}
-                              onChange={(e) => setContractType(e.target.value as ContractType)}
+                              onChange={(e) =>
+                                setContractType(e.target.value as ContractType)
+                              }
                             >
-                              <option value="" disabled hidden>Select contract type</option>
-                              <option value="Non-Disclosure Agreements (NDAs)">Non-Disclosure Agreements (NDAs)</option>
-                              <option value="Master Service Agreements (MSAs)">Master Service Agreements (MSAs)</option>
-                              <option value="Data Processing Agreements (DPAs)">Data Processing Agreements (DPAs)</option>
-                              <option value="Software as a Service Agreements (SaaS)">Software as a Service Agreements (SaaS)</option>
-                              <option value="End-user license agreements (EULAs)">End-user license agreements (EULAs)</option>
-                              <option value="Licensing Agreements">Licensing Agreements</option>
-                              <option value="Consulting Agreements">Consulting Agreements</option>
-                              <option value="Sales agreements">Sales agreements</option>
-                              <option value="Supply Agreements">Supply Agreements</option>
-                              <option value="Real Estate Agreements">Real Estate Agreements</option>
-                              <option value="Construction Agreements">Construction Agreements</option>
-                              <option value="Employment contracts">Employment contracts</option>
-                              <option value="Partnership Agreements">Partnership Agreements</option>
-                              <option value="Statements of Work (SOWs)">Statements of Work (SOWs)</option>
-                              <option value="Work Orders (WOs)">Work Orders (WOs)</option>
+                              <option value="" disabled hidden>
+                                Select contract type
+                              </option>
+                              <option value="Non-Disclosure Agreements (NDAs)">
+                                Non-Disclosure Agreements (NDAs)
+                              </option>
+                              <option value="Master Service Agreements (MSAs)">
+                                Master Service Agreements (MSAs)
+                              </option>
+                              <option value="Data Processing Agreements (DPAs)">
+                                Data Processing Agreements (DPAs)
+                              </option>
+                              <option value="Software as a Service Agreements (SaaS)">
+                                Software as a Service Agreements (SaaS)
+                              </option>
+                              <option value="End-user license agreements (EULAs)">
+                                End-user license agreements (EULAs)
+                              </option>
+                              <option value="Licensing Agreements">
+                                Licensing Agreements
+                              </option>
+                              <option value="Consulting Agreements">
+                                Consulting Agreements
+                              </option>
+                              <option value="Sales agreements">
+                                Sales agreements
+                              </option>
+                              <option value="Supply Agreements">
+                                Supply Agreements
+                              </option>
+                              <option value="Real Estate Agreements">
+                                Real Estate Agreements
+                              </option>
+                              <option value="Construction Agreements">
+                                Construction Agreements
+                              </option>
+                              <option value="Employment contracts">
+                                Employment contracts
+                              </option>
+                              <option value="Partnership Agreements">
+                                Partnership Agreements
+                              </option>
+                              <option value="Statements of Work (SOWs)">
+                                Statements of Work (SOWs)
+                              </option>
+                              <option value="Work Orders (WOs)">
+                                Work Orders (WOs)
+                              </option>
                               <option value="Amendments">Amendments</option>
                               <option value="Other">Other</option>
                             </select>
@@ -440,8 +501,10 @@ export default function CalculateCost({
 
                           <div className="form-group mb-3">
                             <label htmlFor="contractDescription">
-                              Contract description (what is the contract about? what are you buying?
-                              Selling? Where is your company located? Where is the other party located?)
+                              Contract description (what is the contract about?
+                              what are you buying? Selling? Where is your
+                              company located? Where is the other party
+                              located?)
                             </label>
                             <textarea
                               className="form-control"
@@ -449,14 +512,16 @@ export default function CalculateCost({
                               id="contractDescription"
                               value={contractDescription}
                               required={true}
-                              onChange={(e) => setContractDescription(e.target.value)}
+                              onChange={(e) =>
+                                setContractDescription(e.target.value)
+                              }
                             />
                           </div>
 
-
                           <div className="form-group mb-3">
                             <label htmlFor="contractValue">
-                              Contract value (how much will you pay or receive for the goods/services)
+                              Contract value (how much will you pay or receive
+                              for the goods/services)
                             </label>
                             <input
                               type="text"
@@ -476,7 +541,8 @@ export default function CalculateCost({
                           <h3>Tell us about the other party</h3>
                           <div className="form-group mb-3">
                             <label htmlFor="companyName">
-                              Counterparty name (the party you are contracting with)
+                              Counterparty name (the party you are contracting
+                              with)
                             </label>
                             <input
                               type="text"
@@ -485,7 +551,9 @@ export default function CalculateCost({
                               id="counterpartyName"
                               value={counterpartyName}
                               required={true}
-                              onChange={(e) => setCounterpartyName(e.target.value)}
+                              onChange={(e) =>
+                                setCounterpartyName(e.target.value)
+                              }
                             />
                           </div>
                           <div className="form-group mb-3">
@@ -499,7 +567,9 @@ export default function CalculateCost({
                               id="counterpartyAddress"
                               value={counterpartyAddress}
                               required={true}
-                              onChange={(e) => setCounterpartyAddress(e.target.value)}
+                              onChange={(e) =>
+                                setCounterpartyAddress(e.target.value)
+                              }
                             />
                           </div>
                         </div>
@@ -518,25 +588,33 @@ export default function CalculateCost({
                               id="serviceType"
                               value={serviceType}
                               required={true}
-                              onChange={(e) => setServiceType(e.target.value as ServiceType)}
+                              onChange={(e) =>
+                                setServiceType(e.target.value as ServiceType)
+                              }
                             >
-                              <option value="" disabled hidden>Select service type</option>
+                              <option value="" disabled hidden>
+                                Select service type
+                              </option>
                               <option value="review">Review/Check</option>
-                              <option value="redlining">First round of redlining</option>
-                              <option value="negotiation">Start to finish negotiation</option>
+                              <option value="redlining">
+                                First round of redlining
+                              </option>
+                              <option value="negotiation">
+                                Start to finish negotiation
+                              </option>
                             </select>
                           </div>
                           <div className="form-group mb-3">
-                            <label htmlFor="serviceType">
-                              Delivery time
-                            </label>
+                            <label htmlFor="serviceType">Delivery time</label>
                             <select
                               className="form-control"
                               name="deliveryTime"
                               id="deliveryTime"
                               value={deliveryTime}
                               required={true}
-                              onChange={(e) => setDeliveryTime(e.target.value as ServiceType)}
+                              onChange={(e) =>
+                                setDeliveryTime(e.target.value as ServiceType)
+                              }
                             >
                               <option value="whenever">whenever</option>
                               <option value="same day">same day</option>
@@ -553,14 +631,23 @@ export default function CalculateCost({
                         <div className="frame-container">
                           <div className="form-group">
                             <h3>Upload files</h3>
-                            <p>File extensions allowed: .doc, .docx, .rtf, .pdf, .odt</p>
+                            <p>
+                              File extensions allowed: .doc, .docx, .rtf, .pdf,
+                              .odt
+                            </p>
                             {/* VK: Pass the callback function to the FileChooser component */}
-                            <FileChooser onFilesSelected={handleContractsUpload} />
+                            <FileChooser
+                              onFilesSelected={handleContractsUpload}
+                            />
                           </div>
                           <div className="form-group">
                             {uploadedContracts.length > 0 && (
                               <Button
-                                children={costCalculating ? "Processing..." : "Calculate cost"}
+                                children={
+                                  costCalculating
+                                    ? "Processing..."
+                                    : "Calculate cost"
+                                }
                                 color="orange"
                                 onClick={calculateOrderCost}
                                 style="modal-btn"
@@ -572,25 +659,56 @@ export default function CalculateCost({
                             <table className="table">
                               <tbody>
                                 <tr>
-                                  <td style={{ width: "20%", textAlign: "center" }}>
-                                    Pages</td>
-                                  <td style={{ width: "20%", textAlign: "center" }}>
+                                  <td
+                                    style={{
+                                      width: "20%",
+                                      textAlign: "center",
+                                    }}
+                                  >
+                                    Pages
+                                  </td>
+                                  <td
+                                    style={{
+                                      width: "20%",
+                                      textAlign: "center",
+                                    }}
+                                  >
                                     Estimated cost in credits
                                   </td>
-                                  <td style={{ width: "20%", textAlign: "center" }}>
-                                    Estimated cost in $</td>
+                                  <td
+                                    style={{
+                                      width: "20%",
+                                      textAlign: "center",
+                                    }}
+                                  >
+                                    Estimated cost in $
+                                  </td>
                                 </tr>
                                 <tr>
-                                  <td style={{ width: "20%", textAlign: "center" }}>
+                                  <td
+                                    style={{
+                                      width: "20%",
+                                      textAlign: "center",
+                                    }}
+                                  >
                                     {totalPages}
                                   </td>
-                                  <td style={{ width: "40%", textAlign: "center" }}>
+                                  <td
+                                    style={{
+                                      width: "40%",
+                                      textAlign: "center",
+                                    }}
+                                  >
                                     {totalCost}
                                   </td>
-                                  <td style={{ width: "40%", textAlign: "center" }}>
+                                  <td
+                                    style={{
+                                      width: "40%",
+                                      textAlign: "center",
+                                    }}
+                                  >
                                     {totalCostInCerdits}
                                   </td>
-
                                 </tr>
                               </tbody>
                             </table>
@@ -618,13 +736,11 @@ export default function CalculateCost({
                     </form>
                   </div>
                 </div>
-              </div >
+              </div>
             </>
           )}
-
-        </section >
-
-      </div >
+        </section>
+      </div>
       <Footer kind={"short"} />
     </>
   );

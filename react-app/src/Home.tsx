@@ -1,16 +1,11 @@
-import { useState } from "react";
-import Alert from "./components/Alert";
 import Footer from "./components/footer/footer";
-import ModalWindow from "./components/modal/modal";
-import StartScreen from "./components/startScreen/StartScreen";
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
-import HowItWorks from "./components/startScreen/HowItWorks";
-import WhyChronoLegal from "./components/startScreen/WhyChronoLegal";
+import HowItWorks from "./components/homePage/HowItWorks";
+import WhyChronoLegal from "./components/homePage/WhyChronoLegal";
 import HeaderMenu from "./components/header/header";
-import WhoWeServe from "./components/startScreen/WhoWeServe";
-import OurClients from "./components/startScreen/OurClients";
-import SliderTop from "./components/startScreen/SliderTop";
+import WhoWeServe from "./components/homePage/WhoWeServe";
+import OurClients from "./components/homePage/OurClients";
+import SliderTop from "./components/homePage/SliderTop";
+import ReadyToGet from "./components/homePage/ReadyToGet";
 
 export default function Home({
   kind,
@@ -22,20 +17,6 @@ export default function Home({
   modalIsOpen,
   setIsOpen,
 }: any) {
-  function openModal() {
-    setIsOpen(true);
-  }
-  function closeModal() {
-    setIsOpen(false);
-  }
-  const [inputValue, setInputValue] = useState("");
-
-  const showSwal = () => {
-    withReactContent(Swal).fire({
-      title: <i>Input something</i>,
-    });
-  };
-
   return (
     <>
       <div className="app">
@@ -54,6 +35,7 @@ export default function Home({
         <WhyChronoLegal />
         <WhoWeServe />
         <OurClients />
+        <ReadyToGet />
       </div>
 
       <Footer kind="full" />

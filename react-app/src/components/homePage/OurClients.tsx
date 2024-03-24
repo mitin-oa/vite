@@ -1,4 +1,4 @@
-import "../startScreen/startScreen.scss";
+import "../homePage/startScreen.scss";
 import { useMediaQuery } from "react-responsive";
 import { useContext } from "react";
 import { SignedInContext } from "../../App";
@@ -22,7 +22,7 @@ export default function OurClients() {
             <p
               className="only_text"
               style={{
-                color: "#ec720b",
+                color: "#033c5a",
                 fontWeight: "bold",
                 textAlign: "center",
               }}
