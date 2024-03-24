@@ -2,6 +2,7 @@ import "../homePage/startScreen.scss";
 import { useMediaQuery } from "react-responsive";
 import { useContext } from "react";
 import { SignedInContext } from "../../App";
+import Underline from "../Underline";
 
 export default function WhoWeServe() {
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1160px" });
@@ -10,9 +11,12 @@ export default function WhoWeServe() {
   return (
     <>
       <div style={{ backgroundColor: "#033c5a", padding: "0px 40px 50px" }}>
-        <div className="home_title">WHO WE SERVE</div>
+        <div className="title-container">
+          <div className="home_title">WHO WE SERVE</div>
+          <Underline />
+        </div>
         <div className="wrapper d-flex flex-lm-row flex-md-block">
-          <div className="Content" style={{ marginLeft: "10px" }}>
+          <div className="Content" style={{ marginRight: "20px" }}>
             <h3
               style={{
                 color: "#ec720b",

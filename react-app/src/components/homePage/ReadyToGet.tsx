@@ -2,17 +2,16 @@ import "../homePage/startScreen.scss";
 import { useMediaQuery } from "react-responsive";
 import { useContext, useState } from "react";
 import { SignedInContext } from "../../App";
-import Time from "/public/time-fast.png";
-import Money from "/public/piggy-bank.png";
-import Revenue from "/public/revenue.png";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 import { Link } from "react-router-dom";
 import Button from "../Button";
+import CollapseButton from "../CollapseButton";
 // * VK: Significant for the backend area. Please exercise caution when making alterations
 import { createTempUser } from "../../fetchScripts/authRequests";
-import Dropdown from "../CollapseButton";
-import CollapseButton from "../CollapseButton";
+import Underline from "../Underline";
 
-export default function ReadyToGet() {
+export default function ReadyToGet(this: any) {
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1160px" });
   const isPhoneScreen = useMediaQuery({ query: "(max-width: 760px" });
   const signedIn = useContext(SignedInContext);
@@ -99,8 +98,10 @@ export default function ReadyToGet() {
 
   return (
     <>
-      <div className="home_title">READY TO GET YOUR CONTRACTS REVIEWED?</div>
-
+      <div className="title-container">
+        <div className="home_title">READY TO GET YOUR CONTRACTS REVIEWED?</div>
+        <Underline />
+      </div>
       <div
         style={{
           backgroundColor: "white",
@@ -138,8 +139,22 @@ export default function ReadyToGet() {
             <div className="row">
               <div className="col-md-12" id="fullWidthColumn">
                 <form id="orderForm">
-                  <div className="frame-container" style={{ border: "none" }}>
-                    <h5>Contact us by filling out the form below.</h5>
+                  <div
+                    className="frame-container"
+                    style={{
+                      border: "none",
+                    }}
+                  >
+                    <div
+                      className="only_text"
+                      style={{
+                        color: "#033c5a",
+                        fontWeight: "bold",
+                        margin: "0px",
+                      }}
+                    >
+                      Contact us by filling out the form below.
+                    </div>
                     <div className="row">
                       <div className="form-group mb-3" style={{ width: "50%" }}>
                         <label htmlFor="contactPersonName">Your Name*</label>
@@ -187,14 +202,11 @@ export default function ReadyToGet() {
                         style={{ width: "50%", borderWidth: "2px" }}
                       >
                         <label htmlFor="phoneNumber">Phone*</label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          name="phoneNumber"
-                          id="phoneNumber"
+                        <PhoneInput
+                          country={"us"}
+                          inputClass={"input"}
                           value={inputPhone}
-                          required
-                          onChange={(e) => setInputPhone(e.target.value)}
+                          onChange={() => setInputPhone(inputPhone)}
                         />
                       </div>
                     </div>

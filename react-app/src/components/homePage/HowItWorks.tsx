@@ -3,6 +3,7 @@ import { useMediaQuery } from "react-responsive";
 import { useContext } from "react";
 import { SignedInContext } from "../../App";
 import AboutPicture from "../../../public/about_pic.png";
+import Underline from "../Underline";
 
 export default function HowItWorks() {
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1160px" });
@@ -10,7 +11,10 @@ export default function HowItWorks() {
   const signedIn = useContext(SignedInContext);
   return (
     <>
-      <div className="home_title">HOW IT WORKS</div>
+      <div className="title-container">
+        <div className="home_title">HOW IT WORKS</div>
+        <Underline />
+      </div>
       <div className="how-it-works">
         <div className="d-flex flex-lm-row flex-md-block">
           <div className="Content">

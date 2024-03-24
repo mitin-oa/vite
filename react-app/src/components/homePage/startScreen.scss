@@ -97,10 +97,10 @@
     font-size: 38px;
     letter-spacing: 2px;
     text-align: center;
-    line-height: 50px;
+    line-height: 42px;
     font-family: 'MontserratB';
     color: #ec720b;
-    padding: 20px 0;
+    padding: 43px 0 0;
     @media screen and (max-width: 1028px) {
       font-size: 25px;
       line-height: 32.5px;
@@ -195,21 +195,24 @@
     background-image:  url("/public/start_screen_pic3.png") ;
     background-size:cover;
     background-repeat: no-repeat;
+    background-position: center;
     border-radius: 40vw 0 0 40vw;
   }
 
   .WCL_picture {
     width: 100%;
-    background-image:  url("/public/start_screen_pic1.png") ;
-    background-size:contain;
+    background-image:  url("/public/WCL-pic.jpg") ;
+    background-size:cover;
     background-repeat: no-repeat;
+    background-position: center;
   }
 
   .WWS_picture {
     width: 100%;
-    background-image:  url("/public/WWS-pic.jpg") ;
+    background-image:  url("/public/WWS-pic1.jpg") ;
     background-size:cover;
     background-repeat: no-repeat;
+    background-position: center;
   }
 
   .OCL_picture {
@@ -217,19 +220,63 @@
     background-image:  url("/public/WWS-pic.jpg") ;
     background-size:cover;
     background-repeat: no-repeat;
-    background-attachment:fixed
+    background-attachment:fixed;
+    padding: 0 20px 150px;    
   }
 
   .WCL_icon {
     width: 32px;
     height: 32px;
     margin: 0 10px 10px 0;
+  }
+
+  .underline_icon {
+    width: 32px;
+    height: 32px;
+    margin: 0 auto;
+  }
+
+  .title-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0 auto;
+  }
+  .title-underline-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+  .underline-sub-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .underline-icon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 44px;
+  }
+  
+  .underline-top-blok {
+    width: 150px;
+    height: 16px;
+    border-bottom: solid 2px #ec720b;
+  }
+  
+  .underline-bottom-blok {
+    width: 150px;
+    height: 16px;
+  }
+
+  .underline-sub-container {
 
   }
 
   .vertical-strip {
     width: 20px;
-    height: 560px;
+    min-height: 100%;
     background-color: #ec720b;
   }
 

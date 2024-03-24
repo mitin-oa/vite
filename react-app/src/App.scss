@@ -320,6 +320,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .form .form-group[class*="col-"] input[type="text"],
 .form .form-group[class*="col-"] input[type="email"],
+.form .form-group[class*="col-"] input[type="tel"],
 .form .form-group[class*="col-"] input[type="password"] {
   width: 100%;
   min-width: 0;
@@ -328,6 +329,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 input[type="text"],
 input[type="email"],
+input[type="tel"],
 input[type="password"] {
   -webkit-transition: color 0.2s ease, background 0.3s ease;
   -moz-transition: color 0.2s ease, background 0.3s ease;
@@ -342,10 +344,6 @@ input[type="password"] {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
-  /* margin: 0;
-  margin-bottom: 0px;
-  display: inline-block;
-  vertical-align: top; */
   width: 100%;
   font-size: 17px;
   color: #8d8d8d;
@@ -358,15 +356,22 @@ input[type="password"] {
 
 input[type="text"]:hover,
 input[type="email"]:hover,
+input[type="tel"]:hover,
 input[type="password"]:hover {
   color: #000000;
 }
 
 input[type="text"]:focus,
 input[type="email"]:focus,
+input[type="tel"]:focus,
 input[type="password"]:focus {
   outline: none;
   border-left-color: steelblue;
+}
+
+.react-tel-input .form-control {
+  font-size: 17px !important;
+  height: 40px !important;
 }
 
 .well h3 {
