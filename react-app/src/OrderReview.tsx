@@ -9,6 +9,7 @@ import PayPal from "./components/PayPalGuest";
 
 // * VK: Significant for the backend area. Please exercise caution when making alterations
 import { createTempUser } from "./fetchScripts/authRequests";
+import PhoneInput from "react-phone-input-2";
 
 export default function OrderReview({
   handleSignIn,
@@ -251,6 +252,7 @@ export default function OrderReview({
           onSignIn={onSignIn}
           onSignUp={onSignUp}
         />
+        <div className="OAR-pic">ORDER A REWIEW</div>
         <section
           className="main-content container"
           style={{ flexDirection: "column" }}
@@ -274,7 +276,7 @@ export default function OrderReview({
                 to go to the order management dashboard.
               </p>
 
-              <div className="container mt-5 form-container">
+              <div className="mt-5 form-container">
                 <div className="row">
                   <div className="col-md-12" id="fullWidthColumn">
                     <form id="orderForm">
@@ -328,7 +330,10 @@ export default function OrderReview({
                 <div className="row">
                   <div className="col-md-12" id="fullWidthColumn">
                     <form id="orderForm">
-                      <div className="frame-container">
+                      <div
+                        className="frame-container"
+                        style={{ marginBottom: "30px" }}
+                      >
                         <h3>Tell us about you</h3>
                         <div className="form-group mb-3">
                           <label htmlFor="contactPersonName">Your name</label>
@@ -357,23 +362,21 @@ export default function OrderReview({
                         </div>
                         <div className="form-group mb-3">
                           <label htmlFor="phoneNumber">Your phone number</label>
-                          <input
-                            type="text"
-                            className="form-control"
-                            name="phoneNumber"
-                            id="phoneNumber"
+                          <PhoneInput
+                            country={"us"}
+                            inputClass={"input"}
                             value={inputPhone}
-                            required
-                            onChange={(e) => setInputPhone(e.target.value)}
+                            onChange={(e: any) => setInputPhone(e.target.value)}
+                            inputStyle={{ width: "100%" }}
                           />
                         </div>
+
                         <div className="form-group">
                           {!checkedEmail && (
                             <Button
                               children="Next"
                               color="orange"
                               onClick={checkEmail}
-                              style="modal-btn"
                             />
                           )}
                         </div>

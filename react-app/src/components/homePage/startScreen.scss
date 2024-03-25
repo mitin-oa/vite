@@ -128,6 +128,12 @@
     }
   }
 
+  .btn_order_now {
+    min-width: 100px !important;
+    border-radius: 0.3rem !important;
+    padding: 15px !important;
+  }
+
   .btn_get_started:hover {
     background-color: steelblue !important;
   }

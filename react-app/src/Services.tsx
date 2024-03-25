@@ -26,6 +26,7 @@ export default function Services({
           setIsOpen={setIsOpen}
         />
         {/* <!-- Bootstrap "Containers" component. Taken from https://getbootstrap.com/docs/5.2/layout/containers/#how-they-work --> */}
+        <div className="Services-pic">SERVICES</div>
         <section className="main-content">
           <h3 style={{ color: "#ec720b" }}>Contract drafting</h3>
           <h6>Protect Your Business With Bulletproof Contracts!</h6>
@@ -120,9 +121,9 @@ export default function Services({
               </p>
             </div>
           </div>
-          <h2 style={{ color: "#ff8307" }}>
+          <h4 style={{ color: "#ff8307" }}>
             GET HELP WITH YOUR CONTRACTS TODAY!
-          </h2>
+          </h4>
           <p>
             Don’t leave the most important documents in your business to chance.
             Let ChronoLegal protect your business interests through meticulously
@@ -219,9 +220,9 @@ export default function Services({
               </p>
             </div>
           </div>
-          <h2 style={{ color: "#ff8307" }}>
+          <h4 style={{ color: "#ff8307" }}>
             READY TO GET YOUR CONTRACTS ANALYZED?
-          </h2>
+          </h4>
           <p>
             • Our team is available to support you! Let us work together to
             identify opportunities and risks in your contracts both
@@ -305,9 +306,9 @@ export default function Services({
               </p>
             </div>
           </div>
-          <h2 style={{ color: "#ff8307" }}>
+          <h4 style={{ color: "#ff8307" }}>
             TAKE YOUR CONTRACTING UP A NOTCH!
-          </h2>
+          </h4>
           <p>
             Outsource your contract review to ChronoLegal and accelerate your
             deal closing time. Order a Review or contact us to learn more about

@@ -29,6 +29,7 @@ import {
   sendLogInRequest,
   sendLogOutRequest,
 } from "./fetchScripts/authRequests";
+import FAQs from "./FAQs";
 
 export function deleteCookie(name: string) {
   const date = new Date();
@@ -192,7 +193,7 @@ function App() {
               <Route
                 path="FAQs"
                 element={
-                  <About
+                  <FAQs
                     kind="short"
                     onSignIn={onSignIn}
                     handleSignIn={handleSignIn}

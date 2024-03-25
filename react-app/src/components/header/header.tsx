@@ -202,58 +202,12 @@ export default function HeaderMenu({
                 </Link>
 
                 {!isMobileScreen ? (
-                  <Link to="/">
-                    <ModalWindow
-                      // * VK: This part of the code will be displayed if the variable signedIn == true
-                      title={signedUp ? signedInStatus : "Sign Up"}
-                      childComp={
-                        signedInStatus == "Sign In" ? (
-                          !signedIn && signedUp ? (
-                            !resetPass ? (
-                              <LogInForm
-                                handleSignIn={handleSignIn}
-                                onSignUp={handleSignUp}
-                                setIsOpen={setIsOpen}
-                                modalIsOpen={modalIsOpen}
-                                resetPass={resetPass}
-                                setResetPass={setResetPass}
-                              />
-                            ) : (
-                              <ResetPassForm
-                                setIsOpen={setIsOpen}
-                                resetPass={resetPass}
-                                setResetPass={setResetPass}
-                              />
-                            )
-                          ) : (
-                            <SignUpForm
-                              handleSignUpForm={handleSignUp}
-                              onSignUp={onSignUp}
-                              onCloseModal={closeModal}
-                              setUserProfileData={setUserProfileData}
-                            />
-                          )
-                        ) : (
-                          <Link to="/">
-                            <>
-                              <Button
-                                children={`Want to ${signedInStatus}?`}
-                                color="orange"
-                                onClick={() => {
-                                  onSignIn(false);
-                                  setIsOpen(false);
-                                  // deleteCookie("token");
-                                  handleSignOut();
-                                }}
-                                style="modal-btn"
-                              />
-                            </>
-                          </Link>
-                        )
-                      }
-                      modalIsOpen={modalIsOpen}
-                      openModal={openModal}
-                      closeModal={signedUp ? closeModal : closeSignUp}
+                  <Link className="nav__link nav__text" to="/OrderRewiew">
+                    <Button
+                      children="Order Now"
+                      color=""
+                      style={"btn_get_started"}
+                      onClick={() => null}
                     />
                   </Link>
                 ) : (
@@ -276,61 +230,12 @@ export default function HeaderMenu({
                 </Link>
 
                 {!isMobileScreen ? (
-                  <Link to="/">
-                    <ModalWindow
-                      title={
-                        signedUp
-                          ? resetPass
-                            ? "Reset password"
-                            : signedInStatus
-                          : "Sign Up"
-                      }
-                      childComp={
-                        signedInStatus == "Sign In" ? (
-                          !signedIn && signedUp ? (
-                            !resetPass ? (
-                              <LogInForm
-                                handleSignIn={handleSignIn}
-                                onSignUp={handleSignUp}
-                                setIsOpen={setIsOpen}
-                                modalIsOpen={modalIsOpen}
-                                resetPass={resetPass}
-                                setResetPass={setResetPass}
-                              />
-                            ) : (
-                              <ResetPassForm
-                                setIsOpen={setIsOpen}
-                                resetPass={resetPass}
-                                setResetPass={setResetPass}
-                              />
-                            )
-                          ) : (
-                            <SignUpForm
-                              handleSignUp={handleSignUp}
-                              onCloseModal={closeModal}
-                              onSignUp={onSignUp}
-                              setUserProfileData={setUserProfileData}
-                            />
-                          )
-                        ) : (
-                          <Link to="/">
-                            <Button
-                              children={signedInStatus}
-                              color="orange"
-                              onClick={() => {
-                                onSignIn(false);
-                                setIsOpen(false);
-                                // deleteCookie("token");
-                                handleSignOut;
-                              }}
-                              style="modal-btn"
-                            />
-                          </Link>
-                        )
-                      }
-                      modalIsOpen={modalIsOpen}
-                      openModal={openModal}
-                      closeModal={signedUp ? closeModal : closeSignUp}
+                  <Link to="/OrderRewiew">
+                    <Button
+                      children="Order Now"
+                      color=""
+                      style={"btn_order_now"}
+                      onClick={() => null}
                     />
                   </Link>
                 ) : (
