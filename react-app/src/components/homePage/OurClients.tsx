@@ -4,6 +4,22 @@ import { useContext } from "react";
 import { SignedInContext } from "../../App";
 import SimpleSlider from "./SliderBottom";
 import Underline from "../Underline";
+import FearuredIn from "./FeaturedIn";
+import Pic1 from "/public/msn.png";
+import Pic2 from "/public/busines-insider.jpg";
+import Pic3 from "/public/medscape.png";
+import Pic4 from "/public/usnews.png";
+import Pic5 from "/public/yahoo.png";
+import Pic6 from "/public/hcp.png";
+
+const featuredIn_bottom_pictures = [
+  { image: Pic1 },
+  { image: Pic2 },
+  { image: Pic3 },
+  { image: Pic4 },
+  { image: Pic5 },
+  { image: Pic6 },
+];
 
 export default function OurClients() {
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1160px" });
@@ -23,7 +39,7 @@ export default function OurClients() {
               color: "#033c5a",
               fontWeight: "bold",
               textAlign: "center",
-              marginTop: "0",
+              marginBottom: "40px",
             }}
           >
             Are you worried about what is in your contracts? Our clients aren’t!
@@ -32,6 +48,10 @@ export default function OurClients() {
           </p>
           <SimpleSlider />
         </div>
+        <FearuredIn
+          children={featuredIn_bottom_pictures}
+          style="featuredIn-bottom-container"
+        />
       </div>
     </>
   );

@@ -32,7 +32,6 @@ export default function Home({
           setIsOpen={setIsOpen}
         />
         <SliderTop />
-        <FearuredIn />
         <HowItWorks />
         <WhyChronoLegal />
         <WhoWeServe />

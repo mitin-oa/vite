@@ -5,6 +5,12 @@ import "../homePage/startScreen.scss";
 import Button from "../Button";
 import { Link } from "react-router-dom";
 import FearuredIn from "./FeaturedIn";
+import Pic1 from "/public/forbes.png";
+import Pic2 from "/public/above-the-low.png";
+import Pic3 from "/public/bloomberg.png";
+import Pic4 from "/public/legaltech.png";
+import Pic5 from "/public/ic.png";
+import Pic6 from "/public/daily-journal.png";
 
 function SampleNextArrow(props: any) {
   const { className, style, onClick } = props;
@@ -41,6 +47,16 @@ function SamplePrevArrow(props: any) {
     />
   );
 }
+const featuredIn_pictures = [
+  { image: Pic1 },
+  { image: Pic2 },
+  { image: Pic3 },
+  { image: Pic4 },
+  { image: Pic5 },
+  { image: Pic6 },
+];
+
+console.log(featuredIn_pictures);
 
 export default function SliderTop() {
   var settings = {
@@ -59,6 +75,7 @@ export default function SliderTop() {
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
   };
+
   return (
     <div className="start-screen">
       <div className="slider-container">
@@ -139,8 +156,11 @@ export default function SliderTop() {
             </div>
           </div>
         </Slider>
-        <FearuredIn />
       </div>
+      <FearuredIn
+        children={featuredIn_pictures}
+        style="featuredIn-top-container"
+      />
     </div>
   );
 }

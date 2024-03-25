@@ -112,22 +112,6 @@
       padding-right: 0px;
     }
   }
-  
-  .button_only {
-    width: 210px;
-    text-decoration: none;
-    color: #033c5a;
-    font-size: 18px;
-    font-weight: 600;
-    letter-spacing: .06em;
-    padding: 15px 45px;
-    border: none;
-    border-radius: 0.05rem;
-    background-color: #ec720b;
-    @media screen and (max-width: 1028px) {
-      margin: 0 auto;
-    }
-  }
 
   .btn_get_started {
     text-decoration: none;
@@ -139,10 +123,13 @@
     padding: 15px 45px;
     border: none;
     border-radius: 0.05rem;
-    
     @media screen and (max-width: 1028px) {
         margin: 0 auto;
     }
+  }
+
+  .btn_get_started:hover {
+    background-color: steelblue !important;
   }
   
   .button_text {
@@ -156,27 +143,6 @@
     text-decoration: none;
   }
   
-  .start_screen_pet {
-    max-height: 530px;
-    max-width: 700px;
-    height: 40vw;
-    width: 45vw;
-    @media screen and (max-width: 1028px) {
-      margin-top: 50px;
-      height: 50vw;
-      width: 65vw;
-      max-width: 600px;
-    }
-    @media screen and (max-width: 760px) {
-      display: none;
-    }
-  }
-  
-
-  //img {
-    //overflow-clip-margin: content-box;
-    //overflow: clip;
-  //}
   .HIV {
     display: flex;
     width: 100%;
@@ -221,7 +187,7 @@
     background-size:cover;
     background-repeat: no-repeat;
     background-attachment:fixed;
-    padding: 0 20px 150px;    
+    padding: 0 20px 100px;    
   }
 
   .WCL_icon {
@@ -322,8 +288,8 @@
       font-family: "MontserratB";
       text-align: start;
       color: white;
-      font-size: 48px;
-      letter-spacing: 5px;
+      font-size: calc(1em + 1.8vw);
+      letter-spacing: 0.05em;
       //font-weight: bold;
       margin-bottom: 5vh;
     }
@@ -377,12 +343,16 @@ button.slick-arrow.slick-next {
   z-index: 2;
 }
 
-.featuredIn-container {
+.featuredIn-top-container {
   position: absolute;
   bottom: 40px;
-  z-index: 10;
   width: 100%;
-  
+}
+
+.featuredIn-bottom-container {
+  position: relative;
+  top: 80px;
+  width: 100%;
 }
 
 .featuredIn {
