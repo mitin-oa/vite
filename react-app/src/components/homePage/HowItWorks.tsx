@@ -2,7 +2,6 @@ import "../homePage/startScreen.scss";
 import { useMediaQuery } from "react-responsive";
 import { useContext } from "react";
 import { SignedInContext } from "../../App";
-import AboutPicture from "../../../public/about_pic.png";
 import Underline from "../Underline";
 
 export default function HowItWorks() {

@@ -240,6 +240,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    max-width: 1280px;
     margin: 0 auto;
   }
   .title-underline-container {
@@ -268,10 +269,6 @@
   .underline-bottom-blok {
     width: 150px;
     height: 16px;
-  }
-
-  .underline-sub-container {
-
   }
 
   .vertical-strip {
@@ -379,4 +376,25 @@ button.slick-arrow.slick-next {
   right: 50px;
   z-index: 2;
 }
+
+.featuredIn-container {
+  position: absolute;
+  bottom: 40px;
+  z-index: 10;
+  width: 100%;
+  
+}
+
+.featuredIn {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  max-width: 1280px;
+  margin: 0 auto;
+  &__pic {
+    width: 110px;
+    height: 30px;
+  }
+}
+
   /* start screen styles ends */

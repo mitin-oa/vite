@@ -4,6 +4,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "../homePage/startScreen.scss";
 import Button from "../Button";
 import { Link } from "react-router-dom";
+import FearuredIn from "./FeaturedIn";
 
 function SampleNextArrow(props: any) {
   const { className, style, onClick } = props;
@@ -138,6 +139,7 @@ export default function SliderTop() {
             </div>
           </div>
         </Slider>
+        <FearuredIn />
       </div>
     </div>
   );

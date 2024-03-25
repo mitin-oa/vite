@@ -6,6 +6,7 @@ import WhoWeServe from "./components/homePage/WhoWeServe";
 import OurClients from "./components/homePage/OurClients";
 import SliderTop from "./components/homePage/SliderTop";
 import ReadyToGet from "./components/homePage/ReadyToGet";
+import FearuredIn from "./components/homePage/FeaturedIn";
 
 export default function Home({
   kind,
@@ -31,6 +32,7 @@ export default function Home({
           setIsOpen={setIsOpen}
         />
         <SliderTop />
+        <FearuredIn />
         <HowItWorks />
         <WhyChronoLegal />
         <WhoWeServe />
