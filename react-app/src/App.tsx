@@ -14,7 +14,6 @@ import DashBoardEditor from "./DashBoardEditor";
 import DashBoardManager from "./DashBoardManager";
 import Swal from "sweetalert2";
 import ResetPassword from "./ResetPassword";
-import DashBoardTempClient from "./DashBoardTempClient";
 
 import OrderRewiew from "./OrderReview";
 import Contacts from "./Contacts";
@@ -301,22 +300,6 @@ function App() {
                       setIsOpen={setIsOpen}
                     />
                   )
-                }
-              />
-              // * VK: Temporary User Dashboard
-              <Route
-                path="/TemporaryDashboard"
-                element={
-                  <DashBoardTempClient
-                    kind="short"
-                    onSignIn={onSignIn}
-                    handleSignIn={handleSignIn}
-                    signedUp={signedUp}
-                    setUserProfileData={setUserProfileData}
-                    handleSignUp={handleSignUp}
-                    modalIsOpen={modalIsOpen}
-                    setIsOpen={setIsOpen}
-                  />
                 }
               />
               <Route path="*" element={<NotFound />} />
