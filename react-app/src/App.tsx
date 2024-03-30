@@ -29,6 +29,7 @@ import {
   sendLogOutRequest,
 } from "./fetchScripts/authRequests";
 import FAQs from "./FAQs";
+import DashBoardTempClient from "./DashBoardTempClient";
 
 export function deleteCookie(name: string) {
   const date = new Date();
@@ -302,6 +303,19 @@ function App() {
                   )
                 }
               />
+              // * VK: Temporary User Dashboard
+                <Route path="/TemporaryDashboard" element={
+                  <DashBoardTempClient
+                    kind="short"
+                    onSignIn={onSignIn}
+                    handleSignIn={handleSignIn}
+                    signedUp={signedUp}
+                    setUserProfileData={setUserProfileData}
+                    handleSignUp={handleSignUp}
+                    modalIsOpen={modalIsOpen}
+                    setIsOpen={setIsOpen}
+                  />
+                } />
               <Route path="*" element={<NotFound />} />
               <Route path="/resetPassword" Component={ResetPassword} />
             </Routes>
