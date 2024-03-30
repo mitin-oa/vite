@@ -9,7 +9,7 @@ import ChangeProfileForm from "./components/modal/ChangeProfileForm";
 import UploadFiles from "./components/UploadFile";
 
 // * VK: Significant for the backend area. Please exercise caution when making alterations
-import { getUserDataForDashboard } from "./fetchScripts/getUserDataForDashboard";
+import { getRegistredUserData } from "./fetchScripts/getUserDataForDashboard";
 import { fetchWithRefreshAuth } from "./fetchScripts/fetchWithRefreshAuth";
 
 export default function DashBoardEditor({
@@ -30,7 +30,7 @@ export default function DashBoardEditor({
   useEffect(() => {
     const requestData = async () => {
       try {
-        const serverAnswer = await getUserDataForDashboard();
+        const serverAnswer = await getRegistredUserData();
         setUserDataForDashboard(serverAnswer);
       } catch (error) {
         console.error("An error occurred while loading data:", error);
@@ -126,6 +126,10 @@ export default function DashBoardEditor({
     setIsOpen(false);
   }
 
+  function handleResetPass(): void {
+    throw new Error("Function not implemented.");
+  }
+
   return (
     <>
       <div className="app">
@@ -189,7 +193,7 @@ export default function DashBoardEditor({
                   <td>Delivery time</td>
                   <td>Manage</td>
                   <td>Status</td>
-                  <td>Download file</td>
+                  <td>Actions</td>
                   <td>Upload Edited File</td>
                   <td>Notes or Flag to manager</td>
                 </tr>
@@ -204,7 +208,6 @@ export default function DashBoardEditor({
                         <tr>
                           <td onClick={() => toggleOrderDetails(e.order_id)}>
                             {expandedOrderId === e.order_id ? "▲" : "▼"}{" "}
-                            {/* Стрелка */}
                             {userDataForDashboard ? e.order_id : ""}
                           </td>
                           <td>
@@ -247,23 +250,18 @@ export default function DashBoardEditor({
                           </td>
                           <td>{userDataForDashboard ? e.order_status : ""}</td>
                           <td>
-                            {[
-                              "pending",
-                              "paid",
-                              "processed",
-                              "in work",
-                            ].includes(e.order_status) ? (
-                              <DownLoadFile orderId={e.order_id} />
-                            ) : (
-                              <></>
+                            {["pending", "paid", "processed", "in work"].includes(e.order_status) && (
+                              <>
+                                <DownLoadFile orderId={e.order_id} />
+                              </>
                             )}
                           </td>
+
                           <td>
                             {e.order_status === "in work" ? (
-                              <UploadFiles
-                                orderId={e.order_id}
-                                clientEmail={e.client_email}
-                              />
+                              <>
+                                <UploadFiles orderId={e.order_id} clientEmail={e.client_email} />
+                              </>
                             ) : (
                               <UploadFiles orderId={e.order_id} isDisabled />
                             )}
@@ -284,19 +282,18 @@ export default function DashBoardEditor({
                         {expandedOrderId === e.order_id && (
                           <tr>
                             <td colSpan={10}>
-                              <p><b>Service type:</b> {e.service_type} </p>
+                              <p><b>Service type: </b>{e.service_type}</p>
                               {e.add_information ? <p><b>Additional information:</b> {e.add_information} </p> : null}
                               {e.user_guides ? <p><a href="#" onClick={() => downloadClientGuides(e.order_id)}>Download instructions for work</a></p> : null}
                               <p><b>Client info:</b></p>
-                              <p><b>Email:</b> {e.client_email} </p>
-                              <p><b>Company:</b> {e.clients_company_name} </p>
-                              <p><b>Address:</b> {e.clients_company_address} </p>
-                              <p><b>Industry:</b> {e.clients_company_industry} </p>
-                              <p><b>Contract info:</b></p>
-                              <p><b>Description</b> {e.contract_description} </p>
-                              <p><b>Value:</b> {e.contract_value} </p>
-                              <p><b>Counterparty name:</b> {e.counterparty_name} </p>
-                              <p><b>Counterparty address:</b> {e.counterparty_address} </p>
+                              <p><b>Company: </b>{e.clients_company_name}</p>
+                              <p><b>Address: </b>{e.clients_company_address}</p>
+                              <p><b>Industry: </b>{e.clients_company_industry}</p>
+                              <p><b>Contract info: </b></p>
+                              <p><b>Description: </b>{e.contract_description}</p>
+                              <p><b>Value: </b>{e.contract_value}</p>
+                              <p><b>Counterparty name: </b>{e.counterparty_name}</p>
+                              <p><b>Counterparty address: </b>{e.counterparty_address}</p>
                             </td>
                           </tr>
                         )}

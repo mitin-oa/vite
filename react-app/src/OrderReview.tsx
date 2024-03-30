@@ -48,7 +48,7 @@ export default function OrderReview({
   const [contractDescription, setContractDescription] = useState(
     "Contract Description 1"
   );
-  const [contractValue, setContractValue] = useState("10000 $");
+  const [contractValue, setContractValue] = useState("10000");
 
   const [counterpartyName, setCounterpartyName] = useState("Counterparty 1");
   const [counterpartyAddress, setCounterpartyAddress] = useState(

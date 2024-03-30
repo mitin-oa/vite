@@ -9,7 +9,7 @@ import ChangeProfileForm from "./components/modal/ChangeProfileForm";
 import UploadFiles from "./components/UploadFile";
 
 // * VK: Significant for the backend area. Please exercise caution when making alterations
-import { getUserDataForDashboard } from "./fetchScripts/getUserDataForDashboard";
+import { getRegistredUserData } from "./fetchScripts/getUserDataForDashboard";
 import { fetchWithRefreshAuth } from "./fetchScripts/fetchWithRefreshAuth";
 
 export default function DashBoardEditor({
@@ -31,7 +31,7 @@ export default function DashBoardEditor({
     const requestData = async () => {
       try {
         // Запрос комбинированных данных о пользователе при загрузке компонента
-        const serverAnswer = await getUserDataForDashboard();
+        const serverAnswer = await getRegistredUserData();
         setUserDataForDashboard(serverAnswer); // Сохраняем данные в состоянии
       } catch (error) {
         console.error("An error occurred while loading data:", error);
