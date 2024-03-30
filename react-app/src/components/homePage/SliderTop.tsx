@@ -8,8 +8,8 @@ import FearuredIn from "./FeaturedIn";
 import Pic1 from "/public/forbes.png";
 import Pic2 from "/public/above-the-low.png";
 import Pic3 from "/public/bloomberg.png";
-import Pic4 from "/public/legaltech.png";
-import Pic5 from "/public/ic.png";
+import Pic4 from "/public/legal-tech-news.png";
+import Pic5 from "/public/inside-counsel.png";
 import Pic6 from "/public/daily-journal.png";
 
 function SampleNextArrow(props: any) {
