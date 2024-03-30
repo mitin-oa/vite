@@ -29,7 +29,7 @@ export default function About({
         <div className="About-pic">ABOUT</div>
         <section className="main-content">
           <div className="about_service">
-            <h2>
+            <h2 style={{ color: "#ec720b" }}>
               24/7 Contract review Services delivered on time, and on budget!
             </h2>
             <p>
@@ -78,7 +78,7 @@ export default function About({
               unnecessary activity cycles such as excessive rounds of
               negotiation.
             </p>
-            <h2>HOW CAN WE HELP YOU?</h2>
+            <h2 style={{ color: "#ec720b" }}>HOW CAN WE HELP YOU?</h2>
             <p>
               Do you have questions about our services? Please{" "}
               <a style={{ color: "#ff8307" }}>reach out</a>, we have answers!

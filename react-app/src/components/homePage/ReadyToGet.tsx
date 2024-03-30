@@ -2,8 +2,8 @@ import "../homePage/startScreen.scss";
 import { useMediaQuery } from "react-responsive";
 import { useContext, useState } from "react";
 import { SignedInContext } from "../../App";
-import PhoneInput from "react-phone-input-2";
-import "react-phone-input-2/lib/style.css";
+import PhoneInput from "react-phone-number-input";
+import "react-phone-number-input/style.css";
 import { Link } from "react-router-dom";
 import Button from "../Button";
 import CollapseButton from "../CollapseButton";
@@ -94,6 +94,7 @@ export default function ReadyToGet(this: any) {
 
     setCheckedEmail(true); // * VK: Used to display the rest of the fields after the email has been confirmed
     setUserId(addedUser.userId);
+    console.log(inputPhone);
   }
 
   return (
@@ -203,8 +204,8 @@ export default function ReadyToGet(this: any) {
                       >
                         <label htmlFor="phoneNumber">Phone*</label>
                         <PhoneInput
-                          country={"us"}
-                          inputClass={"input"}
+                          //country={"us"}
+                          placeholder="Enter phone number"
                           value={inputPhone}
                           onChange={() => setInputPhone(inputPhone)}
                         />

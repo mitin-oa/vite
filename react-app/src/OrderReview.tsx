@@ -363,7 +363,12 @@ export default function OrderReview({
                         <div className="form-group mb-3">
                           <label htmlFor="phoneNumber">Your phone number</label>
                           <PhoneInput
-                            country={"us"}
+                            inputProps={{
+                              name: "phone",
+                              required: true,
+                              autoFocus: true,
+                            }}
+                            //country={"us"}
                             inputClass={"input"}
                             value={inputPhone}
                             onChange={(e: any) => setInputPhone(e.target.value)}
