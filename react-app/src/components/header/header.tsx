@@ -9,16 +9,15 @@ import FacebookPic from "../../../public/facebook1.png";
 import MailPic from "../../../public/twitter.png";
 import PhonePic from "../../../public/instagram.png";
 import TelegramPic from "../../../public/linkedin.png";
-import {
-  SignedInContext,
-  SignedUpContext,
-  deleteCookie,
-  handleSignOut,
-} from "../../App";
+import { SignedInContext, SignedUpContext, handleSignOut } from "../../App";
 import Button from "../Button";
 import { useMediaQuery } from "react-responsive";
 import SignUpForm from "../modal/SignUpForm";
 import ResetPassForm from "../modal/ResetPass";
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar1 from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
 
 interface IHeaderProps {
   kind?: "full" | "short";
@@ -188,7 +187,7 @@ export default function HeaderMenu({
           ) : (
             <></>
           )}
-          <ul className={kind === "short" ? "nav__short" : "nav"}>
+          <div className={kind === "short" ? "nav__short" : "nav"}>
             {signedIn ? (
               <>
                 <Link className="nav__link nav__text" to="/Dashboard">
@@ -216,18 +215,44 @@ export default function HeaderMenu({
               </>
             ) : (
               <>
-                <Link className="nav__link nav__text" to="/About">
-                  ABOUT
-                </Link>
-                <Link className="nav__link nav__text" to="/Services">
-                  SERVICES
-                </Link>
-                <Link className="nav__link nav__text" to="/FAQs">
-                  FAQs
-                </Link>
-                <Link className="nav__link nav__text" to="/OrderRewiew">
-                  ORDER A REWIEW
-                </Link>
+                <Navbar1 expand="lg" className="bg-body-tertiary">
+                  <Container>
+                    <Nav className="me-auto" style={{ alignItems: "center" }}>
+                      <Link className="nav__text" to="/About">
+                        ABOUT
+                      </Link>
+
+                      <NavDropdown
+                        title="SERVICE"
+                        id="basic-nav-dropdown"
+                        className="nav__text"
+                      >
+                        <NavDropdown.Item href="#action/3.1">
+                          Action
+                          <Link className="nav__link nav__text" to="/Services">
+                            SERVICES
+                          </Link>
+                        </NavDropdown.Item>
+                        <NavDropdown.Item href="#action/3.2">
+                          Another action
+                        </NavDropdown.Item>
+                        <NavDropdown.Item href="#action/3.3">
+                          Something
+                        </NavDropdown.Item>
+                        <NavDropdown.Divider />
+                        <NavDropdown.Item href="#action/3.4">
+                          Separated link
+                        </NavDropdown.Item>
+                      </NavDropdown>
+                      <Link className="nav__link nav__text" to="/FAQs">
+                        FAQs
+                      </Link>
+                      <Link className="nav__link nav__text" to="/OrderRewiew">
+                        ORDER A REWIEW
+                      </Link>
+                    </Nav>
+                  </Container>
+                </Navbar1>
 
                 {!isMobileScreen ? (
                   <Link to="/OrderRewiew">
@@ -243,7 +268,7 @@ export default function HeaderMenu({
                 )}
               </>
             )}
-          </ul>
+          </div>
 
           {isMobileScreen ? (
             <Navbar

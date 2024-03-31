@@ -5,20 +5,36 @@ import { SignedInContext } from "../../App";
 import SimpleSlider from "./SliderBottom";
 import Underline from "../Underline";
 import FearuredIn from "./FeaturedIn";
-import Pic1 from "/public/msn.png";
-import Pic2 from "/public/busines-insider.jpg";
-import Pic3 from "/public/medscape.png";
-import Pic4 from "/public/usnews.png";
-import Pic5 from "/public/yahoo.png";
-import Pic6 from "/public/hcp.png";
 
-const featuredIn_bottom_pictures = [
+import Pic1 from "/public/forbes.png";
+import Pic2 from "/public/above-the-low.png";
+import Pic3 from "/public/bloomberg.png";
+import Pic4 from "/public/legal-tech-news.png";
+import Pic5 from "/public/inside-counsel.png";
+import Pic6 from "/public/daily-journal.png";
+import Pic7 from "/public/msn.png";
+import Pic8 from "/public/busines-insider.jpg";
+import Pic9 from "/public/medscape.png";
+import Pic10 from "/public/usnews.png";
+import Pic11 from "/public/yahoo.png";
+import Pic12 from "/public/hcp.png";
+
+const featuredIn_top_pictures = [
   { image: Pic1 },
   { image: Pic2 },
   { image: Pic3 },
   { image: Pic4 },
   { image: Pic5 },
   { image: Pic6 },
+];
+
+const featuredIn_bottom_pictures = [
+  { image: Pic7 },
+  { image: Pic8 },
+  { image: Pic9 },
+  { image: Pic10 },
+  { image: Pic11 },
+  { image: Pic12 },
 ];
 
 export default function OurClients() {

@@ -260,7 +260,7 @@
     padding: 50px 100px;
     height: 40vh;
     background-color: #ec720b;
-    background: rgb(236 114 11 / 55%);
+    background: rgb(236 114 11 / 60%);
     &__text {
       text-align: center;
       color: #ffffff;
@@ -293,16 +293,21 @@
     &__text {
       font-family: "MontserratB";
       text-align: start;
+      font-weight: bold;
       color: white;
-      font-size: calc(1em + 1.8vw);
-      letter-spacing: 0.05em;
-      //font-weight: bold;
-      margin-bottom: 5vh;
+      line-height: 7vh;
+      font-size: calc(1em + 1.2vw);
+      letter-spacing: 0.01em;
+      margin-bottom: 0;
+    }
+    &__button {
+      position: relative;
+      top: 30px;
     }
   } 
   .slider-top-content {
-    width: 39vw;
-    margin-left: 12vw;
+    width: 44vw;
+    margin-left: 10vw;
   }
 
   .card1 {
@@ -321,7 +326,7 @@
     height: 80vh;
     clip-path: polygon(20% 0%, 100% 0, 100% 100%, 0% 100%);
     background-color: #ec720b;
-    background: rgb(236 114 11 / 40%);
+    background: rgb(236 114 11 / 45%);
     z-index: 1;
   }
   

@@ -9,9 +9,6 @@ export default function FeaturedIn({ children, style }: Props) {
   return (
     <>
       <div className={style}>
-        <p style={{ textAlign: "center", margin: "10px 0 10px" }}>
-          Fearured In
-        </p>
         <div className="featuredIn">
           {children.map((e: { image: string | undefined }) => {
             return (

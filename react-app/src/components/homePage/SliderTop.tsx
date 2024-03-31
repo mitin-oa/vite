@@ -4,13 +4,6 @@ import "slick-carousel/slick/slick-theme.css";
 import "../homePage/startScreen.scss";
 import Button from "../Button";
 import { Link } from "react-router-dom";
-import FearuredIn from "./FeaturedIn";
-import Pic1 from "/public/forbes.png";
-import Pic2 from "/public/above-the-low.png";
-import Pic3 from "/public/bloomberg.png";
-import Pic4 from "/public/legal-tech-news.png";
-import Pic5 from "/public/inside-counsel.png";
-import Pic6 from "/public/daily-journal.png";
 
 function SampleNextArrow(props: any) {
   const { className, style, onClick } = props;
@@ -47,16 +40,6 @@ function SamplePrevArrow(props: any) {
     />
   );
 }
-const featuredIn_pictures = [
-  { image: Pic1 },
-  { image: Pic2 },
-  { image: Pic3 },
-  { image: Pic4 },
-  { image: Pic5 },
-  { image: Pic6 },
-];
-
-console.log(featuredIn_pictures);
 
 export default function SliderTop() {
   var settings = {
@@ -66,7 +49,7 @@ export default function SliderTop() {
     autoplay: true,
     slickplay: true,
     speed: 2000,
-    autoplaySpeed: 6000,
+    autoplaySpeed: 8000,
     cssEase: "linear",
     swipeToSlide: true,
     slidesToShow: 1,
@@ -94,14 +77,16 @@ export default function SliderTop() {
                   24/7 on demand contract drafting, review, and negotiation
                   delivered on time and on budget
                 </h1>
-                <Link to="/Services">
-                  <Button
-                    children="GET STARTED"
-                    color=""
-                    style={"btn_get_started"}
-                    onClick={() => null}
-                  />
-                </Link>
+                <div className="slider-top-card__button">
+                  <Link to="/Services">
+                    <Button
+                      children="GET STARTED"
+                      color=""
+                      style={"btn_get_started"}
+                      onClick={() => null}
+                    />
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
@@ -119,14 +104,16 @@ export default function SliderTop() {
                   Seamless automation of your contracts, creation, approval and
                   signature processes and workflows
                 </h1>
-                <Link to="/Services">
-                  <Button
-                    children="GET STARTED"
-                    color=""
-                    style={"btn_get_started"}
-                    onClick={() => null}
-                  />
-                </Link>
+                <div className="slider-top-card__button">
+                  <Link to="/Services">
+                    <Button
+                      children="GET STARTED"
+                      color=""
+                      style={"btn_get_started"}
+                      onClick={() => null}
+                    />
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
@@ -144,23 +131,21 @@ export default function SliderTop() {
                   Smart contract lifecycle management solution SaaS-based or
                   deployed in your SharePoint environment
                 </h1>
-                <Link to="/Services">
-                  <Button
-                    children="GET STARTED"
-                    color=""
-                    style={"btn_get_started"}
-                    onClick={() => null}
-                  />
-                </Link>
+                <div className="slider-top-card__button">
+                  <Link to="/Services">
+                    <Button
+                      children="GET STARTED"
+                      color=""
+                      style={"btn_get_started"}
+                      onClick={() => null}
+                    />
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
         </Slider>
       </div>
-      <FearuredIn
-        children={featuredIn_pictures}
-        style="featuredIn-top-container"
-      />
     </div>
   );
 }
