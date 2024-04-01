@@ -253,10 +253,7 @@ export default function OrderReview({
           onSignUp={onSignUp}
         />
         <div className="OAR-pic">ORDER A REWIEW</div>
-        <section
-          className="main-content container"
-          style={{ flexDirection: "column" }}
-        >
+        <section className="main-content" style={{ flexDirection: "column" }}>
           {paymentStatus ? (
             // * VK: If the payment has been made, it will display this data
             <>
@@ -324,9 +321,7 @@ export default function OrderReview({
           ) : (
             // * VK: If the payment has not yet been made, display the form
             <>
-              <h2>ORDER A REVIEW</h2>
-
-              <div className="container mt-5 form-container">
+              <div className="container form-container">
                 <div className="row">
                   <div className="col-md-12" id="fullWidthColumn">
                     <form id="orderForm">
@@ -334,7 +329,7 @@ export default function OrderReview({
                         className="frame-container"
                         style={{ marginBottom: "30px" }}
                       >
-                        <h3>Tell us about you</h3>
+                        <h3 className="section-title">Tell us about you</h3>
                         <div className="form-group mb-3">
                           <label htmlFor="contactPersonName">Your name</label>
                           <input
