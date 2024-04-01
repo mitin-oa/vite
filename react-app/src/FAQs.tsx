@@ -191,12 +191,17 @@ export default function FAQs({
           setIsOpen={setIsOpen}
         />
         {/* <!-- Bootstrap "Containers" component. Taken from https://getbootstrap.com/docs/5.2/layout/containers/#how-they-work --> */}
+
         <div className="FAQs-pic">FAQ's</div>
         <section className="main-content" style={{ paddingBottom: "40px" }}>
-          <h2>FREQUENTLY ASKED QUESTIONS</h2>
-          {questions.map((item: any) => {
-            return <CollapseButton value={item.city} label={item.adress} />;
-          })}
+          <div className="wrapper ">
+            <div className="about-service">
+              <h2>FREQUENTLY ASKED QUESTIONS</h2>
+              {questions.map((item: any) => {
+                return <CollapseButton value={item.city} label={item.adress} />;
+              })}
+            </div>
+          </div>
         </section>
 
         {/* <!-- END OF Bootstrap "Containers" component --> */}

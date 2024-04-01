@@ -65,6 +65,10 @@ export default function OurClients() {
           <SimpleSlider />
         </div>
         <FearuredIn
+          children={featuredIn_top_pictures}
+          style="featuredIn-top-container"
+        />
+        <FearuredIn
           children={featuredIn_bottom_pictures}
           style="featuredIn-bottom-container"
         />

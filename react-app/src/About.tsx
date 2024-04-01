@@ -13,82 +13,72 @@ export default function About({
   setIsOpen,
 }: any) {
   return (
-    <>
-      <div className="app">
-        <HeaderMenu
-          kind="short"
-          onSignIn={onSignIn}
-          onSignUp={onSignUp}
-          handleSignUp={handleSignUp}
-          handleSignIn={handleSignIn}
-          setUserProfileData={setUserProfileData}
-          modalIsOpen={modalIsOpen}
-          setIsOpen={setIsOpen}
-        />
-        {/* <!-- Bootstrap "Containers" component. Taken from https://getbootstrap.com/docs/5.2/layout/containers/#how-they-work --> */}
-        <div className="About-pic">ABOUT</div>
-        <section className="main-content">
-          <div className="about_service">
-            <h2 style={{ color: "#ec720b" }}>
-              24/7 Contract review Services delivered on time, and on budget!
+    <div className="app">
+      <HeaderMenu
+        kind="short"
+        onSignIn={onSignIn}
+        onSignUp={onSignUp}
+        handleSignUp={handleSignUp}
+        handleSignIn={handleSignIn}
+        setUserProfileData={setUserProfileData}
+        modalIsOpen={modalIsOpen}
+        setIsOpen={setIsOpen}
+      />
+      <div className="about-pic">ABOUT</div>
+      <section className="main-content">
+        <div className="wrapper">
+          <div className="about-service">
+            <h2 className="section-title">
+              24/7 Contract Review Services Delivered on Time and on Budget!
             </h2>
             <p>
-              ChronoLegal exists to help you contract and close more deals, on
-              time and on budget! Our vision is driven forth by a multinational
-              team of experienced attorneys, legal practitioners, legal
-              technologists, and consultants who are passionate about contracts.
+              ChronoLegal is dedicated to helping you contract and close deals
+              efficiently. Our multinational team of experienced attorneys,
+              legal practitioners, legal technologists, and consultants are
+              passionate about contracts.
             </p>
             <p>
-              We live and breathe commercial contracts; it’s all we do and think
-              about. We won’t try to solve all your legal and business problems,
-              but we will conquer your contracts!!!
+              We specialize in commercial contracts because we believe they are
+              crucial for any business. Our clients range from Fortune 500
+              enterprises to startups, and our services extend across various
+              industries and countries.
             </p>
             <p>
-              We focus on commercial contracts because we believe that they are
-              the most important documents for any business. Our clients include
-              Fortune 500 enterprises, leading technology companies, start-ups,
-              SMEs, in-house legal departments, procurement teams, and law firms
-              in the US, the UK, Canada, and France.
+              Leveraging our outstanding legal expertise, smart technology, and
+              top-notch processes, we deliver high-quality, cost-effective, and
+              time-efficient outsourced contract review services to help our
+              clients close deals faster.
             </p>
             <p>
-              By combining our outstanding legal expertise, smart technology,
-              and top-notch processes, we are able to deliver high-quality,
-              cost-effective, and time-efficient end to end outsourced contract
-              review services to our clients, helping them close deals faster.
+              Our team is committed to quick turnarounds, often delivering
+              results in as little as one business day. We prioritize client
+              satisfaction and strive to exceed expectations in every aspect of
+              our service.
             </p>
             <p>
-              Our team will turn your contracts around in as little as one
-              business day, when needed. We are commercially minded and deliver
-              delight to our clients, doing all that can be done and delivering
-              more than is expected.
+              Our attorneys are highly educated and experienced professionals
+              who have held senior positions in businesses of all sizes. They
+              bring a wealth of knowledge and practical insights to every
+              project.
             </p>
             <p>
-              Our attorneys are smart, experienced, and practical. They were
-              educated at top law schools and trained in some of the most
-              prestigious law firms in the world. Many of them have held senior
-              in-house counsel positions in businesses of all sizes and are
-              experts across a range of industries.
+              We continuously seek ways to improve efficiency and reduce costs
+              for our clients. Our solutions are designed to streamline
+              processes and eliminate unnecessary activities, ensuring optimal
+              outcomes.
             </p>
-            <p>
-              We are continually striving to find ways to help our clients save
-              time and money. We achieve this by ensuring that efficiency is
-              built into our solutions, through a combination of appropriate
-              resourcing, smart use of technology and a continuous improvement
-              methodology which emphasizes the identification and reduction of
-              unnecessary activity cycles such as excessive rounds of
-              negotiation.
-            </p>
-            <h2 style={{ color: "#ec720b" }}>HOW CAN WE HELP YOU?</h2>
+            <h2 className="section-title">How Can We Help You?</h2>
             <p>
               Do you have questions about our services? Please{" "}
-              <a style={{ color: "#ff8307" }}>reach out</a>, we have answers!
+              <a href="#" className="contact-link">
+                reach out
+              </a>
+              , we're here to help!
             </p>
           </div>
-        </section>
-
-        {/* <!-- END OF Bootstrap "Containers" component --> */}
-      </div>
-      <Footer kind={"short"} />
-    </>
+        </div>
+      </section>
+      <Footer kind="short" />
+    </div>
   );
 }

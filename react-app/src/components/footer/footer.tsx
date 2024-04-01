@@ -26,50 +26,32 @@ export default function Footer({ kind }: any) {
         <div className="footer-top-bar__left"></div>
         <div className="footer-top-bar__right"></div>
       </div>
-      <footer className={kind === "short" ? "footer__short" : "footer"}>
+      <footer className="footer">
         <div className="wrapper footer__content">
           <div className="footer__content__contacts">
             <div className="contacts">
-              <p className="contacts__title">For clients</p>
-              <ul
-                className={
-                  kind === "short" ? "footer__nav__short" : "footer__nav"
-                }
-              >
+              <ul className="footer__nav">
                 {
                   <>
-                    <Link
-                      className={
-                        "nav__link" +
-                        (kind === "short"
-                          ? " contacts__info__short"
-                          : " contacts__info")
-                      }
-                      to="/Contacts"
-                    >
+                    <Link className={"nav__link" + " contacts__info"} to="">
+                      Resourses
+                    </Link>
+                    <Link className={"nav__link" + " contacts__info"} to="">
                       Contacts
                     </Link>
-                    <Link
-                      className={
-                        "nav__link" +
-                        (kind === "short"
-                          ? " contacts__info__short"
-                          : " contacts__info")
-                      }
-                      to=""
-                    >
+                  </>
+                }
+              </ul>
+            </div>
+            <div className="contacts">
+              <ul className="footer__nav">
+                {
+                  <>
+                    <Link className={"nav__link" + " contacts__info"} to="">
                       Careers
                     </Link>
-                    <Link
-                      className={
-                        "nav__link" +
-                        (kind === "short"
-                          ? " contacts__info__short"
-                          : " contacts__info")
-                      }
-                      to=""
-                    >
-                      Legal (Terms of services, Legal Notices)
+                    <Link className={"nav__link" + " contacts__info"} to="">
+                      Legal
                     </Link>
                   </>
                 }

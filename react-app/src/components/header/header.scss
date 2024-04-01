@@ -193,6 +193,27 @@
     }
 }
 
+.nav-link {
+    padding: 0px !important;
+    color: #033c5a !important;
+}
+
+.nav-link:hover {
+    color: #ec720b !important;
+}
+
+.navbar-nav {
+    height: 28px;
+}
+
+.header-navBar {
+    margin-right: 1.5vw;
+}
+
+.bg-body-tertiary {
+    background-color: white !important;
+}
+
 .Burger__active .nav__burger {
     display: none;
 }

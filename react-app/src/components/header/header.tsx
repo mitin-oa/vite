@@ -215,36 +215,43 @@ export default function HeaderMenu({
               </>
             ) : (
               <>
-                <Navbar1 expand="lg" className="bg-body-tertiary">
+                <Navbar1 expand="lg" className="header-navBar">
                   <Container>
-                    <Nav className="me-auto" style={{ alignItems: "center" }}>
+                    <Nav className="me-auto">
                       <Link className="nav__text" to="/About">
                         ABOUT
                       </Link>
 
                       <NavDropdown
-                        title="SERVICE"
+                        title="SERVICES"
                         id="basic-nav-dropdown"
                         className="nav__text"
                       >
                         <NavDropdown.Item href="#action/3.1">
-                          Action
-                          <Link className="nav__link nav__text" to="/Services">
-                            SERVICES
+                          <Link className="nav__text" to="/ContractDrafting">
+                            Contract Drafting
                           </Link>
                         </NavDropdown.Item>
+                        <NavDropdown.Divider />
                         <NavDropdown.Item href="#action/3.2">
-                          Another action
+                          <Link className="nav__text" to="/ContractAnalysis">
+                            Contract Analysis
+                          </Link>
                         </NavDropdown.Item>
+                        <NavDropdown.Divider />
                         <NavDropdown.Item href="#action/3.3">
-                          Something
+                          <Link className="nav__text" to="/ContractReview">
+                            Contract Review
+                          </Link>
                         </NavDropdown.Item>
                         <NavDropdown.Divider />
                         <NavDropdown.Item href="#action/3.4">
-                          Separated link
+                          <Link className="nav__text" to="/ContractManagement">
+                            Contract Management
+                          </Link>
                         </NavDropdown.Item>
                       </NavDropdown>
-                      <Link className="nav__link nav__text" to="/FAQs">
+                      <Link className="nav__text" to="/FAQs">
                         FAQs
                       </Link>
                       <Link className="nav__link nav__text" to="/OrderRewiew">

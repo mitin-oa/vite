@@ -30,6 +30,10 @@ import {
 } from "./fetchScripts/authRequests";
 import FAQs from "./FAQs";
 import DashBoardTempClient from "./DashBoardTempClient";
+import ContractDrafting from "./components/ContractDrafting";
+import ContractAnalysis from "./components/ContractAnalysis";
+import ContractReview from "./components/ContractReview";
+import ContractManagment from "./components/ContractManagement";
 
 export function deleteCookie(name: string) {
   const date = new Date();
@@ -176,9 +180,54 @@ function App() {
                 }
               />
               <Route
-                path="Services"
+                path="ContractManagement"
                 element={
-                  <Services
+                  <ContractManagment
+                    kind="short"
+                    onSignIn={onSignIn}
+                    handleSignIn={handleSignIn}
+                    signedUp={signedUp}
+                    setUserProfileData={setUserProfileData}
+                    handleSignUp={handleSignUp}
+                    modalIsOpen={modalIsOpen}
+                    setIsOpen={setIsOpen}
+                  />
+                }
+              />
+              <Route
+                path="ContractReview"
+                element={
+                  <ContractReview
+                    kind="short"
+                    onSignIn={onSignIn}
+                    handleSignIn={handleSignIn}
+                    signedUp={signedUp}
+                    setUserProfileData={setUserProfileData}
+                    handleSignUp={handleSignUp}
+                    modalIsOpen={modalIsOpen}
+                    setIsOpen={setIsOpen}
+                  />
+                }
+              />
+              <Route
+                path="ContractDrafting"
+                element={
+                  <ContractDrafting
+                    kind="short"
+                    onSignIn={onSignIn}
+                    handleSignIn={handleSignIn}
+                    signedUp={signedUp}
+                    setUserProfileData={setUserProfileData}
+                    handleSignUp={handleSignUp}
+                    modalIsOpen={modalIsOpen}
+                    setIsOpen={setIsOpen}
+                  />
+                }
+              />
+              <Route
+                path="ContractAnalysis"
+                element={
+                  <ContractAnalysis
                     kind="short"
                     onSignIn={onSignIn}
                     handleSignIn={handleSignIn}
@@ -304,7 +353,9 @@ function App() {
                 }
               />
               // * VK: Temporary User Dashboard
-                <Route path="/TemporaryDashboard" element={
+              <Route
+                path="/TemporaryDashboard"
+                element={
                   <DashBoardTempClient
                     kind="short"
                     onSignIn={onSignIn}
@@ -315,7 +366,8 @@ function App() {
                     modalIsOpen={modalIsOpen}
                     setIsOpen={setIsOpen}
                   />
-                } />
+                }
+              />
               <Route path="*" element={<NotFound />} />
               <Route path="/resetPassword" Component={ResetPassword} />
             </Routes>
