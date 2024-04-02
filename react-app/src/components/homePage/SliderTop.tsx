@@ -78,7 +78,7 @@ export default function SliderTop() {
                   delivered on time and on budget
                 </h1>
                 <div className="slider-top-card__button">
-                  <Link to="/Services">
+                  <Link to="/ContractDrafting">
                     <Button
                       children="GET STARTED"
                       color=""
@@ -105,7 +105,7 @@ export default function SliderTop() {
                   signature processes and workflows
                 </h1>
                 <div className="slider-top-card__button">
-                  <Link to="/Services">
+                  <Link to="/ContractDrafting">
                     <Button
                       children="GET STARTED"
                       color=""
@@ -132,7 +132,7 @@ export default function SliderTop() {
                   deployed in your SharePoint environment
                 </h1>
                 <div className="slider-top-card__button">
-                  <Link to="/Services">
+                  <Link to="/ContractDrafting">
                     <Button
                       children="GET STARTED"
                       color=""
