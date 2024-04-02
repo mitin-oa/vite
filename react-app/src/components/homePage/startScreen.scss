@@ -14,7 +14,7 @@
     //background-repeat: no-repeat;
     //background-position: bottom 100px right;
     @media (max-width: 1028px) {
-      padding: 30px 40px 0px;
+      padding: 30px 0px 0px;
     };
     @media (max-width: 760px) {
       min-height: 55vh;
@@ -32,17 +32,17 @@
   }
 
   .how-it-works {
-    padding: 0px 40px 20px;
+    padding: 0px 0px 20px 40px;
     background-color: #033c5a;
     background-size:cover;
     background-repeat: no-repeat;
     //background-position: bottom 100px right;
     @media (max-width: 1028px) {
-      padding: 30px 40px 0px;
+      padding: 30px 0px 10px 20px;
     };
     @media (max-width: 760px) {
       min-height: 55vh;
-      padding: 30px 10px 10px;
+      padding: 30px 0px 10px 20px;
     };
     &_content {
       //margin-top: 100px;
@@ -169,6 +169,9 @@
     background-repeat: no-repeat;
     background-position: center;
     border-radius: 40vw 0 0 40vw;
+    @media screen and (max-width: 1028px) {
+      border-radius: 30vw 0 0 30vw;
+    }
   }
 
   .WCL_picture {
@@ -289,7 +292,6 @@
     height: 80vh;
     background-size:cover;
     background-repeat: no-repeat;
-    z-index: 3;
     &__text {
       font-family: "MontserratB";
       text-align: start;
@@ -327,7 +329,6 @@
     clip-path: polygon(20% 0%, 100% 0, 100% 100%, 0% 100%);
     background-color: #ec720b;
     background: rgb(236 114 11 / 45%);
-    z-index: 1;
   }
   
 button.slick-arrow {
@@ -341,17 +342,16 @@ button.slick-arrow.slick-prev {
   width: 30px;
   height: 30px;
   left: 50px;
-  z-index: 2;
 }
 button.slick-arrow.slick-prev::before {
   width: 30px;
   height: 30px;
 }
+
 button.slick-arrow.slick-next {
   width: 30px;
   height: 30px;
   right: 50px;
-  z-index: 2;
 }
 
 .featuredIn-top-container {

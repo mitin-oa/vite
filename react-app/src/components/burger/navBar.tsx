@@ -7,9 +7,18 @@ import { Dispatch, SetStateAction, useContext } from "react";
 import LogInForm from "../modal/LogInForm";
 import ModalWindow from "../modal/modal";
 import Button from "../Button";
-import { SignedInContext, SignedUpContext, deleteCookie, handleSignOut } from "../../App";
+import {
+  SignedInContext,
+  SignedUpContext,
+  deleteCookie,
+  handleSignOut,
+} from "../../App";
 import SignUpForm from "../modal/SignUpForm";
 import ResetPassForm from "../modal/ResetPass";
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar1 from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
 
 const colors = {
   yellowmellow: "#fbe69b",
@@ -132,27 +141,52 @@ export const Navbar = ({
           </>
         ) : (
           <>
-            <Link
-              className="burger_visible__Link"
-              to="/About"
-              onClick={() => close()}
-            >
-              About the service
-            </Link>
-            <Link
-              className="burger_visible__Link"
-              to="/CalculateCost"
-              onClick={() => close()}
-            >
-              Calculate Cost
-            </Link>
-            {/* <Link
-              className="burger_visible__Link"
-              to="/UpLoad"
-              onClick={() => close()}
-            >
-              Upload Form
-            </Link> */}
+            <Navbar1 expand="lg" className="header-navBar">
+              <Container>
+                <Navbar1.Collapse id="basic-navbar-nav">
+                  <Nav className="me-auto">
+                    <Link className="nav__text" to="/About">
+                      ABOUT
+                    </Link>
+                    <NavDropdown
+                      title="SERVICES"
+                      id="basic-nav-dropdown"
+                      className="nav__text"
+                    >
+                      <NavDropdown.Item href="#action/3.1">
+                        <Link className="nav__text" to="/ContractDrafting">
+                          Contract Drafting
+                        </Link>
+                      </NavDropdown.Item>
+                      <NavDropdown.Divider />
+                      <NavDropdown.Item href="#action/3.2">
+                        <Link className="nav__text" to="/ContractAnalysis">
+                          Contract Analysis
+                        </Link>
+                      </NavDropdown.Item>
+                      <NavDropdown.Divider />
+                      <NavDropdown.Item href="#action/3.3">
+                        <Link className="nav__text" to="/ContractReview">
+                          Contract Review
+                        </Link>
+                      </NavDropdown.Item>
+                      <NavDropdown.Divider />
+                      <NavDropdown.Item href="#action/3.4">
+                        <Link className="nav__text" to="/ContractManagement">
+                          Contract Management
+                        </Link>
+                      </NavDropdown.Item>
+                    </NavDropdown>
+                    <Link className="nav__text" to="/FAQs">
+                      FAQs
+                    </Link>
+                    <Link className="nav__link nav__text" to="/OrderRewiew">
+                      ORDER A REWIEW
+                    </Link>
+                  </Nav>
+                </Navbar1.Collapse>
+              </Container>
+            </Navbar1>
           </>
         )}
 

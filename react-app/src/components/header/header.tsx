@@ -18,6 +18,8 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar1 from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import { slide as Menu } from "react-burger-menu";
+import SideBarMenu from "../burger/navMenu";
 
 interface IHeaderProps {
   kind?: "full" | "short";
@@ -60,6 +62,51 @@ export default function HeaderMenu({
     onSignUp(!signedUp);
     setIsOpen(false);
   }
+
+  const styles = {
+    bmBurgerButton: {
+      position: "fixed",
+      width: "36px",
+      height: "30px",
+      left: "36px",
+      top: "36px",
+    },
+    bmBurgerBars: {
+      background: "#373a47",
+    },
+    bmBurgerBarsHover: {
+      background: "#a90000",
+    },
+    bmCrossButton: {
+      height: "24px",
+      width: "24px",
+    },
+    bmCross: {
+      background: "#bdc3c7",
+    },
+    bmMenuWrap: {
+      position: "fixed",
+      height: "100%",
+    },
+    bmMenu: {
+      background: "#373a47",
+      padding: "2.5em 1.5em 0",
+      fontSize: "1.15em",
+    },
+    bmMorphShape: {
+      fill: "#373a47",
+    },
+    bmItemList: {
+      color: "#b8b7ad",
+      padding: "0.8em",
+    },
+    bmItem: {
+      display: "inline-block",
+    },
+    bmOverlay: {
+      background: "rgba(0, 0, 0, 0.3)",
+    },
+  };
 
   return (
     <>
@@ -160,34 +207,35 @@ export default function HeaderMenu({
               closeModal={signedUp ? closeModal : closeSignUp}
             />
           </Link>
+          {isMobileScreen ? (
+            <Link to="/OrderRewiew">
+              <Button
+                children="Order Now"
+                color=""
+                style={"btn_order_now"}
+                onClick={() => null}
+              />
+            </Link>
+          ) : (
+            <></>
+          )}
         </div>
       </div>
 
-      <header className={kind === "short" ? "header__short" : "header"}>
+      <header className="header">
         <div className="wrapper header">
-          {kind === "full" ? (
-            <div className="logo">
-              <img className="logo__img" alt="LOGO" src={Logo}></img>
-            </div>
-          ) : (
-            <></>
-          )}
-          {kind === "short" ? (
-            <>
-              <Link to="/">
-                <button
-                  type="button"
-                  className={"btn btn-warning"}
-                  style={{ padding: "0px" }}
-                >
-                  <img className="logo__img" alt="LOGO" src={Logo} />
-                </button>
-              </Link>
-            </>
-          ) : (
-            <></>
-          )}
-          <div className={kind === "short" ? "nav__short" : "nav"}>
+          <>
+            <Link to="/">
+              <button
+                type="button"
+                className={"btn btn-warning"}
+                style={{ padding: "0px" }}
+              >
+                <img className="logo__img" alt="LOGO" src={Logo} />
+              </button>
+            </Link>
+          </>
+          <div className="nav">
             {signedIn ? (
               <>
                 <Link className="nav__link nav__text" to="/Dashboard">
@@ -217,47 +265,53 @@ export default function HeaderMenu({
               <>
                 <Navbar1 expand="lg" className="header-navBar">
                   <Container>
-                    <Nav className="me-auto">
-                      <Link className="nav__text" to="/About">
-                        ABOUT
-                      </Link>
+                    <Navbar1.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar1.Collapse id="basic-navbar-nav">
+                      <Nav className="me-auto">
+                        <Link className="nav__text" to="/About">
+                          ABOUT
+                        </Link>
 
-                      <NavDropdown
-                        title="SERVICES"
-                        id="basic-nav-dropdown"
-                        className="nav__text"
-                      >
-                        <NavDropdown.Item href="#action/3.1">
-                          <Link className="nav__text" to="/ContractDrafting">
-                            Contract Drafting
-                          </Link>
-                        </NavDropdown.Item>
-                        <NavDropdown.Divider />
-                        <NavDropdown.Item href="#action/3.2">
-                          <Link className="nav__text" to="/ContractAnalysis">
-                            Contract Analysis
-                          </Link>
-                        </NavDropdown.Item>
-                        <NavDropdown.Divider />
-                        <NavDropdown.Item href="#action/3.3">
-                          <Link className="nav__text" to="/ContractReview">
-                            Contract Review
-                          </Link>
-                        </NavDropdown.Item>
-                        <NavDropdown.Divider />
-                        <NavDropdown.Item href="#action/3.4">
-                          <Link className="nav__text" to="/ContractManagement">
-                            Contract Management
-                          </Link>
-                        </NavDropdown.Item>
-                      </NavDropdown>
-                      <Link className="nav__text" to="/FAQs">
-                        FAQs
-                      </Link>
-                      <Link className="nav__link nav__text" to="/OrderRewiew">
-                        ORDER A REWIEW
-                      </Link>
-                    </Nav>
+                        <NavDropdown
+                          title="SERVICES"
+                          id="basic-nav-dropdown"
+                          className="nav__text"
+                        >
+                          <NavDropdown.Item href="#action/3.1">
+                            <Link className="nav__text" to="/ContractDrafting">
+                              Contract Drafting
+                            </Link>
+                          </NavDropdown.Item>
+                          <NavDropdown.Divider />
+                          <NavDropdown.Item href="#action/3.2">
+                            <Link className="nav__text" to="/ContractAnalysis">
+                              Contract Analysis
+                            </Link>
+                          </NavDropdown.Item>
+                          <NavDropdown.Divider />
+                          <NavDropdown.Item href="#action/3.3">
+                            <Link className="nav__text" to="/ContractReview">
+                              Contract Review
+                            </Link>
+                          </NavDropdown.Item>
+                          <NavDropdown.Divider />
+                          <NavDropdown.Item href="#action/3.4">
+                            <Link
+                              className="nav__text"
+                              to="/ContractManagement"
+                            >
+                              Contract Management
+                            </Link>
+                          </NavDropdown.Item>
+                        </NavDropdown>
+                        <Link className="nav__text" to="/FAQs">
+                          FAQs
+                        </Link>
+                        <Link className="nav__link nav__text" to="/OrderRewiew">
+                          ORDER A REWIEW
+                        </Link>
+                      </Nav>
+                    </Navbar1.Collapse>
                   </Container>
                 </Navbar1>
 
@@ -277,8 +331,15 @@ export default function HeaderMenu({
             )}
           </div>
 
-          {isMobileScreen ? (
-            <Navbar
+          {isMobileScreen ? <SideBarMenu /> : <></>}
+        </div>
+      </header>
+    </>
+  );
+}
+
+{
+  /* <Navbar
               signedInStatus={signedInStatus}
               handleSignIn={handleSignIn}
               setUserProfileData={setUserProfileData}
@@ -288,12 +349,5 @@ export default function HeaderMenu({
               setIsOpen={setIsOpen}
               resetPass={resetPass}
               setResetPass={setResetPass}
-            />
-          ) : (
-            <></>
-          )}
-        </div>
-      </header>
-    </>
-  );
+            /> */
 }

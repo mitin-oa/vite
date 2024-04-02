@@ -5,6 +5,9 @@ const colors = {
   lightbrown: "#be8b7b",
   pearl: "#F1CDB3",
   lightblue: "#93CEF0",
+  white: "#ffffff",
+  deepblue: "#033c5a",
+  orange: "#ec720b",
 };
 
 const StyledHamburger = styled.button<{ open: boolean }>`
@@ -14,10 +17,10 @@ const StyledHamburger = styled.button<{ open: boolean }>`
   min-width: 2.35rem !important;
   height: 2.35rem;
   padding: 3px !important;
-  // background: transparent;
+  background-color: ${colors.white} !important;
   position: absolute;
-  top: 2px;
-  right: 0;
+  top: 15px;
+  right: 10;
   display: flex !important;
   flex-direction: column;
   justify-content: space-around;
@@ -31,7 +34,8 @@ const StyledHamburger = styled.button<{ open: boolean }>`
     width: 2rem;
     height: 0.25rem;
     border-radius: 0px;
-    background-color: ${({ open }) => (open ? colors.pearl : colors.pearl)};
+    background-color: ${({ open }) =>
+      open ? colors.deepblue : colors.deepblue};
     transition: all 0.3s linear;
     transform-origin: 1px;
   }
