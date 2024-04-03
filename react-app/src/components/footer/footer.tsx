@@ -33,10 +33,16 @@ export default function Footer({ kind }: any) {
               <ul className="footer__nav">
                 {
                   <>
-                    <Link className={"nav__link" + " contacts__info"} to="">
+                    <Link
+                      className={"nav__link" + " contacts__info"}
+                      to="/Resources"
+                    >
                       Resourses
                     </Link>
-                    <Link className={"nav__link" + " contacts__info"} to="">
+                    <Link
+                      className={"nav__link" + " contacts__info"}
+                      to="/Contacts"
+                    >
                       Contacts
                     </Link>
                   </>
@@ -47,10 +53,16 @@ export default function Footer({ kind }: any) {
               <ul className="footer__nav">
                 {
                   <>
-                    <Link className={"nav__link" + " contacts__info"} to="">
+                    <Link
+                      className={"nav__link" + " contacts__info"}
+                      to="/Careers"
+                    >
                       Careers
                     </Link>
-                    <Link className={"nav__link" + " contacts__info"} to="">
+                    <Link
+                      className={"nav__link" + " contacts__info"}
+                      to="/Legal"
+                    >
                       Legal
                     </Link>
                   </>

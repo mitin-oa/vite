@@ -11,20 +11,14 @@ export default function WhoWeServe() {
   const signedIn = useContext(SignedInContext);
   return (
     <>
-      <div style={{ backgroundColor: "#033c5a", padding: "0px 40px 50px" }}>
-        <div className="title-container">
-          <div className="home_title">WHO WE SERVE</div>
-          <Underline />
-        </div>
-        <div className="wrapper d-flex flex-lm-row flex-md-block">
-          <div className="Content" style={{ marginRight: "20px" }}>
-            <h3
-              style={{
-                color: "#ec720b",
-                textAlign: "start",
-                margin: "20px 0",
-              }}
-            >
+      <div className="title-container" style={{ backgroundColor: "#033c5a" }}>
+        <div className="home_title">WHO WE SERVE</div>
+        <Underline />
+      </div>
+      <div className="who-we-serve">
+        <div className="wrapper d-flex flex-reverse">
+          <div className="Content">
+            <h3 className="section-subtitle">
               Are you a business with no in-house lawyer?
             </h3>
             <p className="only_text" style={{ color: "white", margin: "0px" }}>
@@ -33,13 +27,7 @@ export default function WhoWeServe() {
               negotiate your contracts for just a fraction of the price of a
               conventional law firm.
             </p>
-            <h3
-              style={{
-                color: "#ec720b",
-                textAlign: "start",
-                margin: "20px 0",
-              }}
-            >
+            <h3 className="section-subtitle">
               Is your in-house legal team overwhelmed?
             </h3>
             <p className="only_text" style={{ color: "white", margin: "0px" }}>
@@ -48,13 +36,7 @@ export default function WhoWeServe() {
               stream to free you up and enable you to focus on strategic or
               higher-value matters.
             </p>
-            <h3
-              style={{
-                color: "#ec720b",
-                textAlign: "start",
-                margin: "20px 0",
-              }}
-            >
+            <h3 className="section-subtitle">
               Is your sales or procurement team not thriving?
             </h3>
             <p className="only_text" style={{ color: "white", margin: "0px" }}>
@@ -63,13 +45,7 @@ export default function WhoWeServe() {
               your buy and sales cycles faster and frictionless. Turn contracts
               around in as little as one business day, when needed.
             </p>
-            <h3
-              style={{
-                color: "#ec720b",
-                textAlign: "start",
-                margin: "20px 0",
-              }}
-            >
+            <h3 className="section-subtitle">
               Are you struggling to keep up with the flow of work in your law
               practice?
             </h3>

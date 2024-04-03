@@ -1,15 +1,16 @@
 import "../homePage/startScreen.scss";
 import { useMediaQuery } from "react-responsive";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { SignedInContext } from "../../App";
-import PhoneInput from "react-phone-number-input";
-import "react-phone-number-input/style.css";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/bootstrap.css";
 import { Link } from "react-router-dom";
 import Button from "../Button";
 import CollapseButton from "../CollapseButton";
 // * VK: Significant for the backend area. Please exercise caution when making alterations
 import { createTempUser } from "../../fetchScripts/authRequests";
 import Underline from "../Underline";
+import { useForm, Controller } from "react-hook-form";
 
 export default function ReadyToGet(this: any) {
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1160px" });
@@ -96,6 +97,15 @@ export default function ReadyToGet(this: any) {
     setUserId(addedUser.userId);
     console.log(inputPhone);
   }
+  interface IFormInputs {
+    TextField: string;
+    MyCheckbox: boolean;
+  }
+  const { handleSubmit, control, reset } = useForm<IFormInputs>({
+    defaultValues: {
+      MyCheckbox: false,
+    },
+  });
 
   return (
     <>
@@ -103,12 +113,7 @@ export default function ReadyToGet(this: any) {
         <div className="home_title">READY TO GET YOUR CONTRACTS REVIEWED?</div>
         <Underline />
       </div>
-      <div
-        style={{
-          backgroundColor: "white",
-          padding: "0px 40px 50px",
-        }}
-      >
+      <div className="ready-to-get">
         <div
           className="wrapper only_text"
           style={{
@@ -136,7 +141,7 @@ export default function ReadyToGet(this: any) {
           </span>
         </div>
         <div className="wrapper d-flex flex-lm-row flex-md-block">
-          <div className="container mt-5 form-container">
+          <div className="container form-container">
             <div className="row">
               <div className="col-md-12" id="fullWidthColumn">
                 <form id="orderForm">
@@ -203,11 +208,14 @@ export default function ReadyToGet(this: any) {
                         style={{ width: "50%", borderWidth: "2px" }}
                       >
                         <label htmlFor="phoneNumber">Phone*</label>
-                        <PhoneInput
-                          //country={"us"}
-                          placeholder="Enter phone number"
+                        <input
+                          type="tel"
+                          className="form-control"
+                          name="phone"
+                          id="phone"
                           value={inputPhone}
-                          onChange={() => setInputPhone(inputPhone)}
+                          required={true}
+                          onChange={(e) => setInputPhone(e.target.value)}
                         />
                       </div>
                     </div>
@@ -251,28 +259,19 @@ export default function ReadyToGet(this: any) {
               </div>
             </div>
           </div>
-          <div className="container mt-5 form-container">
-            <div className="about_service d-md-flex flex sm-column">
-              <div className="about_service">
-                <h2
-                  style={{
-                    color: "#ff8307",
-                    fontWeight: "bold",
-                    letterSpacing: "1px",
-                  }}
-                >
-                  OFFICES
-                </h2>
-                {offises.map((item: any) => {
-                  return (
-                    <CollapseButton value={item.city} label={item.adress} />
-                  );
-                })}
-              </div>
+          <div className="container form-container">
+            <div className="about_service" style={{ width: "100%" }}>
+              <h2 className="section-subtitle">OFFICES</h2>
+              {offises.map((item: any) => {
+                return <CollapseButton value={item.city} label={item.adress} />;
+              })}
             </div>
           </div>
         </div>
       </div>
     </>
   );
+}
+function useFocus(): [any, any] {
+  throw new Error("Function not implemented.");
 }

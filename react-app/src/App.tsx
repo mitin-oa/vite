@@ -16,7 +16,7 @@ import Swal from "sweetalert2";
 import ResetPassword from "./ResetPassword";
 
 import OrderRewiew from "./OrderReview";
-import Contacts from "./Contacts";
+import Contacts from "./components/footer/Contacts";
 import Services from "./Services";
 import { ParallaxProvider } from "react-scroll-parallax";
 export const SignedInContext = createContext(false);
@@ -34,6 +34,9 @@ import ContractDrafting from "./components/ContractDrafting";
 import ContractAnalysis from "./components/ContractAnalysis";
 import ContractReview from "./components/ContractReview";
 import ContractManagment from "./components/ContractManagement";
+import Resources from "./components/footer/Resources";
+import Careers from "./components/footer/Careers";
+import Legal from "./components/footer/Legal";
 
 export function deleteCookie(name: string) {
   const date = new Date();
@@ -302,6 +305,51 @@ function App() {
                 path="Contacts"
                 element={
                   <Contacts
+                    kind="short"
+                    onSignIn={onSignIn}
+                    handleSignIn={handleSignIn}
+                    signedUp={signedUp}
+                    setUserProfileData={setUserProfileData}
+                    handleSignUp={handleSignUp}
+                    modalIsOpen={modalIsOpen}
+                    setIsOpen={setIsOpen}
+                  />
+                }
+              />
+              <Route
+                path="Resources"
+                element={
+                  <Resources
+                    kind="short"
+                    onSignIn={onSignIn}
+                    handleSignIn={handleSignIn}
+                    signedUp={signedUp}
+                    setUserProfileData={setUserProfileData}
+                    handleSignUp={handleSignUp}
+                    modalIsOpen={modalIsOpen}
+                    setIsOpen={setIsOpen}
+                  />
+                }
+              />
+              <Route
+                path="Careers"
+                element={
+                  <Careers
+                    kind="short"
+                    onSignIn={onSignIn}
+                    handleSignIn={handleSignIn}
+                    signedUp={signedUp}
+                    setUserProfileData={setUserProfileData}
+                    handleSignUp={handleSignUp}
+                    modalIsOpen={modalIsOpen}
+                    setIsOpen={setIsOpen}
+                  />
+                }
+              />
+              <Route
+                path="Legal"
+                element={
+                  <Legal
                     kind="short"
                     onSignIn={onSignIn}
                     handleSignIn={handleSignIn}

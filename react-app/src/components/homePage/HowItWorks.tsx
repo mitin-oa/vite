@@ -17,15 +17,7 @@ export default function HowItWorks() {
       <div className="how-it-works">
         <div className="d-flex flex-lm-row flex-md-block">
           <div className="Content">
-            <h2
-              style={{
-                color: "#ec720b",
-                textAlign: "center",
-                margin: "20px 0",
-              }}
-            >
-              Contract review made easy!
-            </h2>
+            <h2 className="section-subtitle">Contract review made easy!</h2>
             <p className="only_text">
               Your contracts drafted, reviewed, and negotiated by experienced
               lawyers when you need it and how you want it.
