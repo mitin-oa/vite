@@ -291,6 +291,10 @@ input[type=number]::-webkit-outer-spin-button {
   text-align: start !important;
 }
 
+.ready-to-get-btn {
+  margin: 0 auto;
+}
+
 .form {
   zoom: 1;
   display: block;
@@ -385,27 +389,6 @@ input[type="tel"]:focus,
 input[type="password"]:focus {
   outline: none;
   border-left-color: steelblue;
-}
-
-.input-phone-number {
-
-  -webkit-box-shadow: none !important;
-  -moz-box-shadow: none;
-  box-shadow: none;
-  width: 100%;
-  font-size: 17px;
-  color: #8d8d8d !important;
-  background-color: #ffffff;
-  //border-width: 0 0 2px 0;
-  //border-bottom-color: #d7d7d7;
-  border-radius: 5px !important;
-  outline: none;
-}
-
-.input-phone-number input:focus{
-  outline: none !important;
-  border-left-color: steelblue !important;
-  
 }
 
 .well h3 {
@@ -585,7 +568,6 @@ legend {
 
 .table thead tr th:last-child {
   border-radius: 1px;
-
 }
 
 .table tbody td {
@@ -598,32 +580,23 @@ legend {
   vertical-align: top;
   background: #F8F8F8;
   border-radius: 1px;
-
   @media (max-width: 1200px) {
     font-size: 14px;
     padding: 5px 7px;
-  }
-
-  ;
-
+  };
   @media (max-width: 760px) {
     font-size: 12px;
     padding: 5px 5px;
-  }
-
-  ;
+  };
 }
 
 .table tbody td:first-child {
   width: 40%;
   text-align: left;
   word-break: break-all;
-
   @media (max-width: 760px) {
     width: 40%;
-  }
-
-  ;
+  };
 }
 
 .table tbody td {
@@ -634,49 +607,25 @@ legend {
   background: #F8F8F8;
   border-radius: 1px;
   font-size: 17px;
-
   @media (max-width: 1028px) {
     font-size: 15px;
-  }
-
-  ;
-
+  };
   @media (max-width: 760px) {
     font-size: 12px;
-  }
-
-  ;
+  };
 }
 
 .table tbody tr:first-child td {
   font-size: 17px;
   background: #b8e2f85b;
   color: #ec720b;
-
   @media (max-width: 1028px) {
     font-size: 16px;
-  }
-
-  ;
-
+  };
   @media (max-width: 760px) {
     font-size: 14px;
-  }
-
-  ;
+  };
 }
-
-/* .table tbody tr:last-child td{
-  font-size: 15px;
-  background: #b8e2f85b;
-  color: #ec720b;
-  @media (max-width: 1028px) {
-    font-size: 15px;
-  };
-  @media (max-width: 760px) {
-    font-size: 12px;
-  };
-} */
 
 .table tbody tr:last-child td {
   border-bottom: 3px solid #ddd;
@@ -752,12 +701,6 @@ legend {
       display: none;
     }
   }
-}
-
-
-.sc-bdfCDU.PXKBi,
-.sc-bdfCDU.hNbySd {
-  min-width: 72px !important;
 }
 
 .start_screen_content {
@@ -924,6 +867,7 @@ button.emoji-mart-emoji {
 
 .accordion {
   width: 100% !important;
+  margin-bottom: 5px;
 }
 
 .accordion-button {

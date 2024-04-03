@@ -21,7 +21,7 @@ export default function WhyChronoLegal() {
       <div className="why-chronolegal wrapper d-flex">
         <div className="WCL_picture"></div>
         <div className="vertical-strip"></div>
-        <div className="Content">
+        <div className="why-chronolegal__content">
           <h2
             style={{
               color: "#ec720b",

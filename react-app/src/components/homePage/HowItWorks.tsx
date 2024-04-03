@@ -46,6 +46,7 @@ export default function HowItWorks() {
             <div
               style={{
                 width: "100%",
+
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
@@ -55,8 +56,11 @@ export default function HowItWorks() {
                 <div
                   style={{
                     backgroundColor: "#ec720b",
-                    width: "5%",
-                    textAlign: "center",
+                    width: "6%",
+                    height: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
                   }}
                 >
                   1
@@ -68,8 +72,11 @@ export default function HowItWorks() {
                 <div
                   style={{
                     backgroundColor: "#ec720b",
-                    width: "5%",
-                    textAlign: "center",
+                    width: "6%",
+                    height: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
                   }}
                 >
                   2
@@ -81,8 +88,11 @@ export default function HowItWorks() {
                 <div
                   style={{
                     backgroundColor: "#ec720b",
-                    width: "5%",
-                    textAlign: "center",
+                    width: "6%",
+                    height: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
                   }}
                 >
                   3
@@ -94,8 +104,11 @@ export default function HowItWorks() {
                 <div
                   style={{
                     backgroundColor: "#ec720b",
-                    width: "5%",
-                    textAlign: "center",
+                    width: "6%",
+                    height: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
                   }}
                 >
                   4
@@ -107,8 +120,11 @@ export default function HowItWorks() {
                 <div
                   style={{
                     backgroundColor: "#ec720b",
-                    width: "5%",
-                    textAlign: "center",
+                    width: "6%",
+                    height: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
                   }}
                 >
                   5

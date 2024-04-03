@@ -17,7 +17,7 @@ export default function WhoWeServe() {
       </div>
       <div className="who-we-serve">
         <div className="wrapper d-flex flex-reverse">
-          <div className="Content">
+          <div className="who-we-serve__content">
             <h3 className="section-subtitle">
               Are you a business with no in-house lawyer?
             </h3>

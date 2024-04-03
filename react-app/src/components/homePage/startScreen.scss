@@ -37,16 +37,28 @@
     background-size:cover;
     background-repeat: no-repeat;
     //background-position: bottom 100px right;
-    @media (max-width: 1028px) {
+    @media screen and (max-width: 1028px) {
       padding: 30px 0px 10px 20px;
     };
-    @media (max-width: 760px) {
+    @media screen and (max-width: 760px) {
       min-height: 55vh;
       padding: 30px 0 0;
     };
-    &_content {
-      //margin-top: 100px;
-      align-items: flex-start;
+    &__content {     
+      display: flex;
+      flex-direction: column;
+      align-items:flex-start;
+      width: 100%;
+      margin-left: 2vw;
+      @media (max-width: 1028px) {
+        max-width: 600px;
+        align-items: center;
+        margin-bottom: 0px;
+        margin: 0 auto;
+      };
+      @media (max-width: 760px) {
+        max-width: 560px;
+      };
        
       @media (max-width: 1028px) {
         flex-direction: column;
@@ -58,22 +70,55 @@
   .why-chronolegal {
     background-color: white;
     padding: 0px 0 70px;
-    @media (max-width: 768px) {
+    &__content {     
+      display: flex;
+      flex-direction: column;
+      align-items:flex-start;
+      width: 100%;
+      margin-left: 2vw;
+      @media (max-width: 1028px) {
+        max-width: 600px;
+        align-items: center;
+        margin-bottom: 0px;
+        margin: 0 auto;
+      };
+      @media (max-width: 760px) {
+        max-width: 560px;
+      };
+    }
+    @media screen and (max-width: 768px) {
       padding: 0px 0 30px;
     };
   }
+
 .who-we-serve {
   background-color: #033c5a;
-  padding: 0px 40px 50px;
-  @media (max-width: 768px) {
+  padding: 0px 40px 70px;
+  @media screen and (max-width: 768px) {
     padding: 0px 0px 30px;
   };
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items:flex-start;
+    width: 100%;
+    margin-left: 2vw;
+    @media (max-width: 1028px) {
+      max-width: 600px;
+      align-items: center;
+      margin-bottom: 0px;
+      margin: 0 auto;
+    };
+    @media (max-width: 760px) {
+      max-width: 560px;
+    };
+  }
 }
 
 .ready-to-get {
   background-color: white;
   padding: 0px 40px 50px;
-  @media (max-width: 768px) {
+  @media screen and (max-width: 768px) {
     padding: 0px 20px 30px;
     
   };
@@ -81,7 +126,10 @@
 
 .flex-reverse {
   display: flex;
-  flex-direction: column-reverse;
+  flex-wrap: nowrap;
+  @media screen and (max-width: 768px) {
+    flex-direction: column-reverse;
+  };
 }
 
   .Content {
@@ -181,6 +229,7 @@
   
   .HIV {
     display: flex;
+    align-items: center;
     width: 100%;
     font-size: 22px;
     font-weight: 600;
@@ -190,6 +239,9 @@
     background-color:white;
     height: 40px;
     border-radius: 2px;
+    @media screen and (max-width: 768px) {
+      font-size: 18px;
+    }
   }
   
   .HIW_picture {
@@ -264,7 +316,6 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    max-width: 1280px;
     margin: 0 auto;
   }
   .title-underline-container {

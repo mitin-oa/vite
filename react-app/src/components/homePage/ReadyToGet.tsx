@@ -1,8 +1,8 @@
 import "../homePage/startScreen.scss";
+import "../../App.scss";
 import { useMediaQuery } from "react-responsive";
 import { useContext, useEffect, useRef, useState } from "react";
 import { SignedInContext } from "../../App";
-import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/bootstrap.css";
 import { Link } from "react-router-dom";
 import Button from "../Button";
@@ -244,13 +244,13 @@ export default function ReadyToGet(this: any) {
                         onChange={(e) => setAddInformation(e.target.value)}
                       ></textarea>
                     </div>
-                    <div className="form-group">
+                    <div className="form-group mb-3">
                       {!checkedEmail && (
                         <Button
                           children="SEND"
                           color="orange"
                           onClick={checkEmail}
-                          style=""
+                          style="ready-to-get-btn"
                         />
                       )}
                     </div>
@@ -271,7 +271,4 @@ export default function ReadyToGet(this: any) {
       </div>
     </>
   );
-}
-function useFocus(): [any, any] {
-  throw new Error("Function not implemented.");
 }
