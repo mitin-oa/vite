@@ -77,13 +77,12 @@
       width: 100%;
       margin-left: 2vw;
       @media (max-width: 1028px) {
-        max-width: 600px;
+        margin-right: 2vw;
+      };
+      @media (max-width: 760px) {
         align-items: center;
         margin-bottom: 0px;
         margin: 0 auto;
-      };
-      @media (max-width: 760px) {
-        max-width: 560px;
       };
     }
     @media screen and (max-width: 768px) {
@@ -94,6 +93,9 @@
 .who-we-serve {
   background-color: #033c5a;
   padding: 0px 40px 70px;
+  @media screen and (max-width: 1028px) {
+    padding: 0px 0px 70px;
+  };
   @media screen and (max-width: 768px) {
     padding: 0px 0px 30px;
   };
@@ -104,13 +106,13 @@
     width: 100%;
     margin-left: 2vw;
     @media (max-width: 1028px) {
-      max-width: 600px;
       align-items: center;
       margin-bottom: 0px;
       margin: 0 auto;
+      padding: 0px 20px;
     };
     @media (max-width: 760px) {
-      max-width: 560px;
+      padding: 0;
     };
   }
 }
@@ -139,7 +141,6 @@
     width: 100%;
     margin-left: 2vw;
     @media (max-width: 1028px) {
-      max-width: 600px;
       align-items: center;
       margin-bottom: 0px;
       margin: 0 auto;
