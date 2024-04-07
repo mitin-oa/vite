@@ -37,7 +37,7 @@ export default function Footer({ kind }: any) {
                       className={"nav__link" + " contacts__info"}
                       to="/Resources"
                     >
-                      Resourses
+                      Resources
                     </Link>
                     <Link
                       className={"nav__link" + " contacts__info"}
@@ -69,74 +69,6 @@ export default function Footer({ kind }: any) {
                 }
               </ul>
             </div>
-            {/* <div className="contacts">
-            <ul
-              className={
-                kind === "short" ? "footer__nav__short" : "footer__nav"
-              }
-            >
-              {
-                <>
-                  <Link
-                    className={
-                      "nav__link" +
-                      (kind === "short"
-                        ? " contacts__info__short"
-                        : " contacts__info")
-                    }
-                    to=""
-                  >
-                    Resources
-                  </Link>
-                  <Link
-                    className={
-                      "nav__link" +
-                      (kind === "short"
-                        ? " contacts__info__short"
-                        : " contacts__info")
-                    }
-                    to=""
-                  >
-                    Legal (Terms of services, Legal Notices)
-                  </Link>
-                </>
-              }
-            </ul>
-          </div>
-          <div className="contacts">
-            <ul
-              className={
-                kind === "short" ? "footer__nav__short" : "footer__nav"
-              }
-            >
-              {
-                <>
-                  <Link
-                    className={
-                      "nav__link" +
-                      (kind === "short"
-                        ? " contacts__info__short"
-                        : " contacts__info")
-                    }
-                    to=""
-                  >
-                    Careers
-                  </Link>
-                  <Link
-                    className={
-                      "nav__link" +
-                      (kind === "short"
-                        ? " contacts__info__short"
-                        : " contacts__info")
-                    }
-                    to=""
-                  >
-                    Contacts
-                  </Link>
-                </>
-              }
-            </ul>
-          </div> */}
           </div>
 
           <div className="contacts__social">
@@ -155,7 +87,7 @@ export default function Footer({ kind }: any) {
         </div>
       </footer>
       <div className="footer-bottom-bar">
-        <p className="footer-bottom-bar__content">Copiright ChronoLegal 2024</p>
+        <p className="footer-bottom-bar__content">Copyright ChronoLegal 2024</p>
       </div>
     </>
   );

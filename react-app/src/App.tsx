@@ -37,6 +37,7 @@ import ContractManagment from "./components/ContractManagement";
 import Resources from "./components/footer/Resources";
 import Careers from "./components/footer/Careers";
 import Legal from "./components/footer/Legal";
+import ScrollToTop from "./components/ScrollToTop";
 
 export function deleteCookie(name: string) {
   const date = new Date();
@@ -304,61 +305,73 @@ function App() {
               <Route
                 path="Contacts"
                 element={
-                  <Contacts
-                    kind="short"
-                    onSignIn={onSignIn}
-                    handleSignIn={handleSignIn}
-                    signedUp={signedUp}
-                    setUserProfileData={setUserProfileData}
-                    handleSignUp={handleSignUp}
-                    modalIsOpen={modalIsOpen}
-                    setIsOpen={setIsOpen}
-                  />
+                  <>
+                    <ScrollToTop />
+                    <Contacts
+                      kind="short"
+                      onSignIn={onSignIn}
+                      handleSignIn={handleSignIn}
+                      signedUp={signedUp}
+                      setUserProfileData={setUserProfileData}
+                      handleSignUp={handleSignUp}
+                      modalIsOpen={modalIsOpen}
+                      setIsOpen={setIsOpen}
+                    />
+                  </>
                 }
               />
               <Route
                 path="Resources"
                 element={
-                  <Resources
-                    kind="short"
-                    onSignIn={onSignIn}
-                    handleSignIn={handleSignIn}
-                    signedUp={signedUp}
-                    setUserProfileData={setUserProfileData}
-                    handleSignUp={handleSignUp}
-                    modalIsOpen={modalIsOpen}
-                    setIsOpen={setIsOpen}
-                  />
+                  <>
+                    <ScrollToTop />
+                    <Resources
+                      kind="short"
+                      onSignIn={onSignIn}
+                      handleSignIn={handleSignIn}
+                      signedUp={signedUp}
+                      setUserProfileData={setUserProfileData}
+                      handleSignUp={handleSignUp}
+                      modalIsOpen={modalIsOpen}
+                      setIsOpen={setIsOpen}
+                    />
+                  </>
                 }
               />
               <Route
                 path="Careers"
                 element={
-                  <Careers
-                    kind="short"
-                    onSignIn={onSignIn}
-                    handleSignIn={handleSignIn}
-                    signedUp={signedUp}
-                    setUserProfileData={setUserProfileData}
-                    handleSignUp={handleSignUp}
-                    modalIsOpen={modalIsOpen}
-                    setIsOpen={setIsOpen}
-                  />
+                  <>
+                    <ScrollToTop />
+                    <Careers
+                      kind="short"
+                      onSignIn={onSignIn}
+                      handleSignIn={handleSignIn}
+                      signedUp={signedUp}
+                      setUserProfileData={setUserProfileData}
+                      handleSignUp={handleSignUp}
+                      modalIsOpen={modalIsOpen}
+                      setIsOpen={setIsOpen}
+                    />
+                  </>
                 }
               />
               <Route
                 path="Legal"
                 element={
-                  <Legal
-                    kind="short"
-                    onSignIn={onSignIn}
-                    handleSignIn={handleSignIn}
-                    signedUp={signedUp}
-                    setUserProfileData={setUserProfileData}
-                    handleSignUp={handleSignUp}
-                    modalIsOpen={modalIsOpen}
-                    setIsOpen={setIsOpen}
-                  />
+                  <>
+                    <ScrollToTop />
+                    <Legal
+                      kind="short"
+                      onSignIn={onSignIn}
+                      handleSignIn={handleSignIn}
+                      signedUp={signedUp}
+                      setUserProfileData={setUserProfileData}
+                      handleSignUp={handleSignUp}
+                      modalIsOpen={modalIsOpen}
+                      setIsOpen={setIsOpen}
+                    />
+                  </>
                 }
               />
               <Route

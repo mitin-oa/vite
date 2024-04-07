@@ -108,6 +108,12 @@ section {
   font-family: 'Montserrat';
   font-weight: bold;
   color: #ec720b;
+  @media (max-width: 1028px) {
+    font-size: 30px;
+  }
+  @media (max-width: 768px) {
+    font-size: 25px;
+  }
 }
 
 .section-subtitle {
@@ -816,4 +822,11 @@ button.emoji-mart-emoji {
 
 .buy-credits {
   padding: 30px 0 70px;
+}
+
+.legal-terms {
+  font-size: 15px;
+  @media screen and (max-width: 768px) {
+    font-size: 12px;
+  }
 }
