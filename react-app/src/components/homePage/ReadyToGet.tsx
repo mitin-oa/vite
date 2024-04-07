@@ -200,9 +200,8 @@ export default function ReadyToGet(this: any) {
                         inputProps={{
                           name: "phone",
                           required: true,
-                          autoFocus: true,
+                          //autoFocus: true,
                         }}
-                        //country={"us"}
                         inputClass={"input"}
                         value={inputPhone}
                         onChange={(value) => setInputPhone(value)}
