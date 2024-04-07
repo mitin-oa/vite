@@ -6,7 +6,6 @@ import Button from "./components/Button";
 import FileChooser from "./components/fileUploader/fileChooser";
 import ModalWindow from "./components/modal/modal";
 import PayPal from "./components/PayPalGuest";
-
 // * VK: Significant for the backend area. Please exercise caution when making alterations
 import { createTempUser } from "./fetchScripts/authRequests";
 import PhoneInput from "react-phone-input-2";
@@ -366,7 +365,7 @@ export default function OrderReview({
                             //country={"us"}
                             inputClass={"input"}
                             value={inputPhone}
-                            onChange={(e: any) => setInputPhone(e.target.value)}
+                            onChange={(value) => setInputPhone(value)}
                             inputStyle={{ width: "100%" }}
                           />
                         </div>

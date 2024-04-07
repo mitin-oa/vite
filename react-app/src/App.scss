@@ -398,6 +398,10 @@ input[type="password"]:focus {
   border-left-color: steelblue;
 }
 
+.react-tel-input .form-control {
+  padding: 7px 14px 7px 60px !important;
+}
+
 .well h3 {
   text-shadow: -1px -1px #fff, -2px -2px #fff, -1px 1px #fff, -2px 2px #fff,
     1px 1px #fff, 2px 2px #fff, 1px -1px #fff, 2px -2px #fff, -3px -3px 2px #bbb,

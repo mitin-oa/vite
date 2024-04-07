@@ -11,6 +11,7 @@ import CollapseButton from "../CollapseButton";
 import { createTempUser } from "../../fetchScripts/authRequests";
 import Underline from "../Underline";
 import { useForm, Controller } from "react-hook-form";
+import PhoneInput from "react-phone-input-2";
 
 export default function ReadyToGet(this: any) {
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1160px" });
@@ -95,7 +96,6 @@ export default function ReadyToGet(this: any) {
 
     setCheckedEmail(true); // * VK: Used to display the rest of the fields after the email has been confirmed
     setUserId(addedUser.userId);
-    console.log(inputPhone);
   }
   interface IFormInputs {
     TextField: string;
@@ -195,14 +195,18 @@ export default function ReadyToGet(this: any) {
                       style={{ width: "50%", borderWidth: "2px" }}
                     >
                       <label htmlFor="phoneNumber">Phone*</label>
-                      <input
-                        type="tel"
-                        className="form-control"
-                        name="phone"
-                        id="phone"
+
+                      <PhoneInput
+                        inputProps={{
+                          name: "phone",
+                          required: true,
+                          autoFocus: true,
+                        }}
+                        //country={"us"}
+                        inputClass={"input"}
                         value={inputPhone}
-                        required={true}
-                        onChange={(e) => setInputPhone(e.target.value)}
+                        onChange={(value) => setInputPhone(value)}
+                        inputStyle={{ width: "100%" }}
                       />
                     </div>
                   </div>
