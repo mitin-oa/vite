@@ -31,7 +31,7 @@ function SideBarMenu() {
       width: "32px",
       right: "16px",
       top: "16px",
-      backgroundImage: "url(/public/cross-square-button.png)",
+      backgroundImage: "url(/cross-square-button.png)",
     },
     /* bmCross: {
       background: "#bdc3c7",
