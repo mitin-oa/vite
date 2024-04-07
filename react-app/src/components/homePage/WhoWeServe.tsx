@@ -18,7 +18,7 @@ export default function WhoWeServe() {
       <div className="who-we-serve">
         <div className="wrapper d-flex flex-reverse">
           <div className="who-we-serve__content">
-            <h3 className="section-subtitle">
+            <h3 className="who-we-serve__title">
               Are you a business with no in-house lawyer?
             </h3>
             <p className="only_text" style={{ color: "white", margin: "0px" }}>
@@ -27,7 +27,7 @@ export default function WhoWeServe() {
               negotiate your contracts for just a fraction of the price of a
               conventional law firm.
             </p>
-            <h3 className="section-subtitle">
+            <h3 className="who-we-serve__title">
               Is your in-house legal team overwhelmed?
             </h3>
             <p className="only_text" style={{ color: "white", margin: "0px" }}>
@@ -36,7 +36,7 @@ export default function WhoWeServe() {
               stream to free you up and enable you to focus on strategic or
               higher-value matters.
             </p>
-            <h3 className="section-subtitle">
+            <h3 className="who-we-serve__title">
               Is your sales or procurement team not thriving?
             </h3>
             <p className="only_text" style={{ color: "white", margin: "0px" }}>
@@ -45,7 +45,7 @@ export default function WhoWeServe() {
               your buy and sales cycles faster and frictionless. Turn contracts
               around in as little as one business day, when needed.
             </p>
-            <h3 className="section-subtitle">
+            <h3 className="who-we-serve__title">
               Are you struggling to keep up with the flow of work in your law
               practice?
             </h3>

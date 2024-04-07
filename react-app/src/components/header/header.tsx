@@ -63,51 +63,6 @@ export default function HeaderMenu({
     setIsOpen(false);
   }
 
-  const styles = {
-    bmBurgerButton: {
-      position: "fixed",
-      width: "36px",
-      height: "30px",
-      left: "36px",
-      top: "36px",
-    },
-    bmBurgerBars: {
-      background: "#373a47",
-    },
-    bmBurgerBarsHover: {
-      background: "#a90000",
-    },
-    bmCrossButton: {
-      height: "24px",
-      width: "24px",
-    },
-    bmCross: {
-      background: "#bdc3c7",
-    },
-    bmMenuWrap: {
-      position: "fixed",
-      height: "100%",
-    },
-    bmMenu: {
-      background: "#373a47",
-      padding: "2.5em 1.5em 0",
-      fontSize: "1.15em",
-    },
-    bmMorphShape: {
-      fill: "#373a47",
-    },
-    bmItemList: {
-      color: "#b8b7ad",
-      padding: "0.8em",
-    },
-    bmItem: {
-      display: "inline-block",
-    },
-    bmOverlay: {
-      background: "rgba(0, 0, 0, 0.3)",
-    },
-  };
-
   return (
     <>
       <div className="header__links">
@@ -238,22 +193,43 @@ export default function HeaderMenu({
           <div className="nav">
             {signedIn ? (
               <>
-                <Link className="nav__link nav__text" to="/Dashboard">
-                  Dashboard
-                </Link>
-                <Link className="nav__link nav__text" to="/UpLoad">
-                  File Upload
-                </Link>
-                <Link className="nav__link nav__text" to="/BuyCredits">
-                  Buy Credits
-                </Link>
+                <Navbar1 expand="lg" className="header-navBar">
+                  <Container>
+                    <Navbar1.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar1.Collapse id="basic-navbar-nav">
+                      <Nav className="me-auto">
+                        <Link
+                          className="nav__text"
+                          style={{ marginRight: "2vw" }}
+                          to="/Dashboard"
+                        >
+                          DASHBOARD
+                        </Link>
+                        <Link
+                          className="nav__text"
+                          style={{ marginRight: "2vw" }}
+                          to="/UpLoad"
+                        >
+                          FILE UPLOAD
+                        </Link>
+                        <Link
+                          className="nav__link nav__text"
+                          style={{ marginRight: "2vw" }}
+                          to="/BuyCredits"
+                        >
+                          BUY CREDITS
+                        </Link>
+                      </Nav>
+                    </Navbar1.Collapse>
+                  </Container>
+                </Navbar1>
 
                 {!isMobileScreen ? (
-                  <Link className="nav__link nav__text" to="/OrderRewiew">
+                  <Link className="nav__link" to="/OrderRewiew">
                     <Button
                       children="Order Now"
                       color=""
-                      style={"btn_get_started"}
+                      style={"btn_order_now"}
                       onClick={() => null}
                     />
                   </Link>

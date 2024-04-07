@@ -80,27 +80,26 @@ export default function DashBoardEditor({
   function downloadClientGuides(orderId: any) {
     let pathToFile = "/api/downloadClientGuides/" + orderId;
     fetchWithRefreshAuth(pathToFile, {
-      method: 'GET',
-      headers: {
-      },
+      method: "GET",
+      headers: {},
     })
-      .then(response => {
+      .then((response) => {
         if (!response.ok) {
-          throw new Error('Server returned an error response');
+          throw new Error("Server returned an error response");
         }
         return response.blob();
       })
-      .then(blob => {
+      .then((blob) => {
         const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.style.display = 'none';
+        const a = document.createElement("a");
+        a.style.display = "none";
         a.href = url;
-        a.download = orderId + '-Guides.zip';
+        a.download = orderId + "-Guides.zip";
         document.body.appendChild(a);
         a.click();
         window.URL.revokeObjectURL(url);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
       });
   }
@@ -143,6 +142,7 @@ export default function DashBoardEditor({
           setUserProfileData={setUserProfileData}
           handleSignUp={handleSignUp}
         />
+        <div className="Dashboard_picture">Dashboard Panel</div>
         <section className="main-content flex-column">
           <div className="row">
             <h2>Editor Dashboard Panel</h2>
@@ -217,11 +217,11 @@ export default function DashBoardEditor({
                           <td>
                             {userDataForDashboard
                               ? e.created_at.toString().split("T")[0] +
-                              " " +
-                              e.created_at
-                                .toString()
-                                .split("T")[1]
-                                .split(".")[0]
+                                " " +
+                                e.created_at
+                                  .toString()
+                                  .split("T")[1]
+                                  .split(".")[0]
                               : ""}
                           </td>
                           <td>{userDataForDashboard ? e.delivery_time : ""}</td>
@@ -250,7 +250,12 @@ export default function DashBoardEditor({
                           </td>
                           <td>{userDataForDashboard ? e.order_status : ""}</td>
                           <td>
-                            {["pending", "paid", "processed", "in work"].includes(e.order_status) && (
+                            {[
+                              "pending",
+                              "paid",
+                              "processed",
+                              "in work",
+                            ].includes(e.order_status) && (
                               <>
                                 <DownLoadFile orderId={e.order_id} />
                               </>
@@ -260,7 +265,10 @@ export default function DashBoardEditor({
                           <td>
                             {e.order_status === "in work" ? (
                               <>
-                                <UploadFiles orderId={e.order_id} clientEmail={e.client_email} />
+                                <UploadFiles
+                                  orderId={e.order_id}
+                                  clientEmail={e.client_email}
+                                />
                               </>
                             ) : (
                               <UploadFiles orderId={e.order_id} isDisabled />
@@ -282,18 +290,62 @@ export default function DashBoardEditor({
                         {expandedOrderId === e.order_id && (
                           <tr>
                             <td colSpan={10}>
-                              <p><b>Service type: </b>{e.service_type}</p>
-                              {e.add_information ? <p><b>Additional information:</b> {e.add_information} </p> : null}
-                              {e.user_guides ? <p><a href="#" onClick={() => downloadClientGuides(e.order_id)}>Download instructions for work</a></p> : null}
-                              <p><b>Client info:</b></p>
-                              <p><b>Company: </b>{e.clients_company_name}</p>
-                              <p><b>Address: </b>{e.clients_company_address}</p>
-                              <p><b>Industry: </b>{e.clients_company_industry}</p>
-                              <p><b>Contract info: </b></p>
-                              <p><b>Description: </b>{e.contract_description}</p>
-                              <p><b>Value: </b>{e.contract_value}</p>
-                              <p><b>Counterparty name: </b>{e.counterparty_name}</p>
-                              <p><b>Counterparty address: </b>{e.counterparty_address}</p>
+                              <p>
+                                <b>Service type: </b>
+                                {e.service_type}
+                              </p>
+                              {e.add_information ? (
+                                <p>
+                                  <b>Additional information:</b>{" "}
+                                  {e.add_information}{" "}
+                                </p>
+                              ) : null}
+                              {e.user_guides ? (
+                                <p>
+                                  <a
+                                    href="#"
+                                    onClick={() =>
+                                      downloadClientGuides(e.order_id)
+                                    }
+                                  >
+                                    Download instructions for work
+                                  </a>
+                                </p>
+                              ) : null}
+                              <p>
+                                <b>Client info:</b>
+                              </p>
+                              <p>
+                                <b>Company: </b>
+                                {e.clients_company_name}
+                              </p>
+                              <p>
+                                <b>Address: </b>
+                                {e.clients_company_address}
+                              </p>
+                              <p>
+                                <b>Industry: </b>
+                                {e.clients_company_industry}
+                              </p>
+                              <p>
+                                <b>Contract info: </b>
+                              </p>
+                              <p>
+                                <b>Description: </b>
+                                {e.contract_description}
+                              </p>
+                              <p>
+                                <b>Value: </b>
+                                {e.contract_value}
+                              </p>
+                              <p>
+                                <b>Counterparty name: </b>
+                                {e.counterparty_name}
+                              </p>
+                              <p>
+                                <b>Counterparty address: </b>
+                                {e.counterparty_address}
+                              </p>
                             </td>
                           </tr>
                         )}

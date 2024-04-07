@@ -1,15 +1,17 @@
 .footer {
     width: 100%;
-    min-height: 18vh;
+    min-height: 15vh;
     background-color: #033c5a;
-    padding: 60px 40px 15px;
+    padding: 50px 40px 15px;
     margin: 0 auto;
     overflow: auto;
     @media (max-width: 1028px) {
-        min-height: 15vh;
+        min-height: 10vh;
+        padding: 40px 40px 15px;
     };
     @media (max-width: 760px) {
-        min-height: 15vh;
+        min-height: 8vh;
+        padding: 30px 20px 15px;
     };
     &__short {
         position: relative;
@@ -161,6 +163,9 @@
         line-height: 35.5px;
         letter-spacing: 0.06em;
         text-align: center;
+    };
+    @media (max-width: 768px) {
+        margin-right: 5vw;
     };
     &__links {
         display: flex;

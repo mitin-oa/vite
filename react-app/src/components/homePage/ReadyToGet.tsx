@@ -110,21 +110,16 @@ export default function ReadyToGet(this: any) {
   return (
     <>
       <div className="title-container">
-        <div className="home_title">READY TO GET YOUR CONTRACTS REVIEWED?</div>
+        <div className="home_title" style={{ letterSpacing: "1px" }}>
+          READY TO GET YOUR CONTRACTS REVIEWED?
+        </div>
         <Underline />
       </div>
       <div className="ready-to-get">
-        <div
-          className="wrapper only_text"
-          style={{
-            color: "#033c5a",
-            fontWeight: "bold",
-            margin: "0 auto",
-          }}
-        >
+        <div className="wrapper ready-to-get__text">
           <span>
             <Link
-              className="nav__link only__text"
+              className="only__text"
               style={{
                 color: "#ec720b",
                 fontWeight: "bold",
@@ -142,129 +137,124 @@ export default function ReadyToGet(this: any) {
         </div>
         <div className="wrapper d-flex flex-lm-row flex-md-block">
           <div className="container form-container">
-            <div className="row">
-              <div className="col-md-12" id="fullWidthColumn">
-                <form id="orderForm">
-                  <div
-                    className="frame-container"
-                    style={{
-                      border: "none",
-                    }}
-                  >
-                    <div
-                      className="only_text"
-                      style={{
-                        color: "#033c5a",
-                        fontWeight: "bold",
-                        margin: "0px",
-                      }}
-                    >
-                      Contact us by filling out the form below.
-                    </div>
-                    <div className="row">
-                      <div className="form-group mb-3" style={{ width: "50%" }}>
-                        <label htmlFor="contactPersonName">Your Name*</label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          name="contactPersonName"
-                          id="contactPersonName"
-                          value={inputName}
-                          required={true}
-                          onChange={(e) => setInputName(e.target.value)}
-                        />
-                      </div>
-                      <div className="form-group mb-3" style={{ width: "50%" }}>
-                        <label htmlFor="contactCompanyName">
-                          Your Company Name*
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          name="contactCompanyName"
-                          id="contactCompanyName"
-                          value={inputCompanyName}
-                          required={true}
-                          onChange={(e) => setInputCompanyName(e.target.value)}
-                        />
-                      </div>
-                    </div>
-                    <div className="row">
-                      <div className="form-group mb-3" style={{ width: "50%" }}>
-                        <label htmlFor="email">Email*</label>
-                        <input
-                          type="email"
-                          className="form-control"
-                          name="email"
-                          id="email"
-                          value={inputEmail}
-                          required={true}
-                          onChange={(e) => setInputEmail(e.target.value)}
-                          disabled={checkedEmail}
-                        />
-                      </div>
-                      <div
-                        className="form-group mb-3"
-                        style={{ width: "50%", borderWidth: "2px" }}
-                      >
-                        <label htmlFor="phoneNumber">Phone*</label>
-                        <input
-                          type="tel"
-                          className="form-control"
-                          name="phone"
-                          id="phone"
-                          value={inputPhone}
-                          required={true}
-                          onChange={(e) => setInputPhone(e.target.value)}
-                        />
-                      </div>
-                    </div>
-
-                    <div className="form-group mb-3">
-                      <label htmlFor="Country">Country*</label>
+            <div className="col-md-12" id="fullWidthColumn">
+              <form id="orderForm">
+                <div
+                  className="frame-container"
+                  style={{
+                    border: "none",
+                  }}
+                >
+                  <h2 className="section-subtitle" style={{ marginLeft: "0" }}>
+                    Contact us by filling out the form below:
+                  </h2>
+                  <div className="row">
+                    <div className="form-group mb-3" style={{ width: "50%" }}>
+                      <label htmlFor="contactPersonName">Your Name*</label>
                       <input
                         type="text"
                         className="form-control"
-                        name="Country"
-                        id="Country"
-                        value={inputCountry}
+                        name="contactPersonName"
+                        id="contactPersonName"
+                        value={inputName}
                         required={true}
-                        onChange={(e) => setInputCountry(e.target.value)}
+                        onChange={(e) => setInputName(e.target.value)}
                       />
                     </div>
-                    <div className="form-group mb-3">
-                      <label htmlFor="addInformation">Message*</label>
-                      <textarea
+                    <div className="form-group mb-3" style={{ width: "50%" }}>
+                      <label htmlFor="contactCompanyName">
+                        Your Company Name*
+                      </label>
+                      <input
+                        type="text"
                         className="form-control"
-                        name="addInformation"
-                        id="addInformation"
-                        rows={4}
-                        placeholder="Enter text"
-                        value={addInformation}
-                        onChange={(e) => setAddInformation(e.target.value)}
-                      ></textarea>
-                    </div>
-                    <div className="form-group mb-3">
-                      {!checkedEmail && (
-                        <Button
-                          children="SEND"
-                          color="orange"
-                          onClick={checkEmail}
-                          style="ready-to-get-btn"
-                        />
-                      )}
+                        name="contactCompanyName"
+                        id="contactCompanyName"
+                        value={inputCompanyName}
+                        required={true}
+                        onChange={(e) => setInputCompanyName(e.target.value)}
+                      />
                     </div>
                   </div>
-                </form>
-              </div>
+                  <div className="row">
+                    <div className="form-group mb-3" style={{ width: "50%" }}>
+                      <label htmlFor="email">Email*</label>
+                      <input
+                        type="email"
+                        className="form-control"
+                        name="email"
+                        id="email"
+                        value={inputEmail}
+                        required={true}
+                        onChange={(e) => setInputEmail(e.target.value)}
+                        disabled={checkedEmail}
+                      />
+                    </div>
+                    <div
+                      className="form-group mb-3"
+                      style={{ width: "50%", borderWidth: "2px" }}
+                    >
+                      <label htmlFor="phoneNumber">Phone*</label>
+                      <input
+                        type="tel"
+                        className="form-control"
+                        name="phone"
+                        id="phone"
+                        value={inputPhone}
+                        required={true}
+                        onChange={(e) => setInputPhone(e.target.value)}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="form-group mb-3">
+                    <label htmlFor="Country">Country*</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="Country"
+                      id="Country"
+                      value={inputCountry}
+                      required={true}
+                      onChange={(e) => setInputCountry(e.target.value)}
+                    />
+                  </div>
+                  <div className="form-group mb-3">
+                    <label htmlFor="addInformation">Message*</label>
+                    <textarea
+                      className="form-control"
+                      name="addInformation"
+                      id="addInformation"
+                      rows={4}
+                      placeholder="Enter text"
+                      value={addInformation}
+                      onChange={(e) => setAddInformation(e.target.value)}
+                    ></textarea>
+                  </div>
+                  <div className="form-group mb-3">
+                    {!checkedEmail && (
+                      <Button
+                        children="SEND"
+                        color="orange"
+                        onClick={checkEmail}
+                        style="ready-to-get-btn"
+                      />
+                    )}
+                  </div>
+                </div>
+              </form>
             </div>
           </div>
           <div className="container form-container">
-            <div className="about_service" style={{ width: "100%" }}>
-              <h2 className="section-subtitle">OFFICES</h2>
-              {offises.map((item: any) => {
-                return <CollapseButton value={item.city} label={item.adress} />;
-              })}
+            <div className="col-md-12" id="fullWidthColumn">
+              <div className="frame-container">
+                <h2 className="section-subtitle">OFFICES</h2>
+                {offises.map((item: any) => {
+                  return (
+                    <CollapseButton value={item.city} label={item.adress} />
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>

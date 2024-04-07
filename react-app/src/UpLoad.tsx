@@ -36,7 +36,7 @@ export default function UpLoad({
           setIsOpen={setIsOpen}
           setUserProfileData={undefined}
         />
-
+        <div className="FileUpload_picture">Upload Files</div>
         <section className="main-content">
           <div className="row">
             <h2>Upload files</h2>
@@ -51,7 +51,6 @@ export default function UpLoad({
             </form>
           </div>
         </section>
-
       </div>
       <Footer kind={"short"} />
     </>

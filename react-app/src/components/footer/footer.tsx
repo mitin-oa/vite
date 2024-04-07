@@ -140,11 +140,7 @@ export default function Footer({ kind }: any) {
           </div>
 
           <div className="contacts__social">
-            <div
-              className={
-                kind === "short" ? "footer__logo__short" : "footer__logo"
-              }
-            >
+            <div className="footer__logo">
               Chrono<span className="footer__logo__span">Legal</span>
             </div>
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { slide as Menu } from "react-burger-menu";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
@@ -6,18 +6,19 @@ import Navbar1 from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link } from "react-router-dom";
 import "../header/header.scss";
+import { SignedInContext } from "../../App";
 
-class SideBarMenu extends React.Component {
-  showSettings(event: any) {
-    event.preventDefault();
-  }
-  styles = {
+function SideBarMenu() {
+  const signedIn = useContext(SignedInContext);
+
+  const styles = {
     bmBurgerButton: {
       position: "absolute",
       width: "36px",
       height: "30px",
-      right: "36px",
-      top: "30px",
+      right: "20px",
+      top: "20px",
+      zIndex: "1",
     },
     bmBurgerBars: {
       background: "#033c5a",
@@ -26,12 +27,15 @@ class SideBarMenu extends React.Component {
       background: "#a90000",
     },
     bmCrossButton: {
-      height: "24px",
-      width: "24px",
+      height: "32px",
+      width: "32px",
+      right: "16px",
+      top: "16px",
+      backgroundImage: "url(/public/cross-square-button.png)",
     },
-    bmCross: {
+    /* bmCross: {
       background: "#bdc3c7",
-    },
+    }, */
     bmMenuWrap: {
       position: "fixed",
       height: "100%",
@@ -56,62 +60,96 @@ class SideBarMenu extends React.Component {
       background: "rgba(0, 0, 0, 0.3)",
     },
   };
-  render() {
-    // NOTE: You also need to provide styles, see https://github.com/negomi/react-burger-menu#styling
-    return (
-      <Menu right styles={this.styles} width={"60%"}>
-        <Navbar1 expand="lg" className="header-navBar">
-          <Container>
-            <Nav className="me-auto">
-              <NavDropdown.Divider />
-              <Link className="nav__text" to="/About">
-                ABOUT
-              </Link>
-              <NavDropdown.Divider />
-              <NavDropdown
-                title="SERVICES"
-                id="basic-nav-dropdown"
-                className="nav__text"
-              >
-                <NavDropdown.Item href="#action/3.1">
-                  <Link className="nav__text" to="/ContractDrafting">
-                    Contract Drafting
-                  </Link>
-                </NavDropdown.Item>
+
+  // NOTE: You also need to provide styles, see https://github.com/negomi/react-burger-menu#styling
+  return (
+    <>
+      {!signedIn ? (
+        <Menu right styles={styles} width={"70%"}>
+          <Navbar1 expand="lg" className="header-navBar">
+            <Container>
+              <Nav className="me-auto">
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.2">
-                  <Link className="nav__text" to="/ContractAnalysis">
-                    Contract Analysis
-                  </Link>
-                </NavDropdown.Item>
+                <Link className="nav__text" to="/About">
+                  ABOUT
+                </Link>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.3">
-                  <Link className="nav__text" to="/ContractReview">
-                    Contract Review
-                  </Link>
-                </NavDropdown.Item>
+                <NavDropdown
+                  title="SERVICES"
+                  id="basic-nav-dropdown"
+                  className="nav__text"
+                >
+                  <NavDropdown.Item href="#action/3.1">
+                    <Link
+                      className="nav__text__dropdown"
+                      to="/ContractDrafting"
+                    >
+                      Contract Drafting
+                    </Link>
+                  </NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item href="#action/3.2">
+                    <Link
+                      className="nav__text__dropdown"
+                      to="/ContractAnalysis"
+                    >
+                      Contract Analysis
+                    </Link>
+                  </NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item href="#action/3.3">
+                    <Link className="nav__text__dropdown" to="/ContractReview">
+                      Contract Review
+                    </Link>
+                  </NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item href="#action/3.4">
+                    <Link
+                      className="nav__text__dropdown"
+                      to="/ContractManagement"
+                    >
+                      Contract Management
+                    </Link>
+                  </NavDropdown.Item>
+                </NavDropdown>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">
-                  <Link className="nav__text" to="/ContractManagement">
-                    Contract Management
-                  </Link>
-                </NavDropdown.Item>
-              </NavDropdown>
-              <NavDropdown.Divider />
-              <Link className="nav__text" to="/FAQs">
-                FAQs
-              </Link>
-              <NavDropdown.Divider />
-              <Link className="nav__text" to="/OrderRewiew">
-                ORDER A REWIEW
-              </Link>
-              <NavDropdown.Divider />
-            </Nav>
-          </Container>
-        </Navbar1>
-      </Menu>
-    );
-  }
+                <Link className="nav__text" to="/FAQs">
+                  FAQs
+                </Link>
+                <NavDropdown.Divider />
+                <Link className="nav__text" to="/OrderRewiew">
+                  ORDER A REWIEW
+                </Link>
+                <NavDropdown.Divider />
+              </Nav>
+            </Container>
+          </Navbar1>
+        </Menu>
+      ) : (
+        <Menu right styles={styles} width={"70%"}>
+          <Navbar1 expand="lg" className="header-navBar nav-link ">
+            <Container>
+              <Nav className="me-auto">
+                <NavDropdown.Divider />
+                <Link className="nav__text" to="/Dashboard">
+                  DASHBOARD
+                </Link>
+                <NavDropdown.Divider />
+                <Link className="nav__text" to="/UpLoad">
+                  FILE UPLOAD
+                </Link>
+                <NavDropdown.Divider />
+                <Link className="nav__text" to="/BuyCredits">
+                  BUY CREDITS
+                </Link>
+                <NavDropdown.Divider />
+              </Nav>
+            </Container>
+          </Navbar1>
+        </Menu>
+      )}
+    </>
+  );
 }
 
 export default SideBarMenu;

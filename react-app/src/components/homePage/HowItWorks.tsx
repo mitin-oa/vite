@@ -16,8 +16,8 @@ export default function HowItWorks() {
       </div>
       <div className="how-it-works">
         <div className="d-flex flex-lm-row flex-md-block">
-          <div className="Content">
-            <h2 className="section-subtitle">Contract review made easy!</h2>
+          <div className="how-it-works__content">
+            <h2 className="how-it-works__title">Contract review made easy!</h2>
             <p className="only_text">
               Your contracts drafted, reviewed, and negotiated by experienced
               lawyers when you need it and how you want it.
@@ -29,18 +29,16 @@ export default function HowItWorks() {
               member of your legal team is absent, a sales or procurement leader
               trying to close deals faster, or a law firm manager with an urgent
               project who can’t add full-time headcount to your team at the
-              moment, our business is all about supporting yours. Outsource your
-              contracts to us and relax, we’ve got you covered!
+              moment, our business is all about supporting yours.
+            </p>
+            <p className="only_text">
+              Outsource your contracts to us and relax, we’ve got you covered!
             </p>
             <p className="only_text">
               Let us draft, review, revise, redline, and negotiate your
               contracts.
             </p>
-            <h2
-              style={{
-                color: "#ec720b",
-              }}
-            >
+            <h2 className="how-it-works__title">
               It is as easy as 1, 2, 3, 4, 5
             </h2>
             <div
@@ -65,7 +63,9 @@ export default function HowItWorks() {
                 >
                   1
                 </div>
-                <div>Tell us a bit about your contract</div>
+                <div style={{ paddingLeft: "0.5vw" }}>
+                  Tell us a bit about your contract
+                </div>
               </div>
 
               <div className="HIV">
@@ -81,7 +81,7 @@ export default function HowItWorks() {
                 >
                   2
                 </div>
-                <div>Upload your contract</div>
+                <div style={{ paddingLeft: "0.5vw" }}>Upload your contract</div>
               </div>
 
               <div className="HIV">
@@ -97,7 +97,9 @@ export default function HowItWorks() {
                 >
                   3
                 </div>
-                <div>Tell us what you need and when you need it</div>
+                <div style={{ paddingLeft: "0.5vw" }}>
+                  Tell us what you need and when you need it
+                </div>
               </div>
 
               <div className="HIV">
@@ -113,7 +115,9 @@ export default function HowItWorks() {
                 >
                   4
                 </div>
-                <div>Pay ChronoLegal’s fees </div>
+                <div style={{ paddingLeft: "0.5vw" }}>
+                  Pay ChronoLegal’s fees{" "}
+                </div>
               </div>
 
               <div className="HIV">
@@ -129,7 +133,9 @@ export default function HowItWorks() {
                 >
                   5
                 </div>
-                <div>Receive your contract draft, analysis, or review.</div>
+                <div style={{ paddingLeft: "0.5vw" }}>
+                  Receive your contract draft, analysis, or review.
+                </div>
               </div>
             </div>
           </div>

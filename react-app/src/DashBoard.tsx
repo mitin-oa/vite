@@ -80,18 +80,18 @@ export default function Dashboard({
 
     // Используем fetchWithRetry вместо прямого вызова fetch
     fetchWithRefreshAuth(pathToFile, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/pdf",
-        },
+      method: "GET",
+      headers: {
+        "Content-Type": "application/pdf",
+      },
     })
-    .then((response: { ok: any; blob: () => any; }) => {
+      .then((response: { ok: any; blob: () => any }) => {
         if (!response.ok) {
-            throw new Error("Server returned an error response");
+          throw new Error("Server returned an error response");
         }
         return response.blob();
-    })
-    .then((blob: BlobPart) => {
+      })
+      .then((blob: BlobPart) => {
         const url = window.URL.createObjectURL(new Blob([blob]));
 
         const link = document.createElement("a");
@@ -101,11 +101,11 @@ export default function Dashboard({
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link); // Удаляем ссылку после клика
-    })
-    .catch((error: any) => {
-        console.error('Ошибка:', error);
-    });
-}
+      })
+      .catch((error: any) => {
+        console.error("Ошибка:", error);
+      });
+  }
 
   // * ↑ VK: Significant for the backend area. Please exercise caution when making alterations
 
@@ -122,6 +122,7 @@ export default function Dashboard({
           setUserProfileData={setUserProfileData}
           handleSignUp={handleSignUp}
         />
+        <div className="Dashboard_picture">Dashboard Panel</div>
         <section className="main-content flex-column">
           <div className="row">
             <h2>Dashboard Panel</h2>

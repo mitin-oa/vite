@@ -101,7 +101,7 @@ export default function SliderTop() {
                 }}
               >
                 <h1 className="slider-top-card__text">
-                  Seamless automation of your contracts, creation, approval and
+                  Seamless automation of your contracts creation, approval and
                   signature processes and workflows
                 </h1>
                 <div className="slider-top-card__button">

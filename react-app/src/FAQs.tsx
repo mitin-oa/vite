@@ -196,7 +196,7 @@ export default function FAQs({
         <section className="main-content" style={{ paddingBottom: "40px" }}>
           <div className="wrapper ">
             <div className="about-service">
-              <h2 className="section-title">FREQUENTLY ASKED QUESTIONS</h2>
+              <h2 className="section-title">Frequently Asked Questions</h2>
               {questions.map((item: any) => {
                 return <CollapseButton value={item.city} label={item.adress} />;
               })}

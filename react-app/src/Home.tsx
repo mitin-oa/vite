@@ -4,9 +4,8 @@ import WhyChronoLegal from "./components/homePage/WhyChronoLegal";
 import HeaderMenu from "./components/header/header";
 import WhoWeServe from "./components/homePage/WhoWeServe";
 import OurClients from "./components/homePage/OurClients";
-import SliderTop from "./components/homePage/SliderTop";
 import ReadyToGet from "./components/homePage/ReadyToGet";
-import FearuredIn from "./components/homePage/FeaturedIn";
+import SliderAnimated from "./components/SliderAnimated";
 
 export default function Home({
   kind,
@@ -31,7 +30,7 @@ export default function Home({
           modalIsOpen={modalIsOpen}
           setIsOpen={setIsOpen}
         />
-        <SliderTop />
+        <SliderAnimated />
         <HowItWorks />
         <WhyChronoLegal />
         <WhoWeServe />
