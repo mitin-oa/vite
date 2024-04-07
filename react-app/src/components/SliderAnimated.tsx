@@ -12,7 +12,7 @@ const content = [
     description:
       "drafting, review, and negotiation delivered on time and on budget!",
     button: "GET STARTED",
-    image: "/public/home-pic.jpg",
+    image: "/home-pic.jpg",
     user: "",
     userProfile: "",
   },
@@ -21,7 +21,7 @@ const content = [
     description:
       "of your contracts creation, approval and signature processes and workflows!",
     button: "GET STARTED",
-    image: "/public/slider-top-pic-2.png",
+    image: "/slider-top-pic-2.png",
     user: "",
     userProfile: "",
   },
@@ -30,7 +30,7 @@ const content = [
     description:
       "management solution SaaS-based or deployed in your SharePoint environment!",
     button: "GET STARTED",
-    image: "/public/slider-top-pic-3.png",
+    image: "/slider-top-pic-3.png",
     user: "",
     userProfile: "",
   },

@@ -3,7 +3,6 @@ import { useMediaQuery } from "react-responsive";
 import { useContext } from "react";
 import { SignedInContext } from "../../App";
 import Underline from "../Underline";
-import Question from "/public/question_mark.png";
 
 export default function WhoWeServe() {
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1160px" });
