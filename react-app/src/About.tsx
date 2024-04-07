@@ -1,7 +1,7 @@
 import { useMediaQuery } from "react-responsive";
 import Footer from "./components/footer/footer";
-import AboutPicture from "../public/about_pic.png";
 import HeaderMenu from "./components/header/header";
+import { Link } from "react-router-dom";
 
 export default function About({
   onSignIn,
@@ -70,9 +70,18 @@ export default function About({
             <h2 className="section-title">How Can We Help You?</h2>
             <p>
               Do you have questions about our services? Please{" "}
-              <a href="#" className="contact-link">
+              <Link
+                className="only__text"
+                style={{
+                  color: "#ec720b",
+                  fontWeight: "bold",
+                  margin: "0 auto",
+                  textDecoration: "none",
+                }}
+                to="/Contacts"
+              >
                 reach out
-              </a>
+              </Link>
               , we're here to help!
             </p>
           </div>

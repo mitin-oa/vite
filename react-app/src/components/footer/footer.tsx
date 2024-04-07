@@ -1,13 +1,9 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import "../footer/footer.scss";
-import FacebookPic from "../../../public/facebook.png";
-import MailPic from "../../../public/gmail.png";
-import PhonePic from "../../../public/telephone-call.png";
-import TelegramPic from "../../../public/telegram.png";
 import { HashLink as Link } from "react-router-hash-link";
 import { Widget, addResponseMessage } from "react-chat-widget";
 import "react-chat-widget/lib/styles.css";
-import logo from "../../../public/ChronoLegal_icon.png";
+import logo from "/ChronoLegal_icon.png";
 addResponseMessage("Welcome to this **awesome** chat!");
 
 export default function Footer({ kind }: any) {
@@ -73,9 +69,9 @@ export default function Footer({ kind }: any) {
 
           <div className="contacts__social">
             <div className="footer__logo">
+              <img src={logo} className="logo-icon" alt="logo" />
               Chrono<span className="footer__logo__span">Legal</span>
             </div>
-
             <Widget
               handleNewUserMessage={handleNewUserMessage}
               profileAvatar={logo}

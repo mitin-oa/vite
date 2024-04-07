@@ -81,14 +81,16 @@ export default function Contacts({
         <div className="Services-pic">CONTACTS</div>
         <section className="main-content">
           <div className="wrapper">
-            <div className="about_service">
+            <div className="about-service">
               <p>
                 Regardless of where our people are located, we are all committed
                 to draw from our experience and expertise, to deliver smart and
                 efficient solutions that help our clients contract on time and
-                on budget, anywhere in the world. To contact us, please call +1
-                478-268-3446, or fill the form below or send an email to
-                info@chronolegal.com and we will be in touch within hours.
+                on budget, anywhere in the world. To contact us, please call{" "}
+                <span style={{ color: "#ec720b" }}>+1 478-268-3446</span>, or
+                fill the form below or send an email to{" "}
+                <span style={{ color: "#ec720b" }}>info@chronolegal.com</span>{" "}
+                and we will be in touch within hours.
               </p>
               <p className="section-title">OFFICES</p>
               {offises.map((item: any) => {
