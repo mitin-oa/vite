@@ -54,8 +54,11 @@ export default function OurClients() {
           </div>
           <h5 className="our-clients-love-us__text">
             Are you worried about what is in your contracts? Our clients aren’t!
+            <br />
             We’re great at what we do, and people love us. Don't just take our
-            word for it. See below what our clients have to say about us.
+            word for it.
+            <br />
+            See below what our clients have to say about us.
           </h5>
           <SimpleSlider />
         </div>

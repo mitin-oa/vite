@@ -144,7 +144,7 @@
 
 .our-clients-love-us {
   width: 100%;
-  background-image:  url("/WWS-pic.jpg");
+  background-image:  url("/OCL-pic.jpg");
   background-size:cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -154,19 +154,18 @@
     padding: 0 0 180px;
   }
   &__text {     
-    color:#ec720b;
+    color:white;
     font-size: 26px;
     line-height: 1.6;
-    font-weight: bold;
     text-align: center;
     width: 100%;
-    padding: 30px 0px;
+    padding: 0 5vw 30px;
     @media (max-width: 1028px) {
-      font-size: 24px;
+      font-size: 21px;
       padding: 0 10px 20px;
     };
-    @media (max-width: 760px) {
-      font-size: 21px;
+    @media (max-width: 768px) {
+      font-size: 17px;
       padding:  0 10px 10px;
     };
   }
@@ -598,7 +597,7 @@
   padding: 50px 110px;
   height: 43vh;
   background-color: #ec720b;
-  background: rgb(236 114 11 / 60%);
+  background: rgb(236 114 11 / 40%);
   @media screen and (max-width: 1028px) {
     padding: 30px 70px 10px;
     height: 33vh;
