@@ -18,7 +18,6 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar1 from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import { slide as Menu } from "react-burger-menu";
 import SideBarMenu from "../burger/navMenu";
 
 interface IHeaderProps {

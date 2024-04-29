@@ -10,6 +10,9 @@ import ModalWindow from "./components/modal/modal";
 import { Link, useLocation } from "react-router-dom";
 import ChangeProfileForm from "./components/modal/ChangeProfileForm";
 import DashboardTooltip from "./components/DashboardTooltip";
+import Inbox from "./components/Inbox";
+
+
 
 export default function Dashboard({
   kind,
@@ -37,7 +40,7 @@ export default function Dashboard({
         const serverAnswer = await getTempUserData(orderId);
         console.log(serverAnswer);
         setUserDataForDashboard(serverAnswer.data);
-        console.log(userDataForDashboard);
+        console.log(userDataForDashboard)
       } catch (error) {
         console.error("An error occurred while loading data:", error);
       }
@@ -74,13 +77,13 @@ export default function Dashboard({
         a.style.display = "none";
         a.href = url;
         // Specify the name of the file to download
-        a.download = orderId + ".zip";
+        a.download = orderId + '.zip';
         document.body.appendChild(a);
         a.click();
         // Clearing the link
         window.URL.revokeObjectURL(url);
       })
-      .catch((error) => {
+      .catch(error => {
         console.error(error);
       });
   }
@@ -113,15 +116,13 @@ export default function Dashboard({
         <q>{userDataForDashboard.orderData.add_information}</q>
 
         <ul>
-          {userDataForDashboard.userGuides.map(
-            (guide: string, index: Key | null | undefined) => (
-              <li key={index}>{guide}</li>
-            )
-          )}
+          {userDataForDashboard.userGuides.map((guide: string, index: Key | null | undefined) => (
+            <li key={index}>{guide}</li>
+          ))}
         </ul>
       </div>
     );
-  };
+  }
   // * ↑ VK: Significant for the backend area. Please exercise caution when making alterations
 
   return (
@@ -233,6 +234,12 @@ export default function Dashboard({
                 </tr>
                 {userDataForDashboard ? (
                   <tr>
+                    <td>{userDataForDashboard ? userDataForDashboard.orderData.order_id : ""}</td>
+                    <td>
+                      {userDataForDashboard ? userDataForDashboard.orderData.order_status : ""}
+                      <DashboardTooltip title={userDataForDashboard.orderData.order_status_notes} />
+                    </td>
+
                     <td>
                       {userDataForDashboard
                         ? userDataForDashboard.orderData.order_id
@@ -285,13 +292,19 @@ export default function Dashboard({
               </tbody>
             </table>
             {/* VK: Add FileList component with file list passing */}
-            {userDataForDashboard && (
-              <FileList files={userDataForDashboard.filesData} />
-            )}
+            {userDataForDashboard && <FileList files={userDataForDashboard.filesData} />}
             {/* VK: Add AddInstructions component with other info */}
-            {userDataForDashboard && (
-              <AddInstructions files={userDataForDashboard.filesData} />
-            )}
+            {userDataForDashboard && <AddInstructions files={userDataForDashboard.filesData} />}
+            <p>Messages to editor</p>
+            {userDataForDashboard &&
+              <Inbox
+                senderId={userDataForDashboard.userData.user_id}
+                userRole={localStorage.getItem('userRole')}
+                receiverId={userDataForDashboard.orderData.editor_id}
+                orderId={userDataForDashboard.orderData.order_id}
+                messages={userDataForDashboard.messages}
+              />
+            }
           </div>
         </section>
       </div>
