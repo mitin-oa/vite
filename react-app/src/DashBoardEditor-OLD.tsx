@@ -238,7 +238,7 @@ export default function DashBoardEditor({
                             )}
                           </td>
                           <td>
-                            {e.order_status === "in work" ? (
+                            {/* {e.order_status === "in work" ? (
                               <UploadFiles
                                 orderId={e.order_id}
                                 //sourceFileName={e.file_name}
@@ -249,7 +249,7 @@ export default function DashBoardEditor({
                                 //sourceFileName={e.file_name}
                                 isDisabled={true}
                               />
-                            )}
+                            )} */}
                           </td>
                           <td style={{ minWidth: "30vw" }}>
                             {

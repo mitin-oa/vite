@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Footer from "./components/footer/footer";
 import HeaderMenu from "./components/header/header";
 import Button from "./components/Button";
+import MessageButton from "./components/MessageButton";
 import ModalWindow from "./components/modal/modal";
 import InputText from "./components/InputText";
 import DownLoadFile from "./components/DownloadFile";
@@ -11,6 +12,7 @@ import UploadFiles from "./components/UploadFile";
 // * VK: Significant for the backend area. Please exercise caution when making alterations
 import { getRegistredUserData } from "./fetchScripts/getUserDataForDashboard";
 import { fetchWithRefreshAuth } from "./fetchScripts/fetchWithRefreshAuth";
+import socketIOClient, { Socket } from 'socket.io-client';
 
 export default function DashBoardEditor({
   kind,
@@ -26,19 +28,42 @@ export default function DashBoardEditor({
     null
   );
   const [expandedOrderId, setExpandedOrderId] = useState(null);
+  const [socket, setSocket] = useState<Socket | null>(null);
+
+  const requestData = async () => {
+    try {
+      const serverAnswer = await getRegistredUserData();
+      setUserDataForDashboard(serverAnswer);
+    } catch (error) {
+      console.error("An error occurred while loading data:", error);
+    }
+  };
 
   useEffect(() => {
-    const requestData = async () => {
-      try {
-        const serverAnswer = await getRegistredUserData();
-        setUserDataForDashboard(serverAnswer);
-      } catch (error) {
-        console.error("An error occurred while loading data:", error);
-      }
-    };
-
     requestData();
   }, []);
+
+  useEffect(() => {
+    const token = localStorage.getItem('accessToken');
+    if (token) {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+      const newSocket = socketIOClient(apiUrl);
+      newSocket.emit('registerUser', localStorage.getItem('userId'), localStorage.getItem('userRole'));
+      setSocket(newSocket);
+    }
+  }, []);
+
+  useEffect(() => {
+
+    if (socket) {
+      socket.on('incomingMessage', (message) => {
+        console.log('Получено новое сообщение:', message);
+        requestData();
+      });
+    }
+    
+  }, [socket]);
+
 
   function toggleOrderDetails(orderId: React.SetStateAction<null>) {
     setExpandedOrderId(expandedOrderId === orderId ? null : orderId);
@@ -250,14 +275,16 @@ export default function DashBoardEditor({
                           </td>
                           <td>{userDataForDashboard ? e.order_status : ""}</td>
                           <td>
-                            {[
-                              "pending",
-                              "paid",
-                              "processed",
-                              "in work",
-                            ].includes(e.order_status) && (
+                            {["pending", "paid", "processed", "in work"].includes(e.order_status) && (
                               <>
                                 <DownLoadFile orderId={e.order_id} />
+                                <MessageButton
+                                  color={"orange"}
+                                  style={"table-btn"}
+                                  disable={false}
+                                  e={e}
+                                  hasNewMessage={e.unread_messages}
+                                />
                               </>
                             )}
                           </td>
@@ -265,10 +292,7 @@ export default function DashBoardEditor({
                           <td>
                             {e.order_status === "in work" ? (
                               <>
-                                <UploadFiles
-                                  orderId={e.order_id}
-                                  clientEmail={e.client_email}
-                                />
+                                <UploadFiles orderId={e.order_id} clientEmail={e.client_email} />
                               </>
                             ) : (
                               <UploadFiles orderId={e.order_id} isDisabled />
@@ -290,62 +314,18 @@ export default function DashBoardEditor({
                         {expandedOrderId === e.order_id && (
                           <tr>
                             <td colSpan={10}>
-                              <p>
-                                <b>Service type: </b>
-                                {e.service_type}
-                              </p>
-                              {e.add_information ? (
-                                <p>
-                                  <b>Additional information:</b>{" "}
-                                  {e.add_information}{" "}
-                                </p>
-                              ) : null}
-                              {e.user_guides ? (
-                                <p>
-                                  <a
-                                    href="#"
-                                    onClick={() =>
-                                      downloadClientGuides(e.order_id)
-                                    }
-                                  >
-                                    Download instructions for work
-                                  </a>
-                                </p>
-                              ) : null}
-                              <p>
-                                <b>Client info:</b>
-                              </p>
-                              <p>
-                                <b>Company: </b>
-                                {e.clients_company_name}
-                              </p>
-                              <p>
-                                <b>Address: </b>
-                                {e.clients_company_address}
-                              </p>
-                              <p>
-                                <b>Industry: </b>
-                                {e.clients_company_industry}
-                              </p>
-                              <p>
-                                <b>Contract info: </b>
-                              </p>
-                              <p>
-                                <b>Description: </b>
-                                {e.contract_description}
-                              </p>
-                              <p>
-                                <b>Value: </b>
-                                {e.contract_value}
-                              </p>
-                              <p>
-                                <b>Counterparty name: </b>
-                                {e.counterparty_name}
-                              </p>
-                              <p>
-                                <b>Counterparty address: </b>
-                                {e.counterparty_address}
-                              </p>
+                              <p><b>Service type: </b>{e.service_type}</p>
+                              {e.add_information ? <p><b>Additional information:</b> {e.add_information} </p> : null}
+                              {e.user_guides ? <p><a href="#" onClick={() => downloadClientGuides(e.order_id)}>Download instructions for work</a></p> : null}
+                              <p><b>Client info:</b></p>
+                              <p><b>Company: </b>{e.clients_company_name}</p>
+                              <p><b>Address: </b>{e.clients_company_address}</p>
+                              <p><b>Industry: </b>{e.clients_company_industry}</p>
+                              <p><b>Contract info: </b></p>
+                              <p><b>Description: </b>{e.contract_description}</p>
+                              <p><b>Value: </b>{e.contract_value}</p>
+                              <p><b>Counterparty name: </b>{e.counterparty_name}</p>
+                              <p><b>Counterparty address: </b>{e.counterparty_address}</p>
                             </td>
                           </tr>
                         )}

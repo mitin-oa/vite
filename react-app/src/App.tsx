@@ -1,7 +1,8 @@
 import "./App.scss";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState, useRef, CSSProperties } from "react";
 import { HashLink as Link } from "react-router-hash-link";
 import { Route, Routes } from "react-router-dom";
+
 import Home from "./Home";
 import UpLoad from "./UpLoad";
 import BuyCredits from "./BuyCredits";
@@ -14,6 +15,7 @@ import DashBoardEditor from "./DashBoardEditor";
 import DashBoardManager from "./DashBoardManager";
 import Swal from "sweetalert2";
 import ResetPassword from "./ResetPassword";
+import MessagingTool from "./MessagingTool";
 
 import OrderRewiew from "./OrderReview";
 import Contacts from "./components/footer/Contacts";
@@ -22,6 +24,7 @@ import { ParallaxProvider } from "react-scroll-parallax";
 export const SignedInContext = createContext(false);
 export const SignedUpContext = createContext(true);
 export const MobileScreenContext = createContext(false);
+
 
 // * VK: Significant for the backend area. Please exercise caution when making alterations
 import {
@@ -53,9 +56,9 @@ export function handleSignOut() {
   sendLogOutRequest();
 }
 
-//deleteCookie("token");
-
 function App() {
+
+
   // const value = `; ${document.cookie}`;
   // const parts = value.split(`; token=`);
   // console.log(document.cookie);
@@ -68,6 +71,8 @@ function App() {
 
   const [signedIn, onSignIn] = useState(token);
   const [signedUp, onSignUp] = useState(true);
+  const [userData, setUserData] = useState<any>(null);
+
   const [userRole, setUserRole] = useState(localStorage.getItem("userRole"));
   const [serverAnswerMessage, setServerAnswerMessage] = useState("");
 
@@ -81,6 +86,7 @@ function App() {
     userPassword: "password",
   });
   console.log(userProfileData);
+
   function handleSignUp() {
     onSignUp(!signedUp);
   }
@@ -98,9 +104,12 @@ function App() {
       // * VK: Logic in case of successful authorization
       localStorage.setItem("accessToken", "valid");
       localStorage.setItem("userRole", answer.userRole);
+      localStorage.setItem("userId", answer.userId);
+
       setUserRole(answer.userRole);
-      // console.log('Server response OK:', data);
-      //alert(answer.message);
+      setUserData(answer);
+      console.log('Server response OK:', answer);
+
       Swal.fire({
         title: "Good job!",
         text: `${answer.message}!`,
@@ -140,6 +149,8 @@ function App() {
       }
     }
     setServerAnswerMessage(answer.message);
+
+
   }
 
   console.log(serverAnswerMessage);
@@ -291,6 +302,21 @@ function App() {
                 path="BuyCredits"
                 element={
                   <BuyCredits
+                    kind="short"
+                    onSignIn={onSignIn}
+                    handleSignIn={handleSignIn}
+                    signedUp={signedUp}
+                    setUserProfileData={setUserProfileData}
+                    handleSignUp={handleSignUp}
+                    modalIsOpen={modalIsOpen}
+                    setIsOpen={setIsOpen}
+                  />
+                }
+              />
+              <Route
+                path="/Messages/:orderId/:receiverId"
+                element={
+                  <MessagingTool
                     kind="short"
                     onSignIn={onSignIn}
                     handleSignIn={handleSignIn}

@@ -10,6 +10,9 @@ import ModalWindow from "./components/modal/modal";
 import { Link, useLocation } from "react-router-dom";
 import ChangeProfileForm from "./components/modal/ChangeProfileForm";
 import DashboardTooltip from "./components/DashboardTooltip";
+import Inbox from "./components/Inbox";
+
+
 
 export default function Dashboard({
   kind,
@@ -22,9 +25,7 @@ export default function Dashboard({
   setUserProfileData,
 }: any) {
   // * ↓ VK: Significant for the backend area. Please exercise caution when making alterations
-  const [userDataForDashboard, setUserDataForDashboard] = useState<any | null>(
-    null
-  );
+  const [userDataForDashboard, setUserDataForDashboard] = useState<any | null>(null);
 
   const location = useLocation();
 
@@ -37,7 +38,7 @@ export default function Dashboard({
         const serverAnswer = await getTempUserData(orderId);
         console.log(serverAnswer);
         setUserDataForDashboard(serverAnswer.data);
-        console.log(userDataForDashboard);
+        console.log(userDataForDashboard)
       } catch (error) {
         console.error("An error occurred while loading data:", error);
       }
@@ -47,6 +48,7 @@ export default function Dashboard({
       requestData();
     }
   }, []);
+
 
   function openModal() {
     setIsOpen(true);
@@ -59,7 +61,8 @@ export default function Dashboard({
     let pathToFile = "/api/downloadProcessedFile/" + orderId;
     fetchWithRefreshAuth(pathToFile, {
       method: "GET",
-      headers: {},
+      headers: {
+      },
     })
       .then((response) => {
         if (!response.ok) {
@@ -70,20 +73,21 @@ export default function Dashboard({
       .then((blob) => {
         // Create URL for downloading the file
         const url = window.URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.style.display = "none";
+        const a = document.createElement('a');
+        a.style.display = 'none';
         a.href = url;
         // Specify the name of the file to download
-        a.download = orderId + ".zip";
+        a.download = orderId + '.zip';
         document.body.appendChild(a);
         a.click();
         // Clearing the link
         window.URL.revokeObjectURL(url);
       })
-      .catch((error) => {
+      .catch(error => {
         console.error(error);
       });
   }
+
 
   interface FileData {
     original_name: string;
@@ -104,7 +108,7 @@ export default function Dashboard({
         </ul>
       </div>
     );
-  };
+  }
 
   const AddInstructions: React.FC<FileListProps> = () => {
     return (
@@ -113,15 +117,13 @@ export default function Dashboard({
         <q>{userDataForDashboard.orderData.add_information}</q>
 
         <ul>
-          {userDataForDashboard.userGuides.map(
-            (guide: string, index: Key | null | undefined) => (
-              <li key={index}>{guide}</li>
-            )
-          )}
+          {userDataForDashboard.userGuides.map((guide: string, index: Key | null | undefined) => (
+            <li key={index}>{guide}</li>
+          ))}
         </ul>
       </div>
     );
-  };
+  }
   // * ↑ VK: Significant for the backend area. Please exercise caution when making alterations
 
   return (
@@ -137,7 +139,6 @@ export default function Dashboard({
           setUserProfileData={setUserProfileData}
           handleSignUp={handleSignUp}
         />
-        <div className="Dashboard_picture">Dashboard Panel</div>
         <section className="main-content flex-column">
           <div className="row">
             <h2>Dashboard Panel</h2>
@@ -191,31 +192,19 @@ export default function Dashboard({
                     <tr>
                       <td>
                         {userDataForDashboard
-                          ? userDataForDashboard.paymentsData
-                              .paypal_seller_transaction_id
+                          ? userDataForDashboard.paymentsData.paypal_seller_transaction_id
                           : ""}
                       </td>
                       <td>
                         {userDataForDashboard
-                          ? userDataForDashboard.paymentsData.payment_created_at
-                              .toLocaleString()
-                              .split("T")[0]
+                          ? userDataForDashboard.paymentsData.payment_created_at.toLocaleString().split("T")[0]
                           : ""}
                       </td>
-                      <td>
-                        {userDataForDashboard
-                          ? userDataForDashboard.paymentsData.payment_status
-                          : ""}
-                      </td>
-                      <td>
-                        {userDataForDashboard
-                          ? userDataForDashboard.paymentsData.payment_amount
-                          : ""}
-                      </td>
+                      <td>{userDataForDashboard ? userDataForDashboard.paymentsData.payment_status : ""}</td>
+                      <td>{userDataForDashboard ? userDataForDashboard.paymentsData.payment_amount : ""}</td>
                     </tr>
-                  ) : (
-                    ""
-                  )}
+                  )
+                    : ""}
                 </tbody>
               </table>
             </div>
@@ -233,65 +222,57 @@ export default function Dashboard({
                 </tr>
                 {userDataForDashboard ? (
                   <tr>
+                    <td>{userDataForDashboard ? userDataForDashboard.orderData.order_id : ""}</td>
                     <td>
-                      {userDataForDashboard
-                        ? userDataForDashboard.orderData.order_id
-                        : ""}
-                    </td>
-                    <td>
-                      {userDataForDashboard
-                        ? userDataForDashboard.orderData.order_status
-                        : ""}
-                      <DashboardTooltip
-                        title={
-                          userDataForDashboard.orderData.order_status_notes
-                        }
-                      />
+                      {userDataForDashboard ? userDataForDashboard.orderData.order_status : ""}
+                      <DashboardTooltip title={userDataForDashboard.orderData.order_status_notes} />
                     </td>
 
                     <td>
                       {userDataForDashboard
-                        ? userDataForDashboard.orderData.created_at
-                            .toString()
-                            .split("T")[0] +
-                          " " +
-                          userDataForDashboard.orderData.created_at
-                            .toString()
-                            .split("T")[1]
-                            .split(".")[0]
+                        ? userDataForDashboard.orderData.created_at.toString().split("T")[0] +
+                        " " +
+                        userDataForDashboard.orderData.created_at
+                          .toString()
+                          .split("T")[1]
+                          .split(".")[0]
                         : ""}
                     </td>
                     <td>
-                      {userDataForDashboard.orderData.order_status ==
-                      "processed" ? (
-                        <Button
-                          children={"Download"}
-                          color={"orange"}
-                          style={"table-btn"}
-                          onClick={() =>
-                            downloadProcessedFile(
-                              userDataForDashboard.orderData.order_id
-                            )
-                          }
-                        />
-                      ) : (
-                        "Not completed"
-                      )}
+                      {userDataForDashboard.orderData.order_status == "processed" ?
+                        (
+                          <Button
+                            children={"Download"}
+                            color={"orange"}
+                            style={"table-btn"}
+                            onClick={() =>
+                              downloadProcessedFile(userDataForDashboard.orderData.order_id)
+                            }
+                          />
+                        ) : (
+                          "Not completed"
+                        )
+                      }
                     </td>
                   </tr>
-                ) : (
-                  ""
-                )}
+                )
+                  : ""}
               </tbody>
             </table>
             {/* VK: Add FileList component with file list passing */}
-            {userDataForDashboard && (
-              <FileList files={userDataForDashboard.filesData} />
-            )}
+            {userDataForDashboard && <FileList files={userDataForDashboard.filesData} />}
             {/* VK: Add AddInstructions component with other info */}
-            {userDataForDashboard && (
-              <AddInstructions files={userDataForDashboard.filesData} />
-            )}
+            {userDataForDashboard && <AddInstructions files={userDataForDashboard.filesData} />}
+            <p>Messages to editor</p>
+            {userDataForDashboard &&
+              <Inbox
+                senderId={userDataForDashboard.userData.user_id}
+                userRole={localStorage.getItem('userRole')}
+                receiverId={userDataForDashboard.orderData.editor_id}
+                orderId={userDataForDashboard.orderData.order_id}
+                messages={userDataForDashboard.messages}
+              />
+            }
           </div>
         </section>
       </div>

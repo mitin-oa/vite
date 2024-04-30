@@ -17,10 +17,9 @@ async function getRegistredUserData() {
     // Extracts data from the response in JSON format.
     const data = await response.json();
 
-    console.log('data', data);
     if (data.status == "fail") {
       alert("Please log in.");
-      console.log(data.message);
+
     } else {
       return data;
     }
@@ -32,7 +31,6 @@ async function getRegistredUserData() {
 
 
 async function getTempUserData(orderId: string | null) {
- 
   try {
     const response = await fetch("/api/getTempUserData/" + orderId);
 
@@ -51,7 +49,6 @@ async function getTempUserData(orderId: string | null) {
 }
 
 async function getMessages(orderId: string | null) {
- 
   try {
     const response = await fetch("/api/getMessages/" + orderId);
 
@@ -70,5 +67,30 @@ async function getMessages(orderId: string | null) {
   }
 }
 
+async function saveMessage(messageId: number) {
+  try {
+    const response = await fetch("/api/saveMessage/", {
+      method: "POST", // Метод запроса POST
+      headers: {
+        "Content-Type": "application/json", // Устанавливаем заголовок Content-Type для отправки данных в формате JSON
+      },
+      body: JSON.stringify({ messageId }), // Преобразуем параметры запроса в формат JSON и передаем в теле запроса
+    });
+
+    // Извлекаем данные из ответа в формате JSON.
+    const data = await response.json();
+
+    if (data.status === "fail") {
+      alert("Error");
+    } else {
+      console.log(data);
+      return data;
+    }
+  } catch (error) {
+    console.error("Error while requesting the server:", error);
+    throw error;
+  }
+}
+
 // Exports the function for use in other parts of the code.
-export { getRegistredUserData, getTempUserData, getMessages};
+export { getRegistredUserData, getTempUserData, getMessages, saveMessage };
