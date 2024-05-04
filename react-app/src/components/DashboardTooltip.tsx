@@ -1,4 +1,5 @@
 import React from 'react';
+import QuestionMark from "../../public/question_mark.png";
 
 interface DashboardTooltipProps {
   title: string;
@@ -7,7 +8,7 @@ interface DashboardTooltipProps {
 const DashboardTooltip: React.FC<DashboardTooltipProps> = ({ title }) => (
   <img
     className="dashboard-tooltip"
-    src="/question_mark.png" 
+    src={QuestionMark}
     style={{ marginLeft: '8px' }}
     width="16"
     height="16"
