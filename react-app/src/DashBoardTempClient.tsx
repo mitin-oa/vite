@@ -1,7 +1,6 @@
 import { Key, useEffect, useState } from "react";
 import Footer from "./components/footer/footer";
 import HeaderMenu from "./components/header/header";
-// * VK: Significant for the backend area. Please exercise caution when making alterations
 import { getTempUserData } from "./fetchScripts/getUserDataForDashboard";
 import { fetchWithRefreshAuth } from "./fetchScripts/fetchWithRefreshAuth";
 
@@ -24,7 +23,6 @@ export default function Dashboard({
   handleSignUp,
   setUserProfileData,
 }: any) {
-  // * ↓ VK: Significant for the backend area. Please exercise caution when making alterations
   const [userDataForDashboard, setUserDataForDashboard] = useState<any | null>(null);
 
   const location = useLocation();
@@ -111,20 +109,34 @@ export default function Dashboard({
   }
 
   const AddInstructions: React.FC<FileListProps> = () => {
+    const hasInstructions = userDataForDashboard && userDataForDashboard.orderData.add_information;
+    const hasUserGuides = userDataForDashboard && userDataForDashboard.userGuides && userDataForDashboard.userGuides.length > 0;
+
+    if (!hasInstructions && !hasUserGuides) {
+      return null;
+    }
+
     return (
       <div>
         <p>Your additional instructions</p>
-        <q>{userDataForDashboard.orderData.add_information}</q>
+        {hasInstructions && (
+          <>
+            <q>{userDataForDashboard.orderData.add_information}</q>
+          </>
+        )}
 
-        <ul>
-          {userDataForDashboard.userGuides.map((guide: string, index: Key | null | undefined) => (
-            <li key={index}>{guide}</li>
-          ))}
-        </ul>
+        {hasUserGuides && (
+          <>
+            <ul>
+              {userDataForDashboard.userGuides.map((guide: string, index: number) => (
+                <li key={index}>{guide}</li>
+              ))}
+            </ul>
+          </>
+        )}
       </div>
     );
   }
-  // * ↑ VK: Significant for the backend area. Please exercise caution when making alterations
 
   return (
     <>
