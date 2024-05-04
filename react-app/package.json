@@ -43,6 +43,7 @@
     "react-uploader": "^3.43.0",
     "redux-state-manage": "^1.0.2",
     "slick-carousel": "^1.8.1",
+    "socket.io-client": "^4.7.5",
     "styled-components": "^6.0.8",
     "sweetalert": "^2.1.2",
     "sweetalert2": "^11.10.1",
