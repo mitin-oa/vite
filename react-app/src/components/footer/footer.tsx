@@ -1,20 +1,13 @@
 import { useEffect } from "react";
 import "../footer/footer.scss";
 import { HashLink as Link } from "react-router-hash-link";
-import { Widget, addResponseMessage } from "react-chat-widget";
+import Chat from "../Chat";
 import "react-chat-widget/lib/styles.css";
 import logo from "/ChronoLegal_icon.png";
-addResponseMessage("Welcome to this **awesome** chat!");
 
 export default function Footer({ kind }: any) {
   useEffect(() => {
-    //addResponseMessage("Welcome to this **awesome** chat!");
   }, []);
-
-  const handleNewUserMessage = (newMessage: any) => {
-    console.log(`New message incoming! ${newMessage}`);
-    // Now send the message throught the backend API
-  };
 
   return (
     <>
@@ -72,8 +65,7 @@ export default function Footer({ kind }: any) {
               <img src={logo} className="logo-icon" alt="logo" />
               Chrono<span className="footer__logo__span">Legal</span>
             </div>
-            <Widget
-              handleNewUserMessage={handleNewUserMessage}
+            <Chat
               profileAvatar={logo}
               title="ChronoLegal"
               subtitle="Get the legal service for you"
