@@ -248,6 +248,7 @@ input[type=number]::-webkit-outer-spin-button {
   min-height: 30px;
   padding: 2px 2px !important;
   font-size: 12px !important;
+  margin: 10px 0 !important;
 }
 
 .table-btn:disabled {
@@ -588,12 +589,12 @@ legend {
 
 .table tbody td {
   text-align: center;
+  vertical-align: middle;
   border: none;
   padding: 5px 15px;
   font-size: 15px;
   font-weight: 700;
   color: #033c5ae7;
-  vertical-align: top;
   background: #F8F8F8;
   border-radius: 1px;
   @media (max-width: 1200px) {
